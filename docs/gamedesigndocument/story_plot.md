@@ -22,7 +22,7 @@ After running for what it seems like an eternity, we finally get to the town. It
 
 On our way out, we notice there is a blacksmith, and Tyhma suggests we should check it out. We see he has a big variety of weapons and armor. The blacksmith seems to recognize us and asks if we lost our gear again. What does he mean “again”? He gladly gives us a sword/bow and arrows/spells book and a better slingshot. We are now ready to get that bounty, so we decide to make our way towards the graveyard.
 
-Once we reach our destination we see several *skeletons* roaming around. They seem like a bigger threat than the tiny monster from before.
+Once we reach our destination we see several skeletons roaming around. They seem like a bigger threat than the tiny monster from before.
 
 I realize that fighting has always been a part of my life, it seems natural to go into battle with these skeletons. Tyhma and I head towards the first enemy.
 
