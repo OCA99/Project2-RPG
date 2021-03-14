@@ -2,7 +2,7 @@
 
 ## Description
 
-We present UnderEvil from FM Studios, a group of exciting students working on a university subject at Bachelor's degrees in Video Game Design and Development(CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
+We present UnderEvil from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
 
 ## Developers
 
