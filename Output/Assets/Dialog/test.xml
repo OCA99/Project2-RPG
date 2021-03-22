@@ -1,0 +1,26 @@
+<dialog id="TEST">
+	<line speaker="Oscar" value="Hello my name is Oscar, what is your name?"></line>
+	<options>
+		<option value="Ramon">
+			<line speaker="Oscar" value="Hello Ramon!"></line>
+		</option>
+		<option value="Eduard">
+			<line speaker="Oscar" value="Hello Eduard!"></line>
+		</option>
+		<option value="Paula">
+			<line speaker="Oscar" value="Hello Paula!"></line>
+		</option>
+	</options>
+	<line speaker="Oscar" value="What is your age?"></line>
+	<options>
+		<option value="0">
+			<line speaker="Oscar" value="How can you be alive?"></line>
+		</option>
+		<option value="42">
+			<line speaker="Oscar" value="The answer to everything."></line>
+		</option>
+		<option value="-1">
+			<line speaker="Oscar" value="..."></line>
+		</option>
+	</options>
+</dialog>
