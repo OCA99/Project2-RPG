@@ -31,11 +31,18 @@ public:
 
 	bool LoadDialog(const char* filename);
 
+	void StartDialog(const char* id);
+
+	void EndDialog();
+
+	void NextDialog();
+
 private:
 	DialogNode* ParseDialogXML(pugi::xml_node dialogRoot);
 	void PrintDialog(DialogNode* node);
 
-private:
+	DialogNode* currentDialog = nullptr;
+
 	std::map<std::string, DialogNode*> dialogues;
 
 	std::string folder;

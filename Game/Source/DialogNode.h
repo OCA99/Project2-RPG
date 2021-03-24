@@ -35,32 +35,23 @@ public:
 		children->push_back(child);
 	}
 
+	DialogNode* Next()
+	{
+		/* Start TODO 3 */
+
+		if (type == NodeType::OPTION) return parent->Next();
+		if (next != nullptr) return next;
+		if (parent != nullptr) return parent->Next();
+		return nullptr;
+
+		/* END TODO 3 */
+	}
+
 	NodeType type;
 	std::vector<DialogNode*>* children;
 	std::map<std::string, std::string>* attributes;
+
+	DialogNode* prev = nullptr;
+	DialogNode* next = nullptr;
+	DialogNode* parent = nullptr;
 };
-
-/*struct DialogLine : public DialogNode {
-public:
-	DialogLine(std::string _value, Attributes* _attributes = nullptr) : DialogNode(_attributes) {
-		type = NodeType::DIALOG;
-		value = _value;
-	}
-
-private:
-	std::string value;
-};
-
-struct DialogOptions : public DialogNode {
-public:
-	DialogOptions(Attributes* _attributes = nullptr) : DialogNode(_attributes) {
-		type = NodeType::OPTIONS;
-	}
-};
-
-struct DialogOption : public DialogNode {
-public:
-	DialogOption(Attributes* _attributes = nullptr) : DialogNode(_attributes) {
-		type = NodeType::OPTION;
-	}
-};*/

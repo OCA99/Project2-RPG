@@ -1,6 +1,5 @@
 <dialog id="TEST">
-	<line speaker="Oscar" value="Hello my name is Oscar, what is your name?"></line>
-	<options>
+	<options speaker="Oscar" value="Hello my name is Oscar, what is your name?">
 		<option value="Ramon">
 			<line speaker="Oscar" value="Hello Ramon!"></line>
 		</option>
@@ -11,8 +10,7 @@
 			<line speaker="Oscar" value="Hello Paula!"></line>
 		</option>
 	</options>
-	<line speaker="Oscar" value="What is your age?"></line>
-	<options>
+	<options speaker="Oscar" value="What is your age?">
 		<option value="0">
 			<line speaker="Oscar" value="How can you be alive?"></line>
 		</option>
