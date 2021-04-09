@@ -16,6 +16,7 @@
       <Filter>External\PugiXml</Filter>
     </ClCompile>
     <ClCompile Include="Source\DialogSytem.cpp" />
+    <ClCompile Include="Source\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Source\DialogNode.h">
       <Filter>Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Map.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

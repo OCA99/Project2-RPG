@@ -34,6 +34,8 @@ public:
 
 private:
 	SDL_Texture* img;
+
+	SDL_Rect fullScreenRect;
 };
 
 #endif // __SCENE_H__

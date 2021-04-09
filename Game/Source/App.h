@@ -14,6 +14,7 @@ class Textures;
 class Audio;
 class Scene;
 class DialogSystem;
+class Map;
 
 class App
 {
@@ -76,6 +77,7 @@ public:
 	Audio* audio;
 	Scene* scene;
 	DialogSystem* dialog;
+	Map* map;
 
 private:
 
