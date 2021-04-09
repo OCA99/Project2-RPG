@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
+#include "Map.h"
 #include "Scene.h"
 
 #include "Defs.h"
@@ -30,6 +31,10 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
+	fullScreenRect = SDL_Rect({ 0, 0, app->render->camera.w, app->render->camera.h });
+
+	app->map->Load("level1.tmx");
+
 	return true;
 }
 

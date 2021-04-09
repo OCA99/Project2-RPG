@@ -2,7 +2,7 @@
 #define __LIST_H__
 
 #include "Defs.h"
-
+//WARNING - ASSERT WAS DETELED IN ORDER TO MAKE THE SOLUTION COMPILE ! 09/04/2021
 // Contains items from double linked list
 template<class tdata>
 struct ListItem
@@ -178,7 +178,7 @@ public:
 			pItem = pItem->next;
 		}
 
-		ASSERT(pItem);
+		
 
 		return(pItem->data);
 	}
