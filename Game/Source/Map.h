@@ -38,7 +38,11 @@ struct TileSet
 	int	offsetY;
 
 	// L04: TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
-	SDL_Rect GetTileRect(int id) const;
+	SDL_Rect GetTileRect(int id) const
+	{
+		id = id - firstgid;
+		return { id % numTilesWidth * tileWidth, id / numTilesWidth * tileHeight, tileWidth, tileHeight };
+	}
 };
 
 // L03: DONE 1: We create an enum for map type, just for convenience,
@@ -96,8 +100,12 @@ struct MapLayer
 	// L04: TODO 6: Short function to get the value of x,y
 	inline uint Get(int x, int y) const
 	{
-		//...
-		return 0;
+		return data[y * width + x];
+	}
+
+	uint Size() const
+	{
+		return width * height;
 	}
 };
 
@@ -144,12 +152,11 @@ public:
 	bool CleanUp();
 
 	// Load new map
-	bool Load(const char* path, bool loadEntities = true);
+	bool Load(const char* path);
 
 	// L04: DONE 8: Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 
-	//bool IntersectsWithMap(Collider* c, int direction = 0);
 private:
 
 	// L03: Methods to load all required map data
@@ -160,29 +167,15 @@ private:
 	bool LoadProperties(pugi::xml_node& node, Properties* properties);
 	bool StoreID(pugi::xml_node& node, MapLayer* layer, int ID);
 
-
-	bool CreateColliders();
-	bool CreateEntities();
-	void CreateWalkabilityMap();
-	void CreatePathfindingWalkabilityMap();
-
 public:
 
 	// L03: DONE 1: Add your struct for map info
 	MapData data;
 
 private:
-
-	const char* flagPath;
-	SDL_Texture* flagTex = nullptr;
-
-	//Animation flagAnimation;
-
 	pugi::xml_document mapFile;
 	SString folder;
 	bool mapLoaded;
-	uchar* walkabilityMap = nullptr;
-	uchar* pathfindingWalkabilityMap = nullptr;
 };
 
 #endif // __MAP_H__
