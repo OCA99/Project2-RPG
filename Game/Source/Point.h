@@ -38,7 +38,7 @@ public:
 	// Math ------------------------------------------------
 	Point operator -(const Point &v) const
 	{
-		p2Vector2 r;
+		Point r;
 
 		r.x = x - v.x;
 		r.y = y - v.y;
@@ -48,10 +48,20 @@ public:
 
 	Point operator + (const Point &v) const
 	{
-		p2Vector2 r;
+		Point r;
 
 		r.x = x + v.x;
 		r.y = y + v.y;
+
+		return(r);
+	}
+
+	Point operator * (const TYPE& n) const
+	{
+		Point r;
+
+		r.x = x * n;
+		r.y = y * n;
 
 		return(r);
 	}
@@ -102,6 +112,20 @@ public:
 		return(*this);
 	}
 
+	Point Normalize()
+	{
+		Point r;
+
+		float l = Length();
+
+		if (l == 0.f) return Point(0.f, 0.f);
+
+		r.x = x / l;
+		r.y = y / l;
+
+		return(r);
+	}
+
 	// Distances ---------------------------------------------
 	TYPE DistanceTo(const Point& v) const
 	{
@@ -109,6 +133,12 @@ public:
 		TYPE fy = y - v.y;
 
 		return sqrtf((fx*fx) + (fy*fy));
+	}
+
+	float Length() const
+	{
+		float l = sqrtf((x * x) + (y * y));
+		return l;
 	}
 
 	TYPE DistanceNoSqrt(const Point& v) const

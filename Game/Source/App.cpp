@@ -221,7 +221,6 @@ bool App::DoUpdate()
 		}
 
 		ret = item->data->Update(dt);
-		LOG("%f", dt);
 	}
 
 	return ret;
