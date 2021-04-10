@@ -4,7 +4,6 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
-//#include "Animation.h"
 #include "Textures.h"
 #include "App.h"
 
@@ -143,7 +142,7 @@ public:
 
 	bool Update(float dt);
 
-	bool PostUpdate();
+	bool PostUpdate(float dt);
 
 	// Called each loop iteration
 	void Draw();

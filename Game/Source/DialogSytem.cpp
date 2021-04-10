@@ -48,7 +48,7 @@ bool DialogSystem::Update(float dt)
 	return true;
 }
 
-bool DialogSystem::PostUpdate()
+bool DialogSystem::PostUpdate(float dt)
 {
 	if (currentDialog == nullptr) return true;
 

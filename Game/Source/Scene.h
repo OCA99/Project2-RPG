@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ECS.h"
+
 class Scene
 {
 public:
@@ -7,9 +9,12 @@ public:
 
 	~Scene() {}
 
-	virtual void Load() {}
+	virtual void Load();
 
-	virtual void CleanUp() {}
+	virtual void CleanUp();
+
+public:
+	ECS::World* world = nullptr;
 };
 
 class MapScene : Scene

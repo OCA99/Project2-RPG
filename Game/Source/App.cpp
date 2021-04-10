@@ -24,9 +24,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	scene = new SceneManager();
 	dialog = new DialogSystem();
 	map = new Map();
+	scene = new SceneManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -34,9 +34,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(scene);
 	//AddModule(dialog);
 	AddModule(map);
+	AddModule(scene);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -223,7 +223,7 @@ bool App::PostUpdate()
 			continue;
 		}
 
-		ret = item->data->PostUpdate();
+		ret = item->data->PostUpdate(dt);
 	}
 
 	return ret;

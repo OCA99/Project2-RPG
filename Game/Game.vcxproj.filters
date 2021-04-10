@@ -18,6 +18,9 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
+    <ClCompile Include="Source\SpriteRenderer.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -61,6 +64,19 @@
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\Components.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteRenderer.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Prefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerFactory.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -74,6 +90,15 @@
     </Filter>
     <Filter Include="Dialog">
       <UniqueIdentifier>{22eeae74-e7a7-4fff-8640-0d7552be9939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{a478148c-1038-4234-a1b3-64cf7adbcc3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{72e4cf31-d5cc-456f-b5de-fa32d81f7f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Prefabs">
+      <UniqueIdentifier>{af2dec8e-be6d-4f56-836a-da4f40b8e858}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

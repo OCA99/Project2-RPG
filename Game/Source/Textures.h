@@ -4,6 +4,7 @@
 #include "Module.h"
 
 #include "List.h"
+#include <map>
 
 struct SDL_Texture;
 struct SDL_Surface;
@@ -35,6 +36,7 @@ public:
 public:
 
 	List<SDL_Texture*> textures;
+	std::map<const char*, SDL_Texture* const> textureCache;
 };
 
 
