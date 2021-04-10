@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "ECS.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -51,9 +52,11 @@ bool SceneManager::Update(float dt)
 }
 
 // Called each loop iteration
-bool SceneManager::PostUpdate()
+bool SceneManager::PostUpdate(float dt)
 {
 	bool ret = true;
+
+	currentScene->world->tick(dt);
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;

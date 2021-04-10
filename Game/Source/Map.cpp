@@ -66,7 +66,7 @@ bool Map::Update(float dt)
 	return true;
 }
 
-bool Map::PostUpdate()
+bool Map::PostUpdate(float dt)
 {
 	Draw();
 
