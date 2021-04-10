@@ -106,6 +106,7 @@
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\SpriteRenderer.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\DialogNode.h" />
     <ClInclude Include="Source\DialogSytem.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Components.h" />
+    <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\SpriteRenderer.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Window.h" />
