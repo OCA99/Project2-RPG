@@ -1,41 +1,29 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#pragma once
 
-#include "Module.h"
-
-struct SDL_Texture;
-
-class Scene : public Module
+class Scene
 {
 public:
+	Scene() {}
 
-	Scene();
+	~Scene() {}
 
-	// Destructor
-	virtual ~Scene();
+	virtual void Load() {}
 
-	// Called before render is available
-	bool Awake();
-
-	// Called before the first frame
-	bool Start();
-
-	// Called before all Updates
-	bool PreUpdate();
-
-	// Called each loop iteration
-	bool Update(float dt);
-
-	// Called before all Updates
-	bool PostUpdate();
-
-	// Called before quitting
-	bool CleanUp();
-
-private:
-	SDL_Texture* img;
-
-	SDL_Rect fullScreenRect;
+	virtual void CleanUp() {}
 };
 
-#endif // __SCENE_H__
+class MapScene : Scene
+{
+public:
+	MapScene(const char* _filename) : Scene()
+	{
+		filename = _filename;
+	}
+
+	void Load();
+
+	void CleanUp();
+
+private:
+	const char* filename;
+};

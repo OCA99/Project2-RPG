@@ -6,8 +6,6 @@
 
 #include "Defs.h"
 #include "Log.h"
-//WARNING - ASSERT WAS DETELED IN ORDER TO MAKE THE SOLUTION COMPILE ! 09/04/2021
-//#include "Optick/include/optick.h"
 
 #include <math.h>
 #include <algorithm>
