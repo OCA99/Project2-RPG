@@ -21,4 +21,10 @@
   <dialog>
     <folder>Assets/Dialog/</folder>
   </dialog>
+
+  <map>
+    <folder>Assets/Textures/Maps/</folder>
+  </map>
+
+
 </config>

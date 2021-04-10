@@ -54,40 +54,22 @@ bool Map::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	folder.Create(config.child("folder").child_value());
-	pugi::xml_node mapPathN = config.child("mapcomponent");
-
-	flagPath = mapPathN.attribute("endFlag").as_string();
 
 	return ret;
 }
 
 bool Map::Start()
 {
-
-	//flagAnimation.loop = true;
-	//flagAnimation.speed = 25.0f;
-
-	for (int i = 0; i < 10; i++)
-	{
-		//flagAnimation.PushBack({ i * 30,0,30,46 });
-	}
-
-	flagTex = app->tex->Load(flagPath);
-
 	return true;
 }
 
 bool Map::Update(float dt)
 {
-	//flagAnimation.Update(dt);
-
 	return true;
 }
 
 bool Map::PostUpdate()
 {
-	//OPTICK_EVENT("MapPostUpdate", Optick::Category::Rendering);
-
 	Draw();
 
 	return true;
@@ -99,17 +81,11 @@ void Map::Draw()
 
 	if (mapLoaded == false) return;
 
-	/*if (app->ui->currentLevel == 1)
-	{
-		SDL_Rect rect = flagAnimation.GetCurrentFrame();
-		app->render->DrawTexture(flagTex, 3028, 1026, &rect);
-	}*/
-
 	for (int i = 0; i < data.maplayers.Count(); i++)
 	{
-		if (data.maplayers[i]->properties.GetProperty("draw", 1) == 0)
-			continue;
-		int layerSize = data.maplayers[i]->width * data.maplayers[i]->height;
+		/*if (data.maplayers[i]->properties.GetProperty("draw", 1) == 0)
+			continue;*/
+		int layerSize = data.maplayers[i]->Size();
 		for (int j = 0; j < layerSize; j++)
 		{
 			uint tileGid = data.maplayers[i]->data[j];
@@ -124,8 +100,8 @@ void Map::Draw()
 					continue;
 				}
 
-				int tilesetPosition = tileGid - tileset->firstgid;
-				SDL_Rect section = { tilesetPosition % tileset->numTilesWidth * tileset->tileWidth, tilesetPosition / tileset->numTilesWidth * tileset->tileHeight, tileset->tileWidth, tileset->tileHeight };
+				SDL_Rect section = tileset->GetTileRect(tileGid);
+				//LOG("%d, %d, %d, %d, %d\n", tileGid, section.x, section.y, section.w, section.h);
 				app->render->DrawTexture(tileset->texture, j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight, &section);
 				break;
 			}
@@ -142,16 +118,6 @@ iPoint Map::MapToWorld(int x, int y) const
 	ret.y = y * data.tileHeight;
 
 	return ret;
-}
-
-// Get relative Tile rectangle
-SDL_Rect TileSet::GetTileRect(int id) const
-{
-	SDL_Rect rect = { 0 };
-
-	// L04: TODO 7: Get relative Tile rectangle
-
-	return rect;
 }
 
 // Called before quitting
@@ -176,9 +142,6 @@ bool Map::CleanUp()
 	}
 	data.maplayers.Clear();
 	data.properties.propertyList.Clear();
-
-	//app->collisions->CleanUp();
-	//app->entities->CleanUp();
 	
 	// Clean up the pugui tree
 	mapFile.reset();
@@ -187,7 +150,7 @@ bool Map::CleanUp()
 }
 
 // Load new map
-bool Map::Load(const char* filename, bool loadEntities)
+bool Map::Load(const char* filename)
 {
 	CleanUp();
 
@@ -252,18 +215,6 @@ bool Map::Load(const char* filename, bool loadEntities)
 		// L04: TODO 4: LOG the info for each loaded layer
 	}
 
-	CreateColliders();
-
-	if (loadEntities)
-		CreateEntities();
-
-	CreateWalkabilityMap();
-	CreatePathfindingWalkabilityMap();
-
-	//app->pathfinding->SetMap(data.width, data.height, pathfindingWalkabilityMap);
-
-	//app->ui->timer = 0.0f;
-
 	mapLoaded = ret;
 
 	return ret;
@@ -294,7 +245,7 @@ bool Map::LoadMap()
 		SString red = SString(hexColor).Cut(1, 2);
 		SString green = SString(hexColor).Cut(3, 4);
 		SString blue = SString(hexColor).Cut(5, 6);
-		// Convert base-16 values to bae-10 to get the final color
+		// Convert base-16 values to base-10 to get the final color
 		data.backgroundColor.r = strtol(red.GetString(), nullptr, 16);
 		data.backgroundColor.g = strtol(green.GetString(), nullptr, 16);
 		data.backgroundColor.b = strtol(blue.GetString(), nullptr, 16);
@@ -415,174 +366,3 @@ bool Map::StoreID(pugi::xml_node& node, MapLayer* layer, int ID)
 
 	return ret;
 }
-
-bool Map::CreateColliders()
-{
-	
-	bool ret = true;
-	/*
-	for (int i = 0; i < data.maplayers.Count(); i++)
-	{
-		if (data.maplayers[i]->properties.GetProperty("navigation", 0) == 0)
-			continue;
-		int layerSize = data.maplayers[i]->width * data.maplayers[i]->height;
-		for (int j = 0; j < layerSize; j++)
-		{
-			if (data.maplayers[i]->data[j] == 0)
-				continue;
-			int layerWidth = data.maplayers[i]->width;
-			SDL_Rect section = { j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight, data.tileWidth, data.tileHeight };
-			if (data.maplayers[i]->properties.GetProperty("nextLevel", 0) == 1)
-			{
-				app->collisions->AddCollider(section, Collider::Type::ENDLEVEL, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("death", 0) == 1)
-			{
-				app->collisions->AddCollider(section, Collider::Type::DEATH, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("itemType", 0) == 1)
-			{
-				app->collisions->AddCollider(section, Collider::Type::ITEMHEALTH, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("itemType", 0) == 2)
-			{
-				app->collisions->AddCollider(section, Collider::Type::ITEMSCORE, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("itemType", 0) == 3)
-			{
-				app->collisions->AddCollider(section, Collider::Type::ITEMNUT, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("checkpoint", 0) == 1)
-			{
-				app->collisions->AddCollider(section, Collider::Type::CHECKPOINT1, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("checkpoint", 0) == 2)
-			{
-				app->collisions->AddCollider(section, Collider::Type::CHECKPOINT2, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("text", 0) == 1)
-			{
-				app->collisions->AddCollider(section, Collider::Type::SECRETTEXT, this);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("win", 0) == 1)
-			{
-				app->collisions->AddCollider(section, Collider::Type::WIN, this);
-			}
-			else
-			{
-				app->collisions->AddCollider(section, Collider::Type::STATIC, this);
-			}
-		}
-	}
-	*/
-	return ret;
-}
-
-bool Map::CreateEntities()
-{
-	bool ret = true;
-	/*
-	for (int i = 0; i < data.maplayers.Count(); i++)
-	{
-		if (data.maplayers[i]->properties.GetProperty("entityType", 0) == 0)
-			continue;
-		int layerSize = data.maplayers[i]->width * data.maplayers[i]->height;
-
-
-		for (int j = 0; j < layerSize; j++)
-		{
-			if (data.maplayers[i]->data[j] == 0)
-				continue;
-			int layerWidth = data.maplayers[i]->width;
-			fPoint pos = fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight);
-
-			if (data.maplayers[i]->properties.GetProperty("entityType", 0) == 1)
-			{
-				app->entities->AddEntity(pos, Entity::Type::HEART);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("entityType", 0) == 2)
-			{
-				app->entities->AddEntity(pos, Entity::Type::FRUIT);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("entityType", 0) == 3)
-			{
-				app->entities->AddEntity(pos, Entity::Type::BAT);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("entityType", 0) == 4)
-			{
-				app->entities->AddEntity(pos, Entity::Type::PIG);
-			}
-			else if (data.maplayers[i]->properties.GetProperty("entityType", 0) == 5)
-			{
-				app->entities->AddEntity(pos, Entity::Type::PLAYER);
-			}
-		}
-	}
-	*/
-	return ret;
-}
-
-void Map::CreateWalkabilityMap()
-{
-	/*delete[] walkabilityMap;
-	walkabilityMap = new uchar[data.width * data.height];
-	std::fill_n(walkabilityMap, data.width * data.height, 1);
-	List<Collider*>* colliders = &app->collisions->staticColliders;
-	for (int i = 0; i < colliders->Count(); i++)
-	{
-		if ((*colliders)[i]->type == Collider::Type::STATIC || (*colliders)[i]->type == Collider::Type::DEATH)
-		{
-			Point<int> p;
-			p.x = (*colliders)[i]->rect.x / data.tileWidth;
-			p.y = (*colliders)[i]->rect.y / data.tileHeight;
-			walkabilityMap[p.x + data.width * p.y] = 0;
-		}
-	}*/
-}
-
-void Map::CreatePathfindingWalkabilityMap()
-{
-	/*
-	delete[] pathfindingWalkabilityMap;
-	pathfindingWalkabilityMap = new uchar[data.width * data.height];
-	std::fill_n(pathfindingWalkabilityMap, data.width * data.height, 1);
-	List<Collider*>* colliders = &app->collisions->staticColliders;
-	for (int i = 0; i < colliders->Count(); i++)
-	{
-		if ((*colliders)[i]->type == Collider::Type::STATIC)
-		{
-			Point<int> p;
-			p.x = (*colliders)[i]->rect.x / data.tileWidth;
-			p.y = (*colliders)[i]->rect.y / data.tileHeight;
-			pathfindingWalkabilityMap[p.x + data.width * p.y] = 0;
-		}
-	}*/
-}
-
-/*
-bool Map::IntersectsWithMap(Collider* c, int direction)
-{
-	
-	if (walkabilityMap == nullptr)
-		return true;
-
-	for (int i = 0; i < data.width * data.height; i++)
-	{
-		if (walkabilityMap[i] != 0)
-			continue;
-		iPoint p = MapToWorld(i % data.width, i / data.width);
-		SDL_Rect r = SDL_Rect({ p.x, p.y, data.tileWidth, data.tileHeight });
-		if (c->Intersects(r) && direction == 0)
-			return true;
-
-		r = SDL_Rect({ p.x, p.y + 7, data.tileWidth, data.tileHeight - 14 });
-		if (c->Intersects(r) && direction == 1)
-			return true;
-
-		r = SDL_Rect({ p.x + 7, p.y, data.tileWidth - 14, data.tileHeight });
-		if (c->Intersects(r) && direction == 2)
-			return true;
-	}
-	return false;
-}
-*/
