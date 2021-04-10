@@ -4,7 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-#include "Scene.h"
+#include "SceneManager.h"
 #include "DialogSytem.h"
 #include "Map.h"
 
@@ -24,7 +24,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	scene = new Scene();
+	scene = new SceneManager();
 	dialog = new DialogSystem();
 	map = new Map();
 
