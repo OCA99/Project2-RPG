@@ -33,7 +33,7 @@ bool Scene::Start()
 {
 	fullScreenRect = SDL_Rect({ 0, 0, app->render->camera.w, app->render->camera.h });
 
-	app->map->Load("level1.tmx");
+	app->map->Load("Town.tmx");
 
 	return true;
 }
