@@ -99,8 +99,30 @@ private:
 	float minTime;
 	float frameCap = 60.0f;
 	Timer timer;
+
+	bool requestLoad = false;
+	bool requestSave = false;
+
+	const char* saveFileName;
+
 public:
 	float dt;
+
+public:
+
+	bool Load();
+	bool Save();
+	bool saving = false;
+
+	void RequestSave()
+	{
+		requestSave = true;
+	}
+
+	void RequestLoad()
+	{
+		requestLoad = true;
+	}
 };
 
 extern App* app;

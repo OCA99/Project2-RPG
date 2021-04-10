@@ -87,6 +87,8 @@ bool App::Awake()
 		}
 	}
 
+	saveFileName = configApp.child("savefile").attribute("path").as_string();
+
 	return ret;
 }
 
@@ -164,6 +166,15 @@ void App::PrepareUpdate()
 void App::FinishUpdate()
 {
 	// This is a good place to call Load / Save functions
+	if (requestLoad == true)
+	{
+		Load();
+	}
+
+	if (requestSave == true)
+	{
+		Save();
+	}
 
 	if (dt < minTime)
 	{
@@ -278,6 +289,70 @@ const char* App::GetTitle() const
 const char* App::GetOrganization() const
 {
 	return organization.GetString();
+}
+
+bool App::Load()
+{
+
+	bool ret = true;
+
+	pugi::xml_document saveGame;
+
+	pugi::xml_parse_result result = saveGame.load_file(saveFileName);
+
+	if (result == NULL)
+	{
+		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		//renderer
+		pugi::xml_node rend = saveGame.child("renderer");
+		if (rend == NULL)
+		{
+			LOG("Renderer not loading");
+		}
+
+		//input
+
+		//scene
+		pugi::xml_node sce = saveGame.child("scene");
+		if (sce == NULL)
+		{
+			LOG("Scene not loading");
+		}
+
+
+		app->render->Load(rend);
+
+	}
+
+	requestLoad = false;
+
+	return ret;
+}
+
+bool App::Save()
+{
+	bool ret = true;
+	requestSave = false;
+	saving = true;
+
+	LOG("saved");
+	//app->scene->continueButtonDisabled = false;
+
+	pugi::xml_document newSave;
+
+	pugi::xml_node rend = newSave.append_child("renderer");
+	app->render->Save(rend);
+
+
+
+
+	//newSave.save_file(saveFileName);
+
+	return ret;
 }
 
 

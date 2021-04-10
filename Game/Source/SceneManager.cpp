@@ -61,6 +61,12 @@ bool SceneManager::PostUpdate(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	{
+		app->RequestSave();
+		LOG("hola");
+	}
+
 	return ret;
 }
 
