@@ -1,10 +1,15 @@
 #include "Scene.h"
 #include "App.h"
 #include "Map.h"
-#include "SpriteRenderer.h"
-#include "PlayerFactory.h"
-
 #include "Textures.h"
+
+#include "SpriteSystem.h"
+#include "AnimatorSystem.h"
+#include "InputSystem.h"
+#include "PositionSystem.h"
+#include "HumanoidSystem.h"
+
+#include "PlayerFactory.h"
 
 void Scene::Load()
 {
@@ -20,10 +25,13 @@ void MapScene::Load()
 {
 	Scene::Load();
 
-	world->registerSystem(new SpriteRenderer());
+	world->registerSystem(new SpriteSystem());
+	world->registerSystem(new AnimatorSystem());
+	world->registerSystem(new InputSystem());
+	world->registerSystem(new PositionSystem());
+	world->registerSystem(new HumanoidSystem());
 
 	PlayerFactory::Create(world, fPoint(10, 10));
-	PlayerFactory::Create(world, fPoint(60, 60));
 
 	app->map->Load(filename);
 }

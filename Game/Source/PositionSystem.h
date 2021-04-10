@@ -3,12 +3,12 @@
 #include "ECS.h"
 #include "Components.h"
 
-class SpriteRenderer : public ECS::EntitySystem
+class PositionSystem : public ECS::EntitySystem
 {
 public:
-	SpriteRenderer() {}
+	PositionSystem() {}
 
-	virtual ~SpriteRenderer() {}
+	virtual ~PositionSystem() {}
 
 	virtual void tick(ECS::World* world, float dt) override;
 };
