@@ -17,8 +17,6 @@
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
-	frames = 0;
-
 	win = new Window();
 	input = new Input();
 	render = new Render();
@@ -105,6 +103,8 @@ bool App::Start()
 		item = item->next;
 	}
 
+	minTime = 1.0f / frameCap;
+
 	return ret;
 }
 
@@ -156,12 +156,19 @@ bool App::LoadConfig()
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	dt = timer.ReadSec();
+	timer.Start();
 }
 
 // ---------------------------------------------
 void App::FinishUpdate()
 {
 	// This is a good place to call Load / Save functions
+
+	if (dt < minTime)
+	{
+		SDL_Delay(minTime - dt);
+	}
 }
 
 // Call modules before each loop iteration
@@ -203,6 +210,7 @@ bool App::DoUpdate()
 		}
 
 		ret = item->data->Update(dt);
+		LOG("%f", dt);
 	}
 
 	return ret;

@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "List.h"
+#include "Timer.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -95,7 +96,10 @@ private:
 	pugi::xml_node config;
 	pugi::xml_node configApp;
 
-	uint frames;
+	float minTime;
+	float frameCap = 60.0f;
+	Timer timer;
+public:
 	float dt;
 };
 
