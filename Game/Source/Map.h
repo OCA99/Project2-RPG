@@ -9,6 +9,9 @@
 
 #include "Log.h"
 
+#include <vector>
+#include <math.h>
+
 #include "PugiXml\src\pugixml.hpp"
 #include "SDL/include/SDL.h"
 
@@ -88,6 +91,8 @@ struct MapLayer
 
 	Properties properties;
 
+	bool navigation = false;
+
 	MapLayer() : data(NULL)
 	{}
 
@@ -158,6 +163,8 @@ public:
 
 	SDL_Rect OuterRectangle();
 
+	std::vector<SDL_Rect>* NavigationIntersection(SDL_Rect other);
+
 private:
 
 	// L03: Methods to load all required map data
@@ -167,6 +174,19 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadProperties(pugi::xml_node& node, Properties* properties);
 	bool StoreID(pugi::xml_node& node, MapLayer* layer, int ID);
+
+	bool Intersects(SDL_Rect a, SDL_Rect b)
+	{
+		int leftX = std::max(a.x, b.x);
+		int rightX = std::min(a.x + a.w, b.x + b.w);
+		int topY = std::max(a.y, b.y);
+		int bottomY = std::min(a.y + a.h, b.y + b.h);
+
+		if (leftX < rightX && topY < bottomY)
+			return true;
+		else
+			return false;
+	}
 
 public:
 
