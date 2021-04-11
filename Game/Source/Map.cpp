@@ -81,8 +81,8 @@ void Map::Draw()
 
 	for (int i = 0; i < data.maplayers.Count(); i++)
 	{
-		/*if (data.maplayers[i]->properties.GetProperty("draw", 1) == 0)
-			continue;*/
+		if (data.maplayers[i]->navigation)
+			continue;
 		int layerSize = data.maplayers[i]->Size();
 		for (int j = 0; j < layerSize; j++)
 		{
@@ -126,6 +126,35 @@ SDL_Rect Map::OuterRectangle()
 		outerRectangle = SDL_Rect({ 0, 0, data.width * data.tileWidth, data.height * data.tileHeight });
 	}
 	return outerRectangle;
+}
+
+std::vector<SDL_Rect>* Map::NavigationIntersection(SDL_Rect other)
+{
+	std::vector<SDL_Rect>* result = new std::vector<SDL_Rect>();
+
+	for (int i = 0; i < data.maplayers.Count(); i++)
+	{
+		if (!data.maplayers[i]->navigation)
+			continue;
+		int layerSize = data.maplayers[i]->Size();
+		for (int j = 0; j < layerSize; j++)
+		{
+			uint tileGid = data.maplayers[i]->data[j];
+			int layerWidth = data.maplayers[i]->width;
+
+			if (tileGid != 0)
+			{
+				SDL_Rect tile = SDL_Rect({ j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight, data.tileWidth, data.tileHeight });
+
+				if (Intersects(tile, other))
+				{
+					result->push_back(tile);
+				}
+			}
+		}
+	}
+
+	return result;
 }
 
 // Called before quitting
@@ -346,6 +375,12 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	}
 
 	LoadProperties(node.child("properties"), &layer->properties);
+
+	if (layer->properties.GetProperty("navigation", 0))
+	{
+		LOG("navigation layer");
+		layer->navigation = true;
+	}
 
 	return ret;
 }
