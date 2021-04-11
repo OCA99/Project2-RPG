@@ -9,6 +9,7 @@
 #include "PositionSystem.h"
 #include "HumanoidSystem.h"
 #include "CameraSystem.h"
+#include "CollisionSystem.h"
 
 #include "PlayerFactory.h"
 
@@ -28,12 +29,13 @@ void MapScene::Load()
 
 	world->registerSystem(new SpriteSystem());
 	world->registerSystem(new AnimatorSystem());
-	world->registerSystem(new InputSystem());
 	world->registerSystem(new PositionSystem());
 	world->registerSystem(new HumanoidSystem());
+	world->registerSystem(new CollisionSystem());
+	world->registerSystem(new InputSystem());
 	world->registerSystem(new CameraSystem());
 
-	PlayerFactory::Create(world, fPoint(10, 10));
+	PlayerFactory::Create(world, fPoint(10, 250));
 
 	app->map->Load(filename);
 }
