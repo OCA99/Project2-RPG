@@ -8,6 +8,7 @@
 #include "InputSystem.h"
 #include "PositionSystem.h"
 #include "HumanoidSystem.h"
+#include "CameraSystem.h"
 
 #include "PlayerFactory.h"
 
@@ -30,6 +31,7 @@ void MapScene::Load()
 	world->registerSystem(new InputSystem());
 	world->registerSystem(new PositionSystem());
 	world->registerSystem(new HumanoidSystem());
+	world->registerSystem(new CameraSystem());
 
 	PlayerFactory::Create(world, fPoint(10, 10));
 

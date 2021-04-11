@@ -34,6 +34,9 @@
     <ClCompile Include="Source\HumanoidSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CameraSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -104,6 +107,9 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\HumanoidSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>

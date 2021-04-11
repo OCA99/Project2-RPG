@@ -38,6 +38,8 @@ protected:
 
 		player->assign<Humanoid>();
 
+		player->assign<CameraFollower>();
+
 		return player;
 	}
 };

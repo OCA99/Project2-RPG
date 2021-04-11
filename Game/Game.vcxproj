@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AnimatorSystem.cpp" />
+    <ClCompile Include="Source\CameraSystem.cpp" />
     <ClCompile Include="Source\DialogSytem.cpp" />
     <ClCompile Include="Source\HumanoidSystem.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimatorSystem.h" />
+    <ClInclude Include="Source\CameraSystem.h" />
     <ClInclude Include="Source\DialogNode.h" />
     <ClInclude Include="Source\DialogSytem.h" />
     <ClInclude Include="Source\ECS.h" />
