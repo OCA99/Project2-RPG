@@ -37,6 +37,9 @@
     <ClCompile Include="Source\CameraSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CollisionSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -110,6 +113,9 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\CameraSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
