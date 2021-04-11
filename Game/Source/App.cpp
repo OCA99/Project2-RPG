@@ -313,8 +313,6 @@ bool App::Load()
 			LOG("Renderer not loading");
 		}
 
-		//input
-
 		//scene
 		pugi::xml_node sce = saveGame.child("scene");
 		if (sce == NULL)
@@ -324,6 +322,7 @@ bool App::Load()
 
 
 		app->render->Load(rend);
+		app->scene->Load(sce);
 
 	}
 
@@ -346,10 +345,13 @@ bool App::Save()
 	pugi::xml_node rend = newSave.append_child("renderer");
 	app->render->Save(rend);
 
+	pugi::xml_node sce = newSave.append_child("scene");
+	app->scene->Save(sce);
 
 
 
-	//newSave.save_file(saveFileName);
+
+	newSave.save_file(saveFileName);
 
 	return ret;
 }

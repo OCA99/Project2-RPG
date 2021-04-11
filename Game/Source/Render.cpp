@@ -239,7 +239,7 @@ bool Render::Save(pugi::xml_node& savedGame)
 {
 	pugi::xml_node cameraNode = savedGame.append_child("camera");
 	pugi::xml_attribute cameraX = cameraNode.append_attribute("x");
-	cameraX.set_value(camera.x);
+	cameraX.set_value(120);
 	pugi::xml_attribute cameraY = cameraNode.append_attribute("y");
 	cameraY.set_value(camera.y);
 	return true;
