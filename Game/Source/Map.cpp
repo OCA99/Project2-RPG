@@ -118,6 +118,16 @@ iPoint Map::MapToWorld(int x, int y) const
 	return ret;
 }
 
+// This function computes the rectangle that encapsulates the map
+SDL_Rect Map::OuterRectangle()
+{
+	if (outerRectangle.w == 0)
+	{
+		outerRectangle = SDL_Rect({ 0, 0, data.width * data.tileWidth, data.height * data.tileHeight });
+	}
+	return outerRectangle;
+}
+
 // Called before quitting
 bool Map::CleanUp()
 {
@@ -212,6 +222,8 @@ bool Map::Load(const char* filename)
 
 		// L04: TODO 4: LOG the info for each loaded layer
 	}
+
+	outerRectangle = SDL_Rect({ 0, 0, 0, 0 });
 
 	mapLoaded = ret;
 

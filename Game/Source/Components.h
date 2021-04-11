@@ -63,3 +63,8 @@ struct Humanoid
 {
 	Humanoid() {};
 };
+
+struct CameraFollower
+{
+	CameraFollower() {};
+};
