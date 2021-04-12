@@ -43,6 +43,8 @@ public:
 
 private:
 	Scene* currentScene = nullptr;
+
+	MapScene* s;
 };
 
 #endif // __SCENE_H__
