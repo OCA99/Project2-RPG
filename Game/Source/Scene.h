@@ -29,6 +29,5 @@ public:
 
 	void CleanUp();
 
-private:
 	const char* filename;
 };

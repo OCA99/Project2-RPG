@@ -229,9 +229,9 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 
 bool Render::Load(pugi::xml_node& savedGame)
 {
-	pugi::xml_node cameraNode = savedGame.child("camera");
-	camera.x = cameraNode.attribute("x").as_int();
-	camera.y = cameraNode.attribute("y").as_int();
+	//pugi::xml_node cameraNode = savedGame.child("camera");
+	//camera.x = cameraNode.attribute("x").as_int();
+	//camera.y = cameraNode.attribute("y").as_int();
 	return true;
 }
 
