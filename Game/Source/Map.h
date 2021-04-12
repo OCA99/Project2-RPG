@@ -91,7 +91,9 @@ struct MapLayer
 
 	Properties properties;
 
+	bool draw = true;
 	bool navigation = false;
+	bool isEvent = false;
 
 	MapLayer() : data(NULL)
 	{}
@@ -128,7 +130,32 @@ struct MapData
 	List<MapLayer*> maplayers;
 	Properties properties;
 
+	// This function returns the gid relative to the tileset it belongs to
+	int GetTileSetGid(int gid)
+	{
+		for (int i = 0; i < tilesets.Count(); i++)
+		{
+			if (i == tilesets.Count() - 1) return gid - tilesets[i]->firstgid;
+
+			if (gid < tilesets[i]->firstgid)
+			{
+				return gid - tilesets[i - 1]->firstgid;
+			}
+		}
+
+		return 0;
+	}
+
 	// L04: TODO 2: Add a list/array of layers to the map
+};
+
+struct MapEvent
+{
+	int mapId;
+	int layerId;
+	int eventId;
+
+	std::map<std::string, std::string>* attributes;
 };
 
 class Map : public Module
@@ -158,12 +185,32 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
+	void LoadEvents();
+
 	// L04: DONE 8: Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 
 	SDL_Rect OuterRectangle();
 
 	std::vector<SDL_Rect>* NavigationIntersection(SDL_Rect other);
+
+	bool Map::EventIntersection(SDL_Rect other, std::pair<int, int>& result);
+
+	MapEvent* GetEvent(int layerId, int eventId)
+	{
+		int mapId = data.properties.GetProperty("mapId");
+
+		for (int i = 0; i < events->size(); i++)
+		{
+			MapEvent* e = events->at(i);
+			if (e->mapId == mapId && e->layerId == layerId && e->eventId == eventId)
+			{
+				return e;
+			}
+		}
+
+		return nullptr;
+	}
 
 private:
 
@@ -192,6 +239,7 @@ public:
 
 	// L03: DONE 1: Add your struct for map info
 	MapData data;
+	std::vector<MapEvent*>* events;
 
 private:
 	pugi::xml_document mapFile;

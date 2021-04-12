@@ -23,7 +23,7 @@ void Scene::CleanUp()
 	world->destroyWorld();
 }
 
-void MapScene::Load()
+void MapScene::Load(fPoint playerPosition)
 {
 	Scene::Load();
 
@@ -35,7 +35,7 @@ void MapScene::Load()
 	world->registerSystem(new InputSystem());
 	world->registerSystem(new CameraSystem());
 
-	PlayerFactory::Create(world, fPoint(10, 250));
+	PlayerFactory::Create(world, playerPosition);
 
 	app->map->Load(filename);
 }

@@ -13,12 +13,13 @@
 Map::Map() : Module(), mapLoaded(false)
 {
 	name.Create("map");
+	events = new std::vector<MapEvent*>();
 }
 
 // Destructor
 Map::~Map()
 {
-
+	delete events;
 }
 
 int Properties::GetProperty(const char* name, int defaultValue) const
@@ -58,6 +59,7 @@ bool Map::Awake(pugi::xml_node& config)
 
 bool Map::Start()
 {
+	LoadEvents();
 	return true;
 }
 
@@ -81,7 +83,7 @@ void Map::Draw()
 
 	for (int i = 0; i < data.maplayers.Count(); i++)
 	{
-		if (data.maplayers[i]->navigation)
+		if (!data.maplayers[i]->draw)
 			continue;
 		int layerSize = data.maplayers[i]->Size();
 		for (int j = 0; j < layerSize; j++)
@@ -99,7 +101,6 @@ void Map::Draw()
 				}
 
 				SDL_Rect section = tileset->GetTileRect(tileGid);
-				//LOG("%d, %d, %d, %d, %d\n", tileGid, section.x, section.y, section.w, section.h);
 				app->render->DrawTexture(tileset->texture, j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight, &section);
 				break;
 			}
@@ -155,6 +156,35 @@ std::vector<SDL_Rect>* Map::NavigationIntersection(SDL_Rect other)
 	}
 
 	return result;
+}
+
+bool Map::EventIntersection(SDL_Rect other, std::pair<int, int>& result)
+{
+	for (int i = 0; i < data.maplayers.Count(); i++)
+	{
+		if (!data.maplayers[i]->isEvent)
+			continue;
+		int layerSize = data.maplayers[i]->Size();
+		for (int j = 0; j < layerSize; j++)
+		{
+			uint tileGid = data.maplayers[i]->data[j];
+			int layerWidth = data.maplayers[i]->width;
+
+			if (tileGid != 0)
+			{
+				SDL_Rect tile = SDL_Rect({ j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight, data.tileWidth, data.tileHeight });
+
+				if (Intersects(tile, other))
+				{
+					result.first = data.maplayers[i]->properties.GetProperty("eventLayerId", -1);
+					result.second = data.GetTileSetGid(tileGid);
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 // Called before quitting
@@ -257,6 +287,51 @@ bool Map::Load(const char* filename)
 	mapLoaded = ret;
 
 	return ret;
+}
+
+void Map::LoadEvents()
+{
+	SString tmp("%s", "events.xml");
+
+	pugi::xml_parse_result result = mapFile.load_file(tmp.GetString());
+
+	if (result == NULL)
+	{
+		LOG("Could not load map xml file %s. pugi error: %s", "events.xml", result.description());
+	}
+
+	pugi::xml_node map;
+	for (map = mapFile.child("map"); map; map = map.next_sibling("map"))
+	{
+		int mapId = map.attribute("id").as_int(-1);
+
+		pugi::xml_node layer;
+		for (layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
+		{
+			int layerId = layer.attribute("id").as_int(-1);
+
+			pugi::xml_node eventN;
+			for (eventN = layer.child("event"); eventN; eventN = eventN.next_sibling("event"))
+			{
+				int eventId = eventN.attribute("id").as_int(-1);
+
+				MapEvent* e = new MapEvent();
+				e->mapId = mapId;
+				e->layerId = layerId;
+				e->eventId = eventId;
+
+				e->attributes = new std::map<std::string, std::string>();
+
+				pugi::xml_node::attribute_iterator i = eventN.attributes_begin();
+				for (i; i != eventN.attributes_end(); i++)
+				{
+					e->attributes->insert(std::make_pair(i->name(), i->as_string()));
+				}
+
+				events->push_back(e);
+			}
+		}
+	}
 }
 
 // L03: DONE: Load map general properties
@@ -376,11 +451,14 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 	LoadProperties(node.child("properties"), &layer->properties);
 
+	if (!layer->properties.GetProperty("draw", 1))
+		layer->draw = false;
+
 	if (layer->properties.GetProperty("navigation", 0))
-	{
-		LOG("navigation layer");
 		layer->navigation = true;
-	}
+
+	if (layer->properties.GetProperty("event", 0))
+		layer->isEvent = true;
 
 	return ret;
 }

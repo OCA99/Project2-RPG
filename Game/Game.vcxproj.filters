@@ -40,6 +40,7 @@
     <ClCompile Include="Source\CollisionSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="Source\CollisionSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

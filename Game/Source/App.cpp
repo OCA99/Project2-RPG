@@ -12,6 +12,7 @@
 #include "Log.h"
 
 #include <iostream>
+#include <math.h>
 #include <sstream>
 
 // Constructor
@@ -175,6 +176,8 @@ void App::FinishUpdate()
 	{
 		Save();
 	}
+
+	//LOG("%f\n", 1.0f / std::max(dt, minTime));
 
 	if (dt < minTime)
 	{
