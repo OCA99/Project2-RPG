@@ -34,8 +34,8 @@ bool SceneManager::Awake()
 // Called before the first frame
 bool SceneManager::Start()
 {
-	s = new MapScene("Town.tmx");
-	LoadScene(s);
+	MapScene* s = new MapScene("Town.tmx");
+	LoadScene(s, fPoint(30, 250));
 
 
 	return true;
@@ -89,13 +89,16 @@ bool SceneManager::CleanUp()
 
 void SceneManager::LoadScene(Scene* scene)
 {
+	delete currentScene;
 	currentScene = scene;
 	currentScene->Load();
 }
 
-void SceneManager::LoadScene(MapScene* scene)
+void SceneManager::LoadScene(MapScene* scene, fPoint playerPosition)
 {
-	LoadScene((Scene*)scene);
+	delete currentScene;
+	currentScene = (Scene*)scene;
+	scene->Load(playerPosition);
 }
 
 bool SceneManager::Load(pugi::xml_node& savedGame)
@@ -109,7 +112,7 @@ bool SceneManager::Load(pugi::xml_node& savedGame)
 	pugi::xml_node positionNode = entityNode.child("position");
 
 	MapScene* newS = new MapScene(string);
-	LoadScene(newS);
+	LoadScene((Scene*)newS);
 	
 	currentScene->world->all([&](ECS::Entity* ent)
 	{
@@ -131,7 +134,11 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 	pugi::xml_node sceneNode = savedGame.append_child("currentScene");
 	pugi::xml_attribute currentSceneAtt = sceneNode.append_attribute("name");
 
-	currentSceneAtt.set_value(s->filename);
+	if (currentScene->type == Scene::TYPE::MAP)
+	{
+		MapScene* mapScene = (MapScene*)currentScene;
+		currentSceneAtt.set_value(mapScene->filename);
+	}
 
 	pugi::xml_node entityNode = savedGame.append_child("entity");
 	pugi::xml_node positionNode = entityNode.append_child("position");

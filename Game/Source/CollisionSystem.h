@@ -29,4 +29,9 @@ public:
 	{
 		return SDL_Rect({ collider->rect.x + int(std::round(position.x)), collider->rect.y + int(std::round(position.y)), collider->rect.w, collider->rect.h });
 	}
+
+	SDL_Rect GetOffsetRect(ECS::ComponentHandle<EventCollider> collider, fPoint position)
+	{
+		return SDL_Rect({ collider->rect.x + int(std::round(position.x)), collider->rect.y + int(std::round(position.y)), collider->rect.w, collider->rect.h });
+	}
 };

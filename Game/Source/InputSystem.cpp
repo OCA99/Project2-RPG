@@ -32,6 +32,6 @@ void InputSystem::tick(ECS::World* world, float dt)
 			total += fPoint(0.f, 1.f);
 		}
 
-		p->Translate(total.Normalize() * keyboardMovement->speed);
+		p->Translate(total.Normalize() * keyboardMovement->speed * dt);
 	});
 }

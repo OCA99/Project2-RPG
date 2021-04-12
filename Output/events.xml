@@ -1,0 +1,10 @@
+<map id="0">
+    <layer id="0">
+        <event id="2" type="changeArea" target="Tavern.tmx" playerX="248" playerY="224"></event>
+    </layer>
+</map>
+<map id="1">
+    <layer id="0">
+        <event id="0" type="area" target="tavern"></event>
+    </layer>
+</map>

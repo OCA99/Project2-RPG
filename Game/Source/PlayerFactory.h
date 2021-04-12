@@ -33,10 +33,11 @@ protected:
 		player->get<Animator>()->CreateAnimation("walk_right", SDL_Rect({ 0, 64, 48, 32 }), 1, 3, 8.f);
 		player->get<Animator>()->CreateAnimation("walk_up", SDL_Rect({0, 96, 48, 32}), 1, 3, 8.f);
 
-		player->assign<KeyboardMovement>(2.f);
+		player->assign<KeyboardMovement>(70.f);
 		player->assign<Humanoid>();
 		player->assign<CameraFollower>();
 		player->assign<MapCollider>(SDL_Rect({ 2, 16, 12, 14 }));
+		player->assign<EventCollider>(SDL_Rect({ 2, 16, 12, 14 }));
 
 		return player;
 	}

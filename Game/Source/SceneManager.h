@@ -36,15 +36,13 @@ public:
 
 	void LoadScene(Scene* scene);
 
-	void LoadScene(MapScene* scene);
+	void LoadScene(MapScene* scene, fPoint playerPosition);
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&);
 
 private:
 	Scene* currentScene = nullptr;
-
-	MapScene* s;
 };
 
 #endif // __SCENE_H__

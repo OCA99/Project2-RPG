@@ -99,6 +99,7 @@
     <ClCompile Include="Source\CameraSystem.cpp" />
     <ClCompile Include="Source\CollisionSystem.cpp" />
     <ClCompile Include="Source\DialogSytem.cpp" />
+    <ClCompile Include="Source\EventHandler.cpp" />
     <ClCompile Include="Source\HumanoidSystem.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Source\DialogNode.h" />
     <ClInclude Include="Source\DialogSytem.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\EventHandler.h" />
     <ClInclude Include="Source\HumanoidSystem.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\PlayerFactory.h" />

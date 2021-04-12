@@ -6,6 +6,8 @@
 #include "Map.h"
 #include "Window.h"
 
+#include "EventHandler.h"
+
 #include <vector>
 #include <math.h>
 
@@ -16,8 +18,6 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 		SDL_Rect offsetRect = GetOffsetRect(collider, position);
 
 		std::vector<SDL_Rect>* intersectors = app->map->NavigationIntersection(offsetRect);
-
-		//app->render->DrawRectangle(offsetRect, 255, 0, 0, 128);
 
 		fPoint deltaPosition = entity->get<Position>()->deltaMovement;
 
@@ -30,22 +30,22 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 				if (!Intersects(tmpRect, inter))
 					continue;
 
-				tmpRect.x -= deltaPosition.x;
+				tmpRect.x -= (deltaPosition.x > 0) ? deltaPosition.x : std::floor(deltaPosition.x);
 				if (!Intersects(tmpRect, inter))
 				{
 					entity->get<Position>()->position.x -= deltaPosition.x;
 					continue;
 				}
 
-				tmpRect.x += deltaPosition.x;
-				tmpRect.y -= deltaPosition.y;
+				tmpRect.x += (deltaPosition.x > 0) ? deltaPosition.x : std::floor(deltaPosition.x);
+				tmpRect.y -= (deltaPosition.y > 0) ? deltaPosition.y : std::floor(deltaPosition.y);
 				if (!Intersects(tmpRect, inter))
 				{
 					entity->get<Position>()->position.y -= deltaPosition.y;
 					continue;
 				}
 
-				tmpRect.x -= deltaPosition.x;
+				tmpRect.x -= (deltaPosition.x > 0) ? deltaPosition.x : std::floor(deltaPosition.x);
 				if (!Intersects(tmpRect, inter))
 				{
 					entity->get<Position>()->position.x -= deltaPosition.x;
@@ -53,9 +53,27 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 					continue;
 				}
 
-				tmpRect.x += deltaPosition.x;
-				tmpRect.y += deltaPosition.y;
+				tmpRect.x += (deltaPosition.x > 0) ? deltaPosition.x : std::floor(deltaPosition.x);
+				tmpRect.y += (deltaPosition.y > 0) ? deltaPosition.y : std::floor(deltaPosition.y);
 			}
+		}
+	});
+
+	world->each<EventCollider>([&](ECS::Entity* entity, ECS::ComponentHandle<EventCollider> collider) {
+		fPoint position = entity->get<Position>()->position;
+		SDL_Rect offsetRect = GetOffsetRect(collider, position);
+
+		std::pair<int, int> result;
+		bool found = app->map->EventIntersection(offsetRect, result);
+
+		if (found)
+		{
+			MapEvent* e = app->map->GetEvent(result.first, result.second);
+			
+			if (e == nullptr)
+				return;
+
+			EventHandler::FireEvent(e);
 		}
 	});
 }
