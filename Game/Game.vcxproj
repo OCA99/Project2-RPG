@@ -107,6 +107,7 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\InputSystem.cpp" />
+    <ClCompile Include="Source\NPCMovementSystem.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
@@ -125,6 +126,8 @@
     <ClInclude Include="Source\EventHandler.h" />
     <ClInclude Include="Source\HumanoidSystem.h" />
     <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\NPCFactory.h" />
+    <ClInclude Include="Source\NPCMovementSystem.h" />
     <ClInclude Include="Source\PlayerFactory.h" />
     <ClInclude Include="Source\InputSystem.h" />
     <ClInclude Include="Source\PositionSystem.h" />

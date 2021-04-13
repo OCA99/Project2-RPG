@@ -10,8 +10,10 @@
 #include "HumanoidSystem.h"
 #include "CameraSystem.h"
 #include "CollisionSystem.h"
+#include "NPCMovementSystem.h"
 
 #include "PlayerFactory.h"
+#include "NPCFactory.h"
 
 void Scene::Load()
 {
@@ -34,8 +36,10 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new CollisionSystem());
 	world->registerSystem(new InputSystem());
 	world->registerSystem(new CameraSystem());
+	world->registerSystem(new NPCMovementSystem());
 
 	PlayerFactory::Create(world, playerPosition);
+	NPCFactory::Create(world, fPoint(250, 270));
 
 	app->map->Load(filename);
 }
