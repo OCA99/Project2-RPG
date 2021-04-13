@@ -11,7 +11,7 @@ void SpriteSystem::tick(ECS::World* world, float dt)
 		ECS::ComponentHandle<Animator> a = entity->get<Animator>();
 
 		if (a.isValid())
-			app->render->DrawTexture(sprite->sprite, p->position.x, p->position.y, &a->currentAnimation->GetCurrentFrame());
+			app->render->DrawTexture(sprite->sprite, p->position.x, p->position.y, &a->currentAnimation->GetCurrentFrame(), sprite->scale);
 		else
 			app->render->DrawTexture(sprite->sprite, p->position.x, p->position.y);
 	});

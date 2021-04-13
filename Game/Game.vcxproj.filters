@@ -41,6 +41,9 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Source\EventHandler.cpp" />
+    <ClCompile Include="Source\NPCMovementSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -120,6 +123,12 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventHandler.h" />
+    <ClInclude Include="Source\NPCFactory.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NPCMovementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

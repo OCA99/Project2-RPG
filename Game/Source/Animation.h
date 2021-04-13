@@ -2,6 +2,8 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
+#include <cmath>
+
 #define MAX_FRAMES 100
 
 class Animation
@@ -54,8 +56,9 @@ public:
 	const SDL_Rect& GetCurrentFrame() const
 	{
 		int actualFrame = currentFrame;
+
 		if (pingpongDirection == -1)
-			actualFrame = totalFrames - currentFrame;
+			actualFrame = totalFrames - std::ceil(currentFrame);
 
 		return frames[actualFrame];
 	}

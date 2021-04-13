@@ -25,9 +25,10 @@ struct Position
 
 struct Sprite
 {
-	Sprite(SDL_Texture* sprite, SDL_Rect section) : sprite(sprite) {}
+	Sprite(SDL_Texture* sprite, float scale = 1.0f) : sprite(sprite), scale(scale) {}
 
 	SDL_Texture* sprite;
+	float scale;
 };
 
 struct Animator
@@ -39,7 +40,7 @@ struct Animator
 		anim->GenerateAnimation(rect, rows, columns);
 		anim->speed = speed;
 		anim->loop = loop;
-		anim->pingpong = pingpong;
+		anim->pingpong = false;
 		animations.insert(std::make_pair(name, anim));
 	}
 
@@ -154,4 +155,11 @@ struct EventCollider
 	}
 
 	SDL_Rect rect;
+};
+
+struct NPCMover
+{
+	NPCMover(float speed) : speed(speed) {}
+
+	float speed;
 };
