@@ -3,9 +3,13 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
+
+#include "NPCFactory.h"
 
 #include <math.h>
 #include <algorithm>
@@ -293,9 +297,43 @@ bool Map::Load(const char* filename)
 
 	outerRectangle = SDL_Rect({ 0, 0, 0, 0 });
 
+	LoadNPCs();
+
 	mapLoaded = ret;
 
 	return ret;
+}
+
+void Map::LoadNPCs()
+{
+	for (int k = 0; k < data.maplayers.Count(); k++)
+	{
+		MapLayer* layer = data.maplayers[k];
+
+		if (layer->properties.GetProperty("npc", 0))
+		{
+			int layerSize = data.maplayers[k]->Size();
+			for (int j = 0; j < layerSize; j++)
+			{
+				uint tileGid = data.maplayers[k]->data[j];
+				int layerWidth = data.maplayers[k]->width;
+
+				if (tileGid != 0)
+				{
+					int id = data.GetTileSetGid(tileGid);
+
+					switch (id)
+					{
+					case 0:
+						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::TAVERN);
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
 void Map::LoadEvents()

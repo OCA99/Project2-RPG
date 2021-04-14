@@ -44,6 +44,7 @@
     <ClCompile Include="Source\NPCMovementSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Fonts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -128,6 +129,13 @@
     </ClInclude>
     <ClInclude Include="Source\NPCMovementSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="Source\ToUpperCase.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Callbacks.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,11 +13,35 @@
 
 void CollisionSystem::tick(ECS::World* world, float dt)
 {
+	/*world->each<NPCCollider>([&](ECS::Entity* npcEntity, ECS::ComponentHandle<NPCCollider> npcCollider) {
+		fPoint npcPosition = npcEntity->get<Position>()->position;
+
+		SDL_Rect rect = SDL_Rect({ int(npcPosition.x + npcCollider->rect.x), int(npcPosition.y + npcCollider->rect.y), npcCollider->rect.w, npcCollider->rect.h });
+
+		//app->render->DrawRectangle(rect, 255, 0, 0, 128);
+	});*/
+
 	world->each<MapCollider>([&](ECS::Entity* entity, ECS::ComponentHandle<MapCollider> collider) {
 		fPoint position = entity->get<Position>()->position;
 		SDL_Rect offsetRect = GetOffsetRect(collider, position);
 
 		std::vector<SDL_Rect>* intersectors = app->map->NavigationIntersection(offsetRect);
+
+		world->each<NPCCollider>([&](ECS::Entity* npcEntity, ECS::ComponentHandle<NPCCollider> npcCollider) {
+			fPoint npcPosition = npcEntity->get<Position>()->position;
+
+			intersectors->push_back(SDL_Rect({ int(npcPosition.x + npcCollider->rect.x), int(npcPosition.y + npcCollider->rect.y), npcCollider->rect.w, npcCollider->rect.h }));
+
+			world->each<DialogTrigger>([&](ECS::Entity* entity, ECS::ComponentHandle<DialogTrigger> trigger) {
+				SDL_Rect offsetTrigger = SDL_Rect({ int(trigger->rect.x + npcPosition.x), int(trigger->rect.y + npcPosition.y), trigger->rect.w, trigger->rect.h });
+
+				if (Intersects(offsetRect, offsetTrigger) && !trigger->started)
+				{
+					trigger->started = true;
+					app->dialog->StartDialog("TEST");
+				}
+			});
+		});
 
 		fPoint deltaPosition = entity->get<Position>()->deltaMovement;
 

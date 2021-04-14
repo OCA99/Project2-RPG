@@ -2,6 +2,8 @@
 
 #include "Point.h"
 #include "Animation.h"
+#include "App.h"
+#include "DialogSytem.h"
 #include "External/SDL/include/SDL.h"
 
 #include <map>
@@ -162,4 +164,94 @@ struct NPCMover
 	NPCMover(float speed) : speed(speed) {}
 
 	float speed;
+};
+
+struct NPCCollider
+{
+	NPCCollider(SDL_Rect rect) : rect(rect) {}
+
+	bool Intersects(SDL_Rect other, SDL_Rect& intersection)
+	{
+		int leftX = std::max(rect.x, other.x);
+		int rightX = std::min(rect.x + rect.w, other.x + other.w);
+		int topY = std::max(rect.y, other.y);
+		int bottomY = std::min(rect.y + rect.h, other.y + other.h);
+
+		if (leftX < rightX && topY < bottomY) {
+			intersection.x = leftX;
+			intersection.y = topY;
+			intersection.w = rightX - leftX;
+			intersection.h = bottomY - topY;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool Intersects(SDL_Rect other)
+	{
+		int leftX = std::max(rect.x, other.x);
+		int rightX = std::min(rect.x + rect.w, other.x + other.w);
+		int topY = std::max(rect.y, other.y);
+		int bottomY = std::min(rect.y + rect.h, other.y + other.h);
+
+		if (leftX < rightX && topY < bottomY) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	SDL_Rect rect;
+};
+
+struct DialogTrigger {
+	DialogTrigger(SDL_Rect rect, std::string filename) : rect(rect), filename(filename) {
+		app->dialog->LoadDialog(filename.c_str());
+	}
+
+	bool Intersects(SDL_Rect other, SDL_Rect& intersection)
+	{
+		int leftX = std::max(rect.x, other.x);
+		int rightX = std::min(rect.x + rect.w, other.x + other.w);
+		int topY = std::max(rect.y, other.y);
+		int bottomY = std::min(rect.y + rect.h, other.y + other.h);
+
+		if (leftX < rightX && topY < bottomY) {
+			intersection.x = leftX;
+			intersection.y = topY;
+			intersection.w = rightX - leftX;
+			intersection.h = bottomY - topY;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool Intersects(SDL_Rect other)
+	{
+		int leftX = std::max(rect.x, other.x);
+		int rightX = std::min(rect.x + rect.w, other.x + other.w);
+		int topY = std::max(rect.y, other.y);
+		int bottomY = std::min(rect.y + rect.h, other.y + other.h);
+
+		if (leftX < rightX && topY < bottomY) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	SDL_Rect rect;
+	std::string filename;
+
+	bool started = false;
 };

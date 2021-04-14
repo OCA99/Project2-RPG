@@ -16,6 +16,7 @@ class Audio;
 class SceneManager;
 class DialogSystem;
 class Map;
+class Fonts;
 
 class App
 {
@@ -79,6 +80,7 @@ public:
 	SceneManager* scene;
 	DialogSystem* dialog;
 	Map* map;
+	Fonts* fonts;
 
 private:
 

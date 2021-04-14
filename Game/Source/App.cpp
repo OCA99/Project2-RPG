@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "DialogSytem.h"
 #include "Map.h"
+#include "Fonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -26,6 +27,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	dialog = new DialogSystem();
 	map = new Map();
 	scene = new SceneManager();
+	fonts = new Fonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -33,9 +35,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	//AddModule(dialog);
 	AddModule(map);
 	AddModule(scene);
+	AddModule(dialog);
+	AddModule(fonts);
 
 	// Render last to swap buffer
 	AddModule(render);

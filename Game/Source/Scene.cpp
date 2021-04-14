@@ -40,7 +40,6 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new NPCMovementSystem());
 
 	PlayerFactory::Create(world, playerPosition);
-	NPCFactory::Create(world, fPoint(250, 270));
 
 	app->map->Load(filename);
 }

@@ -138,15 +138,13 @@ struct MapData
 	{
 		for (int i = 0; i < tilesets.Count(); i++)
 		{
-			if (i == tilesets.Count() - 1) return gid - tilesets[i]->firstgid;
-
 			if (gid < tilesets[i]->firstgid)
 			{
 				return gid - tilesets[i - 1]->firstgid;
 			}
 		}
 
-		return 0;
+		return gid - tilesets[tilesets.Count() - 1]->firstgid;
 	}
 
 	// L04: TODO 2: Add a list/array of layers to the map
@@ -224,6 +222,7 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadProperties(pugi::xml_node& node, Properties* properties);
 	bool StoreID(pugi::xml_node& node, MapLayer* layer, int ID);
+	void LoadNPCs();
 
 	bool Intersects(SDL_Rect a, SDL_Rect b)
 	{
