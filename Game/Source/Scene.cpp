@@ -22,7 +22,8 @@ void Scene::Load()
 
 void Scene::CleanUp()
 {
-	world->destroyWorld();
+	if (world != nullptr)
+		world->destroyWorld();
 }
 
 void MapScene::Load(fPoint playerPosition)
@@ -47,5 +48,4 @@ void MapScene::Load(fPoint playerPosition)
 void MapScene::CleanUp()
 {
 	Scene::CleanUp();
-	app->map->CleanUp();
 }

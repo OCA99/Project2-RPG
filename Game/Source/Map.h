@@ -22,6 +22,7 @@ struct TileSet
 	~TileSet()
 	{
 		app->tex->UnLoad(texture);
+		loaded = false;
 	}
 
 	SString	name;
@@ -38,6 +39,8 @@ struct TileSet
 	int	numTilesHeight;
 	int	offsetX;
 	int	offsetY;
+
+	bool loaded = true;
 
 	// L04: TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
 	SDL_Rect GetTileRect(int id) const

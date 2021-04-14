@@ -9,6 +9,12 @@
 class Animation
 {
 public:
+
+	~Animation()
+	{
+		delete[] frames;
+	}
+
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 	bool loop = true;

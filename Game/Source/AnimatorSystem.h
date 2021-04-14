@@ -11,4 +11,6 @@ public:
 	virtual ~AnimatorSystem() {}
 
 	virtual void tick(ECS::World* world, float dt) override;
+
+	virtual void unconfigure(ECS::World* world) override;
 };

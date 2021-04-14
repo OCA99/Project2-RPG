@@ -91,9 +91,15 @@ void Map::Draw()
 			uint tileGid = data.maplayers[i]->data[j];
 			int layerWidth = data.maplayers[i]->width;
 
+			if (tileGid == 0)
+				continue;
+
 			for (int k = 0; k < data.tilesets.Count(); k++)
 			{
 				TileSet* tileset = data.tilesets[k];
+
+				if (!tileset->loaded)
+					break;
 
 				if (data.tilesets.Count() > k + 1 && data.tilesets[k + 1]->firstgid <= tileGid)
 				{
@@ -190,6 +196,7 @@ bool Map::EventIntersection(SDL_Rect other, std::pair<int, int>& result)
 // Called before quitting
 bool Map::CleanUp()
 {
+
 	LOG("Unloading map");
 	// L03: DONE 2: Make sure you clean up any memory allocated from tilesets/map
 	// Remove all tilesets
@@ -212,6 +219,8 @@ bool Map::CleanUp()
 	
 	// Clean up the pugui tree
 	mapFile.reset();
+
+	mapLoaded = false;
 
 	return true;
 }
