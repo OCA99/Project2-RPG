@@ -9,32 +9,50 @@
 static class NPCFactory : public Prefab
 {
 public:
-	static ECS::Entity* Create(ECS::World* world, fPoint position)
+	enum class Type {
+		TAVERN
+	};
+
+	static ECS::Entity* Create(ECS::World* world, fPoint position, Type type)
 	{
-		ECS::Entity* npc = Create(world);
+		ECS::Entity* npc = Create(world, type);
+		position.y -= 4;
 		npc->get<Position>()->position = position;
 
 		return npc;
 	}
 protected:
-	static ECS::Entity* Create(ECS::World* world)
+	static ECS::Entity* Create(ECS::World* world, Type type)
 	{
 		ECS::Entity* npc = world->create();
 		npc->assign<Position>();
 
-		SDL_Texture* t = app->tex->Load("Assets/Textures/Characters/Characters.png");
-		npc->assign<Sprite>(t, 0.8f);
+		if (type == Type::TAVERN)
+		{
+			SDL_Texture* t = app->tex->Load("Assets/Textures/NPC/tavern_lady_sprites.png");
+			npc->assign<Sprite>(t, 0.8f);
 
-		npc->assign<Animator>();
-		npc->get<Animator>()->CreateAnimation("idle", SDL_Rect({ 208, 0, 16, 32 }));
-		npc->get<Animator>()->SetAnimation("idle");
-		npc->get<Animator>()->CreateAnimation("walk_down", SDL_Rect({ 192, 0, 48, 32 }), 1, 3, 8.f, true, true);
-		npc->get<Animator>()->CreateAnimation("walk_left", SDL_Rect({ 192, 32, 48, 32 }), 1, 3, 8.f, true, true);
-		npc->get<Animator>()->CreateAnimation("walk_right", SDL_Rect({ 192, 64, 48, 32 }), 1, 3, 8.f, true, true);
-		npc->get<Animator>()->CreateAnimation("walk_up", SDL_Rect({ 192, 96, 48, 32 }), 1, 3, 8.f, true, true);
+			npc->assign<Animator>();
+			npc->get<Animator>()->CreateAnimation("idle", SDL_Rect({ 25, 0, 25, 26 }));
+			npc->get<Animator>()->SetAnimation("idle");
+			npc->get<Animator>()->CreateAnimation("walk_down", SDL_Rect({ 0, 0, 75, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_left", SDL_Rect({ 0, 26, 75, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_right", SDL_Rect({ 0, 52, 75, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_up", SDL_Rect({ 0, 78, 75, 26 }), 1, 3, 8.f, true, true);
 
-		npc->assign<NPCMover>(30.f);
-		npc->assign<Humanoid>();
+			SDL_Rect collider;
+			collider.x = 4 * 0.8f;
+			collider.y = 18 * 0.8f;
+			collider.w = 17 * 0.8f;
+			collider.h = 8 * 0.8f;
+
+			npc->assign<NPCCollider>(collider);
+			npc->assign<Humanoid>();
+
+			collider.y = 32;
+
+			npc->assign<DialogTrigger>(collider, "tavern.xml");
+		}
 
 		return npc;
 	}

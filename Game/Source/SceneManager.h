@@ -46,8 +46,8 @@ public:
 	Scene* sceneToBeLoaded = nullptr;
 	fPoint playerPositionToBeLoaded;
 
-private:
 	Scene* currentScene = nullptr;
+private:
 };
 
 #endif // __SCENE_H__

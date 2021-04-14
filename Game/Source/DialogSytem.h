@@ -2,6 +2,8 @@
 
 #include <map>
 #include <string>
+#include <functional>
+
 #include "Module.h"
 
 class DialogNode;
@@ -26,6 +28,8 @@ public:
 
 	bool PostUpdate(float dt);
 
+	void DrawDialog();
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -33,17 +37,20 @@ public:
 
 	void StartDialog(const char* id);
 
-	void EndDialog();
-
 	void NextDialog();
 
 private:
 	DialogNode* ParseDialogXML(pugi::xml_node dialogRoot);
-	void PrintDialog(DialogNode* node);
 
 	DialogNode* currentDialog = nullptr;
 
 	std::map<std::string, DialogNode*> dialogues;
+
+	std::map<std::string, DialogNode*> nodeRoutes;
+
+	std::map<std::string, std::function<void()>> callbacks;
+
+	int selectedOption = 0;
 
 	std::string folder;
 	pugi::xml_document dialogFile;

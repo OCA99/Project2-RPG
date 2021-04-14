@@ -39,9 +39,9 @@ protected:
 
 		SDL_Rect colliderRect;
 		colliderRect.x = 4 * 0.8f;
-		colliderRect.y = 2 * 0.8f;
+		colliderRect.y = 18 * 0.8f;
 		colliderRect.w = 17 * 0.8f;
-		colliderRect.h = 24 * 0.8f;
+		colliderRect.h = 8 * 0.8f;
 
 		player->assign<MapCollider>(colliderRect);
 		player->assign<EventCollider>(colliderRect);

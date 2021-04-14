@@ -100,6 +100,7 @@
     <ClCompile Include="Source\CollisionSystem.cpp" />
     <ClCompile Include="Source\DialogSytem.cpp" />
     <ClCompile Include="Source\EventHandler.cpp" />
+    <ClCompile Include="Source\Fonts.cpp" />
     <ClCompile Include="Source\HumanoidSystem.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -118,12 +119,14 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimatorSystem.h" />
+    <ClInclude Include="Source\Callbacks.h" />
     <ClInclude Include="Source\CameraSystem.h" />
     <ClInclude Include="Source\CollisionSystem.h" />
     <ClInclude Include="Source\DialogNode.h" />
     <ClInclude Include="Source\DialogSytem.h" />
     <ClInclude Include="Source\ECS.h" />
     <ClInclude Include="Source\EventHandler.h" />
+    <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="Source\HumanoidSystem.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\NPCFactory.h" />
@@ -144,6 +147,7 @@
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\SpriteSystem.h" />
     <ClInclude Include="Source\Textures.h" />
+    <ClInclude Include="Source\ToUpperCase.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />
