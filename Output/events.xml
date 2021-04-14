@@ -5,6 +5,6 @@
 </map>
 <map id="1">
     <layer id="0">
-        <event id="0" type="area" target="tavern"></event>
+        <event id="2" type="changeArea" target="Town.tmx" playerX="300" playerY="170"></event>
     </layer>
 </map>
