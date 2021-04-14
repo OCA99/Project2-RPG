@@ -2,13 +2,21 @@
 
 #include "ECS.h"
 #include "Point.h"
+#include "App.h"
+#include "Map.h"
 
 class Scene
 {
 public:
 	Scene() {}
 
-	~Scene() {}
+	~Scene() {
+		if (world != nullptr)
+		{
+			world->destroyWorld();
+			world = nullptr;
+		}
+	}
 
 	virtual void Load();
 
@@ -30,6 +38,16 @@ public:
 	{
 		filename = _filename;
 		type = TYPE::MAP;
+	}
+
+	~MapScene() {
+		app->map->CleanUp();
+
+		if (world != nullptr)
+		{
+			world->destroyWorld();
+			world = nullptr;
+		}
 	}
 
 	void Load(fPoint playerPosition);

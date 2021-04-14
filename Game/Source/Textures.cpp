@@ -63,10 +63,6 @@ bool Textures::CleanUp()
 // Load new texture from file path
 SDL_Texture* const Textures::Load(const char* path)
 {
-	if (textureCache.find(path) != textureCache.end())
-	{
-		return textureCache.at(path);
-	}
 
 	SDL_Texture* texture = NULL;
 	SDL_Surface* surface = IMG_Load(path);
@@ -81,7 +77,7 @@ SDL_Texture* const Textures::Load(const char* path)
 		SDL_FreeSurface(surface);
 	}
 
-	textureCache.insert(std::make_pair(path, texture));
+	textures.Add(texture);
 
 	return texture;
 }
@@ -98,16 +94,6 @@ bool Textures::UnLoad(SDL_Texture* texture)
 			SDL_DestroyTexture(item->data);
 			textures.Del(item);
 			return true;
-		}
-	}
-
-	std::map<const char*, SDL_Texture* const>::iterator i = textureCache.begin();
-	for (i; i != textureCache.end(); i++)
-	{
-		if (i->second == texture)
-		{
-			textureCache.erase(i);
-			break;
 		}
 	}
 

@@ -35,8 +35,9 @@ bool SceneManager::Awake()
 bool SceneManager::Start()
 {
 	MapScene* s = new MapScene("Town.tmx");
-	LoadScene(s, fPoint(30, 250));
 
+	mapSceneToBeLoaded = s;
+	playerPositionToBeLoaded = fPoint(30, 250);
 
 	return true;
 }
@@ -50,6 +51,18 @@ bool SceneManager::PreUpdate()
 // Called each loop iteration
 bool SceneManager::Update(float dt)
 {
+	if (mapSceneToBeLoaded != nullptr)
+	{
+		LoadScene(mapSceneToBeLoaded, playerPositionToBeLoaded);
+		mapSceneToBeLoaded = nullptr;
+	}
+
+	if (sceneToBeLoaded != nullptr)
+	{
+		LoadScene(sceneToBeLoaded);
+		sceneToBeLoaded = nullptr;
+	}
+
 	return true;
 }
 
@@ -59,7 +72,6 @@ bool SceneManager::PostUpdate(float dt)
 	bool ret = true;
 
 	currentScene->world->tick(dt);
-
 
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
@@ -82,21 +94,24 @@ bool SceneManager::PostUpdate(float dt)
 // Called before quitting
 bool SceneManager::CleanUp()
 {
-	LOG("Freeing scene");
+	if (currentScene != nullptr && currentScene->type == Scene::TYPE::MAP)
+		delete (MapScene*)currentScene;
+	else
+		delete currentScene;
 
 	return true;
 }
 
 void SceneManager::LoadScene(Scene* scene)
 {
-	delete currentScene;
+	CleanUp();
 	currentScene = scene;
 	currentScene->Load();
 }
 
 void SceneManager::LoadScene(MapScene* scene, fPoint playerPosition)
 {
-	delete currentScene;
+	CleanUp();
 	currentScene = (Scene*)scene;
 	scene->Load(playerPosition);
 }
@@ -112,7 +127,8 @@ bool SceneManager::Load(pugi::xml_node& savedGame)
 	pugi::xml_node positionNode = entityNode.child("position");
 
 	MapScene* newS = new MapScene(string);
-	LoadScene((Scene*)newS);
+	
+	mapSceneToBeLoaded = newS;
 	
 	currentScene->world->all([&](ECS::Entity* ent)
 	{

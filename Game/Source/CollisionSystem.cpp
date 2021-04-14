@@ -57,6 +57,8 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 				tmpRect.y += (deltaPosition.y > 0) ? deltaPosition.y : std::floor(deltaPosition.y);
 			}
 		}
+
+		delete intersectors;
 	});
 
 	world->each<EventCollider>([&](ECS::Entity* entity, ECS::ComponentHandle<EventCollider> collider) {

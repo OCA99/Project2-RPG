@@ -41,6 +41,11 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&);
 
+public:
+	MapScene* mapSceneToBeLoaded = nullptr;
+	Scene* sceneToBeLoaded = nullptr;
+	fPoint playerPositionToBeLoaded;
+
 private:
 	Scene* currentScene = nullptr;
 };

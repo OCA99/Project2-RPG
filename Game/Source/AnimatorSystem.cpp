@@ -10,3 +10,17 @@ void AnimatorSystem::tick(ECS::World* world, float dt)
 			animator->currentAnimation->Update(dt);
 	});
 }
+
+void AnimatorSystem::unconfigure(ECS::World* world)
+{
+	/*world->each<Animator>([&](ECS::Entity* entity, ECS::ComponentHandle<Animator> animator) {
+		std::map<std::string, Animation*>::iterator i = animator->animations.begin();
+		for (i; i != animator->animations.end(); i++)
+		{
+			delete i->second;
+		}
+
+		animator->currentAnimation = nullptr;
+		animator->animations.clear();
+	});*/
+}
