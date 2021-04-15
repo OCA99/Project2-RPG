@@ -166,6 +166,15 @@ struct NPCMover
 	float speed;
 };
 
+struct NPCMoverAuto
+{
+	NPCMoverAuto(float speed, int x, int y) : speed(speed), x(x), y(y) {}
+
+	int x;
+	int y;
+	float speed;
+};
+
 struct NPCCollider
 {
 	NPCCollider(SDL_Rect rect) : rect(rect) {}
