@@ -35,7 +35,8 @@ bool DialogSystem::Start()
 {
 	dialogFrame = app->tex->Load("Assets/Textures/Dialogue/frame.png");
 	tavernLady = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
-
+	reaperSr = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
+	customer = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
 	return true;
 }
 
@@ -100,6 +101,16 @@ void DialogSystem::DrawDialog()
 	{
 		app->render->DrawTexture(tavernLady, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 	}
+	else if (std::strcmp(speaker.c_str(), "reaper") == 0)
+	{
+		app->render->DrawTexture(reaperSr, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+	}
+	else if (std::strcmp(speaker.c_str(), "customer") == 0)
+	{
+		app->render->DrawTexture(customer, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+	}
+	
+
 
 	// Set the text to uppercase, since our font only supports uppercase.
 	std::string text = ToUpperCase(currentDialog->attributes->at("value"));

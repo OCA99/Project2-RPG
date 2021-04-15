@@ -327,12 +327,19 @@ void Map::LoadNPCs()
 					case 0:
 						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::TAVERN, 20);
 						break;
+					case 1:
+						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::REAPER, 20);
+						break;
+					case 3:
+						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::CUSTOMER, 20);
+						break;
 					default:
 						break;
 					}
 				}
 			}
 		}
+		
 	}
 }
 

@@ -1,0 +1,13 @@
+<dialog id="REAPER">
+	<options speaker="reaper" value="Good morning young lady, great adventures await you.">
+		<option value="...">
+			<line speaker="reaper" value="Try not to make me work too much."></line>
+		</option>
+		<option value="What">
+			<line speaker="reaper" value="Try not to make me work too much."></line>
+		</option>
+		<option value="Good morning">
+			<line speaker="reaper" value="Try not to make me work too much."></line>
+		</option>
+	</options>
+</dialog>
