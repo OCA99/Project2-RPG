@@ -35,8 +35,10 @@ bool SceneManager::Awake()
 bool SceneManager::Start()
 {
 	MapScene* s = new MapScene("Town.tmx");
+	//LogoScene* s = new LogoScene();
 
 	mapSceneToBeLoaded = s;
+	//sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
 
 	return true;

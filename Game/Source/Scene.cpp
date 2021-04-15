@@ -11,6 +11,7 @@
 #include "CameraSystem.h"
 #include "CollisionSystem.h"
 #include "NPCMovementSystem.h"
+#include "LogoFadeSystem.h"
 
 #include "PlayerFactory.h"
 #include "NPCFactory.h"
@@ -47,4 +48,22 @@ void MapScene::Load(fPoint playerPosition)
 void MapScene::CleanUp()
 {
 	Scene::CleanUp();
+}
+
+void LogoScene::Load()
+{
+	Scene::Load();
+
+	world->registerSystem(new SpriteSystem());
+	world->registerSystem(new LogoFadeSystem());
+
+	ECS::Entity* e = world->create();
+
+	e->assign<Position>(fPoint(0, 0));
+
+	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
+	e->assign<Sprite>(t);
+
+	e = world->create();
+	e->assign<LogoFade>(70);
 }
