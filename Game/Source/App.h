@@ -19,6 +19,7 @@ class Map;
 class Fonts;
 class ModuleUI;
 class GuiManager;
+class Debug;
 
 class App
 {
@@ -85,6 +86,7 @@ public:
 	Fonts* fonts;
 	ModuleUI* ui;
 	GuiManager* guimanager;
+	Debug* debug;
 
 private:
 

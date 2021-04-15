@@ -219,7 +219,7 @@ struct NPCCollider
 };
 
 struct DialogTrigger {
-	DialogTrigger(SDL_Rect rect, std::string filename) : rect(rect), filename(filename) {
+	DialogTrigger(SDL_Rect rect, std::string filename, std::string dialogName) : rect(rect), filename(filename), dialogName(dialogName) {
 		app->dialog->LoadDialog(filename.c_str());
 	}
 
@@ -261,6 +261,7 @@ struct DialogTrigger {
 
 	SDL_Rect rect;
 	std::string filename;
+	std::string dialogName;
 
 	bool started = false;
 };

@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "App.h"
+#include "Input.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -66,6 +67,16 @@ bool Window::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+bool Window::Update(float dt)
+{
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		ToggleFullscreen();
+	}
+
+	return true;
+}
+
 // Called before quitting
 bool Window::CleanUp()
 {
@@ -98,4 +109,14 @@ void Window::GetWindowSize(uint& width, uint& height) const
 uint Window::GetScale() const
 {
 	return scale;
+}
+
+void Window::ToggleFullscreen()
+{
+	if (!fullscreen)
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	else
+		SDL_SetWindowFullscreen(window, 0);
+
+	fullscreen = !fullscreen;
 }

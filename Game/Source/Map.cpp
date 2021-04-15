@@ -1,10 +1,10 @@
-
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Debug.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -87,7 +87,7 @@ void Map::Draw()
 
 	for (int i = 0; i < data.maplayers.Count(); i++)
 	{
-		if (!data.maplayers[i]->draw)
+		if (!data.maplayers[i]->draw && !app->debug->bounds)
 			continue;
 		int layerSize = data.maplayers[i]->Size();
 		for (int j = 0; j < layerSize; j++)
@@ -325,7 +325,7 @@ void Map::LoadNPCs()
 					switch (id)
 					{
 					case 0:
-						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::TAVERN);
+						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::TAVERN, 20);
 						break;
 					default:
 						break;
