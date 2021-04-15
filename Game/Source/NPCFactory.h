@@ -48,6 +48,7 @@ protected:
 
 			npc->assign<NPCCollider>(collider);
 			npc->assign<Humanoid>();
+			npc->assign<NPCMoverAuto>(16.0f,0,180);
 
 			collider.y = 32;
 
