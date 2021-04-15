@@ -6,6 +6,8 @@
 
 #include "Module.h"
 
+#include "SDL/include/SDL.h"
+
 class DialogNode;
 
 class DialogSystem : public Module {
@@ -54,4 +56,7 @@ private:
 
 	std::string folder;
 	pugi::xml_document dialogFile;
+
+	SDL_Texture* dialogFrame;
+	SDL_Texture* tavernLady;
 };

@@ -10,6 +10,7 @@
 #include "Fonts.h"
 #include "ModuleUI.h"
 #include "GuiManager.h"
+#include "Debug.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -32,6 +33,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fonts = new Fonts();
 	ui = new ModuleUI();
 	guimanager = new GuiManager();
+	debug = new Debug();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -45,6 +47,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fonts);
 	AddModule(ui);
 	AddModule(guimanager);
+	AddModule(debug);
 
 	// Render last to swap buffer
 	AddModule(render);

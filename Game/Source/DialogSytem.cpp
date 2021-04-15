@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Fonts.h"
 #include "Window.h"
+#include "Textures.h"
 
 #include <utility>
 
@@ -32,6 +33,9 @@ bool DialogSystem::Awake(pugi::xml_node& config)
 
 bool DialogSystem::Start()
 {
+	dialogFrame = app->tex->Load("Assets/Textures/Dialogue/frame.png");
+	tavernLady = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
+
 	return true;
 }
 
@@ -87,13 +91,21 @@ bool DialogSystem::PostUpdate(float dt)
 void DialogSystem::DrawDialog()
 {
 	// Draw the background rectangle.
-	app->render->DrawRectangle(SDL_Rect({ 0, (app->render->camera.h / 3) * 2, app->render->camera.w, app->render->camera.h / 3 }), 255, 255, 255, 255, true, false);
+	//app->render->DrawRectangle(SDL_Rect({ 0, (app->render->camera.h / 3) * 2, app->render->camera.w, app->render->camera.h / 3 }), 255, 255, 255, 255, true, false);
+	app->render->DrawTexture(dialogFrame, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+	std::string speaker = currentDialog->attributes->at("speaker");
+
+	if (std::strcmp(speaker.c_str(), "Oscar") == 0)
+	{
+		app->render->DrawTexture(tavernLady, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+	}
 
 	// Set the text to uppercase, since our font only supports uppercase.
 	std::string text = ToUpperCase(currentDialog->attributes->at("value"));
 
 	// Write the dialog line.
-	app->fonts->BlitText(10, 250, 0, text.c_str());
+	app->fonts->BlitText(25, 260, 0, text.c_str());
 
 	// If the current node is a question, we should also draw the possible answers
 	if (currentDialog->type == DialogNode::NodeType::OPTIONS)
@@ -106,12 +118,12 @@ void DialogSystem::DrawDialog()
 			// Set them to uppercase.
 			text = ToUpperCase((*i)->attributes->at("value"));
 			// Draw them, increasing the y offset at every iteration.
-			app->fonts->BlitText(23, 265 + y * 15, 0, text.c_str());
+			app->fonts->BlitText(42, 275 + y * 15, 0, text.c_str());
 			y++;
 		}
 		// Draw a small black rectangle next to the selected option.
-		SDL_Rect selectedRectangle = SDL_Rect({ 25, (267 + (15 * selectedOption)) * int(app->win->GetScale()), 6, 6 });
-		app->render->DrawRectangle(selectedRectangle, 0, 0, 0, 255, true, false);
+		SDL_Rect selectedRectangle = SDL_Rect({ 30 * int(app->win->GetScale()), (277 + (15 * selectedOption)) * int(app->win->GetScale()), 6, 6 });
+		app->render->DrawRectangle(selectedRectangle, 255, 255, 255, 255, true, false);
 	}
 }
 

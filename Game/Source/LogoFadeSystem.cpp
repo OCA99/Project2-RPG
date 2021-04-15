@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Input.h"
 
 #include <algorithm>
 
@@ -16,6 +17,11 @@ void LogoFadeSystem::tick(ECS::World* world, float dt)
 		app->win->GetWindowSize(w, h);
 		fullscreen.w = w;
 		fullscreen.h = h;
+
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+			direction = 1;
+			alpha = 255;
+		}
 
 		alpha += logoFade->speed * dt * direction;
 		if (alpha > 255 && direction == 1)

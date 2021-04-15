@@ -98,6 +98,7 @@
     <ClCompile Include="Source\AnimatorSystem.cpp" />
     <ClCompile Include="Source\CameraSystem.cpp" />
     <ClCompile Include="Source\CollisionSystem.cpp" />
+    <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\DialogSytem.cpp" />
     <ClCompile Include="Source\EventHandler.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Source\Callbacks.h" />
     <ClInclude Include="Source\CameraSystem.h" />
     <ClInclude Include="Source\CollisionSystem.h" />
+    <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\DialogNode.h" />
     <ClInclude Include="Source\DialogSytem.h" />
     <ClInclude Include="Source\ECS.h" />

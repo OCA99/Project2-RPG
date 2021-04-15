@@ -18,6 +18,8 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
+	bool Update(float dt);
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -30,6 +32,8 @@ public:
 	// Retrieve window scale
 	uint GetScale() const;
 
+	void ToggleFullscreen();
+
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
@@ -38,6 +42,8 @@ public:
 	SDL_Surface* screenSurface;
 
 private:
+	bool fullscreen = false;
+
 	SString title;
 	uint width;
 	uint height;

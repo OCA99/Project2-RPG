@@ -13,16 +13,16 @@ public:
 		TAVERN
 	};
 
-	static ECS::Entity* Create(ECS::World* world, fPoint position, Type type)
+	static ECS::Entity* Create(ECS::World* world, fPoint position, Type type, float radius = 14)
 	{
-		ECS::Entity* npc = Create(world, type);
+		ECS::Entity* npc = Create(world, type, radius);
 		position.y -= 14;
 		npc->get<Position>()->position = position;
 
 		return npc;
 	}
 protected:
-	static ECS::Entity* Create(ECS::World* world, Type type)
+	static ECS::Entity* Create(ECS::World* world, Type type, float radius)
 	{
 		ECS::Entity* npc = world->create();
 		npc->assign<Position>();
@@ -48,11 +48,13 @@ protected:
 
 			npc->assign<NPCCollider>(collider);
 			npc->assign<Humanoid>();
-			//npc->assign<NPCMoverAuto>(16.0f,0,180);
 
-			collider.y = 32;
+			collider.x = -radius;
+			collider.y = -radius;
+			collider.w += radius * 2;
+			collider.h += radius * 3;
 
-			npc->assign<DialogTrigger>(collider, "tavern.xml");
+			npc->assign<DialogTrigger>(collider, "tavern.xml", "TEST");
 		}
 
 		return npc;
