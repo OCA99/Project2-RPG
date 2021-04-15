@@ -19,6 +19,8 @@ void SpriteSystem::tick(ECS::World* world, float dt)
 		q.texture = sprite->sprite;
 		q.x = p->position.x;
 		q.y = p->position.y;
+		q.scale = sprite->scale;
+
 
 		if (a.isValid() && a->currentAnimation != nullptr)
 		{
