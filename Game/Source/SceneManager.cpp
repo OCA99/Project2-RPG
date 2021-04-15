@@ -34,11 +34,11 @@ bool SceneManager::Awake()
 // Called before the first frame
 bool SceneManager::Start()
 {
-	MapScene* s = new MapScene("Town.tmx");
-	//LogoScene* s = new LogoScene();
+	//MapScene* s = new MapScene("Town.tmx");
+	LogoScene* s = new LogoScene();
 
-	mapSceneToBeLoaded = s;
-	//sceneToBeLoaded = (Scene*)s;
+	//mapSceneToBeLoaded = s;
+	sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
 
 	return true;
