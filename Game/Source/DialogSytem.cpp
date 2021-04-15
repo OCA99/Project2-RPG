@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Input.h"
 #include "Fonts.h"
+#include "Window.h"
 
 #include <utility>
 
@@ -86,13 +87,13 @@ bool DialogSystem::PostUpdate(float dt)
 void DialogSystem::DrawDialog()
 {
 	// Draw the background rectangle.
-	//app->render->DrawRectangle(SDL_Rect({ 0, (app->render->camera.h / 3) * 2, app->render->camera.w, app->render->camera.h / 3 }), 255, 255, 255, 255, true, false);
+	app->render->DrawRectangle(SDL_Rect({ 0, (app->render->camera.h / 3) * 2, app->render->camera.w, app->render->camera.h / 3 }), 255, 255, 255, 255, true, false);
 
 	// Set the text to uppercase, since our font only supports uppercase.
 	std::string text = ToUpperCase(currentDialog->attributes->at("value"));
 
 	// Write the dialog line.
-	app->fonts->BlitText(10, (app->render->camera.h / 3) * 2 + 10, 0, text.c_str());
+	app->fonts->BlitText(10, 250, 0, text.c_str());
 
 	// If the current node is a question, we should also draw the possible answers
 	if (currentDialog->type == DialogNode::NodeType::OPTIONS)
@@ -105,11 +106,11 @@ void DialogSystem::DrawDialog()
 			// Set them to uppercase.
 			text = ToUpperCase((*i)->attributes->at("value"));
 			// Draw them, increasing the y offset at every iteration.
-			app->fonts->BlitText(30, (app->render->camera.h / 3) * 2 + 30 + (18 * y), 0, text.c_str());
+			app->fonts->BlitText(23, 265 + y * 15, 0, text.c_str());
 			y++;
 		}
 		// Draw a small black rectangle next to the selected option.
-		SDL_Rect selectedRectangle = SDL_Rect({ 20, (app->render->camera.h / 3) * 2 + 30 + (18 * selectedOption), 6, 6 });
+		SDL_Rect selectedRectangle = SDL_Rect({ 25, (267 + (15 * selectedOption)) * int(app->win->GetScale()), 6, 6 });
 		app->render->DrawRectangle(selectedRectangle, 0, 0, 0, 255, true, false);
 	}
 }

@@ -16,7 +16,7 @@ public:
 	static ECS::Entity* Create(ECS::World* world, fPoint position, Type type)
 	{
 		ECS::Entity* npc = Create(world, type);
-		position.y -= 4;
+		position.y -= 14;
 		npc->get<Position>()->position = position;
 
 		return npc;
@@ -48,7 +48,7 @@ protected:
 
 			npc->assign<NPCCollider>(collider);
 			npc->assign<Humanoid>();
-			npc->assign<NPCMoverAuto>(16.0f,0,180);
+			//npc->assign<NPCMoverAuto>(16.0f,0,180);
 
 			collider.y = 32;
 

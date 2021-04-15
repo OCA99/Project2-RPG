@@ -1,5 +1,6 @@
 #include "InputSystem.h"
 #include "ECS.h"
+#include "DialogSytem.h"
 
 #include "App.h"
 #include "Input.h"
@@ -42,6 +43,9 @@ void InputSystem::tick(ECS::World* world, float dt)
 			keyboardMovement->speed = 70.0f;
 		}
 
-		p->Translate(total.Normalize() * keyboardMovement->speed * dt);
+		if (app->dialog->currentDialog == nullptr)
+			p->Translate(total.Normalize() * keyboardMovement->speed * dt);
+		else
+			p->Translate(fPoint(0, 0));
 	});
 }

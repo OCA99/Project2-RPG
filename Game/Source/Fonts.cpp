@@ -112,7 +112,7 @@ void Fonts::BlitText(int x, int y, int fontId, const char* text) const
 				spriteRect.x = (j % font->columns) * spriteRect.w;
 				spriteRect.y = (j / font->columns) * spriteRect.h;
 				// Blit the character at its proper position
-				app->render->DrawTexture(font->texture, x, y, &spriteRect);
+				app->render->DrawTexture(font->texture, x, y, &spriteRect, 1.0f, 1.0f, 0.0f, INT_MAX, INT_MAX, false);
 				break;
 			}
 		}
