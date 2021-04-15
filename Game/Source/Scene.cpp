@@ -59,10 +59,11 @@ void LogoScene::Load()
 
 	ECS::Entity* e = world->create();
 
-	e->assign<Position>(fPoint(0, 0));
+	e->assign<Position>(fPoint(150, 50));
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
-	e->assign<Sprite>(t);
+
+	e->assign<Sprite>(t, 0.2f);
 
 	e = world->create();
 	e->assign<LogoFade>(70);
