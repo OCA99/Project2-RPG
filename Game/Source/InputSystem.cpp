@@ -32,6 +32,16 @@ void InputSystem::tick(ECS::World* world, float dt)
 			total += fPoint(0.f, 1.f);
 		}
 
+		if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		{
+			keyboardMovement->speed = 200.0f;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		{
+			keyboardMovement->speed = 70.0f;
+		}
+
 		p->Translate(total.Normalize() * keyboardMovement->speed * dt);
 	});
 }
