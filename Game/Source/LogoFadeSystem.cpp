@@ -1,6 +1,8 @@
 #include "LogoFadeSystem.h"
 #include "Render.h"
 #include "Window.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 #include <algorithm>
 
@@ -20,6 +22,11 @@ void LogoFadeSystem::tick(ECS::World* world, float dt)
 		{
 			direction *= -1;
 			alpha = 255;
+
+			//Load Map
+			MapScene* s = new MapScene("Town.tmx");
+			app->scene->mapSceneToBeLoaded = s;
+
 		}
 
 		if (alpha < 0 && direction == -1)
