@@ -59,4 +59,6 @@ private:
 
 	SDL_Texture* dialogFrame;
 	SDL_Texture* tavernLady;
+	SDL_Texture* reaperSr;
+	SDL_Texture* customer;
 };
