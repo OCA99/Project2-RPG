@@ -45,6 +45,9 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\LogoFadeSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="Source\Callbacks.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogoFadeSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

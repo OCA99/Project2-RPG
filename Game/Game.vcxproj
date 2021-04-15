@@ -102,6 +102,7 @@
     <ClCompile Include="Source\EventHandler.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
     <ClCompile Include="Source\HumanoidSystem.cpp" />
+    <ClCompile Include="Source\LogoFadeSystem.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="Source\EventHandler.h" />
     <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="Source\HumanoidSystem.h" />
+    <ClInclude Include="Source\LogoFadeSystem.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\NPCMovementSystem.h" />

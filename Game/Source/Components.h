@@ -264,3 +264,9 @@ struct DialogTrigger {
 
 	bool started = false;
 };
+
+struct LogoFade {
+	LogoFade(float speed) : speed(speed) {}
+
+	float speed;
+};

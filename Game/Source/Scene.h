@@ -40,7 +40,8 @@ public:
 		type = TYPE::MAP;
 	}
 
-	~MapScene() {
+	~MapScene()
+	{
 		app->map->CleanUp();
 
 		if (world != nullptr)
@@ -55,4 +56,20 @@ public:
 	void CleanUp();
 
 	const char* filename;
+};
+
+class LogoScene : Scene
+{
+public:
+	LogoScene() : Scene()
+	{
+
+	}
+
+	~LogoScene()
+	{
+
+	}
+
+	void Load();
 };
