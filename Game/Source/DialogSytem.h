@@ -39,10 +39,10 @@ public:
 
 	void NextDialog();
 
+	DialogNode* currentDialog = nullptr;
 private:
 	DialogNode* ParseDialogXML(pugi::xml_node dialogRoot);
 
-	DialogNode* currentDialog = nullptr;
 
 	std::map<std::string, DialogNode*> dialogues;
 
