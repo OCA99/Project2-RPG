@@ -48,6 +48,19 @@
     <ClCompile Include="Source\LogoFadeSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ModuleUI.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp">
+      <Filter>GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiCheckBox.cpp">
+      <Filter>GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>GuiControls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiSlider.cpp">
+      <Filter>GuiControls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -143,6 +156,22 @@
     <ClInclude Include="Source\LogoFadeSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ModuleUI.h" />
+    <ClInclude Include="Source\GuiButton.h">
+      <Filter>GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiCheckBox.h">
+      <Filter>GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>GuiControls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiSlider.h">
+      <Filter>GuiControls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -165,6 +194,9 @@
     </Filter>
     <Filter Include="Prefabs">
       <UniqueIdentifier>{af2dec8e-be6d-4f56-836a-da4f40b8e858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GuiControls">
+      <UniqueIdentifier>{b5ce32ae-77da-4f81-9d03-a3ef0ef17a3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

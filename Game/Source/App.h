@@ -17,6 +17,8 @@ class SceneManager;
 class DialogSystem;
 class Map;
 class Fonts;
+class ModuleUI;
+class GuiManager;
 
 class App
 {
@@ -81,6 +83,8 @@ public:
 	DialogSystem* dialog;
 	Map* map;
 	Fonts* fonts;
+	ModuleUI* ui;
+	GuiManager* guimanager;
 
 private:
 
