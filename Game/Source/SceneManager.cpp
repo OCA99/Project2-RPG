@@ -11,6 +11,7 @@
 #include "Components.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "Audio.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -39,6 +40,8 @@ bool SceneManager::Start()
 	//MapScene* s = new MapScene("Town.tmx");
 
 	LogoScene* s = new LogoScene();
+
+	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
 
 	sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
