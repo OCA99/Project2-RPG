@@ -14,4 +14,6 @@ public:
 
 	int direction = -1;
 	float alpha = 450.0f;
+
+	bool hasSounded = false;
 };
