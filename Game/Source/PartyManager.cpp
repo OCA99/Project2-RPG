@@ -59,7 +59,7 @@ bool PartyManager::CleanUp()
 
 void PartyManager::AddMember(Member& member, Party* party)
 {
-	party->list.Add(member);
+	//party->list.Add(member);
 
 }
 
