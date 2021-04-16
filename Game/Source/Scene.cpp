@@ -21,6 +21,7 @@
 void Scene::Load()
 {
 	world = ECS::World::createWorld();
+	
 }
 
 void Scene::CleanUp()
@@ -42,7 +43,28 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new CameraSystem());
 	world->registerSystem(new NPCMovementSystem());
 
+	std::string s = filename;
 	
+	if (s == "Town.tmx")
+	{
+		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
+		app->audio->PlayMusic(app->audio->songToBeLoaded);
+	}
+	else if (s == "Tavern.tmx")
+	{
+		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_tavern.wav";
+		app->audio->PlayMusic(app->audio->songToBeLoaded);
+	}
+	else if (s == "Forest.tmx")
+	{
+		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_main.wav";
+		app->audio->PlayMusic(app->audio->songToBeLoaded);
+	}
+	else if (s == "NPC House")
+	{
+		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
+		app->audio->PlayMusic(app->audio->songToBeLoaded);
+	}
 
 	PlayerFactory::Create(world, playerPosition);
 
@@ -65,7 +87,12 @@ void LogoScene::Load()
 
 	e->assign<Position>(fPoint(150, 50));
 
-	app->audio->LoadFx("Assets/Audio/Fx/logo.ogg");
+	app->audio->LoadFx("Assets/Audio/Fx/logo.ogg");//1
+	app->audio->LoadFx("Assets/Audio/Fx/action_interact.ogg");//2
+	app->audio->LoadFx("Assets/Audio/Fx/title.ogg");//3
+	app->audio->LoadFx("Assets/Audio/Fx/action_door.ogg");//4
+	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//5
+
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
 
 	e->assign<Sprite>(t, 0.2f);
@@ -80,6 +107,7 @@ void MenuScene::Load()
 
 	world->registerSystem(new SpriteSystem());
 
+
 	SDL_Texture* t = app->tex->Load("Assets/Textures/UI/MainMenu/main_menu.png");
 
 	ECS::Entity* e = world->create();
@@ -87,6 +115,7 @@ void MenuScene::Load()
 	e->assign<Sprite>(t, 0.5f);
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/game_title.png");
+	app->audio->PlayFx(3, 0);
 	e = world->create();
 	e->assign<Position>(fPoint(0, -105));
 	e->assign<Sprite>(t, 0.5f, 1);

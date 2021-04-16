@@ -4,6 +4,7 @@
 
 #include "App.h"
 #include "Debug.h"
+#include "Audio.h"
 #include "Input.h"
 #include "SDL/include/SDL_scancode.h"
 

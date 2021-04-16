@@ -1,5 +1,6 @@
 #include "EventHandler.h"
 #include "App.h"
+#include "Audio.h"
 #include "Scene.h"
 #include "SceneManager.h"
 
@@ -17,6 +18,11 @@ void EventHandler::FireEvent(MapEvent* e)
 		int playerY = std::stoi(e->attributes->at("playerY"));
 
 		app->scene->sceneToBeLoaded = (Scene*)s;
+		std::string str = s->filename;
+		if (str == "Tavern.tmx" || str == "NPC House.tmx")
+		{
+			app->audio->PlayFx(4, 0);
+		}
 		app->scene->playerPositionToBeLoaded = fPoint(playerX, playerY);
 	}
 }

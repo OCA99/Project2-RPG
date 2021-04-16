@@ -4,6 +4,7 @@
 #include "App.h"
 #include "Render.h"
 #include "Input.h"
+#include "Audio.h"
 #include "Fonts.h"
 #include "Window.h"
 #include "Textures.h"
@@ -48,7 +49,8 @@ bool DialogSystem::PreUpdate()
 bool DialogSystem::Update(float dt)
 {
 	// The key to skip to the next dialog line.
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN) 
+	{
 		NextDialog();
 	}
 
@@ -210,6 +212,7 @@ void DialogSystem::NextDialog()
 	// Else, we just skip to the next line.
 	else
 	{
+	
 		currentDialog = currentDialog->Next();
 	}
 
@@ -219,6 +222,7 @@ void DialogSystem::NextDialog()
 	// Again, if we have reached the end of the dialog we return.
 	if (currentDialog == nullptr)
 	{
+		app->audio->PlayFx(2, 0);
 		return;
 	}
 
@@ -234,6 +238,7 @@ void DialogSystem::NextDialog()
 		currentDialog = nodeRoutes.at(route);
 	}
 
+	app->audio->PlayFx(2, 0);
 	/* End TODO 4 */
 }
 
