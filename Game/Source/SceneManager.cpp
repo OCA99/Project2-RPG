@@ -128,10 +128,20 @@ bool SceneManager::Load(pugi::xml_node& savedGame)
 	pugi::xml_node positionNode = entityNode.child("position");
 
 	MapScene* newS = new MapScene(string);
-	
+
 	sceneToBeLoaded = (Scene*)newS;
 	playerPositionToBeLoaded = fPoint(positionNode.attribute("entity_x").as_int(), positionNode.attribute("entity_y").as_int());
 	
+	currentScene->world->all([&](ECS::Entity* ent)
+	{
+		ECS::ComponentHandle<Position> position = ent->get<Position>();
+		if (position.isValid())
+		{
+			position->position.x = positionNode.attribute("x").as_int();
+			position->position.y = positionNode.attribute("y").as_int();
+		}
+			// do something with ent
+	});
 
 	return true;
 }
@@ -156,14 +166,12 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 		ECS::ComponentHandle<Position> position = ent->get<Position>();
 		if (position.isValid())
 		{
-			pugi::xml_attribute positionEntityx = positionNode.append_attribute("entity_x");
+			pugi::xml_attribute positionEntityx = positionNode.append_attribute("x");
 			positionEntityx.set_value(position->position.x);
-			pugi::xml_attribute positionEntityy = positionNode.append_attribute("entity_y");
+			pugi::xml_attribute positionEntityy = positionNode.append_attribute("y");
 			positionEntityy.set_value(position->position.y);
 		}
 		// do something with ent
-		LOG(" X %f", position->position.x);
-		LOG(" Y %f", position->position.y);
 	});
 	//guardar entitats etc
 	return true;
