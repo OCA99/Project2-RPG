@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "App.h"
 #include "DialogSytem.h"
+#include "Log.h"
 #include "External/SDL/include/SDL.h"
 
 #include <map>
@@ -23,6 +24,7 @@ struct Position
 
 	fPoint position;
 	fPoint deltaMovement;
+	
 };
 
 struct Sprite
