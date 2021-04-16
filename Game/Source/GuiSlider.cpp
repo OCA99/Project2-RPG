@@ -1,4 +1,5 @@
 #include "GuiSlider.h"
+#include "App.h"
 #include "Window.h"
 #include <stdio.h>      /* printf */
 #include <math.h>       /* round, floor, ceil, trunc */
@@ -6,7 +7,7 @@
 #include "Log.h"
 
 
-GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::SLIDER, id)
+GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::SLIDER, id)
 {
 	this->bounds = bounds;
 	this->text = text;

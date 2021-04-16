@@ -16,7 +16,7 @@ void EventHandler::FireEvent(MapEvent* e)
 		int playerX = std::stoi(e->attributes->at("playerX"));
 		int playerY = std::stoi(e->attributes->at("playerY"));
 
-		app->scene->mapSceneToBeLoaded = s;
+		app->scene->sceneToBeLoaded = (Scene*)s;
 		app->scene->playerPositionToBeLoaded = fPoint(playerX, playerY);
 	}
 }

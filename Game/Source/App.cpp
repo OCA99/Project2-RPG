@@ -8,9 +8,9 @@
 #include "DialogSytem.h"
 #include "Map.h"
 #include "Fonts.h"
-#include "ModuleUI.h"
 #include "GuiManager.h"
 #include "Debug.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -31,8 +31,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	scene = new SceneManager();
 	fonts = new Fonts();
-	ui = new ModuleUI();
-	guimanager = new GuiManager();
+	ui = new GuiManager();
 	debug = new Debug();
 
 	// Ordered for awake / Start / Update
@@ -46,7 +45,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialog);
 	AddModule(fonts);
 	AddModule(ui);
-	AddModule(guimanager);
 	AddModule(debug);
 
 	// Render last to swap buffer

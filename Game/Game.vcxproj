@@ -114,7 +114,6 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\InputSystem.cpp" />
-    <ClCompile Include="Source\ModuleUI.cpp" />
     <ClCompile Include="Source\NPCMovementSystem.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
@@ -143,7 +142,6 @@
     <ClInclude Include="Source\HumanoidSystem.h" />
     <ClInclude Include="Source\LogoFadeSystem.h" />
     <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\ModuleUI.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\NPCMovementSystem.h" />
     <ClInclude Include="Source\PlayerFactory.h" />

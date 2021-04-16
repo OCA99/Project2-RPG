@@ -84,8 +84,7 @@ public:
 	DialogSystem* dialog;
 	Map* map;
 	Fonts* fonts;
-	ModuleUI* ui;
-	GuiManager* guimanager;
+	GuiManager* ui;
 	Debug* debug;
 
 private:

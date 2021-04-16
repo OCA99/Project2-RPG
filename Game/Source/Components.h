@@ -29,10 +29,11 @@ struct Position
 
 struct Sprite
 {
-	Sprite(SDL_Texture* sprite, float scale = 1.0f) : sprite(sprite), scale(scale) {}
+	Sprite(SDL_Texture* sprite, float scale = 1.0f, int zindex = 0) : sprite(sprite), scale(scale), zindex(zindex) {}
 
 	SDL_Texture* sprite;
 	float scale;
+	int zindex;
 };
 
 struct Animator

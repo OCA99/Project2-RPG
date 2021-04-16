@@ -30,9 +30,8 @@ void LogoFadeSystem::tick(ECS::World* world, float dt)
 			direction *= -1;
 			alpha = 255;
 
-			//Load Map
-			MapScene* s = new MapScene("Town.tmx");
-			app->scene->mapSceneToBeLoaded = s;
+			MenuScene* s = new MenuScene();
+			app->scene->sceneToBeLoaded = (Scene*)s;
 
 		}
 
