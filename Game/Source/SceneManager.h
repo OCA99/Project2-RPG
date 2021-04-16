@@ -6,6 +6,7 @@
 struct SDL_Texture;
 class Scene;
 class MapScene;
+class GuiControl;
 
 class SceneManager : public Module
 {
@@ -41,8 +42,9 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&);
 
+	void OnGuiMouseClickEvent(GuiControl* control);
+
 public:
-	MapScene* mapSceneToBeLoaded = nullptr;
 	Scene* sceneToBeLoaded = nullptr;
 	fPoint playerPositionToBeLoaded;
 

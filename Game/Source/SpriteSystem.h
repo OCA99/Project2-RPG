@@ -25,6 +25,7 @@ public:
 		int y;
 		const SDL_Rect* section = nullptr;
 		float scale = 1.0f;
+		int zindex = 0;
 	};
 
 	std::vector<RenderQueue>* queue;

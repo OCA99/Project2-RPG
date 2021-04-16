@@ -23,7 +23,9 @@ public:
 	virtual void CleanUp();
 
 	enum class TYPE {
-		MAP
+		MAP,
+		LOGO,
+		MENU
 	};
 
 public:
@@ -63,10 +65,26 @@ class LogoScene : Scene
 public:
 	LogoScene() : Scene()
 	{
-
+		type = TYPE::LOGO;
 	}
 
 	~LogoScene()
+	{
+
+	}
+
+	void Load();
+};
+
+class MenuScene : Scene
+{
+public:
+	MenuScene() : Scene()
+	{
+		type = TYPE::MENU;
+	}
+
+	~MenuScene()
 	{
 
 	}

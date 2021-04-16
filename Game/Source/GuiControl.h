@@ -3,7 +3,7 @@
 
 #include "Input.h"
 #include "Render.h"
-#include "Scene.h"
+#include "SceneManager.h"
 
 #include "Point.h"
 #include "SString.h"
@@ -72,12 +72,7 @@ public:
 
 	void NotifyObserver()
 	{
-		//observer->OnGuiMouseClickEvent(this); !!!!!!!!!!!!!!!!!!
-	}
-
-	virtual bool DrawDebug(Render* render)
-	{
-		return true;
+		observer->OnGuiMouseClickEvent(this);
 	}
 
 public:

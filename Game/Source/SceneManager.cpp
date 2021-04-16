@@ -9,6 +9,8 @@
 #include "Scene.h"
 #include "ECS.h"
 #include "Components.h"
+#include "GuiControl.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -35,9 +37,9 @@ bool SceneManager::Awake()
 bool SceneManager::Start()
 {
 	//MapScene* s = new MapScene("Town.tmx");
+
 	LogoScene* s = new LogoScene();
 
-	//mapSceneToBeLoaded = s;
 	sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
 
@@ -53,15 +55,12 @@ bool SceneManager::PreUpdate()
 // Called each loop iteration
 bool SceneManager::Update(float dt)
 {
-	if (mapSceneToBeLoaded != nullptr)
-	{
-		LoadScene(mapSceneToBeLoaded, playerPositionToBeLoaded);
-		mapSceneToBeLoaded = nullptr;
-	}
-
 	if (sceneToBeLoaded != nullptr)
 	{
-		LoadScene(sceneToBeLoaded);
+		if (sceneToBeLoaded->type == Scene::TYPE::MAP)
+			LoadScene((MapScene*)sceneToBeLoaded, playerPositionToBeLoaded);
+		else
+			LoadScene(sceneToBeLoaded);
 		sceneToBeLoaded = nullptr;
 	}
 
@@ -130,7 +129,7 @@ bool SceneManager::Load(pugi::xml_node& savedGame)
 
 	MapScene* newS = new MapScene(string);
 	
-	mapSceneToBeLoaded = newS;
+	sceneToBeLoaded = (Scene*)newS;
 	playerPositionToBeLoaded = fPoint(positionNode.attribute("entity_x").as_int(), positionNode.attribute("entity_y").as_int());
 	
 
@@ -168,4 +167,23 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 	});
 	//guardar entitats etc
 	return true;
+}
+
+void SceneManager::OnGuiMouseClickEvent(GuiControl* control)
+{
+	MapScene* s;
+	switch (control->id)
+	{
+	case 0:
+		app->ui->DestroyAllGuiControls();
+		s = new MapScene("Town.tmx");
+		app->scene->sceneToBeLoaded = (Scene*)s;
+		break;
+	case 1:
+		app->ui->DestroyAllGuiControls();
+		app->RequestLoad();
+		break;
+	default:
+		break;
+	}
 }

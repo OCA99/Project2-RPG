@@ -1,6 +1,6 @@
 #include "GuiCheckBox.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::CHECKBOX, id)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::CHECKBOX, id)
 {
 	this->bounds = bounds;
 	this->checkedBounds = { bounds.x + 15, bounds.y + 15, 50, 50 };

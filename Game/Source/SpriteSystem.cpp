@@ -6,7 +6,7 @@
 #include "Log.h"
 
 bool compareQueue(SpriteSystem::RenderQueue a, SpriteSystem::RenderQueue b) {
-	return a.y < b.y;
+	return (a.zindex == b.zindex) ? a.y < b.y : a.zindex < b.zindex;
 }
 
 void SpriteSystem::tick(ECS::World* world, float dt)
@@ -20,7 +20,7 @@ void SpriteSystem::tick(ECS::World* world, float dt)
 		q.x = p->position.x;
 		q.y = p->position.y;
 		q.scale = sprite->scale;
-
+		q.zindex = sprite->zindex;
 
 		if (a.isValid() && a->currentAnimation != nullptr)
 		{

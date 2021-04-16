@@ -48,7 +48,6 @@
     <ClCompile Include="Source\LogoFadeSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModuleUI.cpp" />
     <ClCompile Include="Source\GuiButton.cpp">
       <Filter>GuiControls</Filter>
     </ClCompile>
@@ -157,7 +156,6 @@
     <ClInclude Include="Source\LogoFadeSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModuleUI.h" />
     <ClInclude Include="Source\GuiButton.h">
       <Filter>GuiControls</Filter>
     </ClInclude>
