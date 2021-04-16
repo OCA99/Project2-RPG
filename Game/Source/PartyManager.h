@@ -29,7 +29,7 @@ struct Party {
 	//Getter
 	//SETTER
 
-	List<Member> list;
+	//List<Member> list;
 };
 
 class PartyManager : public Module
