@@ -2,6 +2,7 @@
 #include "App.h"
 #include "Map.h"
 #include "Textures.h"
+#include "Audio.h"
 
 #include "SpriteSystem.h"
 #include "AnimatorSystem.h"
@@ -40,6 +41,8 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new CameraSystem());
 	world->registerSystem(new NPCMovementSystem());
 
+	
+
 	PlayerFactory::Create(world, playerPosition);
 
 	app->map->Load(filename);
@@ -61,6 +64,7 @@ void LogoScene::Load()
 
 	e->assign<Position>(fPoint(150, 50));
 
+	app->audio->LoadFx("Assets/Audio/Fx/logo.ogg");//0
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
 
 	e->assign<Sprite>(t, 0.2f);
