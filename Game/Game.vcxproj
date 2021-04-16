@@ -115,6 +115,7 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\InputSystem.cpp" />
     <ClCompile Include="Source\NPCMovementSystem.cpp" />
+    <ClCompile Include="Source\PartyManager.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />

@@ -61,6 +61,7 @@
       <Filter>GuiControls</Filter>
     </ClCompile>
     <ClCompile Include="Source\Debug.cpp" />
+    <ClCompile Include="Source\PartyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
