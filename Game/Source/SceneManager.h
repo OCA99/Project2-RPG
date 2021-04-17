@@ -42,7 +42,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&);
 
-	void OnGuiMouseClickEvent(GuiControl* control);
+	bool OnGuiMouseClickEvent(GuiControl* control);
 
 public:
 	Scene* sceneToBeLoaded = nullptr;
