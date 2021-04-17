@@ -6,39 +6,41 @@ We present UnderEvil from FM Studios, a group of students working on a universit
 
 
 ## Key Features
-- *Town Map*: town, tavern, forest
-- *Team Party of 2*
-- *3 NPC Characters*: tavern keeper, reaper and blacksmith
-- *Dialogue System*: 4 different dialogues implemented.
-- *Turn-based Combat System*
-- *3 types of enemies*
-- *Main Menu*
-- *Pause Menu*
-- *Battle Menu*
-- *HUD*
-- *Keyboard and Gamepad Inputs*
-- *Save & Load*
+- **Town Map**: town, tavern, forest.
+- **Team Party of 2**
+- **3 NPC Characters**: tavern keeper, reaper and blacksmith.
+- **Dialogue System**: 4 different dialogues implemented.
+- **Turn-based Combat System**
+- **3 types of enemies**
+- **Main Menu**
+- **Pause Menu**
+- **Battle Menu**
+- **HUD**
+- **Keyboard and Gamepad Inputs**
+- **Save & Load**
 
 ## Controls
 Keyboard
-- *Up Arrow*: Move player upwards
-- *Down Arrow*: Move player downwards
-- *Left Arrow*: Move player to the left
-- *Right Arrow*: Move player to the right
-- *Space Bar*: Interact
+- **Up Arrow**: Move player upwards.
+- **Down Arrow**: Move player downwards.
+- **Left Arrow**: Move player to the left.
+- **Right Arrow**: Move player to the right.
+- **Space Bar**: Interact.
 
 Gamepad
-- *A Button*: 
+- **A Button**: 
 
 Debug Keys
-- *F1*:
-- *F2*:
+- **F9**: view colliders and bounds.
+- **F10**: activate god mode.
+- **F11**: toggle fullscreen.
 
 
 ## External Libraries and Softwares
 - [Simple DirectMedia Layer](https://www.libsdl.org/)
 - [ECS](https://github.com/redxdev/ECS)
-- [Tiled Map Editor](https://pugixml.org/)
+- [pugixml](https://pugixml.org/)
+- [Tiled Map Editor](https://www.mapeditor.org/)
 - [RPG Maker](https://www.rpgmakerweb.com/)
 
 ## Developer Team
