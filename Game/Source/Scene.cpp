@@ -65,6 +65,11 @@ void MapScene::Load(fPoint playerPosition)
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
+	else if (s == "NPC House.tmx")
+	{
+		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
+		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
+	}
 
 	PlayerFactory::Create(world, playerPosition);
 
@@ -107,6 +112,8 @@ void MenuScene::Load()
 
 	world->registerSystem(new SpriteSystem());
 
+	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_blacksmith.wav";
+	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/UI/MainMenu/main_menu.png");
 
