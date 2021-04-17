@@ -37,9 +37,9 @@ bool SceneManager::Awake()
 // Called before the first frame
 bool SceneManager::Start()
 {
-	//MapScene* s = new MapScene("Town.tmx");
+	MapScene* s = new MapScene("Town.tmx");
 
-	LogoScene* s = new LogoScene();
+	//LogoScene* s = new LogoScene();
 
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
 
@@ -65,6 +65,16 @@ bool SceneManager::Update(float dt)
 		else
 			LoadScene(sceneToBeLoaded);
 		sceneToBeLoaded = nullptr;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+
+		MapScene* s = new MapScene("Forest.tmx");
+		sceneToBeLoaded = (Scene*)s;
+		playerPositionToBeLoaded.x = 944;
+		playerPositionToBeLoaded.y = 240;
+
 	}
 
 	return true;

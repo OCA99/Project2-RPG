@@ -26,6 +26,7 @@ public:
 		MAP,
 		LOGO,
 		MENU,
+		BATTLE
 	};
 
 public:
@@ -85,6 +86,22 @@ public:
 	}
 
 	~MenuScene()
+	{
+
+	}
+
+	void Load();
+};
+
+class BattleScene : Scene
+{
+public:
+	BattleScene() : Scene()
+	{
+		type = TYPE::BATTLE;
+	}
+
+	~BattleScene()
 	{
 
 	}

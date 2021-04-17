@@ -34,17 +34,20 @@ bool PartyManager::Awake()
 // Called before the first frame
 bool PartyManager::Start()
 {
-	currentParty = new Party();
-	currentParty->AddMember(Member("Eduardo", NONE, 10.0f, 20.0f, true));
-	currentParty->AddMember(Member("Telmo", PLAYER, 100.f, 15.f, false));
-	currentParty->AddMember(Member("Oscar", PLAYER, -10.f, 0.f, false));
-	currentParty->AddMember(Member("Paula", NONE, 70.0f, 30.f, true));
-	//currentParty->RemoveMember("Oscar");
-	//currentParty->RemoveMember("Telmo");
+	allyParty = new Party();
+	allyParty->partyName = "ALLY PARTY";
+	allyParty->AddMember(Member("Toisto", PLAYER1, 10.0f, 20.0f, false));
+	allyParty->AddMember(Member("Thyma", PLAYER2, 100.f, 15.f, false));
 
-	currentParty->PrintMemberDescription("Telmo");
-	currentParty->PrintPartyDescription();
+	allyParty->PrintPartyDescription();
 
+	enemyParty = new Party();
+	enemyParty->partyName = "ENEMY PARTY";
+	enemyParty->AddMember(Member("King Mush", SHROOM1, 10.0f, 20.0f, false));
+	enemyParty->AddMember(Member("Magic Mush", SHROOM2, 100.f, 15.f, false));
+	enemyParty->AddMember(Member("Mr. Bones", SKELETON, 100.f, 15.f, false));
+
+	enemyParty->PrintPartyDescription();
 
 	//CARGAR GUI
 
@@ -114,23 +117,34 @@ void Party::PrintMemberDescription(std::string name)
 			std::cout << "-------------MEMBER " << item->data.data.id << " : " << item->data.name << "-------------" << std::endl;
 			switch (item->data.type)
 			{
-			case NONE:
+			case PLAYER1:
 			{
-				std::cout << "-------------TYPE: NONE " << "---------------" << std::endl;
+				std::cout << "-------------TYPE: PLAYER1 " << "---------------" << std::endl;
 				break;
 			}
-			case PLAYER:
+			case PLAYER2:
 			{
-				std::cout << "-------------TYPE: PLAYER " << "---------------" << std::endl;
+				std::cout << "-------------TYPE: PLAYER2 " << "---------------" << std::endl;
 				break;
 			}
-			case ENEMY:
+			case SHROOM1:
 			{
-				std::cout << "-------------TYPE: ENEMY " << "---------------" << std::endl;
+				std::cout << "-------------TYPE: SKELETON1 " << "---------------" << std::endl;
+				break;
+			}
+			case SHROOM2:
+			{
+				std::cout << "-------------TYPE: SKELETON2 " << "---------------" << std::endl;
+				break;
+			}
+			case SKELETON:
+			{
+				std::cout << "-------------TYPE: SKELETON2 " << "---------------" << std::endl;
 				break;
 			}
 			/* etc... */
 			}
+
 			switch (item->data.data.dead)
 			{
 			default:
@@ -148,7 +162,7 @@ void Party::PrintMemberDescription(std::string name)
 			}
 
 			std::cout << "-------------Health: " << item->data.data.health << "---------------" << std::endl;
-			std::cout << "-------------Damage: " << item->data.data.damage << "---------------" << std::endl;
+			std::cout << "-------------Damage: " << item->data.data.power << "---------------" << std::endl;
 
 			std::cout << std::endl;
 		}
@@ -160,32 +174,45 @@ void Party::PrintMemberDescription(std::string name)
 
 void Party::PrintPartyDescription()
 {
-	std::cout << "-------------PARTY MEMBERS " << "---------------" << std::endl;
-	std::cout << std::endl;
+	
 
 	ListItem<Member>* item = list.start;
+
+	std::cout << "-------------"<<partyName<<" MEMBERS ---------------" << std::endl;
+	std::cout << std::endl;
 	while (item)
 	{
 		std::cout << "-------------MEMBER " << item->data.data.id << " : " << item->data.name << "-------------" << std::endl;
 		switch (item->data.type)
 		{
-		case NONE:
+		case PLAYER1:
 		{
-			std::cout << "-------------TYPE: NONE " << "---------------" << std::endl;
+			std::cout << "-------------TYPE: PLAYER1 " << "---------------" << std::endl;
 			break;
 		}
-		case PLAYER:
+		case PLAYER2:
 		{
-			std::cout << "-------------TYPE: PLAYER " << "---------------" << std::endl;
+			std::cout << "-------------TYPE: PLAYER2 " << "---------------" << std::endl;
 			break;
 		}
-		case ENEMY:
+		case SHROOM1:
 		{
-			std::cout << "-------------TYPE: ENEMY " << "---------------" << std::endl;
+			std::cout << "-------------TYPE: SKELETON1 " << "---------------" << std::endl;
+			break;
+		}
+		case SHROOM2:
+		{
+			std::cout << "-------------TYPE: SKELETON2 " << "---------------" << std::endl;
+			break;
+		}
+		case SKELETON:
+		{
+			std::cout << "-------------TYPE: SKELETON2 " << "---------------" << std::endl;
 			break;
 		}
 		/* etc... */
 		}
+
 		switch (item->data.data.dead)
 		{
 		default:
@@ -202,7 +229,7 @@ void Party::PrintPartyDescription()
 		}
 		}
 		std::cout << "-------------Health: " << item->data.data.health << "---------------" << std::endl;
-		std::cout << "-------------Damage: " << item->data.data.damage << "---------------" << std::endl;
+		std::cout << "-------------Damage: " << item->data.data.power << "---------------" << std::endl;
 		std::cout << std::endl;
 		item = item->next;
 	}
@@ -254,10 +281,10 @@ Member::Member(std::string name, Type type) : name(name), type(type)
 {
 }
 
-Member::Member(std::string name, Type type, float health, float damage, bool isDead) : name(name), type(type)
+Member::Member(std::string name, Type type, float health, float power, bool isDead) : name(name), type(type)
 {
 	data.health = health;
-	data.damage = damage;
+	data.power = power;
 	data.dead = isDead;
 }
 

@@ -152,3 +152,16 @@ void MenuScene::Load()
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
 }
+
+void BattleScene::Load()
+{
+	Scene::Load();
+	world->registerSystem(new SpriteSystem());
+
+	SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/battle_forest.png");
+	ECS::Entity* e = world->create();
+	app->render->camera.x = app->render->camera.y = 0;
+	e->assign<Position>(fPoint(0, 0));
+	e->assign<Sprite>(t, 0.5f, 1);
+
+}
