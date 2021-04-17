@@ -25,6 +25,12 @@ struct Data {
 	float power;
 	bool dead = false;
 	List<Action*> actions;
+
+	void CleanUp() {
+		for (int i = 0; i < actions.Count(); i++) {
+			delete actions.At(i)->data;
+		}
+	}
 };
 
 struct Member {
@@ -84,7 +90,6 @@ struct Party {
 	void PrintPartyDescription();
 	void AddMember(Member* member);
 	void RemoveMember(const std::string name);
-
 	//Find Member
 	ListItem<Member*>* FindByName(const std::string name) const;
 
@@ -105,7 +110,10 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	void RemoveParties();
+
 	void OpenPartyInventory();
+	void InitializeParties();
 
 	Party* allyParty = nullptr;
 	Party* enemyParty = nullptr;
