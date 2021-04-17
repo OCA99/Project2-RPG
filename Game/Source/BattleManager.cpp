@@ -114,6 +114,8 @@ bool BattleManager::CleanUp()
 
 void BattleManager::StartBattle()
 {
+	app->party->InitializeParties();
+
 	isBattling = true;
 	currentParty = 0;
 	currentMember = 0;
@@ -127,6 +129,8 @@ void BattleManager::EndBattle()
 	app->scene->sceneToBeLoaded = (Scene*)s;
 	app->scene->playerPositionToBeLoaded.x = 944;
 	app->scene->playerPositionToBeLoaded.y = 240;
+
+	app->party->CleanUp();
 }
 
 void BattleManager::DoAction()

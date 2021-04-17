@@ -34,35 +34,6 @@ bool PartyManager::Awake()
 // Called before the first frame
 bool PartyManager::Start()
 {
-	allyParty = new Party("ALLY PARTY");
-	Member* toisto = new Member("Toisto", PLAYER1, 10.0f, 20.0f, false);
-	allyParty->AddMember(toisto);
-	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 15.f, false);
-	allyParty->AddMember(thyma);
-
-	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0);
-	toisto->data.actions.Add(a);
-
-	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0);
-	thyma->data.actions.Add(a);
-
-	//allyParty->PrintPartyDescription();
-
-	enemyParty = new Party("ENEMY PARTY");
-	Member* kmush = new Member("King Mush", SHROOM1, 100.0f, 20.0f, false);
-	enemyParty->AddMember(kmush);
-
-	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0);
-	kmush->data.actions.Add(a);
-
-	//enemyParty->AddMember(new Member("Magic Mush", SHROOM2, 100.f, 15.f, false));
-	//enemyParty->AddMember(new Member("Mr. Bones", SKELETON, 100.f, 15.f, false));
-
-	//enemyParty->PrintPartyDescription();
-
-	//CARGAR GUI
-
-
 	return true;
 }
 
@@ -97,6 +68,12 @@ bool PartyManager::CleanUp()
 	return true;
 }
 
+void PartyManager::RemoveParties()
+{
+	delete allyParty;
+	delete enemyParty;
+}
+
 void PartyManager::OpenPartyInventory()
 {
 
@@ -117,6 +94,9 @@ Party::Party(List<Member*>& list) : list(list)
 
 Party::~Party()
 {
+	for (int i = 0; i < list.Count(); i++) {
+		delete list.At(i)->data;
+	}
 }
 
 void Party::PrintMemberDescription(std::string name)
@@ -274,6 +254,30 @@ void Party::RemoveMember(const std::string name)
 	}
 }
 
+void PartyManager::InitializeParties()
+{
+	allyParty = new Party("ALLY PARTY");
+	Member* toisto = new Member("Toisto", PLAYER1, 10.0f, 20.0f, false);
+	allyParty->AddMember(toisto);
+	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 15.f, false);
+	allyParty->AddMember(thyma);
+
+	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0);
+	toisto->data.actions.Add(a);
+
+	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0);
+	thyma->data.actions.Add(a);
+
+	//allyParty->PrintPartyDescription();
+
+	enemyParty = new Party("ENEMY PARTY");
+	Member* kmush = new Member("King Mush", SHROOM1, 100.0f, 20.0f, false);
+	enemyParty->AddMember(kmush);
+
+	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0);
+	kmush->data.actions.Add(a);
+}
+
 ListItem<Member*>* Party::FindByName(const std::string name) const
 {
 	ListItem<Member*>* item = list.start;
@@ -304,4 +308,5 @@ Member::Member(std::string name, Type type, float health, float power, bool isDe
 
 Member::~Member()
 {
+ 	data.CleanUp();
 }
