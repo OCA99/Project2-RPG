@@ -1,6 +1,7 @@
 #ifndef __PARTYMANAGER_H__
 #define __PARTYMANAGER_H__
 
+#include "ECS.h"
 #include "Module.h"
 #include "List.h"
 
@@ -28,7 +29,8 @@ struct Member {
 
 	Member();
 	Member(std::string name, Type type);
-	Member(std::string name, Type type, float health, float damage, bool dead);
+	Member(std::string name, Type type, float health, float damage, bool isDead);
+	~Member();
 };
 
 struct Party {
@@ -38,8 +40,9 @@ struct Party {
 	//Functions
 	Party();
 	Party(List<Member>& list);
+	~Party();
 
-	void PrintMemberDescription(Member member);
+	void PrintMemberDescription(std::string name);
 	void PrintPartyDescription();
 	void AddMember(Member member);
 	void RemoveMember(const std::string name);
@@ -64,8 +67,11 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	void OpenPartyInventory();
+
 private:
 
+	ECS::World* world = nullptr;
 	Party* currentParty;
 
 };

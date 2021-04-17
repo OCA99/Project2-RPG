@@ -10,7 +10,6 @@ void NPCMovementSystem::tick(ECS::World* world, float dt)
 
 	world->each<NPCMoverAuto>([&](ECS::Entity* entity, ECS::ComponentHandle<NPCMoverAuto> npcMoverAuto) {
 		ECS::ComponentHandle<Position> p = entity->get<Position>();
-		//SI X ES MAYOR A 0 MOVER EN HORIZONTAL PRIMERO
 		if (npcMoverAuto->speed != 0)
 		{
 			if (npcMoverAuto->x <= 0 && npcMoverAuto->y <= 0)

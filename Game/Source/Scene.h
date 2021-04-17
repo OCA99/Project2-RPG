@@ -25,7 +25,7 @@ public:
 	enum class TYPE {
 		MAP,
 		LOGO,
-		MENU
+		MENU,
 	};
 
 public:

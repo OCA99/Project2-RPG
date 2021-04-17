@@ -1,8 +1,15 @@
 #include "PartyManager.h"
 #include "App.h"
+#include "Input.h"
+#include "GuiManager.h"
+#include "Textures.h"
+#include "Audio.h"
+
+#include "SpriteSystem.h"
 
 #include "Defs.h"
 #include "Log.h"
+#include "SDL/include/SDL_scancode.h"
 
 #include <iostream>
 
@@ -28,15 +35,19 @@ bool PartyManager::Awake()
 bool PartyManager::Start()
 {
 	currentParty = new Party();
-	currentParty->AddMember(Member("Oscar", ENEMY));
-	currentParty->AddMember(Member("Telmo", PLAYER));
-	currentParty->AddMember(Member("Paula", NONE));
-	currentParty->RemoveMember("Oscar");
+	currentParty->AddMember(Member("Eduardo", NONE, 10.0f, 20.0f, true));
+	currentParty->AddMember(Member("Telmo", PLAYER, 100.f, 15.f, false));
+	currentParty->AddMember(Member("Oscar", PLAYER, -10.f, 0.f, false));
+	currentParty->AddMember(Member("Paula", NONE, 70.0f, 30.f, true));
+	//currentParty->RemoveMember("Oscar");
 	//currentParty->RemoveMember("Telmo");
 
-	//Member m = currentParty->FindByName("Telmo")->data;
-	//currentParty->PrintMemberDescription(m);
+	currentParty->PrintMemberDescription("Telmo");
 	currentParty->PrintPartyDescription();
+
+
+	//CARGAR GUI
+
 
 	return true;
 }
@@ -50,7 +61,10 @@ bool PartyManager::PreUpdate()
 // Called each loop iteration
 bool PartyManager::Update(float dt)
 {
-
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		//ABRIR PARTY
+	}
 
 	return true;
 }
@@ -69,6 +83,12 @@ bool PartyManager::CleanUp()
 	return true;
 }
 
+void PartyManager::OpenPartyInventory()
+{
+
+
+}
+
 Party::Party()
 {
 }
@@ -77,11 +97,64 @@ Party::Party(List<Member>& list) : list(list)
 {
 }
 
-void Party::PrintMemberDescription(Member member)
+Party::~Party()
 {
-	std::cout << "-------------MEMBER:" << member.name << "-------------" << std::endl;
-	std::cout << "-------------TYPE:" << member.type << "---------------" << std::endl;
-	std::cout << "-------------ISDEAD: " << member.data.dead << "-------------" << std::endl;
+}
+
+void Party::PrintMemberDescription(std::string name)
+{
+	ListItem<Member>* item = list.start;
+	std::cout << "-------------MEMBER INFO " << "---------------" << std::endl;
+	std::cout << std::endl;
+
+	while (item)
+	{
+		if (item->data.name == name)
+		{
+			std::cout << "-------------MEMBER " << item->data.data.id << " : " << item->data.name << "-------------" << std::endl;
+			switch (item->data.type)
+			{
+			case NONE:
+			{
+				std::cout << "-------------TYPE: NONE " << "---------------" << std::endl;
+				break;
+			}
+			case PLAYER:
+			{
+				std::cout << "-------------TYPE: PLAYER " << "---------------" << std::endl;
+				break;
+			}
+			case ENEMY:
+			{
+				std::cout << "-------------TYPE: ENEMY " << "---------------" << std::endl;
+				break;
+			}
+			/* etc... */
+			}
+			switch (item->data.data.dead)
+			{
+			default:
+				break;
+			case 0:
+			{
+				std::cout << "-------------ISDEAD: FALSE " << "-------------" << std::endl;
+				break;
+			}
+			case 1:
+			{
+				std::cout << "-------------ISDEAD: TRUE " << "-------------" << std::endl;
+				break;
+			}
+			}
+
+			std::cout << "-------------Health: " << item->data.data.health << "---------------" << std::endl;
+			std::cout << "-------------Damage: " << item->data.data.damage << "---------------" << std::endl;
+
+			std::cout << std::endl;
+		}
+
+		item = item->next;
+	}
 
 }
 
@@ -120,12 +193,16 @@ void Party::PrintPartyDescription()
 		case 0:
 		{
 			std::cout << "-------------ISDEAD: FALSE " << "-------------" << std::endl;
+			break;
 		}
 		case 1:
 		{
-			std::cout << "-------------ISDEAD: TRUE " <<  "-------------" << std::endl;
+			std::cout << "-------------ISDEAD: TRUE " << "-------------" << std::endl;
+			break;
 		}
 		}
+		std::cout << "-------------Health: " << item->data.data.health << "---------------" << std::endl;
+		std::cout << "-------------Damage: " << item->data.data.damage << "---------------" << std::endl;
 		std::cout << std::endl;
 		item = item->next;
 	}
@@ -177,9 +254,13 @@ Member::Member(std::string name, Type type) : name(name), type(type)
 {
 }
 
-Member::Member(std::string name, Type type, float health, float damage, bool dead) : name(name), type(type)
+Member::Member(std::string name, Type type, float health, float damage, bool isDead) : name(name), type(type)
 {
 	data.health = health;
 	data.damage = damage;
-	data.dead = dead;
+	data.dead = isDead;
+}
+
+Member::~Member()
+{
 }
