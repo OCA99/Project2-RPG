@@ -34,15 +34,13 @@ bool PartyManager::Awake()
 // Called before the first frame
 bool PartyManager::Start()
 {
-	allyParty = new Party();
-	allyParty->partyName = "ALLY PARTY";
+	allyParty = new Party("ALLY PARTY");
 	allyParty->AddMember(Member("Toisto", PLAYER1, 10.0f, 20.0f, false));
 	allyParty->AddMember(Member("Thyma", PLAYER2, 100.f, 15.f, false));
 
 	allyParty->PrintPartyDescription();
 
-	enemyParty = new Party();
-	enemyParty->partyName = "ENEMY PARTY";
+	enemyParty = new Party("ENEMY PARTY");
 	enemyParty->AddMember(Member("King Mush", SHROOM1, 10.0f, 20.0f, false));
 	enemyParty->AddMember(Member("Magic Mush", SHROOM2, 100.f, 15.f, false));
 	enemyParty->AddMember(Member("Mr. Bones", SKELETON, 100.f, 15.f, false));
@@ -93,6 +91,10 @@ void PartyManager::OpenPartyInventory()
 }
 
 Party::Party()
+{
+}
+
+Party::Party(std::string partyName) : partyName(partyName)
 {
 }
 
