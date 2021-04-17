@@ -45,14 +45,13 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 
 # Developer Team
 
-* Aitor Álvarez - Project Lead, Programmer - [@AitorAlvarez17](https://github.com/AitorAlvarez17)
-* Oscar Cuatrecasas - Lead Programmer- [@oca99](https://github.com/OCA99)
-* Irene Hernandez - Lead Designer, UI Designer - [@ihedud](https://github.com/ihedud)
-* Paula Hitz - Lead Artist, UI Designer - [@paulahitz8](https://github.com/paulahitz8)
-* Eduard Minguell- Level Designer, Programmer- [@Eduardiko](https://github.com/Eduardiko)
-* Andres Sanchez - QA, Programmer - [@andreusama](https://github.com/andreusama)
-* Telmo Beroiz - Management, Programmer - [@Telmiyo](https://github.com/Telmiyo)
-
+* [Aitor Álvarez](https://github.com/AitorAlvarez17) - Project Lead, Programmer
+* [Oscar Cuatrecasas](https://github.com/OCA99) - Lead Programmer
+* [Irene Hernandez](https://github.com/ihedud) - Lead Designer, UI Designer
+* [Paula Hitz](https://github.com/paulahitz8) - Lead Artist, UI Designer
+* [Eduard Minguell](https://github.com/Eduardiko)- Level Designer, Programmer
+* [Andres Sanchez](https://github.com/andreusama) - QA, Programmer
+* [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
 # License
 
 ## MIT License 
