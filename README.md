@@ -45,7 +45,7 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 
 # Developer Team
 
-![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
+![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Output/Assets/Textures/logo.png)
 
 FM Studios is composed by a group of 7 hardworking and ambitious students:
 
@@ -56,7 +56,7 @@ FM Studios is composed by a group of 7 hardworking and ambitious students:
 * [Eduard Minguell](https://github.com/Eduardiko)- Level Designer, Programmer
 * [Andres Sanchez](https://github.com/andreusama) - QA, Programmer
 * [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
-* 
+
 # License
 
 ## MIT License 
