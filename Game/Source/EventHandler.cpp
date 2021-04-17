@@ -1,6 +1,8 @@
 #include "EventHandler.h"
 #include "App.h"
 #include "Audio.h"
+#include "Components.h"
+#include "ECS.h"
 #include "Scene.h"
 #include "SceneManager.h"
 
@@ -12,6 +14,15 @@ void EventHandler::FireEvent(MapEvent* e)
 
 	if (type == "changeArea")
 	{
+		/*app->scene->currentScene->world->all([&](ECS::Entity* ent)
+		{
+			ECS::ComponentHandle<KeyboardMovement> speed = ent->get<KeyboardMovement>();
+			if (speed.isValid())
+			{
+				speed = 0;
+			}
+		});*/
+
 		MapScene* s = new MapScene(e->attributes->at("target").c_str());
 
 		int playerX = std::stoi(e->attributes->at("playerX"));
