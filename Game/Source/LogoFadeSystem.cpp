@@ -5,12 +5,14 @@
 #include "Scene.h"
 #include "Input.h"
 #include "Audio.h"
+#include "App.h"
 
 #include <algorithm>
 
 void LogoFadeSystem::tick(ECS::World* world, float dt)
 {
 	world->each<LogoFade>([&](ECS::Entity* entity, ECS::ComponentHandle<LogoFade> logoFade) {
+		GamePad& pad = app->input->pads[0];
 		SDL_Rect fullscreen;
 		fullscreen.x = 0;
 		fullscreen.y = 0;
@@ -19,7 +21,7 @@ void LogoFadeSystem::tick(ECS::World* world, float dt)
 		fullscreen.w = w;
 		fullscreen.h = h;
 
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a == true) {
 			direction = 1;
 			alpha = 255;
 		}

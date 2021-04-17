@@ -39,6 +39,11 @@ bool DialogSystem::Start()
 	reaperSr = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
 	customer = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
 	thyma = app->tex->Load("Assets/Textures/Dialogue/thyma_good_dialogue.png");
+
+	aPressed = true;
+	downPressed = true;
+	upPressed = true;
+
 	return true;
 }
 
@@ -49,24 +54,40 @@ bool DialogSystem::PreUpdate()
 
 bool DialogSystem::Update(float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	// The key to skip to the next dialog line.
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN || pad.a == true) 
 	{
-		NextDialog();
+		if(aPressed)NextDialog();
+		aPressed = false;
 	}
+	
+	if (pad.a == false) aPressed = true;
 
 	// Select the next option.
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_DOWN && currentDialog != nullptr) {
-		selectedOption += 1;
-		if (selectedOption == currentDialog->children->size())
-			selectedOption = currentDialog->children->size() - 1;
+	if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_DOWN || pad.l_y > 0.0f || pad.down == true) && currentDialog != nullptr) {
+		if (downPressed)
+		{
+			selectedOption += 1;
+			if (selectedOption == currentDialog->children->size())
+				selectedOption = currentDialog->children->size() - 1;
+		}
+		downPressed = false;
 	}
 
+	if (pad.l_y <= 0.0f && pad.down == false) downPressed = true;
+
 	// Select the previous option.
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_DOWN && currentDialog != nullptr) {
-		selectedOption -= 1;
-		if (selectedOption < 0) selectedOption = 0;
+	if ((app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_DOWN || pad.l_y < 0.0f || pad.up == true) && currentDialog != nullptr) {
+		if (upPressed)
+		{
+			selectedOption -= 1;
+			if (selectedOption < 0) selectedOption = 0;
+		}
+		upPressed = false;
 	}
+
+	if (pad.l_y >= 0.0f && pad.up == false) upPressed = true;
 
 	/* ONLY FOR TESTING */
 

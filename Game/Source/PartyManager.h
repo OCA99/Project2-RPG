@@ -6,6 +6,9 @@
 #include "List.h"
 
 #include <string>
+#include <iostream>
+
+struct Action;
 
 enum Type {
 	PLAYER1,
@@ -15,26 +18,13 @@ enum Type {
 	SHROOM2
 };
 
-struct Action {
-	enum class Target {
-		ALLY,
-		ENEMY,
-		BOTH
-	};
-
-	std::string name;
-	Target target;
-	float damage;
-	float heal;
-};
-
 struct Data {
 	//Numero en la Party
 	int id;
 	float health;
 	float power;
 	bool dead = false;
-	List<Action> actions;
+	List<Action*> actions;
 };
 
 struct Member {
@@ -49,24 +39,54 @@ struct Member {
 	~Member();
 };
 
+struct Action {
+	enum class Filter {
+		ALLY,
+		ENEMY,
+		BOTH
+	};
+
+	Action(std::string name, Member* _owner, Filter filter, float damage, float heal) : name(name), filter(filter), damage(damage), heal(heal)
+	{
+		owner = _owner;
+	}
+
+	Member* owner = nullptr;
+	std::string name;
+	Filter filter;
+	float damage;
+	float heal;
+
+	void Apply(Member* other) {
+		other->data.health += owner->data.power * heal;
+		other->data.health -= owner->data.power * damage;
+
+		if (other->data.health <= 0) other->data.dead = true;
+
+		std::cout << owner->name << ": + -> " << owner->data.power * heal << ", - -> " << owner->data.power * damage << " to " << other->name << std::endl;
+		if (other->data.dead)
+			std::cout << other->name << " is dead" << std::endl;
+	}
+};
+
 struct Party {
 
-	List<Member> list;
+	List<Member*> list;
 	std::string partyName;
 
 	//Functions
 	Party();
 	Party(std::string partyName);
-	Party(List<Member>& list);
+	Party(List<Member*>& list);
 	~Party();
 
 	void PrintMemberDescription(std::string name);
 	void PrintPartyDescription();
-	void AddMember(Member member);
+	void AddMember(Member* member);
 	void RemoveMember(const std::string name);
 
 	//Find Member
-	ListItem<Member>* FindByName(const std::string name) const;
+	ListItem<Member*>* FindByName(const std::string name) const;
 
 };
 
@@ -87,11 +107,9 @@ public:
 
 	void OpenPartyInventory();
 
-private:
-
-	ECS::World* world = nullptr;
 	Party* allyParty = nullptr;
 	Party* enemyParty = nullptr;
+private:
 
 };
 

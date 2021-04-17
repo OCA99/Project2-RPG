@@ -2,6 +2,7 @@
 #define __SCENE_H__
 
 #include "Module.h"
+#include "Point.h"
 
 struct SDL_Texture;
 class Scene;

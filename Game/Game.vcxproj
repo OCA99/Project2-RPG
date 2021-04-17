@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AnimatorSystem.cpp" />
+    <ClCompile Include="Source\BattleManager.cpp" />
     <ClCompile Include="Source\CameraSystem.cpp" />
     <ClCompile Include="Source\CollisionSystem.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimatorSystem.h" />
+    <ClInclude Include="Source\BattleManager.h" />
     <ClInclude Include="Source\Callbacks.h" />
     <ClInclude Include="Source\CameraSystem.h" />
     <ClInclude Include="Source\CollisionSystem.h" />

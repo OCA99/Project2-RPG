@@ -7,6 +7,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "Debug.h"
+#include "App.h"
 
 #include "Scene.h"
 #include "SceneManager.h"
@@ -19,6 +20,7 @@
 
 void CollisionSystem::tick(ECS::World* world, float dt)
 {
+	GamePad& pad = app->input->pads[0];
 	if (app->debug->bounds) {
 		world->each<DialogTrigger>([&](ECS::Entity* npcEntity, ECS::ComponentHandle<DialogTrigger> npcCollider) {
 			fPoint npcPosition = npcEntity->get<Position>()->position;
@@ -54,7 +56,7 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 				if (app->debug->bounds)
 					app->render->DrawRectangle(offsetTrigger, 0, 0, 255, 128);
 
-				if (Intersects(offsetRect, offsetTrigger) && !trigger->started && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+				if (Intersects(offsetRect, offsetTrigger) && !trigger->started && (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a == true))
 				{
 					trigger->started = true;
 					app->dialog->StartDialog(trigger->dialogName.c_str());
