@@ -38,6 +38,7 @@ bool DialogSystem::Start()
 	tavernLady = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
 	reaperSr = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
 	customer = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
+	thyma = app->tex->Load("Assets/Textures/Dialogue/thyma_good_dialogue.png");
 	return true;
 }
 
@@ -110,6 +111,10 @@ void DialogSystem::DrawDialog()
 	else if (std::strcmp(speaker.c_str(), "customer") == 0)
 	{
 		app->render->DrawTexture(customer, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+	}
+	else if (std::strcmp(speaker.c_str(), "thyma") == 0)
+	{
+		app->render->DrawTexture(thyma, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 	}
 	
 

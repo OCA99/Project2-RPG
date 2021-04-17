@@ -61,4 +61,5 @@ private:
 	SDL_Texture* tavernLady;
 	SDL_Texture* reaperSr;
 	SDL_Texture* customer;
+	SDL_Texture* thyma;
 };
