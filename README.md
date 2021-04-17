@@ -1,59 +1,65 @@
-# UnderEvil
+![title](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Output/Assets/Textures/UI/MainMenu/game_title.png)
 
-## Description
+# Description
 
-We present UnderEvil from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
-
-
-## Key Features
-- *Town Map*: town, tavern, forest
-- *Team Party of 2*
-- *3 NPC Characters*: tavern keeper, reaper and blacksmith
-- *Dialogue System*: 4 different dialogues implemented.
-- *Turn-based Combat System*
-- *3 types of enemies*
-- *Main Menu*
-- *Pause Menu*
-- *Battle Menu*
-- *HUD*
-- *Keyboard and Gamepad Inputs*
-- *Save & Load*
-
-## Controls
-Keyboard
-- *Up Arrow*: Move player upwards
-- *Down Arrow*: Move player downwards
-- *Left Arrow*: Move player to the left
-- *Right Arrow*: Move player to the right
-- *Space Bar*: Interact
-
-Gamepad
-- *A Button*: 
-
-Debug Keys
-- *F1*:
-- *F2*:
+We present *UnderEvil* from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
 
 
-## External Libraries and Softwares
+# Key Features
+- **Town Map**: town, tavern, forest.
+- **Team Party of 2**
+- **3 NPC Characters**: tavern keeper, reaper and blacksmith.
+- **Dialogue System**: 4 different dialogues implemented.
+- **Turn-based Combat System**
+- **3 types of enemies**
+- **Main Menu**
+- **Pause Menu**
+- **Battle Menu**
+- **HUD**
+- **Keyboard and Gamepad Inputs**
+- **Save & Load**
+
+# Controls
+## Keyboard
+- **Up Arrow**: Move player upwards.
+- **Down Arrow**: Move player downwards.
+- **Left Arrow**: Move player to the left.
+- **Right Arrow**: Move player to the right.
+- **Space Bar**: Interact.
+
+## Gamepad
+- **A Button**: 
+
+## Debug Keys
+- **F9**: view colliders and bounds.
+- **F10**: activate god mode.
+- **F11**: toggle fullscreen.
+
+
+# External Libraries and Softwares
 - [Simple DirectMedia Layer](https://www.libsdl.org/)
 - [ECS](https://github.com/redxdev/ECS)
-- [Tiled Map Editor](https://pugixml.org/)
+- [pugixml](https://pugixml.org/)
+- [Tiled Map Editor](https://www.mapeditor.org/)
 - [RPG Maker](https://www.rpgmakerweb.com/)
 
-## Developer Team
+# Developer Team
 
-* Aitor Álvarez - Project Lead, Programmer - [@AitorAlvarez17](https://github.com/AitorAlvarez17)
-* Oscar Cuatrecasas - Lead Programmer- [@oca99](https://github.com/OCA99)
-* Irene Hernandez - Lead Designer, UI Designer - [@ihedud](https://github.com/ihedud)
-* Paula Hitz - Lead Artist, UI Designer - [@paulahitz8](https://github.com/paulahitz8)
-* Eduard Minguell- Level Designer, Programmer- [@Eduardiko](https://github.com/Eduardiko)
-* Andres Sanchez - QA, Programmer - [@andreusama](https://github.com/andreusama)
-* Telmo Beroiz - Management, Programmer - [@Telmiyo](https://github.com/Telmiyo)
+![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
 
-## License
+FM Studios is composed by a group of 7 hardworking and ambitious students:
 
-MIT License 
+* [Aitor Álvarez](https://github.com/AitorAlvarez17) - Project Lead, Programmer
+* [Oscar Cuatrecasas](https://github.com/OCA99) - Lead Programmer
+* [Irene Hernandez](https://github.com/ihedud) - Lead Designer, UI Designer
+* [Paula Hitz](https://github.com/paulahitz8) - Lead Artist, UI Designer
+* [Eduard Minguell](https://github.com/Eduardiko)- Level Designer, Programmer
+* [Andres Sanchez](https://github.com/andreusama) - QA, Programmer
+* [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
+
+# License
+
+## MIT License 
 
 Copyright (c) 2020 [FM Studios]
 
