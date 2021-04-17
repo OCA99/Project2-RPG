@@ -41,8 +41,13 @@ struct Party {
 
 	void PrintMemberDescription(Member member);
 	void PrintPartyDescription();
+	void AddMember(Member member);
+	void RemoveMember(const std::string name);
+
 	//Find Member
 	ListItem<Member>* FindByName(const std::string name) const;
+
+
 
 };
 
@@ -63,7 +68,7 @@ public:
 
 	//Crear Party
 	void AddMember(Member& member, Party* party);
-	void RemoveMember(Member& member, Party* party);
+
 
 
 	//PRINTEAR Stats de la Party / COMBAT LOG
