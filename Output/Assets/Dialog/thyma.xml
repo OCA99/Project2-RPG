@@ -1,0 +1,24 @@
+<dialog id="THYMA">
+	<options speaker="thyma" value="Welcome to my town!">
+		<option value="Who am I?">
+			<line speaker="thyma" value="That's kind of a deep question mate"></line>
+		</option>
+		<option value="What is this town">
+			<line speaker="thyma" value="That's my hometown Laventeli!"></line>
+		</option>
+		<option value="Where's the tavern? I'm hungry">
+			<line speaker="thyma" value="You will find it near the watertight"></line>
+		</option>
+	</options>
+	<options speaker="thyma" value="Do you want to know something more?">
+		<option value="What's you'r name?">
+			<line speaker="thyma" value="I'm Thyma, one of the few young persons around here"></line>
+		</option>
+		<option value="Is this town safe?">
+			<line speaker="thyma" value="Yes! It is, try to avoid the forest and it will be ok"></line>
+		</option>
+		<option value="Can you give me some money for the food?">
+			<line speaker="thyma" value="Of course! Anyway Pomo will feed you"></line>
+		</option>
+	</options>
+</dialog>
