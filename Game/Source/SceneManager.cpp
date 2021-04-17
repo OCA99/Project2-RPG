@@ -133,7 +133,7 @@ bool SceneManager::Load(pugi::xml_node& savedGame)
 	MapScene* newS = new MapScene(string);
 
 	sceneToBeLoaded = (Scene*)newS;
-	playerPositionToBeLoaded = fPoint(positionNode.attribute("entity_x").as_int(), positionNode.attribute("entity_y").as_int());
+	playerPositionToBeLoaded = fPoint(positionNode.attribute("x").as_int(), positionNode.attribute("y").as_int());
 	
 	currentScene->world->all([&](ECS::Entity* ent)
 	{
