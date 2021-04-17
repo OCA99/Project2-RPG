@@ -37,7 +37,7 @@ struct Party {
 
 	//Functions
 	Party();
-	Party(List<Member*>& list);
+	Party(List<Member>& list);
 
 	void PrintMemberDescription(Member member);
 	void PrintPartyDescription();

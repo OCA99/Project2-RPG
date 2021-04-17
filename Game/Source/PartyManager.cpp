@@ -73,7 +73,7 @@ Party::Party()
 {
 }
 
-Party::Party(List<Member*>& list)
+Party::Party(List<Member>& list) : list(list)
 {
 }
 
