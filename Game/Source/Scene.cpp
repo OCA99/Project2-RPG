@@ -48,22 +48,22 @@ void MapScene::Load(fPoint playerPosition)
 	if (s == "Town.tmx")
 	{
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
-		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.01f);
+		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "Tavern.tmx")
 	{
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_tavern.wav";
-		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.01f);
+		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "Forest.tmx")
 	{
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_main.wav";
-		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.01f);
+		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "NPC House")
 	{
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
-		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.01f);
+		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 
 	PlayerFactory::Create(world, playerPosition);
