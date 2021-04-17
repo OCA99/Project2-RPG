@@ -33,13 +33,13 @@ bool GuiCheckBox::Update(Input* input, float dt)
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
 				checked = !checked;
-				NotifyObserver();
+				return NotifyObserver();
 			}
 		}
 		else state = GuiControlState::NORMAL;
 	}
 
-	return false;
+	return true;
 }
 
 bool GuiCheckBox::Draw(Render* render)

@@ -57,14 +57,14 @@ bool GuiSlider::Update(Input* input, float dt)
 			// If mouse button pressed -> Generate event!
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
-				NotifyObserver();
+				return NotifyObserver();
 			}
 
 		}
 		else state = GuiControlState::NORMAL;
 	}
 
-	return false;
+	return true;
 }
 
 bool GuiSlider::Draw(Render* render)

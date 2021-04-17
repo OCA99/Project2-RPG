@@ -180,7 +180,7 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 	return true;
 }
 
-void SceneManager::OnGuiMouseClickEvent(GuiControl* control)
+bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 {
 	MapScene* s;
 	switch (control->id)
@@ -194,7 +194,12 @@ void SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		app->ui->DestroyAllGuiControls();
 		app->RequestLoad();
 		break;
+	case 3:
+		return false;
+		break;
 	default:
 		break;
 	}
+
+	return true;
 }

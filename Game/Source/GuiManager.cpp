@@ -6,6 +6,7 @@
 #include "GuiSlider.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "Debug.h"
 
 GuiManager::GuiManager() : Module()
 {
@@ -27,15 +28,15 @@ bool GuiManager::Start()
 
 bool GuiManager::Update(float dt)
 {
-	UpdateAll(dt);
+	return UpdateAll(dt);
 
 	return true;
 }
 
 bool GuiManager::PostUpdate(float dt)
 {
-
-	DrawAll();
+	if (app->debug->bounds)
+		DrawAll();
 
 	return true;
 }
@@ -96,12 +97,15 @@ void GuiManager::AddGuiControl(GuiControl* entity)
 	if (entity != nullptr) controls.Add(entity);
 }
 
-void GuiManager::UpdateAll(float dt)
+bool GuiManager::UpdateAll(float dt)
 {
 	for (int i = 0; i < controls.Count(); i++)
 	{
-		controls[i]->Update(app->input, dt);
+		if (!controls[i]->Update(app->input, dt))
+			return false;
 	}
+
+	return true;
 }
 
 void GuiManager::DrawAll()

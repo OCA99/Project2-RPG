@@ -38,7 +38,7 @@ public:
 
 	void AddGuiControl(GuiControl* entity);
 
-	void UpdateAll(float dt);
+	bool UpdateAll(float dt);
 
 	void DrawAll();
 
