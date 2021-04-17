@@ -2,6 +2,7 @@
 #define __PARTYMANAGER_H__
 
 #include "Module.h"
+#include "List.h"
 
 #include <string>
 
@@ -11,25 +12,38 @@ enum Type {
 	PLAYER
 };
 
+struct Data {
+	//Numero en la Party
+	int id;
+	float health;
+	float damage;
+	bool dead = false;
+};
+
 struct Member {
-	Type* type;
+	//Sprite sprite;
 	std::string name;
-	bool dead;
+	Type type;
+	Data data;
 
-	struct Data {
-		//Numero en la Party
-		int id;
-		float health;
-		float damage;
-	};
-
+	Member();
+	Member(std::string name, Type type);
+	Member(std::string name, Type type, float health, float damage, bool dead);
 };
 
 struct Party {
-	//Getter
-	//SETTER
 
-	//List<Member> list;
+	List<Member> list;
+
+	//Functions
+	Party();
+	Party(List<Member*>& list);
+
+	void PrintMemberDescription(Member member);
+	void PrintPartyDescription();
+	//Find Member
+	ListItem<Member>* FindByName(const std::string name) const;
+
 };
 
 class PartyManager : public Module
