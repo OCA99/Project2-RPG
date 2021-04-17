@@ -333,6 +333,9 @@ void Map::LoadNPCs()
 					case 3:
 						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::CUSTOMER, 20);
 						break;
+					case 4:
+						NPCFactory::Create(app->scene->currentScene->world, fPoint(j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight), NPCFactory::Type::THYMA, 20);
+						break;
 					default:
 						break;
 					}

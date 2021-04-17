@@ -28,11 +28,13 @@ bool PartyManager::Awake()
 bool PartyManager::Start()
 {
 	currentParty = new Party();
-	currentParty->list.Add(Member("Telmo", NONE));
-	currentParty->list.Add(Member("Oscar", ENEMY));
+	currentParty->AddMember(Member("Oscar", ENEMY));
+	currentParty->AddMember(Member("Telmo", PLAYER));
+	currentParty->AddMember(Member("Paula", NONE));
+	currentParty->RemoveMember("Oscar");
+	currentParty->RemoveMember("Telmo");
 
-	Member m = currentParty->FindByName("Telmo")->data;
-
+	//Member m = currentParty->FindByName("Telmo")->data;
 	//currentParty->PrintMemberDescription(m);
 	currentParty->PrintPartyDescription();
 
@@ -67,23 +69,6 @@ bool PartyManager::CleanUp()
 	return true;
 }
 
-void PartyManager::AddMember(Member& member, Party* party)
-{
-	party->list.Add(member);
-
-}
-
-void PartyManager::RemoveMember(Member& member, Party* party)
-{
-	//for (ListItem<Member>* list = party->list.start; list != NULL; list = list->next)
-	//{
-	//	if (list->data.name == member.name)
-	//	{
-	//	
-	//	}
-	//}
-}
-
 Party::Party()
 {
 }
@@ -94,7 +79,7 @@ Party::Party(List<Member*>& list)
 
 void Party::PrintMemberDescription(Member member)
 {
-	std::cout << "-------------MEMBER:"<< member.name << "-------------" << std::endl;
+	std::cout << "-------------MEMBER:" << member.name << "-------------" << std::endl;
 	std::cout << "-------------TYPE:" << member.type << "---------------" << std::endl;
 	std::cout << "-------------ISDEAD: " << member.data.dead << "-------------" << std::endl;
 
@@ -102,12 +87,69 @@ void Party::PrintMemberDescription(Member member)
 
 void Party::PrintPartyDescription()
 {
+	std::cout << "-------------PARTY MEMBERS " << "---------------" << std::endl;
+	std::cout << std::endl;
+
 	ListItem<Member>* item = list.start;
 	while (item)
 	{
-		std::cout << "-------------MEMBER:" << item->data.name << "-------------" << std::endl;
-		std::cout << "-------------TYPE:" << item->data.type << "---------------" << std::endl;
-		std::cout << "-------------ISDEAD: " << item->data.data.dead << "-------------" << std::endl;
+		std::cout << "-------------MEMBER " << item->data.data.id << " : " << item->data.name << "-------------" << std::endl;
+		switch (item->data.type)
+		{
+		case NONE:
+		{
+			std::cout << "-------------TYPE: NONE " << "---------------" << std::endl;
+			break;
+		}
+		case PLAYER:
+		{
+			std::cout << "-------------TYPE: PLAYER " << "---------------" << std::endl;
+			break;
+		}
+		case ENEMY:
+		{
+			std::cout << "-------------TYPE: ENEMY " << "---------------" << std::endl;
+			break;
+		}
+		/* etc... */
+		}
+		switch (item->data.data.dead)
+		{
+		default:
+			break;
+		case 0:
+		{
+			std::cout << "-------------ISDEAD: FALSE " << "-------------" << std::endl;
+		}
+		case 1:
+		{
+			std::cout << "-------------ISDEAD: TRUE " <<  "-------------" << std::endl;
+		}
+		}
+		std::cout << std::endl;
+		item = item->next;
+	}
+}
+
+void Party::AddMember(Member member)
+{
+	if (list.start == nullptr)
+		member.data.id = 0;
+	else
+		member.data.id = list.end->data.data.id + 1;
+
+	list.Add(member);
+
+}
+
+void Party::RemoveMember(const std::string name)
+{
+	ListItem<Member>* item = list.start;
+	while (item)
+	{
+		if (item->data.name == name)
+			list.Del(item);
+		item->data.data.id--;;
 		item = item->next;
 	}
 }

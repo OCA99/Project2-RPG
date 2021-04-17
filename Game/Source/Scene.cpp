@@ -60,7 +60,7 @@ void MapScene::Load(fPoint playerPosition)
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_main.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
-	else if (s == "NPC House")
+	else if (s == "NPC House.tmx")
 	{
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
