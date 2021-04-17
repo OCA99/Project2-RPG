@@ -28,12 +28,11 @@ bool PartyManager::Awake()
 bool PartyManager::Start()
 {
 	currentParty = new Party();
-	//currentParty->list.Add(Member("Telmo", NONE));
-	//currentParty->list.Add(Member("Oscar", ENEMY));
 	currentParty->AddMember(Member("Oscar", ENEMY));
 	currentParty->AddMember(Member("Telmo", PLAYER));
 	currentParty->AddMember(Member("Paula", NONE));
-	//currentParty->RemoveMember("Oscar");
+	currentParty->RemoveMember("Oscar");
+	currentParty->RemoveMember("Telmo");
 
 	//Member m = currentParty->FindByName("Telmo")->data;
 	//currentParty->PrintMemberDescription(m);
@@ -134,7 +133,6 @@ void Party::PrintPartyDescription()
 
 void Party::AddMember(Member member)
 {
-
 	if (list.start == nullptr)
 		member.data.id = 0;
 	else
@@ -146,14 +144,14 @@ void Party::AddMember(Member member)
 
 void Party::RemoveMember(const std::string name)
 {
-	//ListItem<Member>* item = list.start;
-	//while (item)
-	//{
-	//	if (item->data.name == name)
-	//		item->~ListItem();
-
-	//	item = item->next;
-	//}
+	ListItem<Member>* item = list.start;
+	while (item)
+	{
+		if (item->data.name == name)
+			list.Del(item);
+		item->data.data.id--;;
+		item = item->next;
+	}
 }
 
 ListItem<Member>* Party::FindByName(const std::string name) const
