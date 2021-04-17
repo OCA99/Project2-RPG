@@ -9,7 +9,7 @@
         <event id="0" type="changeArea" target="Forest.tmx" playerX="1552" playerY="872"></event>
 	<event id="1" type="changeArea" target="Tavern.tmx" playerX="374" playerY="352"></event>
 	<event id="2" type="changeArea" target="NPC House.tmx" playerX="366" playerY="330"></event>
-	<event id="3" type="changeArea" target="Graveyard.tmx" playerX="248" playerY="224"></event>
+	<event id="3" type="changeArea" target="Graveyard.tmx" playerX="752" playerY="1712"></event>
     </layer>
 </map>
 
@@ -22,5 +22,11 @@
 <map id="3">
     <layer id="0">
         <event id="0" type="changeArea" target="Town.tmx" playerX="158" playerY="972"></event>
+    </layer>
+</map>
+
+<map id="4">
+    <layer id="0">
+        <event id="0" type="changeArea" target="Town.tmx" playerX="752" playerY="26"></event>
     </layer>
 </map>
