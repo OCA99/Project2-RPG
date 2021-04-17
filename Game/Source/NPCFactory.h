@@ -64,12 +64,12 @@ protected:
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
-			npc->get<Animator>()->CreateAnimation("idle", SDL_Rect({ 25, 0, 25, 26 }));
+			npc->get<Animator>()->CreateAnimation("idle", SDL_Rect({ 27, 0, 27, 26 }));
 			npc->get<Animator>()->SetAnimation("idle");
-			npc->get<Animator>()->CreateAnimation("walk_down", SDL_Rect({ 0, 0, 75, 26 }), 1, 3, 8.f, true, true);
-			npc->get<Animator>()->CreateAnimation("walk_left", SDL_Rect({ 0, 26, 75, 26 }), 1, 3, 8.f, true, true);
-			npc->get<Animator>()->CreateAnimation("walk_right", SDL_Rect({ 0, 52, 75, 26 }), 1, 3, 8.f, true, true);
-			npc->get<Animator>()->CreateAnimation("walk_up", SDL_Rect({ 0, 78, 75, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_down", SDL_Rect({ 0, 0, 81, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_left", SDL_Rect({ 0, 26, 81, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_right", SDL_Rect({ 0, 52, 81, 26 }), 1, 3, 8.f, true, true);
+			npc->get<Animator>()->CreateAnimation("walk_up", SDL_Rect({ 0, 78, 81, 26 }), 1, 3, 8.f, true, true);
 
 			SDL_Rect collider;
 			collider.x = 4 * 0.8f;
