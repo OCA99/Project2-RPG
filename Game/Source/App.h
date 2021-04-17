@@ -21,6 +21,7 @@ class ModuleUI;
 class GuiManager;
 class Debug;
 class PartyManager;
+class BattleManager;
 
 class App
 {
@@ -88,6 +89,7 @@ public:
 	GuiManager* ui;
 	Debug* debug;
 	PartyManager* party;
+	BattleManager* battle;
 
 private:
 

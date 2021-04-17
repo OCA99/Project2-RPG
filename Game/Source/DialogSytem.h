@@ -42,6 +42,11 @@ public:
 	void NextDialog();
 
 	DialogNode* currentDialog = nullptr;
+
+	bool aPressed;
+	bool downPressed;
+	bool upPressed;
+
 private:
 	DialogNode* ParseDialogXML(pugi::xml_node dialogRoot);
 
