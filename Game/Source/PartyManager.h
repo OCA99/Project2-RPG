@@ -47,8 +47,6 @@ struct Party {
 	//Find Member
 	ListItem<Member>* FindByName(const std::string name) const;
 
-
-
 };
 
 class PartyManager : public Module
@@ -65,15 +63,6 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-
-	//Crear Party
-	void AddMember(Member& member, Party* party);
-
-
-
-	//PRINTEAR Stats de la Party / COMBAT LOG
-
-	//SETTERS Y GETTERS
 
 private:
 
