@@ -164,4 +164,11 @@ void BattleScene::Load()
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
 
+	//Enemy Sprite
+	t = app->tex->Load("Assets/Textures/Battle/tmp.png");
+	e = world->create();
+	e->assign<Position>(fPoint(0, 0));
+	e->assign<Sprite>(t, 0.5f, 1);
+
+
 }
