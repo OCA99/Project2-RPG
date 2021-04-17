@@ -4,16 +4,61 @@
 
 We present UnderEvil from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
 
-## Developers
 
-* Aitor Álvarez - Team Leader - [@AitorAlvarez17](https://github.com/AitorAlvarez17)
-* Oscar Cuatrecasas - Code - [@oca99](https://github.com/OCA99)
-* Irene Hernandez - QA - [@ihedud](https://github.com/ihedud)
-* Paula Hitz - Art and Audio - [@paulahitz8](https://github.com/paulahitz8)
-* Eduard Minguell- Design - [@Eduardiko](https://github.com/Eduardiko)
-* Andres Sanchez - UI - [@andreusama](https://github.com/andreusama)
-* Telmo Beroiz - {ROL} - [@Telmiyo](https://github.com/Telmiyo)
+## Key Features
+- *Town Map*: town, tavern, forest
+- *Team Party of 2*
+- *3 NPC Characters*: tavern keeper, reaper and blacksmith
+- *Dialogue System*: 4 different dialogues implemented.
+- *Turn-based Combat System*
+- *3 types of enemies*
+- *Main Menu*
+- *Pause Menu*
+- *Battle Menu*
+- *HUD*
+- *Keyboard and Gamepad Inputs*
+- *Save & Load*
+
+## Controls
+Keyboard
+- *Up Arrow*: Move player upwards
+- *Down Arrow*: Move player downwards
+- *Left Arrow*: Move player to the left
+- *Right Arrow*: Move player to the right
+- *Space Bar*: Interact
+
+Gamepad
+- *A Button*: 
+
+Debug Keys
+- *F1*:
+- *F2*:
+
+
+## External Libraries and Softwares
+- [Simple DirectMedia Layer](https://www.libsdl.org/)
+- [ECS](https://github.com/redxdev/ECS)
+- [Tiled Map Editor](https://pugixml.org/)
+- [RPG Maker](https://www.rpgmakerweb.com/)
+
+## Developer Team
+
+* Aitor Álvarez - Project Lead, Programmer - [@AitorAlvarez17](https://github.com/AitorAlvarez17)
+* Oscar Cuatrecasas - Lead Programmer- [@oca99](https://github.com/OCA99)
+* Irene Hernandez - Lead Designer, UI Designer - [@ihedud](https://github.com/ihedud)
+* Paula Hitz - Lead Artist, UI Designer - [@paulahitz8](https://github.com/paulahitz8)
+* Eduard Minguell- Level Designer, Programmer- [@Eduardiko](https://github.com/Eduardiko)
+* Andres Sanchez - QA, Programmer - [@andreusama](https://github.com/andreusama)
+* Telmo Beroiz - Management, Programmer - [@Telmiyo](https://github.com/Telmiyo)
 
 ## License
 
-This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
+MIT License 
+
+Copyright (c) 2020 [FM Studios]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OF THE USE OR OTHER DEALINGS IN THE SOFTWARE.
