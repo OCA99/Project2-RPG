@@ -1,11 +1,11 @@
 ![title](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Output/Assets/Textures/UI/MainMenu/game_title.png)
 
-## Description
+# Description
 
-We present UnderEvil from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
+We present *UnderEvil* from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
 
 
-## Key Features
+# Key Features
 - **Town Map**: town, tavern, forest.
 - **Team Party of 2**
 - **3 NPC Characters**: tavern keeper, reaper and blacksmith.
@@ -19,31 +19,31 @@ We present UnderEvil from FM Studios, a group of students working on a universit
 - **Keyboard and Gamepad Inputs**
 - **Save & Load**
 
-## Controls
-Keyboard
+# Controls
+## Keyboard
 - **Up Arrow**: Move player upwards.
 - **Down Arrow**: Move player downwards.
 - **Left Arrow**: Move player to the left.
 - **Right Arrow**: Move player to the right.
 - **Space Bar**: Interact.
 
-Gamepad
+## Gamepad
 - **A Button**: 
 
-Debug Keys
+## Debug Keys
 - **F9**: view colliders and bounds.
 - **F10**: activate god mode.
 - **F11**: toggle fullscreen.
 
 
-## External Libraries and Softwares
+# External Libraries and Softwares
 - [Simple DirectMedia Layer](https://www.libsdl.org/)
 - [ECS](https://github.com/redxdev/ECS)
 - [pugixml](https://pugixml.org/)
 - [Tiled Map Editor](https://www.mapeditor.org/)
 - [RPG Maker](https://www.rpgmakerweb.com/)
 
-## Developer Team
+# Developer Team
 
 * Aitor Álvarez - Project Lead, Programmer - [@AitorAlvarez17](https://github.com/AitorAlvarez17)
 * Oscar Cuatrecasas - Lead Programmer- [@oca99](https://github.com/OCA99)
@@ -53,9 +53,9 @@ Debug Keys
 * Andres Sanchez - QA, Programmer - [@andreusama](https://github.com/andreusama)
 * Telmo Beroiz - Management, Programmer - [@Telmiyo](https://github.com/Telmiyo)
 
-## License
+# License
 
-MIT License 
+## MIT License 
 
 Copyright (c) 2020 [FM Studios]
 
