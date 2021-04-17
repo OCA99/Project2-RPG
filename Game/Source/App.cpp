@@ -18,6 +18,7 @@
 #include <iostream>
 #include <math.h>
 #include <sstream>
+#include <stdlib.h>
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
@@ -51,6 +52,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// Render last to swap buffer
 	AddModule(render);
+
+	srand(time(NULL));
 }
 
 // Destructor

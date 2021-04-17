@@ -8,17 +8,33 @@
 #include <string>
 
 enum Type {
-	NONE,
-	ENEMY,
-	PLAYER
+	PLAYER1,
+	PLAYER2,
+	SKELETON,
+	SHROOM1,
+	SHROOM2
+};
+
+struct Action {
+	enum class Target {
+		ALLY,
+		ENEMY,
+		BOTH
+	};
+
+	std::string name;
+	Target target;
+	float damage;
+	float heal;
 };
 
 struct Data {
 	//Numero en la Party
 	int id;
 	float health;
-	float damage;
+	float power;
 	bool dead = false;
+	List<Action> actions;
 };
 
 struct Member {
@@ -36,6 +52,7 @@ struct Member {
 struct Party {
 
 	List<Member> list;
+	std::string partyName;
 
 	//Functions
 	Party();
@@ -72,7 +89,8 @@ public:
 private:
 
 	ECS::World* world = nullptr;
-	Party* currentParty;
+	Party* allyParty = nullptr;
+	Party* enemyParty = nullptr;
 
 };
 

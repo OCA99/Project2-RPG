@@ -97,6 +97,7 @@ struct MapLayer
 	bool draw = true;
 	bool navigation = false;
 	bool isEvent = false;
+	bool isBattle = false;
 
 	MapLayer() : data(NULL)
 	{}
@@ -196,6 +197,8 @@ public:
 	std::vector<SDL_Rect>* NavigationIntersection(SDL_Rect other);
 
 	bool Map::EventIntersection(SDL_Rect other, std::pair<int, int>& result);
+
+	bool Map::BattleIntersection(SDL_Rect other);
 
 	MapEvent* GetEvent(int layerId, int eventId)
 	{

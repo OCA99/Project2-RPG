@@ -197,6 +197,33 @@ bool Map::EventIntersection(SDL_Rect other, std::pair<int, int>& result)
 	return false;
 }
 
+bool Map::BattleIntersection(SDL_Rect other)
+{
+	for (int i = 0; i < data.maplayers.Count(); i++)
+	{
+		if (!data.maplayers[i]->isBattle)
+			continue;
+		int layerSize = data.maplayers[i]->Size();
+		for (int j = 0; j < layerSize; j++)
+		{
+			uint tileGid = data.maplayers[i]->data[j];
+			int layerWidth = data.maplayers[i]->width;
+
+			if (tileGid != 0)
+			{
+				SDL_Rect tile = SDL_Rect({ j % layerWidth * data.tileWidth, j / layerWidth * data.tileHeight, data.tileWidth, data.tileHeight });
+
+				if (Intersects(tile, other))
+				{
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
 // Called before quitting
 bool Map::CleanUp()
 {
@@ -516,6 +543,9 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 	if (layer->properties.GetProperty("event", 0))
 		layer->isEvent = true;
+
+	if (layer->properties.GetProperty("battle", 0))
+		layer->isBattle = true;
 
 	return ret;
 }

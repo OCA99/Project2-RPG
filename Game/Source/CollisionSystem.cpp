@@ -8,10 +8,14 @@
 #include "Input.h"
 #include "Debug.h"
 
+#include "Scene.h"
+#include "SceneManager.h"
+
 #include "EventHandler.h"
 
 #include <vector>
 #include <math.h>
+#include <stdlib.h>
 
 void CollisionSystem::tick(ECS::World* world, float dt)
 {
@@ -111,10 +115,20 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 		{
 			MapEvent* e = app->map->GetEvent(result.first, result.second);
 			
-			if (e == nullptr)
-				return;
+			if (e != nullptr)
+				EventHandler::FireEvent(e);
+		}
 
-			EventHandler::FireEvent(e);
+		found = app->map->BattleIntersection(offsetRect);
+
+		if (found)
+		{
+			int r = rand() % 2;
+			if (r < 1)
+			{
+				BattleScene* s = new BattleScene();
+				app->scene->sceneToBeLoaded = (Scene*)s;
+			}
 		}
 	});
 }

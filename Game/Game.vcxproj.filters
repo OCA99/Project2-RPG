@@ -173,6 +173,7 @@
       <Filter>GuiControls</Filter>
     </ClInclude>
     <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\PartyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
