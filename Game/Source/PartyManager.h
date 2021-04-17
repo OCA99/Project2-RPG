@@ -56,6 +56,7 @@ struct Party {
 
 	//Functions
 	Party();
+	Party(std::string partyName);
 	Party(List<Member>& list);
 	~Party();
 
