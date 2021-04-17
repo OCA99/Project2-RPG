@@ -35,17 +35,30 @@ bool PartyManager::Awake()
 bool PartyManager::Start()
 {
 	allyParty = new Party("ALLY PARTY");
-	allyParty->AddMember(Member("Toisto", PLAYER1, 10.0f, 20.0f, false));
-	allyParty->AddMember(Member("Thyma", PLAYER2, 100.f, 15.f, false));
+	Member* toisto = new Member("Toisto", PLAYER1, 10.0f, 20.0f, false);
+	allyParty->AddMember(toisto);
+	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 15.f, false);
+	allyParty->AddMember(thyma);
 
-	allyParty->PrintPartyDescription();
+	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0);
+	toisto->data.actions.Add(a);
+
+	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0);
+	thyma->data.actions.Add(a);
+
+	//allyParty->PrintPartyDescription();
 
 	enemyParty = new Party("ENEMY PARTY");
-	enemyParty->AddMember(Member("King Mush", SHROOM1, 10.0f, 20.0f, false));
-	enemyParty->AddMember(Member("Magic Mush", SHROOM2, 100.f, 15.f, false));
-	enemyParty->AddMember(Member("Mr. Bones", SKELETON, 100.f, 15.f, false));
+	Member* kmush = new Member("King Mush", SHROOM1, 100.0f, 20.0f, false);
+	enemyParty->AddMember(kmush);
 
-	enemyParty->PrintPartyDescription();
+	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0);
+	kmush->data.actions.Add(a);
+
+	//enemyParty->AddMember(new Member("Magic Mush", SHROOM2, 100.f, 15.f, false));
+	//enemyParty->AddMember(new Member("Mr. Bones", SKELETON, 100.f, 15.f, false));
+
+	//enemyParty->PrintPartyDescription();
 
 	//CARGAR GUI
 
@@ -98,7 +111,7 @@ Party::Party(std::string partyName) : partyName(partyName)
 {
 }
 
-Party::Party(List<Member>& list) : list(list)
+Party::Party(List<Member*>& list) : list(list)
 {
 }
 
@@ -108,16 +121,16 @@ Party::~Party()
 
 void Party::PrintMemberDescription(std::string name)
 {
-	ListItem<Member>* item = list.start;
+	ListItem<Member*>* item = list.start;
 	std::cout << "-------------MEMBER INFO " << "---------------" << std::endl;
 	std::cout << std::endl;
 
 	while (item)
 	{
-		if (item->data.name == name)
+		if (item->data->name == name)
 		{
-			std::cout << "-------------MEMBER " << item->data.data.id << " : " << item->data.name << "-------------" << std::endl;
-			switch (item->data.type)
+			std::cout << "-------------MEMBER " << item->data->data.id << " : " << item->data->name << "-------------" << std::endl;
+			switch (item->data->type)
 			{
 			case PLAYER1:
 			{
@@ -147,7 +160,7 @@ void Party::PrintMemberDescription(std::string name)
 			/* etc... */
 			}
 
-			switch (item->data.data.dead)
+			switch (item->data->data.dead)
 			{
 			default:
 				break;
@@ -163,8 +176,8 @@ void Party::PrintMemberDescription(std::string name)
 			}
 			}
 
-			std::cout << "-------------Health: " << item->data.data.health << "---------------" << std::endl;
-			std::cout << "-------------Damage: " << item->data.data.power << "---------------" << std::endl;
+			std::cout << "-------------Health: " << item->data->data.health << "---------------" << std::endl;
+			std::cout << "-------------Damage: " << item->data->data.power << "---------------" << std::endl;
 
 			std::cout << std::endl;
 		}
@@ -178,14 +191,14 @@ void Party::PrintPartyDescription()
 {
 	
 
-	ListItem<Member>* item = list.start;
+	ListItem<Member*>* item = list.start;
 
 	std::cout << "-------------"<<partyName<<" MEMBERS ---------------" << std::endl;
 	std::cout << std::endl;
 	while (item)
 	{
-		std::cout << "-------------MEMBER " << item->data.data.id << " : " << item->data.name << "-------------" << std::endl;
-		switch (item->data.type)
+		std::cout << "-------------MEMBER " << item->data->data.id << " : " << item->data->name << "-------------" << std::endl;
+		switch (item->data->type)
 		{
 		case PLAYER1:
 		{
@@ -215,7 +228,7 @@ void Party::PrintPartyDescription()
 		/* etc... */
 		}
 
-		switch (item->data.data.dead)
+		switch (item->data->data.dead)
 		{
 		default:
 			break;
@@ -230,45 +243,44 @@ void Party::PrintPartyDescription()
 			break;
 		}
 		}
-		std::cout << "-------------Health: " << item->data.data.health << "---------------" << std::endl;
-		std::cout << "-------------Damage: " << item->data.data.power << "---------------" << std::endl;
+		std::cout << "-------------Health: " << item->data->data.health << "---------------" << std::endl;
+		std::cout << "-------------Damage: " << item->data->data.power << "---------------" << std::endl;
 		std::cout << std::endl;
 		item = item->next;
 	}
 }
 
-void Party::AddMember(Member member)
+void Party::AddMember(Member* member)
 {
 	if (list.start == nullptr)
-		member.data.id = 0;
+		member->data.id = 0;
 	else
-		member.data.id = list.end->data.data.id + 1;
+		member->data.id = list.end->data->data.id + 1;
 
 	list.Add(member);
-
 }
 
 void Party::RemoveMember(const std::string name)
 {
-	ListItem<Member>* item = list.start;
+	ListItem<Member*>* item = list.start;
 	while (item)
 	{
-		if (item->data.name == name)
+		if (item->data->name == name)
 			list.Del(item);
-		if (item->data.data.id <= 0) item->data.data.id = 0;
-		else item->data.data.id--;
+		if (item->data->data.id <= 0) item->data->data.id = 0;
+		else item->data->data.id--;
 
 		item = item->next;
 	}
 }
 
-ListItem<Member>* Party::FindByName(const std::string name) const
+ListItem<Member*>* Party::FindByName(const std::string name) const
 {
-	ListItem<Member>* item = list.start;
+	ListItem<Member*>* item = list.start;
 	while (item)
 	{
 
-		if (item->data.name == name)
+		if (item->data->name == name)
 			return item;
 		item = item->next;
 	}

@@ -62,6 +62,7 @@
     </ClCompile>
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\PartyManager.cpp" />
+    <ClCompile Include="Source\BattleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -174,6 +175,7 @@
     </ClInclude>
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\PartyManager.h" />
+    <ClInclude Include="Source\BattleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

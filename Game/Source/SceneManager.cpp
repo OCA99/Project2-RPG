@@ -67,16 +67,6 @@ bool SceneManager::Update(float dt)
 		sceneToBeLoaded = nullptr;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-	{
-
-		MapScene* s = new MapScene("Forest.tmx");
-		sceneToBeLoaded = (Scene*)s;
-		playerPositionToBeLoaded.x = 944;
-		playerPositionToBeLoaded.y = 240;
-
-	}
-
 	return true;
 }
 

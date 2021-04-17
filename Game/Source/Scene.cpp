@@ -14,6 +14,7 @@
 #include "CollisionSystem.h"
 #include "NPCMovementSystem.h"
 #include "LogoFadeSystem.h"
+#include "BattleManager.h"
 
 #include "PlayerFactory.h"
 #include "NPCFactory.h"
@@ -170,5 +171,5 @@ void BattleScene::Load()
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
 
-
+	app->battle->StartBattle();
 }
