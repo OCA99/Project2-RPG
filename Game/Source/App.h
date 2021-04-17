@@ -20,6 +20,7 @@ class Fonts;
 class ModuleUI;
 class GuiManager;
 class Debug;
+class PartyManager;
 
 class App
 {
@@ -86,6 +87,7 @@ public:
 	Fonts* fonts;
 	GuiManager* ui;
 	Debug* debug;
+	PartyManager* party;
 
 private:
 
