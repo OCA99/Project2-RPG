@@ -32,7 +32,7 @@ bool PartyManager::Start()
 	currentParty->AddMember(Member("Telmo", PLAYER));
 	currentParty->AddMember(Member("Paula", NONE));
 	currentParty->RemoveMember("Oscar");
-	currentParty->RemoveMember("Telmo");
+	//currentParty->RemoveMember("Telmo");
 
 	//Member m = currentParty->FindByName("Telmo")->data;
 	//currentParty->PrintMemberDescription(m);
@@ -149,7 +149,9 @@ void Party::RemoveMember(const std::string name)
 	{
 		if (item->data.name == name)
 			list.Del(item);
-		item->data.data.id--;;
+		if (item->data.data.id <= 0) item->data.data.id = 0;
+		else item->data.data.id--;
+
 		item = item->next;
 	}
 }
