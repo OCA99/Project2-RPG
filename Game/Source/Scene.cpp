@@ -162,6 +162,8 @@ void MenuScene::Load()
 	e = world->create();
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
+
+	app->render->camera.x = app->render->camera.y = 0;
 }
 
 void BattleScene::Load()
