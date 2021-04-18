@@ -61,7 +61,7 @@ public:
 	SDL_Texture* mainTex;
 private:
 
-	bool menu;
+	bool menu = false;
 };
 
 #endif // __SCENE_H__
