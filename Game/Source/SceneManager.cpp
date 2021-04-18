@@ -89,10 +89,21 @@ bool SceneManager::Update(float dt)
 
 				}
 
-				app->volume -= volSpeed * dt;
+
+				if (app->volume > 0 && app->volumeUp == false)
+				{
+					app->volume -= volSpeed * dt;
+					app->volumeDown = true;
+
+				}
 				LOG("%f", app->volume);
-				if (app->volume < 0) app->volume = 0;
-				Mix_Volume(-1, app->volume);
+				if (app->volume == 0.0f) 
+				{
+					app->volume = 0.0f;
+					app->volumeDown = false;
+				}
+
+				Mix_VolumeMusic(app->volume);
 			}
 			else
 			{
@@ -190,11 +201,21 @@ bool SceneManager::PostUpdate(float dt)
 
 		if (menu == false)
 		{
-			if (app->volume < 100)
+			if (app->volume < 100 && app->volumeDown == false)
 			{
-				app->volume += speed * dt;
+				app->volumeUp = true;
+				app->volume += volSpeed * dt;
 			}
-			if (app->volume > 100)app->volume = 100;
+			if (app->volume <= 0.0f)
+			{
+				app->volumeDown = false;
+			}
+			if (app->volume > 100)
+			{
+				app->volume = 100;
+				app->volumeUp = false;
+			}
+
 
 			Mix_VolumeMusic(app->volume);
 			app->ui->DestroyAllGuiControls();
