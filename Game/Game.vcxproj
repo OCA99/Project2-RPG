@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="Source\AnimatorSystem.cpp" />
     <ClCompile Include="Source\BattleManager.cpp" />
+    <ClCompile Include="Source\BattleMemberSystem.cpp" />
     <ClCompile Include="Source\CameraSystem.cpp" />
     <ClCompile Include="Source\CollisionSystem.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
@@ -115,12 +116,14 @@
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\InputSystem.cpp" />
+    <ClCompile Include="Source\MenuFadeSystem.cpp" />
     <ClCompile Include="Source\NPCMovementSystem.cpp" />
     <ClCompile Include="Source\PartyManager.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\SceneTransitionSystem.cpp" />
     <ClCompile Include="Source\SpriteSystem.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
@@ -128,6 +131,8 @@
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AnimatorSystem.h" />
     <ClInclude Include="Source\BattleManager.h" />
+    <ClInclude Include="Source\BattleMemberFactory.h" />
+    <ClInclude Include="Source\BattleMemberSystem.h" />
     <ClInclude Include="Source\Callbacks.h" />
     <ClInclude Include="Source\CameraSystem.h" />
     <ClInclude Include="Source\CollisionSystem.h" />
@@ -145,6 +150,7 @@
     <ClInclude Include="Source\HumanoidSystem.h" />
     <ClInclude Include="Source\LogoFadeSystem.h" />
     <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\MenuFadeSystem.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\NPCMovementSystem.h" />
     <ClInclude Include="Source\PartyManager.h" />
@@ -161,6 +167,7 @@
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Components.h" />
+    <ClInclude Include="Source\SceneTransitionSystem.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\SpriteSystem.h" />
     <ClInclude Include="Source\Textures.h" />

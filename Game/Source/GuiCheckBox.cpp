@@ -48,35 +48,35 @@ bool GuiCheckBox::Draw(Render* render)
 	{
 	case GuiControlState::DISABLED:
 	{
-		if (checked) render->DrawRectangle(bounds, 100, 100, 100, 255, true, false);
-		else render->DrawRectangle(bounds, 0, 108, 107, 200, true, false);
+		if (checked) render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
+		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 	} break;
 	case GuiControlState::NORMAL:
 	{
 		if (checked)
 		{
-			render->DrawRectangle(bounds, 46, 108, 107, 255, true, false);//BG QUAD -
-			render->DrawRectangle(checkedBounds, 0, 255, 255, 255, true, false);//LITTLE QUAD - 
+			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//BG QUAD -
+			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//LITTLE QUAD - 
 		}
-		else render->DrawRectangle(bounds, 46, 108, 107, 255, true, false);
+		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 	} break;
 	case GuiControlState::FOCUSED:
 		if (checked)
 		{
-			render->DrawRectangle(bounds, 46, 108, 107, 255, true, false);//IDLE
-			render->DrawRectangle(checkedBounds, 255, 255, 0, 255, true, false);//YELLOW
+			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//IDLE
+			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//YELLOW
 		}
-		else render->DrawRectangle(bounds, 255, 255, 0, 255, true, false);;//YELLOW
+		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);;//YELLOW
 		break;
 	case GuiControlState::PRESSED:
 		if (checked)
 		{
-			render->DrawRectangle(bounds, 46, 108, 107, 255, true, false);//IDLE
-			render->DrawRectangle(checkedBounds, 255, 0, 255, 255, true, false);//PURPLE
+			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//IDLE
+			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//PURPLE
 		}
-		else render->DrawRectangle(bounds, 255, 0, 255, 255, true, false);//PURPLE
+		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//PURPLE
 		break;
-	case GuiControlState::SELECTED: render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+	case GuiControlState::SELECTED: render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 		break;
 	default:
 		break;

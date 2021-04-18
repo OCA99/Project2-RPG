@@ -121,7 +121,7 @@ void DialogSystem::DrawDialog()
 
 	std::string speaker = currentDialog->attributes->at("speaker");
 
-	if (std::strcmp(speaker.c_str(), "Oscar") == 0)
+	if (std::strcmp(speaker.c_str(), "tlady") == 0)
 	{
 		app->render->DrawTexture(tavernLady, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 	}
