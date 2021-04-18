@@ -103,7 +103,6 @@ void LogoScene::Load()
 	app->audio->LoadFx("Assets/Audio/Fx/title.ogg");//3
 	app->audio->LoadFx("Assets/Audio/Fx/action_door.ogg");//4
 	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//5
-	app->audio->LoadFx("Assets/Audio/Fx/menu_interact.ogg");//5
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
 
@@ -138,11 +137,11 @@ void MenuScene::Load()
 	e->assign<MenuFade>(70);
 	e->assign<Sprite>(t, 0.5f, 1);
 
-
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3);
+
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/start.png");
 	e = world->create();
