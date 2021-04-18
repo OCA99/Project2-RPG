@@ -160,6 +160,9 @@ void MenuScene::Load()
 
 void BattleScene::Load()
 {
+	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_battle.wav";
+	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
+
 	Scene::Load();
 	world->registerSystem(new SpriteSystem());
 	world->registerSystem(new BattleMemberSystem());
