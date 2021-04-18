@@ -103,6 +103,7 @@ void LogoScene::Load()
 	app->audio->LoadFx("Assets/Audio/Fx/title.ogg");//3
 	app->audio->LoadFx("Assets/Audio/Fx/action_door.ogg");//4
 	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//5
+	app->audio->LoadFx("Assets/Audio/Fx/menu_travel.ogg");//6
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
 
