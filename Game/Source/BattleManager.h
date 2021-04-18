@@ -35,12 +35,17 @@ public:
 	void DoAction();
 	void CheckBattleEnd();
 
+	void WaitFrames(int frames);
+
 private:
 	void Draw();
 	SDL_Texture* characterBar = nullptr;
 	SDL_Texture* actionBox = nullptr;
 	SDL_Texture* healthBars = nullptr;
 	SDL_Texture* selectionArrow = nullptr;
+	SDL_Texture* selectionArrowHorizontal = nullptr;
+	SDL_Texture* selectionArrowGreen = nullptr;
+	SDL_Texture* selectionArrowRed = nullptr;
 
 	char currentParty = 0;
 	char currentMember = 0;
@@ -52,4 +57,9 @@ private:
 	Selecting selecting = Selecting::MEMBER;
 
 	bool isBattling = false;
+
+	int pendingWaitFrames = 0;
+
+	bool end = false;
+	float endWait = 0;
 };

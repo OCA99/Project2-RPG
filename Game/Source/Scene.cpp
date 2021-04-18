@@ -181,13 +181,13 @@ void BattleScene::Load()
 	e->assign<Sprite>(t, 0.5f, 1);
 
 	app->battle->StartBattle();
-	for (int i = 0; i < app->party->allyParty->list.Count(); i++)
+	for (int i = 0; i < app->party->allyParty->list.size(); i++)
 	{
-		BattleMemberFactory::Create(world, fPoint(40.0f, 50 + i * 80.5f), app->party->allyParty->list.At(i)->data);
+		BattleMemberFactory::Create(world, fPoint(40.0f, 50 + i * 80.5f), app->party->allyParty->list.at(i));
 	}
-	for (int i = 0; i < app->party->enemyParty->list.Count(); i++)
+	for (int i = 0; i < app->party->enemyParty->list.size(); i++)
 	{
-		BattleMemberFactory::Create(world, fPoint(480.0f, 10 + i * 80.5f), app->party->enemyParty->list.At(i)->data);
+		BattleMemberFactory::Create(world, fPoint(480.0f, 20 + i * 80.5f), app->party->enemyParty->list.at(i));
 	}
 	
 }

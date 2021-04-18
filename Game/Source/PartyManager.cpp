@@ -88,20 +88,20 @@ Party::Party(std::string partyName) : partyName(partyName)
 {
 }
 
-Party::Party(List<Member*>& list) : list(list)
+Party::Party(std::vector<Member*>& list) : list(list)
 {
 }
 
 Party::~Party()
 {
-	for (int i = 0; i < list.Count(); i++) {
-		delete list.At(i)->data;
+	for (int i = 0; i < list.size(); i++) {
+		delete list.at(i);
 	}
 }
 
 void Party::PrintMemberDescription(std::string name)
 {
-	ListItem<Member*>* item = list.start;
+	/*ListItem<Member*>* item = list.start;
 	std::cout << "-------------MEMBER INFO " << "---------------" << std::endl;
 	std::cout << std::endl;
 
@@ -138,7 +138,7 @@ void Party::PrintMemberDescription(std::string name)
 				break;
 			}
 			/* etc... */
-			}
+			/*}
 
 			switch (item->data->data.dead)
 			{
@@ -163,7 +163,7 @@ void Party::PrintMemberDescription(std::string name)
 		}
 
 		item = item->next;
-	}
+	}*/
 
 }
 
@@ -171,7 +171,7 @@ void Party::PrintPartyDescription()
 {
 	
 
-	ListItem<Member*>* item = list.start;
+	/*ListItem<Member*>* item = list.start;
 
 	std::cout << "-------------"<<partyName<<" MEMBERS ---------------" << std::endl;
 	std::cout << std::endl;
@@ -206,7 +206,7 @@ void Party::PrintPartyDescription()
 			break;
 		}
 		/* etc... */
-		}
+		/*}
 
 		switch (item->data->data.dead)
 		{
@@ -227,30 +227,23 @@ void Party::PrintPartyDescription()
 		std::cout << "-------------Damage: " << item->data->data.power << "---------------" << std::endl;
 		std::cout << std::endl;
 		item = item->next;
-	}
+	}*/
 }
 
 void Party::AddMember(Member* member)
 {
-	if (list.start == nullptr)
-		member->data.id = 0;
-	else
-		member->data.id = list.end->data->data.id + 1;
-
-	list.Add(member);
+	member->data.id = list.size();
+	list.push_back(member);
 }
 
 void Party::RemoveMember(const std::string name)
 {
-	ListItem<Member*>* item = list.start;
-	while (item)
+	for (int i = 0; i < list.size(); i++)
 	{
-		if (item->data->name == name)
-			list.Del(item);
-		if (item->data->data.id <= 0) item->data->data.id = 0;
-		else item->data->data.id--;
-
-		item = item->next;
+		if (list.at(i)->name == name)
+			list.erase(list.begin() + i);
+		if (list.at(i)->data.id <= 0) list.at(i)->data.id = 0;
+		else list.at(i)->data.id -= 1;
 	}
 }
 
@@ -263,10 +256,10 @@ void PartyManager::InitializeParties()
 	allyParty->AddMember(thyma);
 
 	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0);
-	toisto->data.actions.Add(a);
+	toisto->data.actions.push_back(a);
 
 	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0);
-	thyma->data.actions.Add(a);
+	thyma->data.actions.push_back(a);
 
 	//allyParty->PrintPartyDescription();
 
@@ -279,26 +272,23 @@ void PartyManager::InitializeParties()
 	enemyParty->AddMember(mush);
 
 	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0);
-	kmush->data.actions.Add(a);
+	kmush->data.actions.push_back(a);
 	a = new Action("punch", mush, Action::Filter::ENEMY, 1, 0);
-	mush->data.actions.Add(a);
+	mush->data.actions.push_back(a);
 	a = new Action("punch", bones, Action::Filter::ENEMY, 1, 0);
-	bones->data.actions.Add(a);
+	bones->data.actions.push_back(a);
 
 
 
 
 }
 
-ListItem<Member*>* Party::FindByName(const std::string name) const
+Member* Party::FindByName(const std::string name) const
 {
-	ListItem<Member*>* item = list.start;
-	while (item)
+	for (int i = 0; i < list.size(); i++)
 	{
-
-		if (item->data->name == name)
-			return item;
-		item = item->next;
+		if (list.at(i)->name == name)
+			return list.at(i);
 	}
 	return nullptr;
 }
@@ -314,6 +304,7 @@ Member::Member(std::string name, Type type) : name(name), type(type)
 Member::Member(std::string name, Type type, float health, float power, bool isDead) : name(name), type(type)
 {
 	data.health = health;
+	data.maxHealth = health;
 	data.power = power;
 	data.dead = isDead;
 }
