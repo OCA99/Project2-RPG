@@ -63,7 +63,12 @@ struct Action {
 		BOTH
 	};
 
-	Action(std::string name, Member* _owner, Filter filter, float damage, float heal) : name(name), filter(filter), damage(damage), heal(heal)
+	enum class Type {
+		ATTACK,
+		DEFENSE
+	};
+
+	Action(std::string name, Member* _owner, Filter filter, float damage, float heal, Type type) : name(name), filter(filter), damage(damage), heal(heal), type(type)
 	{
 		owner = _owner;
 	}
@@ -73,6 +78,7 @@ struct Action {
 	Filter filter;
 	float damage;
 	float heal;
+	Type type;
 
 	void Apply(Member* other) {
 		other->data.health += owner->data.power * heal;
