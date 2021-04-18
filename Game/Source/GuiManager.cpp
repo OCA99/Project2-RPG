@@ -35,7 +35,7 @@ bool GuiManager::Update(float dt)
 
 bool GuiManager::PostUpdate(float dt)
 {
-	DrawAll();
+		DrawAll();
 
 	return true;
 }
