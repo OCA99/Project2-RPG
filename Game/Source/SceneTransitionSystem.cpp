@@ -22,14 +22,8 @@ void SceneTransitionSystem::tick(ECS::World* world, float dt)
 		fullscreen.h = h;
 
 		alpha -= sceneFade->speed * dt * direction;
-		if (alpha < 0 && direction == 1)
-		{
-			alpha = 0;
 
-			hasFinished = true;
-		}
-
-		if (alpha > 255 && direction == -1)
+		if (alpha > 0 && direction == -1)
 		{
 			direction *= -1;
 			alpha = 255;
@@ -41,5 +35,11 @@ void SceneTransitionSystem::tick(ECS::World* world, float dt)
 			hasSounded = true;
 		}
 		app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
+
+		if (alpha <= 0)
+		{
+			world->destroy(entity, true);
+			hasFinished = true;
+		}
 		});
 }
