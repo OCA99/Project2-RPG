@@ -109,7 +109,7 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 
-	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO) {
+	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
 
 		if (menu)
 		{
@@ -242,6 +242,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 	case 1:
 		app->ui->DestroyAllGuiControls();
 		app->RequestLoad();
+		app->scene->menu = 0;
 		break;
 	case 3:
 		return false;
@@ -250,7 +251,6 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		menu = 0;
 		break;
 	case 5:
-		app->ui->DestroyAllGuiControls();
 		app->RequestSave();
 		break;
 	case 7:
