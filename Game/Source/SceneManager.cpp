@@ -319,6 +319,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		app->ui->DestroyAllGuiControls();
 		s = (Scene*)(new MapScene("Town.tmx"));
 		app->scene->sceneToBeLoaded = s;
+		app->scene->playerPositionToBeLoaded = fPoint(30, 250);
 		break;
 	case 1:
 		app->ui->DestroyAllGuiControls();
