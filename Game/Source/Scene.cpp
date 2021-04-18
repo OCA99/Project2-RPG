@@ -17,7 +17,7 @@
 #include "BattleManager.h"
 #include "PartyManager.h"
 #include "BattleMemberSystem.h"
-#include "MenuFadeSystem,.h"
+#include "MenuFadeSystem.h"
 
 #include "BattleMemberFactory.h"
 
