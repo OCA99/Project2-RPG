@@ -132,10 +132,10 @@ void MenuScene::Load()
 	e->assign<Position>(fPoint(0, -105));
 	e->assign<Sprite>(t, 0.5f, 1);
 
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0);
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1);
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2);
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3);
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0, 0, 0, 0, 255);
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1, 229, 56, 59, 255);
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2, 252, 163, 17, 255);
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3, 239, 131, 84, 255);
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/start.png");
 	e = world->create();
