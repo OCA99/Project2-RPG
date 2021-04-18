@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="66" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="66" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="1">
  <properties>
   <property name="mapId" type="int" value="1"/>
  </properties>
  <tileset firstgid="1" name="Serene_Village_16x16" tilewidth="16" tileheight="16" tilecount="836" columns="19">
-  <image source="../Environment/Serene_Village_16x16.png" width="304" height="714"/>
+  <image source="../Environment/serene_village_16x16.png" width="304" height="714"/>
  </tileset>
  <tileset firstgid="837" name="Serene_Village_16x16" tilewidth="16" tileheight="16" tilecount="836" columns="19">
-  <image source="../Environment/Serene_Village_16x16.png" width="304" height="714"/>
+  <image source="../Environment/serene_village_16x16.png" width="304" height="714"/>
  </tileset>
  <tileset firstgid="1673" name="colors" tilewidth="16" tileheight="16" tilecount="6" columns="6">
   <image source="../collider_colors.png" width="96" height="16"/>
