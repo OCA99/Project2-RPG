@@ -69,6 +69,9 @@
     <ClCompile Include="Source\MenuFadeSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneTransitionSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -188,7 +191,10 @@
     <ClInclude Include="Source\BattleMemberSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MenuFadeSystem,.h">
+    <ClInclude Include="Source\MenuFadeSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneTransitionSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>

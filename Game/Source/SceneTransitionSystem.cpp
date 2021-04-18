@@ -1,4 +1,4 @@
-#include "MenuFadeSystem.h"
+#include "SceneTransitionSystem.h"
 #include "Render.h"
 #include "Window.h"
 #include "SceneManager.h"
@@ -9,9 +9,9 @@
 
 #include <algorithm>
 
-void MenuFadeSystem::tick(ECS::World* world, float dt)
+void SceneTransitionSystem::tick(ECS::World* world, float dt)
 {
-	world->each<MenuFade>([&](ECS::Entity* entity, ECS::ComponentHandle<MenuFade> MenuFade) {
+	world->each<SceneFade>([&](ECS::Entity* entity, ECS::ComponentHandle<SceneFade> sceneFade) {
 		GamePad& pad = app->input->pads[0];
 		SDL_Rect fullscreen;
 		fullscreen.x = 0;
@@ -21,13 +21,7 @@ void MenuFadeSystem::tick(ECS::World* world, float dt)
 		fullscreen.w = w;
 		fullscreen.h = h;
 
-		
-		/*if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || pad.a == true && hasFinished == true) {
-			direction = 1;
-			alpha = 255;
-		}*/
-
-		alpha -= MenuFade->speed * dt * direction;
+		alpha -= sceneFade->speed * dt * direction;
 		if (alpha < 0 && direction == 1)
 		{
 			alpha = 0;
@@ -46,7 +40,6 @@ void MenuFadeSystem::tick(ECS::World* world, float dt)
 			//app->audio->PlayFx(3, 0);
 			hasSounded = true;
 		}
-
 		app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
 		});
 }
