@@ -118,6 +118,7 @@ private:
 
 public:
 	float dt;
+	float volume;
 
 public:
 

@@ -14,7 +14,9 @@ public:
 
 	int direction = 1;
 	float alpha = 450.0f;
-
+	float speed = 12.0f;
 	bool hasSounded = false;
 	bool hasFinished = false;
+
+
 };

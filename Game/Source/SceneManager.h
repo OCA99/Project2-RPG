@@ -64,6 +64,11 @@ public:
 	bool menu = false;
 	bool buttons = false;
 
+	float alpha = 0;
+	float speed = 200.0f;
+	float volSpeed = 2.0f;
+	bool isFinished = false;
+
 private:
 
 	
