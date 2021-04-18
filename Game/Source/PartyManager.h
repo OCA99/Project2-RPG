@@ -92,6 +92,8 @@ struct Action {
 			other->state = Member::State::DEAD;
 		}
 
+		if (other->data.health > other->data.maxHealth)
+			other->data.health = other->data.maxHealth;
 		std::cout << owner->name << ": + -> " << owner->data.power * heal << ", - -> " << owner->data.power * damage << " to " << other->name << std::endl;
 		if (other->data.dead)
 			std::cout << other->name << " is dead" << std::endl;

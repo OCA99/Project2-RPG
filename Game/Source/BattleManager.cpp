@@ -78,7 +78,10 @@ bool BattleManager::Update(float dt)
 		currentMember += 1;
 
 	if (currentMember == p->list.size())
+	{
 		end = true;
+		return true;
+	}
 
 	if (pendingWaitTime > 0)
 	{
@@ -86,7 +89,7 @@ bool BattleManager::Update(float dt)
 		return true;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && currentParty == 0)
+	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->pads[0].a == true) && currentParty == 0)
 	{
 		if (selecting == Selecting::MEMBER)
 			selecting = Selecting::ACTION;
@@ -105,40 +108,56 @@ bool BattleManager::Update(float dt)
 						targets.push_back(o->list.at(i));
 				}
 			}
+			else if (a->filter == Action::Filter::ALLY)
+			{
+				for (int i = 0; i < p->list.size(); i++)
+				{
+					if (!p->list.at(i)->data.dead)
+						targets.push_back(p->list.at(i));
+				}
+			}
 		}
 		else if (selecting == Selecting::TARGET)
 		{
 			DoAction();
-			WaitTime(4.0f);
+			WaitTime(2.0f);
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentParty == 0)
+	if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || app->input->pads[0].l_y > 0.0f || app->input->pads[0].down == true) && currentParty == 0)
 	{
 		if (selecting == Selecting::ACTION)
-			currentAction += 1;
-		if (selecting == Selecting::TARGET)
-			currentTarget += 1;
-		if (currentAction == p->list.at(currentMember)->data.actions.size()) currentAction -= 1;
-		if (currentTarget == o->list.size()) currentTarget -= 1;
-		LOG("%d, %d", currentAction, currentTarget);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentParty == 0)
-	{
-		if (selecting == Selecting::ACTION)
+		{
 			currentAction -= 1;
+			if (currentAction < 0) currentAction = 0;
+		}
 		if (selecting == Selecting::TARGET)
-			currentTarget -= 1;
-		if (currentAction < 0) currentAction = 0;
-		if (currentTarget < 0) currentTarget = 0;
-		LOG("%d, %d", currentAction, currentTarget);
+		{
+			currentTarget += 1;
+			if (currentTarget == targets.size()) currentTarget -= 1;
+		}
+		LOG("Deez %d, %d", currentAction, currentTarget);
 	}
 
-	if (currentParty == 1)
+	if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || app->input->pads[0].l_y < 0.0f || app->input->pads[0].up == true) && currentParty == 0)
+	{
+		if (selecting == Selecting::ACTION)
+		{
+			currentAction += 1;
+			if (currentAction == p->list.at(currentMember)->data.actions.size()) currentAction -= 1;
+		}
+		if (selecting == Selecting::TARGET)
+		{
+			currentTarget -= 1;
+			if (currentTarget < 0) currentTarget = 0;
+		}
+		LOG("Nuts %d, %d", currentAction, currentTarget);
+	}
+
+	if (currentParty == 1 && pendingWaitTime <= 0)
 	{
 		PlayAITurn();
-		WaitTime(4.0f);
+		WaitTime(2.0f);
 	}
 
 	return true;
@@ -176,7 +195,7 @@ void BattleManager::EndBattle()
 	app->scene->playerPositionToBeLoaded.x = 944;
 	app->scene->playerPositionToBeLoaded.y = 240;
 
-	app->party->CleanUp();
+	app->party->RemoveParties();
 
 	end = false;
 }
@@ -205,7 +224,14 @@ void BattleManager::DoAction()
 		t = targets.at(currentTarget);
 	else
 	{
-		t = app->party->allyParty->list.at(currentTarget);
+		if (a->type == Action::Type::ATTACK)
+		{
+			t = app->party->allyParty->list.at(currentTarget);
+		}
+		else if (a->type == Action::Type::DEFENSE)
+		{
+			t = app->party->enemyParty->list.at(currentTarget);
+		}
 	}
 
 	a->Apply(t);
@@ -224,8 +250,6 @@ void BattleManager::DoAction()
 		else currentParty = 0;
 		currentMember = 0;
 	}
-
-	CheckBattleEnd();
 }
 
 void BattleManager::CheckBattleEnd()
@@ -354,7 +378,7 @@ void BattleManager::Draw()
 		std::transform(name.begin(), name.end(), name.begin(), ::toupper);
 		app->fonts->BlitText(x + 30, y + 20, 1, name.c_str());
 		int p = 10 - std::floor(party->list.at(i)->data.health / party->list.at(i)->data.maxHealth * 11.0f);
-		if (p == -1) p = 0;
+		if (p < 0) p = 0;
 		if (p > 10) p = 10;
 		SDL_Rect section = SDL_Rect({ 0, 30 * p, 300, 30 });
 		app->render->DrawTexture(healthBars, x + 250, y + 15, &section, 0.5f);
@@ -382,24 +406,16 @@ void BattleManager::Draw()
 
 	if (selecting == Selecting::TARGET && currentParty == 0) {
 		for (int i = 0; i < party->list.size(); i++) {
-			for (int j = 0; j < targets.size(); j++) {
-				if (j == currentTarget) {
-					if (party->list.at(i) == targets.at(j)) {
-						app->render->DrawTexture(selectionArrowGreen, 75, 30 + i * 80.5f, NULL, .5f);
-					}
-				}
+			if (party->list.at(i) == targets.at(currentTarget)) {
+				app->render->DrawTexture(selectionArrowGreen, 75, 30 + i * 80.5f, NULL, .5f);
 			}
 		}
 
 		party = app->party->enemyParty;
 
 		for (int i = 0; i < party->list.size(); i++) {
-			for (int j = 0; j < targets.size(); j++) {
-				if (j == currentTarget) {
-					if (party->list.at(i) == targets.at(j)) {
-						app->render->DrawTexture(selectionArrowRed, 495, 10 + i * 80.5f, NULL, .5f);
-					}
-				}
+			if (party->list.at(i) == targets.at(currentTarget)) {
+				app->render->DrawTexture(selectionArrowRed, 495, 10 + i * 80.5f, NULL, .5f);
 			}
 		}
 	}

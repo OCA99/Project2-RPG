@@ -250,32 +250,36 @@ void Party::RemoveMember(const std::string name)
 void PartyManager::InitializeParties()
 {
 	allyParty = new Party("ALLY PARTY");
-	Member* toisto = new Member("Toisto", PLAYER1, 10.0f, 20.0f, false);
+	Member* toisto = new Member("Toisto", PLAYER1, 120.0f, 20.0f, false);
 	allyParty->AddMember(toisto);
-	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 15.f, false);
+	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 25.f, false);
 	allyParty->AddMember(thyma);
 
-	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
+	Action* a = new Action("Punch", toisto, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
+	toisto->data.actions.push_back(a);
+	a = new Action("Medkit", toisto, Action::Filter::ALLY, 0, 2, Action::Type::DEFENSE);
 	toisto->data.actions.push_back(a);
 
-	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
+	a = new Action("Slash", thyma, Action::Filter::ENEMY, 1.2f, 0, Action::Type::ATTACK);
 	thyma->data.actions.push_back(a);
 
 	//allyParty->PrintPartyDescription();
 
 	enemyParty = new Party("ENEMY PARTY");
-	Member* kmush = new Member("King Mush", SHROOM1, 100.0f, 20.0f, false);
-	Member* mush = new Member("Lil Mush", SHROOM2, 100.0f, 15.0f, false);
-	Member* bones = new Member("Mr.Bones", SKELETON, 100.0f, 12.0f, false);
+	Member* kmush = new Member("King Mush", SHROOM1, 60.0f, 18.0f, false);
+	Member* mush = new Member("Lil Mush", SHROOM2, 40.0f, 15.0f, false);
+	Member* bones = new Member("Mr.Bones", SKELETON, 50.0f, 12.0f, false);
 	enemyParty->AddMember(kmush);
 	enemyParty->AddMember(bones);
 	enemyParty->AddMember(mush);
 
 	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
 	kmush->data.actions.push_back(a);
-	a = new Action("punch", mush, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
+	a = new Action("punch", mush, Action::Filter::ALLY, 0, 1, Action::Type::DEFENSE);
 	mush->data.actions.push_back(a);
-	a = new Action("punch", bones, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
+	a = new Action("cure", mush, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
+	mush->data.actions.push_back(a);
+	a = new Action("punch", bones, Action::Filter::ENEMY, 1.3f, 0, Action::Type::ATTACK);
 	bones->data.actions.push_back(a);
 
 
