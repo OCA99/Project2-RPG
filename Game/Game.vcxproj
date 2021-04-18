@@ -123,6 +123,7 @@
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\SceneTransitionSystem.cpp" />
     <ClCompile Include="Source\SpriteSystem.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
@@ -149,7 +150,7 @@
     <ClInclude Include="Source\HumanoidSystem.h" />
     <ClInclude Include="Source\LogoFadeSystem.h" />
     <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\MenuFadeSystem,.h" />
+    <ClInclude Include="Source\MenuFadeSystem.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\NPCMovementSystem.h" />
     <ClInclude Include="Source\PartyManager.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Components.h" />
+    <ClInclude Include="Source\SceneTransitionSystem.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\SpriteSystem.h" />
     <ClInclude Include="Source\Textures.h" />
