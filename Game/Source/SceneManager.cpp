@@ -43,7 +43,6 @@ bool SceneManager::Awake()
 bool SceneManager::Start()
 {
 	//MapScene* s = new MapScene("Town.tmx");
-	
 
 	LogoScene* s = new LogoScene();
 	menuTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_menu.png");
@@ -59,6 +58,8 @@ bool SceneManager::Start()
 
 	sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
+
+	startPressed = true;
 
 	return true;
 }
@@ -136,6 +137,7 @@ bool SceneManager::Update(float dt)
 bool SceneManager::PostUpdate(float dt)
 {
 	bool ret = true;
+	GamePad& pad = app->input->pads[0];
 
 	currentScene->world->tick(dt);
 
@@ -149,12 +151,14 @@ bool SceneManager::PostUpdate(float dt)
 
 	app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true)
 	{
 		
-		menu = !menu;
-		
+		if(startPressed)menu = !menu;
+		startPressed = false;
 	}
+
+	if (pad.start == false) startPressed = true;
 	//ret = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
