@@ -4,10 +4,10 @@
   <property name="mapId" type="int" value="0"/>
  </properties>
  <tileset firstgid="1" name="Serene_Village_16x16" tilewidth="16" tileheight="16" tilecount="836" columns="19">
-  <image source="../Environment/Serene_Village_16x16.png" width="304" height="714"/>
+  <image source="../Environment/serene_village_16x16.png" width="304" height="714"/>
  </tileset>
  <tileset firstgid="837" name="Serene_Village_16x16" tilewidth="16" tileheight="16" tilecount="836" columns="19">
-  <image source="../Environment/Serene_Village_16x16.png" width="304" height="714"/>
+  <image source="../Environment/serene_village_16x16.png" width="304" height="714"/>
  </tileset>
  <tileset firstgid="1673" name="collider_colors" tilewidth="16" tileheight="16" tilecount="6" columns="6">
   <image source="../collider_colors.png" trans="c634ff" width="96" height="16"/>

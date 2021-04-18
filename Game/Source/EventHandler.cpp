@@ -5,6 +5,7 @@
 #include "ECS.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "SceneTransitionSystem.h"
 
 #include <string>
 
@@ -14,6 +15,7 @@ void EventHandler::FireEvent(MapEvent* e)
 
 	if (type == "changeArea")
 	{
+
 		MapScene* s = new MapScene(e->attributes->at("target").c_str());
 
 		int playerX = std::stoi(e->attributes->at("playerX"));

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="65" height="56" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1">
  <tileset firstgid="1" name="Tileset - Sewers 16x16" tilewidth="16" tileheight="16" tilecount="88" columns="8">
-  <image source="../Environment/Tileset - Sewers 16x16.png" width="128" height="176"/>
+  <image source="../Environment/tileset - sewers 16x16.png" width="128" height="176"/>
  </tileset>
  <tileset firstgid="89" name="Tileset - Complete 16x16" tilewidth="16" tileheight="16" tilecount="368" columns="8">
-  <image source="../Environment/Tileset - Complete 16x16.png" width="128" height="736"/>
+  <image source="../Environment/tileset - complete 16x16.png" width="128" height="736"/>
  </tileset>
  <layer id="1" name="ground, walls &amp; water" width="65" height="56">
   <data>
