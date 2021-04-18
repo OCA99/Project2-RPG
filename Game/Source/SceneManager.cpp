@@ -40,6 +40,14 @@ bool SceneManager::Start()
 	MapScene* s = new MapScene("Town.tmx");
 
 	//LogoScene* s = new LogoScene();
+	menuTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_menu.png");
+
+	pauseTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_text.png");
+	continueTex = app->tex->Load("Assets/Textures/UI/PauseMenu/continue_text.png");
+	saveTex = app->tex->Load("Assets/Textures/UI/PauseMenu/save_text.png");
+	loadTex = app->tex->Load("Assets/Textures/UI/PauseMenu/load_text.png");
+	optionTex = app->tex->Load("Assets/Textures/UI/PauseMenu/option_text.png");
+	mainTex = app->tex->Load("Assets/Textures/UI/PauseMenu/mainmenu_text.png");
 
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
 
@@ -77,8 +85,13 @@ bool SceneManager::PostUpdate(float dt)
 
 	currentScene->world->tick(dt);
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		
+		menu = !menu;
+		
+	}
+	//ret = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
@@ -92,6 +105,16 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 
+	if (menu)
+	{
+		app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(pauseTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(continueTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(saveTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(loadTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+	}
 	return ret;
 }
 
