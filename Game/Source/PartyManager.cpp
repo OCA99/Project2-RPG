@@ -272,10 +272,22 @@ void PartyManager::InitializeParties()
 
 	enemyParty = new Party("ENEMY PARTY");
 	Member* kmush = new Member("King Mush", SHROOM1, 100.0f, 20.0f, false);
+	Member* mush = new Member("Lil Mush", SHROOM2, 100.0f, 15.0f, false);
+	Member* bones = new Member("Mr.Bones", SKELETON, 100.0f, 12.0f, false);
 	enemyParty->AddMember(kmush);
+	enemyParty->AddMember(bones);
+	enemyParty->AddMember(mush);
 
 	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0);
 	kmush->data.actions.Add(a);
+	a = new Action("punch", mush, Action::Filter::ENEMY, 1, 0);
+	mush->data.actions.Add(a);
+	a = new Action("punch", bones, Action::Filter::ENEMY, 1, 0);
+	bones->data.actions.Add(a);
+
+
+
+
 }
 
 ListItem<Member*>* Party::FindByName(const std::string name) const

@@ -15,6 +15,10 @@
 #include "NPCMovementSystem.h"
 #include "LogoFadeSystem.h"
 #include "BattleManager.h"
+#include "PartyManager.h"
+#include "BattleMemberSystem.h"
+
+#include "BattleMemberFactory.h"
 
 #include "PlayerFactory.h"
 #include "NPCFactory.h"
@@ -158,6 +162,8 @@ void BattleScene::Load()
 {
 	Scene::Load();
 	world->registerSystem(new SpriteSystem());
+	world->registerSystem(new BattleMemberSystem());
+	world->registerSystem(new AnimatorSystem());
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/battle_forest.png");
 	ECS::Entity* e = world->create();
@@ -165,11 +171,14 @@ void BattleScene::Load()
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
 
-	//Enemy Sprite
-	t = app->tex->Load("Assets/Textures/Battle/tmp.png");
-	e = world->create();
-	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
-
 	app->battle->StartBattle();
+	for (int i = 0; i < app->party->allyParty->list.Count(); i++)
+	{
+		BattleMemberFactory::Create(world, fPoint(40.0f, 50 + i * 80.5f), app->party->allyParty->list.At(i)->data);
+	}
+	for (int i = 0; i < app->party->enemyParty->list.Count(); i++)
+	{
+		BattleMemberFactory::Create(world, fPoint(480.0f, 10 + i * 80.5f), app->party->enemyParty->list.At(i)->data);
+	}
+	
 }

@@ -33,11 +33,21 @@ struct Data {
 	}
 };
 
+
 struct Member {
 	//Sprite sprite;
+	enum class State
+	{
+		IDLE,
+		ATTACKING,
+		HURT,
+		DEAD
+	};
+
 	std::string name;
 	Type type;
 	Data data;
+	State state;
 
 	Member();
 	Member(std::string name, Type type);
@@ -66,12 +76,20 @@ struct Action {
 	void Apply(Member* other) {
 		other->data.health += owner->data.power * heal;
 		other->data.health -= owner->data.power * damage;
+		
+		owner->state = Member::State::ATTACKING;
+		other->state = Member::State::HURT;
 
-		if (other->data.health <= 0) other->data.dead = true;
+		if (other->data.health <= 0) {
+			other->data.dead = true;
+			other->state = Member::State::DEAD;
+		}
 
 		std::cout << owner->name << ": + -> " << owner->data.power * heal << ", - -> " << owner->data.power * damage << " to " << other->name << std::endl;
 		if (other->data.dead)
 			std::cout << other->name << " is dead" << std::endl;
+
+
 	}
 };
 
