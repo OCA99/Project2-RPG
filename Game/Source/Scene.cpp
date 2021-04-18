@@ -17,6 +17,7 @@
 #include "BattleManager.h"
 #include "PartyManager.h"
 #include "BattleMemberSystem.h"
+#include "MenuFadeSystem,.h"
 
 #include "BattleMemberFactory.h"
 
@@ -109,6 +110,8 @@ void LogoScene::Load()
 
 	e = world->create();
 	e->assign<LogoFade>(70);
+	app->audio->PlayFx(1, 0);
+
 }
 
 void MenuScene::Load()
@@ -116,6 +119,7 @@ void MenuScene::Load()
 	Scene::Load();
 
 	world->registerSystem(new SpriteSystem());
+	world->registerSystem(new MenuFadeSystem());
 
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_blacksmith.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
@@ -127,15 +131,17 @@ void MenuScene::Load()
 	e->assign<Sprite>(t, 0.5f);
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/game_title.png");
-	app->audio->PlayFx(3, 0);
+	//app->audio->PlayFx(3, 0);
 	e = world->create();
 	e->assign<Position>(fPoint(0, -105));
+	e->assign<MenuFade>(70);
 	e->assign<Sprite>(t, 0.5f, 1);
 
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3);
+
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/start.png");
 	e = world->create();
@@ -160,6 +166,9 @@ void MenuScene::Load()
 
 void BattleScene::Load()
 {
+	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_battle.wav";
+	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
+
 	Scene::Load();
 	world->registerSystem(new SpriteSystem());
 	world->registerSystem(new BattleMemberSystem());

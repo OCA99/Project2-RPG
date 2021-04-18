@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneManager.h"
+#include "App.h"
 
 #include "Point.h"
 #include "SString.h"
@@ -56,6 +57,8 @@ public:
 
 	virtual bool Draw(Render* render)
 	{
+
+
 		return true;
 	}
 

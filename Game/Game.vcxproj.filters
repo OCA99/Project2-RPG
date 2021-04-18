@@ -66,6 +66,9 @@
     <ClCompile Include="Source\BattleMemberSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MenuFadeSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -183,6 +186,9 @@
       <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Source\BattleMemberSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MenuFadeSystem,.h">
       <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,6 +16,10 @@
 #include "Defs.h"
 #include "Log.h"
 
+
+#include "SDL_mixer/include/SDL_mixer.h"
+
+
 SceneManager::SceneManager() : Module()
 {
 	name.Create("scene");
@@ -105,21 +109,37 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 
-	if (menu)
-	{
-		app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		app->render->DrawTexture(pauseTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		app->render->DrawTexture(continueTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		app->render->DrawTexture(saveTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		app->render->DrawTexture(loadTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO) {
 
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164/2, 120, 32 }), 4);//continue
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271/2, 120, 32 }), 5);//save
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381/2, 120, 32 }), 1);//load
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491/2, 120, 32 }), 7);//options
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601/2, 120, 32 }), 8);//back to menu
+		if (menu)
+		{
+			app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(pauseTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(continueTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(saveTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(loadTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			if (buttons == false)
+			{
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164 / 2, 120, 32 }), 4);//continue
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271 / 2, 120, 32 }), 5);//save
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381 / 2, 120, 32 }), 1);//load
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491 / 2, 120, 32 }), 7);//options
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601 / 2, 120, 32 }), 8);//back to menu
+				buttons = true;
+			}
+
+			Mix_VolumeMusic(25);
+
+		}
+
+		if (menu == false)
+		{
+			Mix_VolumeMusic(100);
+			app->ui->DestroyAllGuiControls();
+			buttons = false;
+		}
 	}
 	return ret;
 }
