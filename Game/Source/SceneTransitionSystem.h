@@ -12,7 +12,7 @@ public:
 
 	virtual void tick(ECS::World* world, float dt) override;
 
-	int direction = -1;
+	int direction = 1;
 	float alpha = 450.0f;
 
 	bool hasSounded = false;
