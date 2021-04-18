@@ -17,7 +17,8 @@
 #include "BattleManager.h"
 #include "PartyManager.h"
 #include "BattleMemberSystem.h"
-#include "MenuFadeSystem,.h"
+#include "MenuFadeSystem.h"
+#include "SceneTransitionSystem.h"
 
 #include "BattleMemberFactory.h"
 
@@ -48,8 +49,13 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new InputSystem());
 	world->registerSystem(new CameraSystem());
 	world->registerSystem(new NPCMovementSystem());
+	world->registerSystem(new SceneTransitionSystem());
+
+	ECS::Entity* e = world->create();
+
 
 	std::string s = filename;
+	e->assign<SceneFade>(150);
 	
 	if (s == "Town.tmx")
 	{
@@ -103,6 +109,8 @@ void LogoScene::Load()
 	app->audio->LoadFx("Assets/Audio/Fx/title.ogg");//3
 	app->audio->LoadFx("Assets/Audio/Fx/action_door.ogg");//4
 	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//5
+	app->audio->LoadFx("Assets/Audio/Fx/menu_travel.ogg");//6
+	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//7
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
 
@@ -137,6 +145,7 @@ void MenuScene::Load()
 	e->assign<MenuFade>(70);
 	e->assign<Sprite>(t, 0.5f, 1);
 
+
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2);
@@ -162,6 +171,8 @@ void MenuScene::Load()
 	e = world->create();
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
+
+	app->render->camera.x = app->render->camera.y = 0;
 }
 
 void BattleScene::Load()

@@ -231,13 +231,13 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 
 bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 {
-	MapScene* s;
+	Scene* s;
 	switch (control->id)
 	{
 	case 0:
 		app->ui->DestroyAllGuiControls();
-		s = new MapScene("Town.tmx");
-		app->scene->sceneToBeLoaded = (Scene*)s;
+		s = (Scene*)(new MapScene("Town.tmx"));
+		app->scene->sceneToBeLoaded = s;
 		break;
 	case 1:
 		app->ui->DestroyAllGuiControls();
@@ -257,6 +257,10 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		//option
 		break;
 	case 8:
+		app->ui->DestroyAllGuiControls();
+		s = (Scene*)(new MenuScene());
+		sceneToBeLoaded = s;
+		menu = false;
 		//back to main
 		break;
 	default:

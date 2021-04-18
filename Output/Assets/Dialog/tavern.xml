@@ -15,7 +15,7 @@
 			<line speaker="tlady" value="You will have to settle with some fried chips"></line>
 		</option>
 		<option value="Bean stew">
-			<line speaker="tlady" value="Alright!"></line>
+			<line speaker="tlady" value="Allright!"></line>
 		</option>
 		<option value="Seafood Soup">
 			<line speaker="tlady" value="Does this look like a palace?"></line>
