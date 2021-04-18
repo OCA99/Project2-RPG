@@ -1,3 +1,37 @@
+Title: [Serene Village Revamped](https://limezu.itch.io/serenevillagerevamped)
+Author: [LimeZu](https://limezu.itch.io/)
+License: Published under [CC0 License](https://creativecommons.org/licenses/by/4.0/)
+
+
+Title: [Fungus Cave](https://limezu.itch.io/fungus-cave)
+Author: [LimeZu](https://limezu.itch.io/)
+License: Published under [CC0 License](https://creativecommons.org/licenses/by/4.0/)
+
+
+Title: [Modern Interiors](https://limezu.itch.io/moderninteriors)
+Author: [LimeZu](https://limezu.itch.io/)
+License: Complete version LICENSE 
+
+- You CAN use the asset in any not commercial/commercial project
+- You CAN'T resell or distribute the asset to others
+- You CAN'T edit and resell the asset to others
+- Credits are  appreciated (https://limezu.itch.io/)
+
+
+Title: [16*16 Pixel Art Graveyard Tileset](https://angrysnail.itch.io/pixel-art-graveyard-tileset?download)
+Author: [angrysnail](!https://angrysnail.itch.io/)
+License: Published under [CC0 License](https://creativecommons.org/licenses/by/4.0/)
+
+
+Title: [Super Retro World](https://gif-superretroworld.itch.io/interior-pack)
+Author: [Gif](https://gif-superretroworld.itch.io/)
+License: Published under [CC0 License](https://creativecommons.org/licenses/by/4.0/)
+
+
+Disclaimer: the character sprites were created by our art team
+
+
+Font License:
 Shareware/ Font License
 
 Pixel Sagas Freeware Fonts EULA (End User License Agreement) and Software Inclusion Agreement
@@ -45,3 +79,4 @@ Should the user have any questions concerning this document or you desire to con
 Governing Law
 
 This agreement is governed by and subject to the laws of the United States of America.
+
