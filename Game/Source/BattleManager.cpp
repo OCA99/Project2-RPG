@@ -219,7 +219,7 @@ void BattleManager::DoAction()
 	Member* m = p->list.at(currentMember);
 	Action* a = m->data.actions.at(currentAction);
 
-	Member* t;
+	Member* t = nullptr;
 	if (!targets.empty())
 		t = targets.at(currentTarget);
 	else
