@@ -66,7 +66,7 @@ public:
 
 	float alpha = 0;
 	float speed = 200.0f;
-	float volSpeed = 2.0f;
+	float volSpeed = 50.0f;
 	bool isFinished = false;
 
 	bool startPressed;
