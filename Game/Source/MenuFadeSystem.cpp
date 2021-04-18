@@ -1,4 +1,4 @@
-#include "MenuFadeSystem,.h"
+#include "MenuFadeSystem.h"
 #include "Render.h"
 #include "Window.h"
 #include "SceneManager.h"
