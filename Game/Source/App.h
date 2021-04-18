@@ -119,6 +119,8 @@ private:
 public:
 	float dt;
 	float volume;
+	bool volumeUp = false;
+	bool volumeDown = false;
 
 public:
 

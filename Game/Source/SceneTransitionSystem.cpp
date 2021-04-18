@@ -31,9 +31,13 @@ void SceneTransitionSystem::tick(ECS::World* world, float dt)
 		}
 
 		alpha -= sceneFade->speed * dt * direction;
-		app->volume += speed * dt;
-		if (app->volume > 100) app->volume = 100;
-		Mix_VolumeMusic(app->volume);
+		//if (app->volume > 100 && app->volumeUp == false)
+		//{
+		//	app->volume = 100;
+		//	app->volume += speed * dt;
+
+		//}
+		//Mix_VolumeMusic(app->volume);
 
 
 		if (alpha > 0 && direction == -1)
@@ -43,7 +47,7 @@ void SceneTransitionSystem::tick(ECS::World* world, float dt)
 		}
 		app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
 
-		if (alpha <= 0)
+		if (alpha <= 10)
 		{
 			world->destroy(entity, true);
 		}
