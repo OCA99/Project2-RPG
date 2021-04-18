@@ -35,8 +35,12 @@ bool GuiManager::Update(float dt)
 
 bool GuiManager::PostUpdate(float dt)
 {
-	DrawAll();
+	if (app->debug->bounds)
+		ChangeColorToAll(SDL_Color{ 163, 206, 241, 50 }); 
+	else
+		//ChangeColorToAll(SDL_Color{ 1, 1, 1, 50 });
 
+	DrawAll();
 	return true;
 }
 
@@ -124,5 +128,13 @@ void GuiManager::DrawAll()
 	for (int i = 0; i < controls.Count(); i++)
 	{
 		controls[i]->Draw(app->render);
+	}
+}
+
+void GuiManager::ChangeColorToAll(SDL_Color& color)
+{
+	for (int i = 0; i < controls.Count(); i++)
+	{
+		controls[i]->color =  color;
 	}
 }
