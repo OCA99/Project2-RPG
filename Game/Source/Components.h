@@ -273,6 +273,29 @@ struct LogoFade {
 	float speed;
 };
 
+struct MenuFade
+{
+	MenuFade(float speed) : speed(speed) {}
+
+	float speed;
+}; 
+
+struct SceneFade
+{
+	SceneFade(float speed) : speed(speed) {}
+
+	float speed;
+};
+
+struct Member;
+
+struct BattleMember
+{
+	BattleMember(Member* member) : member(member) {}
+
+	Member* member;
+};
+
 /*struct BattleTrigger {
 	BattleTrigger(SDL_Rect rect) : rect(rect) {
 

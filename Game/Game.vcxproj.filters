@@ -63,6 +63,15 @@
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\PartyManager.cpp" />
     <ClCompile Include="Source\BattleManager.cpp" />
+    <ClCompile Include="Source\BattleMemberSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MenuFadeSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneTransitionSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -176,6 +185,18 @@
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\PartyManager.h" />
     <ClInclude Include="Source\BattleManager.h" />
+    <ClInclude Include="Source\BattleMemberFactory.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BattleMemberSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MenuFadeSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneTransitionSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

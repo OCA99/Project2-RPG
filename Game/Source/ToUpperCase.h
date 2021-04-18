@@ -1,4 +1,5 @@
-#pragma once
+#ifndef upper
+
 
 #include <string>
 
@@ -18,3 +19,5 @@ std::string ToUpperCase(std::string input)
 
 	return output;
 }
+
+#endif // !upper

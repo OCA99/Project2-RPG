@@ -22,22 +22,33 @@ struct Data {
 	//Numero en la Party
 	int id;
 	float health;
+	float maxHealth;
 	float power;
 	bool dead = false;
-	List<Action*> actions;
+	std::vector<Action*> actions;
 
 	void CleanUp() {
-		for (int i = 0; i < actions.Count(); i++) {
-			delete actions.At(i)->data;
+		for (int i = 0; i < actions.size(); i++) {
+			delete actions.at(i);
 		}
 	}
 };
 
+
 struct Member {
 	//Sprite sprite;
+	enum class State
+	{
+		IDLE,
+		ATTACKING,
+		HURT,
+		DEAD
+	};
+
 	std::string name;
 	Type type;
 	Data data;
+	State state;
 
 	Member();
 	Member(std::string name, Type type);
@@ -66,24 +77,32 @@ struct Action {
 	void Apply(Member* other) {
 		other->data.health += owner->data.power * heal;
 		other->data.health -= owner->data.power * damage;
+		
+		owner->state = Member::State::ATTACKING;
+		other->state = Member::State::HURT;
 
-		if (other->data.health <= 0) other->data.dead = true;
+		if (other->data.health <= 0) {
+			other->data.dead = true;
+			other->state = Member::State::DEAD;
+		}
 
 		std::cout << owner->name << ": + -> " << owner->data.power * heal << ", - -> " << owner->data.power * damage << " to " << other->name << std::endl;
 		if (other->data.dead)
 			std::cout << other->name << " is dead" << std::endl;
+
+
 	}
 };
 
 struct Party {
 
-	List<Member*> list;
+	std::vector<Member*> list;
 	std::string partyName;
 
 	//Functions
 	Party();
 	Party(std::string partyName);
-	Party(List<Member*>& list);
+	Party(std::vector<Member*>& list);
 	~Party();
 
 	void PrintMemberDescription(std::string name);
@@ -91,7 +110,7 @@ struct Party {
 	void AddMember(Member* member);
 	void RemoveMember(const std::string name);
 	//Find Member
-	ListItem<Member*>* FindByName(const std::string name) const;
+	Member* FindByName(const std::string name) const;
 
 };
 

@@ -35,7 +35,6 @@ bool GuiManager::Update(float dt)
 
 bool GuiManager::PostUpdate(float dt)
 {
-	if (app->debug->bounds)
 		DrawAll();
 
 	return true;
@@ -46,7 +45,7 @@ bool GuiManager::CleanUp()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	GuiControl* control = nullptr;
 
@@ -55,14 +54,26 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	case GuiControlType::BUTTON:
 		control = new GuiButton(id, bounds);
 		control->SetObserver(app->scene);
+		control->color.r = r;
+		control->color.g = g;
+		control->color.b = b;
+		control->color.a = a;
 		break;
 	case GuiControlType::CHECKBOX:
 		control = new GuiCheckBox(id, bounds);
 		control->SetObserver(app->scene);
+		control->color.r = r;
+		control->color.g = g;
+		control->color.b = b;
+		control->color.a = a;
 		break;
 	case GuiControlType::SLIDER:
 		control = new GuiSlider(id, bounds);
 		control->SetObserver(app->scene);//preguntar EDU que onda
+		control->color.r = r;
+		control->color.g = g;
+		control->color.b = b;
+		control->color.a = a;
 		break;
 
 	default: break;

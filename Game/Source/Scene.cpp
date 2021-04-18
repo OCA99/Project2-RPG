@@ -15,6 +15,12 @@
 #include "NPCMovementSystem.h"
 #include "LogoFadeSystem.h"
 #include "BattleManager.h"
+#include "PartyManager.h"
+#include "BattleMemberSystem.h"
+#include "MenuFadeSystem.h"
+#include "SceneTransitionSystem.h"
+
+#include "BattleMemberFactory.h"
 
 #include "PlayerFactory.h"
 #include "NPCFactory.h"
@@ -43,8 +49,13 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new InputSystem());
 	world->registerSystem(new CameraSystem());
 	world->registerSystem(new NPCMovementSystem());
+	world->registerSystem(new SceneTransitionSystem());
+
+	ECS::Entity* e = world->create();
+
 
 	std::string s = filename;
+	e->assign<SceneFade>(250);
 	
 	if (s == "Town.tmx")
 	{
@@ -66,9 +77,9 @@ void MapScene::Load(fPoint playerPosition)
 		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
-	else if (s == "NPC House.tmx")
+	else if (s == "Graveyard.tmx")
 	{
-		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
+		app->audio->songToBeLoaded = "Assets/Audio/Music/graveyard_main.ogg";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 
@@ -98,6 +109,8 @@ void LogoScene::Load()
 	app->audio->LoadFx("Assets/Audio/Fx/title.ogg");//3
 	app->audio->LoadFx("Assets/Audio/Fx/action_door.ogg");//4
 	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//5
+	app->audio->LoadFx("Assets/Audio/Fx/menu_travel.ogg");//6
+	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//7
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
 
@@ -105,6 +118,8 @@ void LogoScene::Load()
 
 	e = world->create();
 	e->assign<LogoFade>(70);
+	app->audio->PlayFx(1, 0);
+
 }
 
 void MenuScene::Load()
@@ -112,6 +127,7 @@ void MenuScene::Load()
 	Scene::Load();
 
 	world->registerSystem(new SpriteSystem());
+	world->registerSystem(new MenuFadeSystem());
 
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_blacksmith.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
@@ -123,15 +139,18 @@ void MenuScene::Load()
 	e->assign<Sprite>(t, 0.5f);
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/game_title.png");
-	app->audio->PlayFx(3, 0);
+	//app->audio->PlayFx(3, 0);
 	e = world->create();
 	e->assign<Position>(fPoint(0, -105));
+	e->assign<MenuFade>(70);
 	e->assign<Sprite>(t, 0.5f, 1);
+
 
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2);
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3);
+
 
 	t = app->tex->Load("Assets/Textures/UI/MainMenu/start.png");
 	e = world->create();
@@ -152,12 +171,19 @@ void MenuScene::Load()
 	e = world->create();
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
+
+	app->render->camera.x = app->render->camera.y = 0;
 }
 
 void BattleScene::Load()
 {
+	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_battle.wav";
+	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
+
 	Scene::Load();
 	world->registerSystem(new SpriteSystem());
+	world->registerSystem(new BattleMemberSystem());
+	world->registerSystem(new AnimatorSystem());
 
 	SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/battle_forest.png");
 	ECS::Entity* e = world->create();
@@ -165,11 +191,14 @@ void BattleScene::Load()
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f, 1);
 
-	//Enemy Sprite
-	t = app->tex->Load("Assets/Textures/Battle/tmp.png");
-	e = world->create();
-	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
-
 	app->battle->StartBattle();
+	for (int i = 0; i < app->party->allyParty->list.size(); i++)
+	{
+		BattleMemberFactory::Create(world, fPoint(40.0f, 50 + i * 80.5f), app->party->allyParty->list.at(i));
+	}
+	for (int i = 0; i < app->party->enemyParty->list.size(); i++)
+	{
+		BattleMemberFactory::Create(world, fPoint(480.0f, 20 + i * 80.5f), app->party->enemyParty->list.at(i));
+	}
+	
 }
