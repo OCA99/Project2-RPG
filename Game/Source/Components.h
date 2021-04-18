@@ -273,6 +273,13 @@ struct LogoFade {
 	float speed;
 };
 
+struct MenuFade
+{
+	MenuFade(float speed) : speed(speed) {}
+
+	float speed;
+};
+
 struct Member;
 
 struct BattleMember
