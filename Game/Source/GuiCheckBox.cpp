@@ -49,14 +49,14 @@ bool GuiCheckBox::Draw(Render* render)
 	case GuiControlState::DISABLED:
 	{
 		if (checked) render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
-		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
+		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a - 200, true, false);
 	} break;
 	case GuiControlState::NORMAL:
 	{
 		if (checked)
 		{
-			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//BG QUAD -
-			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//LITTLE QUAD - 
+			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a - 200, true, false);//BG QUAD -
+			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a + 100, true, false);//LITTLE QUAD - 
 		}
 		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 	} break;

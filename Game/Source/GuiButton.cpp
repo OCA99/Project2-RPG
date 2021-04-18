@@ -1,6 +1,7 @@
 #include "GuiButton.h"
 #include "Window.h"
 #include "App.h"
+#include "Audio.h"
 
 
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::BUTTON, id)
@@ -29,6 +30,7 @@ bool GuiButton::Update(Input* input, float dt)
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = GuiControlState::PRESSED;
+				app->audio->PlayFx(6, 0);
 			}
 
 			// If mouse button pressed -> Generate event!
@@ -37,7 +39,8 @@ bool GuiButton::Update(Input* input, float dt)
 				return NotifyObserver();
 			}
 		}
-		else state = GuiControlState::NORMAL;
+		else 
+			state = GuiControlState::NORMAL;
 	}
 	return true;
 }
@@ -51,13 +54,13 @@ bool GuiButton::Draw(Render* render)
 	switch (state)
 	{
 	case GuiControlState::DISABLED: 
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a - 200, true, false);
+		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a , true, false);
 		break;
 	case GuiControlState::FOCUSED:
 		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a + 100, true, false);
 		break;
 	case GuiControlState::NORMAL:
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a - 200, true, false);
+		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a , true, false);
 		break;
 	case GuiControlState::PRESSED:
 		render->DrawRectangle(drawBounds, color.r, color.g, color.b , color.a + 100, true, false);
