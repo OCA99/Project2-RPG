@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <string>
+#include <random>
 
 BattleManager::BattleManager()
 {
@@ -47,6 +48,8 @@ bool BattleManager::PreUpdate()
 
 bool BattleManager::Update(float dt)
 {
+	if (!isBattling) return true;
+
 	if (end)
 	{
 		endWait -= dt;
@@ -56,14 +59,6 @@ bool BattleManager::Update(float dt)
 
 		return true;
 	}
-
-	if (pendingWaitFrames > 0)
-	{
-		pendingWaitFrames -= 1;
-		return true;
-	}
-
-	if (!isBattling) return true;
 
 	Party* p;
 	Party* o;
@@ -85,7 +80,13 @@ bool BattleManager::Update(float dt)
 	if (currentMember == p->list.size())
 		end = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (pendingWaitTime > 0)
+	{
+		pendingWaitTime -= dt;
+		return true;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && currentParty == 0)
 	{
 		if (selecting == Selecting::MEMBER)
 			selecting = Selecting::ACTION;
@@ -106,10 +107,13 @@ bool BattleManager::Update(float dt)
 			}
 		}
 		else if (selecting == Selecting::TARGET)
+		{
 			DoAction();
+			WaitTime(4.0f);
+		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && currentParty == 0)
 	{
 		if (selecting == Selecting::ACTION)
 			currentAction += 1;
@@ -120,7 +124,7 @@ bool BattleManager::Update(float dt)
 		LOG("%d, %d", currentAction, currentTarget);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && currentParty == 0)
 	{
 		if (selecting == Selecting::ACTION)
 			currentAction -= 1;
@@ -129,6 +133,12 @@ bool BattleManager::Update(float dt)
 		if (currentAction < 0) currentAction = 0;
 		if (currentTarget < 0) currentTarget = 0;
 		LOG("%d, %d", currentAction, currentTarget);
+	}
+
+	if (currentParty == 1)
+	{
+		PlayAITurn();
+		WaitTime(4.0f);
 	}
 
 	return true;
@@ -190,7 +200,13 @@ void BattleManager::DoAction()
 	Member* m = p->list.at(currentMember);
 	Action* a = m->data.actions.at(currentAction);
 
-	Member* t = targets.at(currentTarget);
+	Member* t;
+	if (!targets.empty())
+		t = targets.at(currentTarget);
+	else
+	{
+		t = app->party->allyParty->list.at(currentTarget);
+	}
 
 	a->Apply(t);
 
@@ -245,9 +261,81 @@ void BattleManager::CheckBattleEnd()
 	if (A || B) end = true;
 }
 
-void BattleManager::WaitFrames(int frames)
+void BattleManager::WaitTime(float time)
 {
-	pendingWaitFrames = frames;
+	pendingWaitTime = time;
+}
+
+void BattleManager::PlayAITurn()
+{
+	struct ProbabilityAction {
+		int action;
+		int target;
+		float probability;
+	};
+
+	Party* party = app->party->enemyParty;
+	Member* member = party->list.at(currentMember);
+	std::vector<Action*> actions = member->data.actions;
+
+	std::vector<ProbabilityAction*>* probActions = new std::vector<ProbabilityAction*>();
+
+	float accuProb = 0.0f;
+
+	for (int i = 0; i < actions.size(); i++)
+	{
+		Action* a = actions.at(i);
+		if (a->type == Action::Type::ATTACK)
+		{
+			Party* allyParty = app->party->allyParty;
+			for (int j = 0; j < allyParty->list.size(); j++)
+			{
+				if (allyParty->list.at(j)->data.dead)
+					continue;
+				float prob = allyParty->list.at(j)->data.health / allyParty->list.at(j)->data.maxHealth;
+				prob = prob * prob;
+				accuProb += prob;
+				ProbabilityAction* p = new ProbabilityAction();
+				p->action = i;
+				p->probability = accuProb;
+				p->target = j;
+				probActions->push_back(p);
+			}
+		}
+		else if (a->type == Action::Type::DEFENSE)
+		{
+			for (int j = 0; j < party->list.size(); j++)
+			{
+				if (party->list.at(j)->data.dead)
+					continue;
+				float prob = 1.0f - (party->list.at(j)->data.health / party->list.at(j)->data.maxHealth);
+				prob = prob * prob;
+				accuProb += prob;
+				ProbabilityAction* p = new ProbabilityAction();
+				p->action = i;
+				p->probability = accuProb;
+				p->target = j;
+				probActions->push_back(p);
+			}
+		}
+	}
+
+	float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	r *= accuProb;
+
+	for (int i = 0; i < probActions->size(); i++) {
+		if (r < probActions->at(i)->probability) {
+			currentAction = probActions->at(i)->action;
+			currentTarget = probActions->at(i)->target;
+			DoAction();
+			break;
+		}
+	}
+
+	for (int i = 0; i < probActions->size(); i++) {
+		delete probActions->at(i);
+	}
+	delete probActions;
 }
 
 void BattleManager::Draw()
