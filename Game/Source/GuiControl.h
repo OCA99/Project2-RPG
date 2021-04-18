@@ -57,6 +57,8 @@ public:
 
 	virtual bool Draw(Render* render)
 	{
+
+
 		return true;
 	}
 

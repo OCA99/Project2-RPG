@@ -119,7 +119,6 @@ bool SceneManager::PostUpdate(float dt)
 		app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
-
 		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164/2, 120, 32 }), 4);//continue
 		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271/2, 120, 32 }), 5);//save
 		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381/2, 120, 32 }), 1);//load
@@ -133,7 +132,6 @@ bool SceneManager::PostUpdate(float dt)
 	if (menu == false)
 	{
 		Mix_VolumeMusic(100);
-
 	}
 	return ret;
 }
