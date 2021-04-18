@@ -22,13 +22,14 @@ struct Data {
 	//Numero en la Party
 	int id;
 	float health;
+	float maxHealth;
 	float power;
 	bool dead = false;
-	List<Action*> actions;
+	std::vector<Action*> actions;
 
 	void CleanUp() {
-		for (int i = 0; i < actions.Count(); i++) {
-			delete actions.At(i)->data;
+		for (int i = 0; i < actions.size(); i++) {
+			delete actions.at(i);
 		}
 	}
 };
@@ -95,13 +96,13 @@ struct Action {
 
 struct Party {
 
-	List<Member*> list;
+	std::vector<Member*> list;
 	std::string partyName;
 
 	//Functions
 	Party();
 	Party(std::string partyName);
-	Party(List<Member*>& list);
+	Party(std::vector<Member*>& list);
 	~Party();
 
 	void PrintMemberDescription(std::string name);
@@ -109,7 +110,7 @@ struct Party {
 	void AddMember(Member* member);
 	void RemoveMember(const std::string name);
 	//Find Member
-	ListItem<Member*>* FindByName(const std::string name) const;
+	Member* FindByName(const std::string name) const;
 
 };
 
