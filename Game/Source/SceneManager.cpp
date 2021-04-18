@@ -16,6 +16,10 @@
 #include "Defs.h"
 #include "Log.h"
 
+
+#include "SDL_mixer/include/SDL_mixer.h"
+
+
 SceneManager::SceneManager() : Module()
 {
 	name.Create("scene");
@@ -120,6 +124,14 @@ bool SceneManager::PostUpdate(float dt)
 		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381/2, 120, 32 }), 1);//load
 		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491/2, 120, 32 }), 7);//options
 		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601/2, 120, 32 }), 8);//back to menu
+
+		Mix_VolumeMusic(25);
+		
+	}
+
+	if (menu == false)
+	{
+		Mix_VolumeMusic(100);
 	}
 	return ret;
 }
