@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "SDL/include/SDL.h"
+
 struct Member;
 
 class BattleManager : public Module
@@ -34,6 +36,12 @@ public:
 	void CheckBattleEnd();
 
 private:
+	void Draw();
+	SDL_Texture* characterBar = nullptr;
+	SDL_Texture* actionBox = nullptr;
+	SDL_Texture* healthBars = nullptr;
+	SDL_Texture* selectionArrow = nullptr;
+
 	char currentParty = 0;
 	char currentMember = 0;
 	char currentAction = 0;

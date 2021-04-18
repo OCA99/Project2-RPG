@@ -4,7 +4,14 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "PartyManager.h"
+#include "Render.h"
+#include "Window.h"
 #include "Input.h"
+#include "Fonts.h"
+#include <cmath>
+
+#include <algorithm>
+#include <string>
 
 BattleManager::BattleManager()
 {
@@ -21,6 +28,11 @@ bool BattleManager::Awake()
 
 bool BattleManager::Start()
 {
+	characterBar = app->tex->Load("Assets/Textures/UI/BattleMenu/character_bar.png");
+	actionBox = app->tex->Load("Assets/Textures/UI/BattleMenu/action_box.png");
+	healthBars = app->tex->Load("Assets/Textures/UI/BattleMenu/health_bars.png");
+	selectionArrow = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow.png");
+
 	return true;
 }
 
@@ -104,6 +116,7 @@ bool BattleManager::Update(float dt)
 
 bool BattleManager::PostUpdate(float dt)
 {
+	Draw();
 	return true;
 }
 
@@ -205,4 +218,44 @@ void BattleManager::CheckBattleEnd()
 	}
 
 	if (A || B) EndBattle();
+}
+
+void BattleManager::Draw()
+{
+	if (!isBattling) return;
+
+	Party* ally = app->party->allyParty;
+
+	for (int i = 0; i < ally->list.Count(); i++) {
+		int x = 70;
+		uint w, h;
+		app->win->GetWindowSize(w, h);
+		int y = h / 2 - 45 - 38 * i;
+		app->render->DrawTexture(characterBar, x, y, NULL, 0.5f);
+		std::string name = ally->list.At(i)->data->name;
+		std::transform(name.begin(), name.end(), name.begin(), ::toupper);
+		app->fonts->BlitText(x + 30, y + 20, 1, name.c_str());
+		int p = 10 - std::floor(ally->list.At(i)->data->data.health / 100.0f * 11.0f);
+		if (p == -1) p = 0;
+		if (p > 10) p = 10;
+		SDL_Rect section = SDL_Rect({ 0, 30 * p, 300, 30 });
+		app->render->DrawTexture(healthBars, x + 250, y + 15, &section, 0.5f);
+
+		if (i == currentMember && currentParty == 0)
+		{
+			app->render->DrawTexture(selectionArrow, 75, 30 + i * 80.5f, NULL, .5f);
+		}
+
+		if (currentParty == 0)
+		{
+			List<Action*> actions = ally->list.At(i)->data->data.actions;
+			for (int j = 0; j < actions.Count(); j++) {
+				Action* a = actions.At(j)->data;
+
+				x = 90;
+				y = h / 2 - 45 - 38 * i - 32 - j * 25;
+				app->render->DrawTexture(actionBox, x, y, NULL, .5f);
+			}
+		}
+	}
 }
