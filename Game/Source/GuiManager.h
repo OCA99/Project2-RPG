@@ -42,6 +42,8 @@ public:
 
 	void DrawAll();
 
+	void ChangeColorToAll(SDL_Color& color);
+
 public:
 
 	List<GuiControl*> controls;

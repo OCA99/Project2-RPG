@@ -115,11 +115,11 @@ bool SceneManager::PostUpdate(float dt)
 		app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164/2, 120, 32 }), 4);//continue
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271/2, 120, 32 }), 5);//save
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381/2, 120, 32 }), 1);//load
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491/2, 120, 32 }), 7);//options
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601/2, 120, 32 }), 8);//back to menu
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164/2, 120, 32 }), 4, 0, 0, 0, 50);//continue
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271/2, 120, 32 }), 5, 229, 56, 59, 50);//save
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381/2, 120, 32 }), 1, 252, 163, 17, 50);//load
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491/2, 120, 32 }), 7, 239, 131, 84, 50);//options
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601/2, 120, 32 }), 8, 239, 131, 84, 50);//back to menu
 	}
 	return ret;
 }
