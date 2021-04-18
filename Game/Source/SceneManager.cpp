@@ -114,6 +114,12 @@ bool SceneManager::PostUpdate(float dt)
 		app->render->DrawTexture(loadTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164/2, 120, 32 }), 4);//continue
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271/2, 120, 32 }), 5);//save
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381/2, 120, 32 }), 1);//load
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491/2, 120, 32 }), 7);//options
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601/2, 120, 32 }), 8);//back to menu
 	}
 	return ret;
 }
@@ -219,6 +225,19 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 3:
 		return false;
+		break;
+	case 4:
+		menu = 0;
+		break;
+	case 5:
+		app->ui->DestroyAllGuiControls();
+		app->RequestSave();
+		break;
+	case 7:
+		//option
+		break;
+	case 8:
+		//back to main
 		break;
 	default:
 		break;
