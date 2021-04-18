@@ -27,11 +27,12 @@ bool GuiButton::Update(Input* input, float dt)
 			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h)))
 		{
 			state = GuiControlState::FOCUSED;
-			PlayFx(6, 0);
+		
 
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
 			{
 				state = GuiControlState::PRESSED;
+				app->audio->PlayFx(6, 0);
 			}
 
 			// If mouse button pressed -> Generate event!
