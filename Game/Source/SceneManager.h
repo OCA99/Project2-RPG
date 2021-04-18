@@ -62,6 +62,7 @@ public:
 
 
 	bool menu = false;
+	bool buttons = false;
 
 private:
 
