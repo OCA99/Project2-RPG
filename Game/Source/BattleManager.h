@@ -35,7 +35,9 @@ public:
 	void DoAction();
 	void CheckBattleEnd();
 
-	void WaitFrames(int frames);
+	void WaitTime(float time);
+
+	void PlayAITurn();
 
 private:
 	void Draw();
@@ -58,7 +60,7 @@ private:
 
 	bool isBattling = false;
 
-	int pendingWaitFrames = 0;
+	float pendingWaitTime = 0;
 
 	bool end = false;
 	float endWait = 0;

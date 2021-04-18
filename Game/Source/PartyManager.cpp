@@ -255,10 +255,10 @@ void PartyManager::InitializeParties()
 	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 15.f, false);
 	allyParty->AddMember(thyma);
 
-	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0);
+	Action* a = new Action("punch", toisto, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
 	toisto->data.actions.push_back(a);
 
-	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0);
+	a = new Action("punch", thyma, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
 	thyma->data.actions.push_back(a);
 
 	//allyParty->PrintPartyDescription();
@@ -271,11 +271,11 @@ void PartyManager::InitializeParties()
 	enemyParty->AddMember(bones);
 	enemyParty->AddMember(mush);
 
-	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0);
+	a = new Action("punch", kmush, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
 	kmush->data.actions.push_back(a);
-	a = new Action("punch", mush, Action::Filter::ENEMY, 1, 0);
+	a = new Action("punch", mush, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
 	mush->data.actions.push_back(a);
-	a = new Action("punch", bones, Action::Filter::ENEMY, 1, 0);
+	a = new Action("punch", bones, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);
 	bones->data.actions.push_back(a);
 
 
