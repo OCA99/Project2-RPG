@@ -6,6 +6,9 @@
 #include "Input.h"
 #include "Audio.h"
 #include "App.h"
+#include "SDL_mixer/include/SDL_mixer.h"
+
+
 
 #include <algorithm>
 
@@ -21,25 +24,32 @@ void SceneTransitionSystem::tick(ECS::World* world, float dt)
 		fullscreen.w = w;
 		fullscreen.h = h;
 
+		if (hasFinished == false)
+		{
+			app->volume = 0;
+			hasFinished = true;
+		}
+
 		alpha -= sceneFade->speed * dt * direction;
+		//if (app->volume > 100 && app->volumeUp == false)
+		//{
+		//	app->volume = 100;
+		//	app->volume += speed * dt;
+
+		//}
+		//Mix_VolumeMusic(app->volume);
+
 
 		if (alpha > 0 && direction == -1)
 		{
 			direction *= -1;
 			alpha = 255;
 		}
-
-		if (alpha > 200 && !hasSounded)
-		{
-			//app->audio->PlayFx(3, 0);
-			hasSounded = true;
-		}
 		app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
 
-		if (alpha <= 0)
+		if (alpha <= 10)
 		{
 			world->destroy(entity, true);
-			hasFinished = true;
 		}
 		});
 }

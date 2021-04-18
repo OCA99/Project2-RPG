@@ -12,6 +12,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "Audio.h"
+#include "SceneTransitionSystem.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -41,9 +42,9 @@ bool SceneManager::Awake()
 // Called before the first frame
 bool SceneManager::Start()
 {
-	MapScene* s = new MapScene("Town.tmx");
+	//MapScene* s = new MapScene("Town.tmx");
 
-	//LogoScene* s = new LogoScene();
+	LogoScene* s = new LogoScene();
 	menuTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_menu.png");
 
 	pauseTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_text.png");
@@ -57,6 +58,8 @@ bool SceneManager::Start()
 
 	sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
+
+	startPressed = true;
 
 	return true;
 }
@@ -72,12 +75,60 @@ bool SceneManager::Update(float dt)
 {
 	if (sceneToBeLoaded != nullptr)
 	{
-		if (sceneToBeLoaded->type == Scene::TYPE::MAP)
-			LoadScene((MapScene*)sceneToBeLoaded, playerPositionToBeLoaded);
+		
+		if (currentScene != nullptr && currentScene->type == Scene::TYPE::MAP)
+		{
+			if (isFinished == false)
+			{
+				alpha += speed * dt;
+
+
+				if (alpha >= 255)
+				{
+					isFinished = true;
+
+				}
+
+
+				if (app->volume > 0 && app->volumeUp == false)
+				{
+					app->volume -= volSpeed * dt;
+					app->volumeDown = true;
+
+				}
+				LOG("%f", app->volume);
+				if (app->volume == 0.0f) 
+				{
+					app->volume = 0.0f;
+					app->volumeDown = false;
+				}
+
+				Mix_VolumeMusic(app->volume);
+			}
+			else
+			{
+				if (sceneToBeLoaded->type == Scene::TYPE::MAP)
+					LoadScene((MapScene*)sceneToBeLoaded, playerPositionToBeLoaded);
+				else
+					LoadScene(sceneToBeLoaded);
+				sceneToBeLoaded = nullptr;
+				isFinished = false;
+				alpha = 0;
+			}
+		}
 		else
-			LoadScene(sceneToBeLoaded);
-		sceneToBeLoaded = nullptr;
+		{
+			if (sceneToBeLoaded->type == Scene::TYPE::MAP)
+				LoadScene((MapScene*)sceneToBeLoaded, playerPositionToBeLoaded);
+			else
+				LoadScene(sceneToBeLoaded);
+			sceneToBeLoaded = nullptr;
+			isFinished = false;
+
+		}
+
 	}
+
 
 	return true;
 }
@@ -86,15 +137,28 @@ bool SceneManager::Update(float dt)
 bool SceneManager::PostUpdate(float dt)
 {
 	bool ret = true;
+	GamePad& pad = app->input->pads[0];
 
 	currentScene->world->tick(dt);
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	SDL_Rect fullscreen;
+	fullscreen.x = 0;
+	fullscreen.y = 0;
+	uint w, h;
+	app->win->GetWindowSize(w, h);
+	fullscreen.w = w;
+	fullscreen.h = h;
+
+	app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true)
 	{
 		
-		menu = !menu;
-		
+		if(startPressed)menu = !menu;
+		startPressed = false;
 	}
+
+	if (pad.start == false) startPressed = true;
 	//ret = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
@@ -130,13 +194,30 @@ bool SceneManager::PostUpdate(float dt)
 				buttons = true;
 			}
 
-			Mix_VolumeMusic(25);
+			app->volume = 25;
+			Mix_VolumeMusic(app->volume);
 
 		}
 
 		if (menu == false)
 		{
-			Mix_VolumeMusic(100);
+			if (app->volume < 100 && app->volumeDown == false)
+			{
+				app->volumeUp = true;
+				app->volume += volSpeed * dt;
+			}
+			if (app->volume <= 0.0f)
+			{
+				app->volumeDown = false;
+			}
+			if (app->volume > 100)
+			{
+				app->volume = 100;
+				app->volumeUp = false;
+			}
+
+
+			Mix_VolumeMusic(app->volume);
 			app->ui->DestroyAllGuiControls();
 			buttons = false;
 		}
