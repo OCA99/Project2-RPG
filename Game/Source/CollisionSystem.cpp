@@ -125,7 +125,7 @@ void CollisionSystem::tick(ECS::World* world, float dt)
 
 		if (found)
 		{
-			int r = rand() % 200;
+			int r = rand() % 100;
 			if (r < 1)
 			{
 				BattleScene* s = new BattleScene();
