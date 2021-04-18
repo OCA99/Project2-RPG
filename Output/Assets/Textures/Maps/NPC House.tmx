@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="46" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="46" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
  <properties>
   <property name="mapId" type="int" value="3"/>
  </properties>
  <tileset firstgid="1" name="Interiors_16x16" tilewidth="16" tileheight="16" tilecount="8592" columns="16">
-  <image source="../Environment/Interiors_16x16.png" width="256" height="8592"/>
+  <image source="../Environment/interiors_16x16.png" width="256" height="8592"/>
  </tileset>
  <tileset firstgid="8593" name="Room_Builder_16x16" tilewidth="16" tileheight="16" tilecount="2550" columns="50">
-  <image source="../Environment/Room_Builder_16x16.png" width="800" height="816"/>
+  <image source="../Environment/room_builder_16x16.png" width="800" height="816"/>
  </tileset>
  <tileset firstgid="11143" name="collider_colors" tilewidth="16" tileheight="16" tilecount="6" columns="6">
   <image source="../collider_colors.png" trans="c634ff" width="96" height="16"/>
