@@ -174,11 +174,11 @@ bool SceneManager::PostUpdate(float dt)
 
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 1);//continue
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 4);//save
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 5);//load
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 4);//continue
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 5);//save
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 6);//load
 				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2);//options
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 6);//back to menu
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 7);//back to menu
 				buttons = true;
 			}
 
@@ -319,14 +319,17 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		return false;
 		break;
 	case 4:
-		app->RequestSave();
+		menu = 0;
 		break;
 	case 5:
+		app->RequestSave();
+		break;
+	case 6:
 		app->ui->DestroyAllGuiControls();
 		app->RequestLoad();
 		app->scene->menu = 0;
 		break;
-	case 6:
+	case 7:
 		app->ui->DestroyAllGuiControls();
 		s = (Scene*)(new MenuScene());
 		sceneToBeLoaded = s;

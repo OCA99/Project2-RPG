@@ -73,12 +73,15 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		textTex = exitTex;
 		break;
 	case 4:
-		textTex = saveTex;
+		textTex = continueTex;
 		break;
 	case 5:
-		textTex = loadTex;
+		textTex = saveTex;
 		break;
 	case 6:
+		textTex = loadTex;
+		break;
+	case 7:
 		textTex = mainMenuTex;
 		break;
 	default:
