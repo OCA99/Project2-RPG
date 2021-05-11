@@ -13,6 +13,7 @@
 #include "GuiManager.h"
 #include "Audio.h"
 #include "SceneTransitionSystem.h"
+#include "GuiCheckBox.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -46,6 +47,10 @@ bool SceneManager::Start()
 
 	LogoScene* s = new LogoScene();
 	menuTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/pause_menu.png");
+	optionsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/options_menu.png");
+
+	audioMenuTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/audio_menu.png");
+	graphicsMenuTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/graphics_menu.png");
 
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
 
@@ -144,7 +149,7 @@ bool SceneManager::PostUpdate(float dt)
 
 	app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true)
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu)
 	{
 		
 		if(startPressed)menu = !menu;
@@ -170,21 +175,97 @@ bool SceneManager::PostUpdate(float dt)
 
 		if (menu)
 		{
-			app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-
-			if (buttons == false)
+			if (!optionsMenu)
 			{
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 4);//continue
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 5);//save
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 6);//load
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2);//options
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 7);//back to menu
-				buttons = true;
+				app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+				if (buttons == false)
+				{
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 4);//continue
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 5);//save
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 6);//load
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2);//options
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 7);//back to menu
+					buttons = true;
+				}
+
+				if (app->volume > 25)
+				{
+					app->volumeDown = true;
+					app->volume -= volSpeed * 1.25f * dt;
+				}
+
+				if (app->volume < 25)
+				{
+					app->volumeDown = false;
+					app->volume = 25;
+				}
+
+				Mix_VolumeMusic(app->volume);
 			}
+			else
+			{
+				if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+				{
+					optionsMenu = false;
+					audioSelected = false;
+					controlsSelected = false;
+					graphicsSelected = false;
+					app->ui->DestroyAllGuiControls();
+					buttons = false;
+				}
+				app->render->DrawTexture(optionsTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
-			app->volume = 25;
-			Mix_VolumeMusic(app->volume);
+				if(graphicsSelected)
+				{
+					app->render->DrawTexture(graphicsMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
+					if (buttons == false)
+					{
+						app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15); //fullscreen checkbox
+						app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16); //vsync checkbox
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+
+						buttons = true;
+					}
+				}
+
+				if(audioSelected)
+				{
+					app->render->DrawTexture(audioMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+					if (buttons == false)
+					{
+						app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 330 / 2, 300/2, 30/2 }), 8); //general volume slider
+						app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 412 / 2, 300 / 2, 30 / 2 }), 9); //music volume slider
+						app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 494 / 2, 300 / 2, 30 / 2 }), 10); //fx volume slider
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+
+						buttons = true;
+					}
+				}
+
+				if (controlsSelected)
+				{
+
+					if (buttons == false)
+					{
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
+						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+
+						buttons = true;
+					}
+				}
+
+			}
 		}
 
 		if (menu == false)
@@ -315,6 +396,12 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		app->RequestLoad();
 		app->scene->menu = 0;
 		break;
+	case 2:
+		app->ui->DestroyAllGuiControls();
+		buttons = false;
+		optionsMenu = true;
+		audioSelected = true;
+		break;
 	case 3:
 		return false;
 		break;
@@ -335,9 +422,42 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		sceneToBeLoaded = s;
 		menu = false;
 		break;
+	case 11:
+		app->ui->DestroyAllGuiControls();
+		graphicsSelected = true;
+		audioSelected = false;
+		controlsSelected = false;
+		buttons = false;
+		break;
+	case 12:
+		app->ui->DestroyAllGuiControls();
+		audioSelected = true;
+		graphicsSelected = false;
+		controlsSelected = false;
+		buttons = false;
+		break;
+	case 13:
+		app->ui->DestroyAllGuiControls();
+		controlsSelected = true;
+		audioSelected = false;
+		graphicsSelected = false;
+		buttons = false;
+		break;
+	case 14:
+		optionsMenu = false;
+		audioSelected = false;
+		controlsSelected = false;
+		graphicsSelected = false;
+		app->ui->DestroyAllGuiControls();
+		buttons = false;
+		break;
+	case 15:
+		app->win->ToggleFullscreen();
+		break;
 	default:
 		break;
 	}
+	//8,9,10 are audio sliders
 
 	return true;
 }

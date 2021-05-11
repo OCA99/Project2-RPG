@@ -1,10 +1,13 @@
 #include "GuiCheckBox.h"
+#include "Window.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::CHECKBOX, id)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::CHECKBOX, id)
 {
 	this->bounds = bounds;
 	this->checkedBounds = { bounds.x + 15, bounds.y + 15, 50, 50 };
 	this->text = text;
+	this->texture = tex;
+	this->texture2 = textTex;
 }
 
 GuiCheckBox::~GuiCheckBox()
@@ -13,6 +16,10 @@ GuiCheckBox::~GuiCheckBox()
 
 bool GuiCheckBox::Update(Input* input, float dt)
 {
+
+	if (app->win->fullscreen && id == 15) checked = true;
+	if (!app->win->fullscreen && id == 15) checked = false;
+
 	if (state != GuiControlState::DISABLED)
 	{
 		int mouseX, mouseY;
@@ -47,37 +54,46 @@ bool GuiCheckBox::Draw(Render* render)
 	switch (state)
 	{
 	case GuiControlState::DISABLED:
-	{
-		if (checked) render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
-		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
-	} break;
+		break;
 	case GuiControlState::NORMAL:
-	{
 		if (checked)
 		{
-			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//BG QUAD -
-			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//LITTLE QUAD - 
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 92, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		}
-		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
-	} break;
+		else
+		{
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 100, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x + 46, bounds.y, &SDL_Rect({ 92, 0, 91, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		}
+		break;
 	case GuiControlState::FOCUSED:
 		if (checked)
 		{
-			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//IDLE
-			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//YELLOW
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 50, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 92, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		}
-		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);;//YELLOW
+		else
+		{
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 150, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x + 46, bounds.y, &SDL_Rect({ 92, 0, 91, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		}
 		break;
 	case GuiControlState::PRESSED:
 		if (checked)
 		{
-			render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//IDLE
-			render->DrawRectangle(checkedBounds, color.r, color.g, color.b, color.a, true, false);//PURPLE
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 50, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x - 1, bounds.y + 1, &SDL_Rect({ 0, 0, 92, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		}
-		else render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);//PURPLE
+		else
+		{
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 150, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x + 45, bounds.y + 1, &SDL_Rect({ 92, 0, 91, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		}
 		break;
 	case GuiControlState::SELECTED: render->DrawRectangle(bounds, color.r, color.g, color.b, color.a, true, false);
 		break;
+
 	default:
 		break;
 	}

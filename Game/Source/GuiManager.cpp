@@ -24,6 +24,13 @@ bool GuiManager::Awake(pugi::xml_node& config)
 bool GuiManager::Start()
 {
 	menuButtonTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/menu_button.png");
+	optionsButtonsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/options_buttons.png");
+	
+	
+	sliderTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/volume_slider.png");
+	backButtonTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/back_button.png");
+	checkBoxTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/checkbox.png");
+
 	startTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/start.png");
 	continueTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/continue.png");
 	optionsTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/options.png");
@@ -31,6 +38,10 @@ bool GuiManager::Start()
 	saveTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/save.png");
 	loadTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/load.png");
 	mainMenuTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/main_menu_text.png");
+	graphicsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/graphics.png");
+	audioTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/audio.png");
+	controlsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/controls.png");
+	onOffTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/on_off.png");
 
 	return true;
 }
@@ -58,40 +69,67 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 {
 	GuiControl* control = nullptr;
 	SDL_Texture* textTex = nullptr;
+	SDL_Texture* buttonTex = nullptr;
+
 	switch (id)
 	{
 	case 0:
 		textTex = startTex;
+		buttonTex = menuButtonTex;
 		break;
 	case 1:
+		buttonTex = menuButtonTex;
 		textTex = continueTex;
 		break;
 	case 2:
+		buttonTex = menuButtonTex;
 		textTex = optionsTex;
 		break;
 	case 3:
+		buttonTex = menuButtonTex;
 		textTex = exitTex;
 		break;
 	case 4:
+		buttonTex = menuButtonTex;
 		textTex = continueTex;
 		break;
 	case 5:
+		buttonTex = menuButtonTex;
 		textTex = saveTex;
 		break;
 	case 6:
+		buttonTex = menuButtonTex;
 		textTex = loadTex;
 		break;
 	case 7:
+		buttonTex = menuButtonTex;
 		textTex = mainMenuTex;
+		break;
+	case 11:
+		buttonTex = optionsButtonsTex;
+		textTex = graphicsTex;
+		break;
+	case 12:
+		buttonTex = optionsButtonsTex;
+		textTex = audioTex;
+		break;
+	case 13:
+		buttonTex = optionsButtonsTex;
+		textTex = controlsTex;
+		break;
+	case 14:
+		buttonTex = backButtonTex;
 		break;
 	default:
 		break;
 	}
 
+	//8,9,10 are volume sliders
+
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		control = new GuiButton(id, bounds, menuButtonTex, textTex);
+		control = new GuiButton(id, bounds, buttonTex, textTex);
 		control->SetObserver(app->scene);
 		control->color.r = r;
 		control->color.g = g;
@@ -99,7 +137,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		control->color.a = a;
 		break;
 	case GuiControlType::CHECKBOX:
-		control = new GuiCheckBox(id, bounds);
+		control = new GuiCheckBox(id, bounds, checkBoxTex, onOffTex);
 		control->SetObserver(app->scene);
 		control->color.r = r;
 		control->color.g = g;
@@ -107,7 +145,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		control->color.a = a;
 		break;
 	case GuiControlType::SLIDER:
-		control = new GuiSlider(id, bounds);
+		control = new GuiSlider(id, bounds, sliderTex);
 		control->SetObserver(app->scene);//preguntar EDU que onda
 		control->color.r = r;
 		control->color.g = g;

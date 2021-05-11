@@ -11,7 +11,7 @@ class GuiCheckBox : public GuiControl
 {
 public:
 
-	GuiCheckBox(uint32 id, SDL_Rect bounds);
+	GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex);
 	virtual ~GuiCheckBox();
 
 	bool Update(Input* input, float dt);
