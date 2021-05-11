@@ -45,14 +45,7 @@ bool SceneManager::Start()
 	//MapScene* s = new MapScene("Town.tmx");
 
 	LogoScene* s = new LogoScene();
-	menuTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_menu.png");
-
-	pauseTex = app->tex->Load("Assets/Textures/UI/PauseMenu/pause_text.png");
-	continueTex = app->tex->Load("Assets/Textures/UI/PauseMenu/continue_text.png");
-	saveTex = app->tex->Load("Assets/Textures/UI/PauseMenu/save_text.png");
-	loadTex = app->tex->Load("Assets/Textures/UI/PauseMenu/load_text.png");
-	optionTex = app->tex->Load("Assets/Textures/UI/PauseMenu/option_text.png");
-	mainTex = app->tex->Load("Assets/Textures/UI/PauseMenu/mainmenu_text.png");
+	menuTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/pause_menu.png");
 
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
 
@@ -178,19 +171,14 @@ bool SceneManager::PostUpdate(float dt)
 		if (menu)
 		{
 			app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			app->render->DrawTexture(pauseTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			app->render->DrawTexture(continueTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			app->render->DrawTexture(saveTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			app->render->DrawTexture(loadTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			app->render->DrawTexture(optionTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			app->render->DrawTexture(mainTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 164 / 2, 120, 32 }), 4);//continue
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 271 / 2, 120, 32 }), 5);//save
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 381 / 2, 120, 32 }), 1);//load
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 491 / 2, 120, 32 }), 7);//options
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 261, 601 / 2, 120, 32 }), 8);//back to menu
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 1);//continue
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 4);//save
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 5);//load
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2);//options
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 6);//back to menu
 				buttons = true;
 			}
 

@@ -45,6 +45,17 @@ public:
 public:
 
 	List<GuiControl*> controls;
+	SDL_Texture* menuButtonTex;
+
+	SDL_Texture* startTex;
+	SDL_Texture* continueTex;
+	SDL_Texture* optionsTex;
+	SDL_Texture* exitTex;
+	SDL_Texture* saveTex;
+	SDL_Texture* loadTex;
+	SDL_Texture* mainMenuTex;
+
+
 };
 
 #endif // __GUIMANAGER_H__
