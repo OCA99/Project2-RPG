@@ -1,5 +1,6 @@
 #include "GuiSlider.h"
 #include "App.h"
+#include "GuiManager.h"
 #include "Window.h"
 #include <stdio.h>      /* printf */
 #include <math.h>       /* round, floor, ceil, trunc */
@@ -7,12 +8,26 @@
 #include "Log.h"
 
 
-GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds) : GuiControl(GuiControlType::SLIDER, id)
+GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture* tex) : GuiControl(GuiControlType::SLIDER, id)
 {
 	this->bounds = bounds;
 	this->text = text;
+	this->texture = tex;
 	slider = { bounds.x, bounds.y, 30, 30 };
 
+	// el musicVolume iii fxVolume empieza en 100 en guiManager, no se cambia en ningún lao, tmbién se tiene q hacer q cuando lo pruebes
+	//suene al volumen q toca pq cuando estamos en menu la musica se capea a 25.
+	if (id == 8)
+	{
+		value = app->ui->musicVolume;
+	}
+	else if (id == 9)
+	{
+		value = app->ui->fxVolume;
+	}
+
+	value = round(value);
+	sliderPosx = ((value * unit) + bounds.x) - unit;
 }
 
 GuiSlider::~GuiSlider()
@@ -33,33 +48,26 @@ bool GuiSlider::Update(Input* input, float dt)
 		input->GetMousePosition(mouseX, mouseY);
 
 		// Check collision between mouse and button bounds
-		if ((mouseX > bounds.x) && (mouseX < (bounds.x + bounds.w)) &&
+		if ((mouseX > bounds.x + 5) && (mouseX < (bounds.x + bounds.w) - 8) &&
 			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h)))
 		{
 			state = GuiControlState::FOCUSED;
-			// TODO.
-			unit = bounds.w / 100;
+
+			unit = bounds.w / 100.0f;
 			value = (mouseX - bounds.x) / unit;
 			value = round(value);
 
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = GuiControlState::PRESSED;
-				for (int i = 1; i <= 100; i++)
-				{
-					if (i == value)
-					{
-						slider.x = ((i * unit) + bounds.x) - unit;
-					}
-				}
+				sliderPosx = ((value * unit) + bounds.x) - unit - 5;
 			}
 
 			// If mouse button pressed -> Generate event!
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
-				return NotifyObserver();
+				state = GuiControlState::SELECTED;
 			}
-
 		}
 		else state = GuiControlState::NORMAL;
 	}
@@ -76,19 +84,24 @@ bool GuiSlider::Draw(Render* render)
 	switch (state)
 	{
 	case GuiControlState::DISABLED:
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a, true, false);
+		render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 300, 30 }), 0.5f, 0, 0, 0, false);
+		render->DrawTexture(texture, sliderPosx, bounds.y, &SDL_Rect({ 300, 0, 30, 30 }), 0.5f, 0, 0, 0, false);
 		break;
 	case GuiControlState::FOCUSED:
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a, true, false);
+		render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 300, 30 }), 0.5f, 0, 0, 0, false);
+		render->DrawTexture(texture, sliderPosx, bounds.y, &SDL_Rect({ 330, 0, 30, 30 }), 0.5f, 0, 0, 0, false);
 		break;
 	case GuiControlState::NORMAL:
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a, true, false);
+		render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 300, 30 }), 0.5f, 0, 0, 0, false);
+		render->DrawTexture(texture, sliderPosx, bounds.y, &SDL_Rect({ 300, 0, 30, 30 }), 0.5f, 0, 0, 0, false);
 		break;
 	case GuiControlState::PRESSED:
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a, true, false);
+		render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 300, 30 }), 0.5f, 0, 0, 0, false);
+		render->DrawTexture(texture, sliderPosx, bounds.y, &SDL_Rect({ 360, 0, 30, 30 }), 0.5f, 0, 0, 0, false);
 		break;
 	case GuiControlState::SELECTED:
-		render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a, true, false);
+		render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 0, 300, 30 }), 0.5f, 0, 0, 0, false);
+		render->DrawTexture(texture, sliderPosx, bounds.y, &SDL_Rect({ 300, 0, 30, 30 }), 0.5f, 0, 0, 0, false);
 		break;
 	}
 

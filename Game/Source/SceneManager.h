@@ -52,8 +52,18 @@ public:
 	Scene* currentScene = nullptr;
 
 	SDL_Texture* menuTex;
+	SDL_Texture* optionsTex;
+
+	SDL_Texture* graphicsMenuTex;
+	bool graphicsSelected;
+
+	SDL_Texture* audioMenuTex;
+	bool audioSelected;
+
+	bool controlsSelected;
 
 	bool menu = false;
+	bool optionsMenu = false;
 	bool buttons = false;
 
 	float alpha = 0;

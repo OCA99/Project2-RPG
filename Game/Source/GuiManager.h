@@ -45,7 +45,15 @@ public:
 public:
 
 	List<GuiControl*> controls;
+
 	SDL_Texture* menuButtonTex;
+	SDL_Texture* optionsButtonsTex;
+
+
+	SDL_Texture* buttonTex;
+	SDL_Texture* sliderTex;
+	SDL_Texture* checkBoxTex;
+	SDL_Texture* backButtonTex;
 
 	SDL_Texture* startTex;
 	SDL_Texture* continueTex;
@@ -54,8 +62,13 @@ public:
 	SDL_Texture* saveTex;
 	SDL_Texture* loadTex;
 	SDL_Texture* mainMenuTex;
+	SDL_Texture* graphicsTex;
+	SDL_Texture* audioTex;
+	SDL_Texture* controlsTex;
+	SDL_Texture* onOffTex;
 
-
+	int fxVolume = 100;
+	int musicVolume = 100;
 };
 
 #endif // __GUIMANAGER_H__
