@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <renderer>
-	<camera x="120" y="-788" />
+	<camera x="120" y="-140" />
 </renderer>
 <scene>
 	<currentScene name="Town.tmx" />
 	<entity>
-		<position x="460.141174" y="574.252014" x="80" y="226" />
+		<position x="30" y="250" x="80" y="226" />
 	</entity>
 </scene>
