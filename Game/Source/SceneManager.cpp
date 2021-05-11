@@ -385,65 +385,65 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 
 	switch (control->id)
 	{
-	case 0:
+	case 0: //start button
 		app->ui->DestroyAllGuiControls();
 		s = (Scene*)(new MapScene("Town.tmx"));
 		app->scene->sceneToBeLoaded = s;
 		app->scene->playerPositionToBeLoaded = fPoint(30, 250);
 		break;
-	case 1:
+	case 1: //continue button
 		app->ui->DestroyAllGuiControls();
 		app->RequestLoad();
 		app->scene->menu = 0;
 		break;
-	case 2:
+	case 2: //options button
 		app->ui->DestroyAllGuiControls();
 		buttons = false;
 		optionsMenu = true;
 		audioSelected = true;
 		break;
-	case 3:
+	case 3: //exit
 		return false;
 		break;
-	case 4:
+	case 4: //continue (exit menu) button
 		menu = 0;
 		break;
-	case 5:
+	case 5: //save
 		app->RequestSave();
 		break;
-	case 6:
+	case 6: //load
 		app->ui->DestroyAllGuiControls();
 		app->RequestLoad();
 		app->scene->menu = 0;
 		break;
-	case 7:
+	case 7: //back to menu
 		app->ui->DestroyAllGuiControls();
 		s = (Scene*)(new MenuScene());
 		sceneToBeLoaded = s;
 		menu = false;
 		break;
-	case 11:
+	case 11: //graphics window button
 		app->ui->DestroyAllGuiControls();
 		graphicsSelected = true;
 		audioSelected = false;
 		controlsSelected = false;
 		buttons = false;
 		break;
-	case 12:
+	case 12: //audio window button
 		app->ui->DestroyAllGuiControls();
 		audioSelected = true;
 		graphicsSelected = false;
 		controlsSelected = false;
 		buttons = false;
 		break;
-	case 13:
+	case 13: //controls window button
 		app->ui->DestroyAllGuiControls();
 		controlsSelected = true;
 		audioSelected = false;
 		graphicsSelected = false;
 		buttons = false;
 		break;
-	case 14:
+	case 14: //back button
 		optionsMenu = false;
 		audioSelected = false;
 		controlsSelected = false;
@@ -451,7 +451,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		app->ui->DestroyAllGuiControls();
 		buttons = false;
 		break;
-	case 15:
+	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
 		break;
 	default:
