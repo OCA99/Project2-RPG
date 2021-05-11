@@ -301,41 +301,6 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 {
 	Scene* s;
-	//switch (control->id)
-	//{
-	//case 0:
-	//	app->ui->DestroyAllGuiControls();
-	//	s = (Scene*)(new MapScene("Town.tmx"));
-	//	app->scene->sceneToBeLoaded = s;
-	//	app->scene->playerPositionToBeLoaded = fPoint(30, 250);
-	//	break;
-	//case 1:
-	//	app->ui->DestroyAllGuiControls();
-	//	app->RequestLoad();
-	//	app->scene->menu = 0;
-	//	break;
-	//case 3:
-	//	return false;
-	//	break;
-	//case 4:
-	//	menu = 0;
-	//	break;
-	//case 5:
-	//	app->RequestSave();
-	//	break;
-	//case 7:
-	//	//option
-	//	break;
-	//case 8:
-	//	app->ui->DestroyAllGuiControls();
-	//	s = (Scene*)(new MenuScene());
-	//	sceneToBeLoaded = s;
-	//	menu = false;
-	//	//back to main
-	//	break;
-	//default:
-	//	break;
-	//}
 
 	switch (control->id)
 	{
