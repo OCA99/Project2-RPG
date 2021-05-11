@@ -92,7 +92,7 @@ bool GuiButton::Draw(Render* render)
 			break;
 		case GuiControlState::PRESSED:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 482,0,241,65 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			render->DrawTexture(texture2, bounds.x - 3, bounds.y + 2, &SDL_Rect({ 0,0,241,65 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ 0,0,241,65 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			break;
 		case GuiControlState::SELECTED:
 			render->DrawRectangle(drawBounds, color.r, color.g, color.b, color.a + 100, true, false);
