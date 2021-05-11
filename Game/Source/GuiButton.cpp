@@ -38,6 +38,7 @@ bool GuiButton::Update(Input* input, float dt)
 		if (id == 13) state = GuiControlState::SELECTED;
 	}
 
+
 	if (state != GuiControlState::DISABLED)
 	{
 		int mouseX, mouseY;
@@ -60,6 +61,7 @@ bool GuiButton::Update(Input* input, float dt)
 			{
 				app->audio->PlayFx(6, 0);
 				state = GuiControlState::SELECTED;
+				if (id == 5 && state == GuiControlState::SELECTED) state = GuiControlState::NORMAL;
 				return NotifyObserver();
 			}
 		}
