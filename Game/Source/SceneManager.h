@@ -53,14 +53,6 @@ public:
 
 	SDL_Texture* menuTex;
 
-	SDL_Texture* pauseTex;
-	SDL_Texture* continueTex;
-	SDL_Texture* saveTex;
-	SDL_Texture* loadTex;
-	SDL_Texture* optionTex;
-	SDL_Texture* mainTex;
-
-
 	bool menu = false;
 	bool buttons = false;
 

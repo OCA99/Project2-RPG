@@ -23,6 +23,15 @@ bool GuiManager::Awake(pugi::xml_node& config)
 
 bool GuiManager::Start()
 {
+	menuButtonTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/menu_button.png");
+	startTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/start.png");
+	continueTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/continue.png");
+	optionsTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/options.png");
+	exitTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/exit.png");
+	saveTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/save.png");
+	loadTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/load.png");
+	mainMenuTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/main_menu_text.png");
+
 	return true;
 }
 
@@ -48,11 +57,38 @@ bool GuiManager::CleanUp()
 GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	GuiControl* control = nullptr;
+	SDL_Texture* textTex = nullptr;
+	switch (id)
+	{
+	case 0:
+		textTex = startTex;
+		break;
+	case 1:
+		textTex = continueTex;
+		break;
+	case 2:
+		textTex = optionsTex;
+		break;
+	case 3:
+		textTex = exitTex;
+		break;
+	case 4:
+		textTex = saveTex;
+		break;
+	case 5:
+		textTex = loadTex;
+		break;
+	case 6:
+		textTex = mainMenuTex;
+		break;
+	default:
+		break;
+	}
 
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		control = new GuiButton(id, bounds);
+		control = new GuiButton(id, bounds, menuButtonTex, textTex);
 		control->SetObserver(app->scene);
 		control->color.r = r;
 		control->color.g = g;

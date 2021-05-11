@@ -132,45 +132,23 @@ void MenuScene::Load()
 	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_blacksmith.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
-	SDL_Texture* t = app->tex->Load("Assets/Textures/UI/MainMenu/main_menu.png");
+	SDL_Texture* t = app->tex->Load("Assets/Textures/UI/MainPauseMenu/main_menu.png");
 
 	ECS::Entity* e = world->create();
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f);
 
-	t = app->tex->Load("Assets/Textures/UI/MainMenu/game_title.png");
+	t = app->tex->Load("Assets/Textures/UI/MainPauseMenu/game_title.png");
 	//app->audio->PlayFx(3, 0);
 	e = world->create();
 	e->assign<Position>(fPoint(0, -105));
 	e->assign<MenuFade>(70);
 	e->assign<Sprite>(t, 0.5f, 1);
 
-
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0);
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1);
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2);
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3);
-
-
-	t = app->tex->Load("Assets/Textures/UI/MainMenu/start.png");
-	e = world->create();
-	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
-
-	t = app->tex->Load("Assets/Textures/UI/MainMenu/continue.png");
-	e = world->create();
-	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
-
-	t = app->tex->Load("Assets/Textures/UI/MainMenu/options.png");
-	e = world->create();
-	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
-
-	t = app->tex->Load("Assets/Textures/UI/MainMenu/exit.png");
-	e = world->create();
-	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0); //start
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1); //continue
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
 
 	app->render->camera.x = app->render->camera.y = 0;
 }
