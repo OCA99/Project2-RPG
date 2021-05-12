@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-      RELEASE_NAME: PUT_YOUR_RELEASE_NAME_HERE
+      RELEASE_NAME: FM_Studios-Under_Evil_RPG
       GNUTARGET: default
 
     steps:
@@ -19,7 +19,7 @@ jobs:
     
     - name: Setup Release Version
       run: |
-        echo "RELEASE_NAME=PUT_YOUR_RELEASE_NAME_HERE_${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+        echo "RELEASE_NAME=FM_Studios-Under_Evil_RPG_${{ github.event.release.tag_name }}" >> $GITHUB_ENV
       shell: bash
       if: github.event_name == 'release' && github.event.action == 'published'
 
@@ -29,7 +29,7 @@ jobs:
         mkdir build
         cd build
         mkdir ${{ env.RELEASE_NAME }}
-        cd ../../Wasabi-Warriors-RPG
+        cd ../../Project2-RPG
         dir
         
     # Setup MSBuild.exe path if required
