@@ -22,6 +22,7 @@ class GuiManager;
 class Debug;
 class PartyManager;
 class BattleManager;
+class ItemManager;
 
 class App
 {
@@ -90,6 +91,7 @@ public:
 	Debug* debug;
 	PartyManager* party;
 	BattleManager* battle;
+	ItemManager* items;
 
 private:
 
