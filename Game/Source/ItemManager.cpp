@@ -1,6 +1,8 @@
 #include "ItemManager.h"
 #include "App.h"
 #include "Module.h"
+#include "Textures.h"
+#include "Render.h"
 
 
 #include "SDL/include/SDL_scancode.h"
@@ -72,6 +74,17 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
+	SDL_Rect rec = { 0,0,16,16 };
+	ListItem<Item*>* item = playerItemList.start;
+	int y = 0;
+	while (item)
+	{
+		//Draw Texture
+		SDL_Texture* tex = app->tex->Load(SString("Assets/Textures/Items/%s", item->data->texturePath.GetString()).GetString());
+		app->render->DrawTexture(tex, 0, 16 * y, &rec, 1);
+		y++;
+		item = item->next;
+	}
 
 	return true;
 }

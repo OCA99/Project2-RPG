@@ -30,7 +30,7 @@ public:
 	SString description; // Item description
 	SString objective; // target to the enemy who drops
 	SString rewardingNPC; // Name of rewarding NPC
-	const char* texturePath; //Texture Path
+	SString texturePath; //Texture Path
 };
 
 class ItemManager : public Module
