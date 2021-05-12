@@ -12,6 +12,7 @@
 #include "Debug.h"
 #include "PartyManager.h"
 #include "BattleManager.h"
+#include "ItemManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -37,6 +38,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	debug = new Debug();
 	party = new PartyManager();
 	battle = new BattleManager();
+	items = new ItemManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -52,6 +54,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(debug);
 	AddModule(party);
 	AddModule(battle);
+	AddModule(items);
 
 	// Render last to swap buffer
 	AddModule(render);

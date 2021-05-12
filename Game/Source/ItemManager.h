@@ -20,19 +20,17 @@ public:
 	Item() {};
 	~Item() {};
 public:
-	int id; // Quest ID (unique for each quest)
-	int type; // Quest type: 0 --> gather 1 --> kill 2 --> delivery 3 --> dialogue
-	SString title; // Quest title
-	SString description; // Quest description
-	SString objective; // Object gathered or monster killer or NPC talked
-	int quantity; // Amount of objective required for the quest
-	SString demandingNPC; // Name of NPC quest giver
+
+	int type; // Item type: 0 --> weapon --> 1 --> armor --> 2 --> potion
+	int quantity; // Amount of items in possession
+	int buyCost; // Quantity of Gold item costs on buy
+	int sellCost; // Quantity of Gold item costs on sell
+	bool questItem; // True if it is for a quest
+	SString title; // Item title
+	SString description; // Item description
+	SString objective; // target to the enemy who drops
 	SString rewardingNPC; // Name of rewarding NPC
-	int rewardXP; // Quantity of XP rewarded
-	int rewardGold; // Quantity of Gold rewarded
-	int requiredId; // For a quest chain if it requires another quest ID completed before
-	bool isCompleted; // true --> Quest completed // false --> Quest not completed
-	int status; // 0 inactive, 1 active, 2 completed
+	SString texturePath; //Texture Path
 };
 
 class ItemManager : public Module
@@ -47,20 +45,25 @@ public:
 
 	bool Update(float dt);
 
-	bool PostUpdate();
+	bool PostUpdate(float dt);
 
 	bool CleanUp();
+
+	void DrawPlayerItems();
+
+	void GiveItemToPlayer(SString& itemTitle) { playerItemList.Add(SearchForItem(itemTitle)); }
+
+	Item* SearchForItem(SString& itemTitle);
 
 public:
 
 	//List<Quest*> questsList;
 	//List<Quest*> questsInactive;
+	List<Item*> itemList;//ALL Items
+	List<Item*> playerItemList;//Player Items
+	bool tempDraw = true;//ignore this
 	//List<Quest*> questsActive;
 	//List<Quest*> questsFinished;
-
-	//Font* font;
-
-	//int debugId = 1;
 };
 
 
