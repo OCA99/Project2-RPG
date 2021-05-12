@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="66" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="1">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="66" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="1">
  <properties>
   <property name="mapId" type="int" value="1"/>
  </properties>
@@ -71321,10 +71321,10 @@
    <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
-   <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
    <tile gid="1673"/>
+   <tile gid="1673"/>
    <tile/>
    <tile/>
    <tile/>
@@ -71338,10 +71338,10 @@
    <tile/>
    <tile/>
    <tile gid="1673"/>
-   <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
    <tile gid="1673"/>
+   <tile gid="1673"/>
    <tile/>
    <tile/>
    <tile gid="1673"/>
@@ -71487,9 +71487,9 @@
    <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
-   <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
+   <tile gid="1673"/>
    <tile/>
    <tile/>
    <tile gid="1673"/>
@@ -71540,9 +71540,9 @@
    <tile/>
    <tile/>
    <tile gid="1673"/>
-   <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
+   <tile gid="1673"/>
    <tile/>
    <tile gid="1673"/>
    <tile/>
@@ -71867,7 +71867,7 @@
    <tile/>
    <tile/>
    <tile gid="1673"/>
-   <tile/>
+   <tile gid="1673"/>
    <tile gid="1673"/>
    <tile/>
    <tile/>
@@ -71883,7 +71883,7 @@
    <tile gid="1673"/>
    <tile gid="1673"/>
    <tile gid="1673"/>
-   <tile/>
+   <tile gid="1673"/>
    <tile gid="1673"/>
    <tile gid="1673"/>
    <tile gid="1673"/>
@@ -72345,7 +72345,7 @@
    <tile/>
    <tile gid="1673"/>
    <tile gid="1673"/>
-   <tile/>
+   <tile gid="1673"/>
    <tile gid="1673"/>
    <tile gid="1673"/>
    <tile/>

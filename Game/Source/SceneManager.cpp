@@ -11,6 +11,7 @@
 #include "Components.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "BattleManager.h"
 #include "Audio.h"
 #include "SceneTransitionSystem.h"
 #include "GuiCheckBox.h"
@@ -84,7 +85,6 @@ bool SceneManager::Update(float dt)
 				if (alpha >= 255)
 				{
 					isFinished = true;
-
 				}
 
 
@@ -127,6 +127,7 @@ bool SceneManager::Update(float dt)
 
 	}
 
+	changingScene = false;
 
 	return true;
 }
@@ -149,7 +150,7 @@ bool SceneManager::PostUpdate(float dt)
 
 	app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
 
-	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu)
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling)
 	{
 		app->audio->PlayFx(8, 0);
 		if(startPressed)menu = !menu;

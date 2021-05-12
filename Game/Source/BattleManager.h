@@ -39,6 +39,8 @@ public:
 
 	void PlayAITurn();
 
+	bool isBattling = false;
+
 private:
 	void Draw();
 	SDL_Texture* characterBar = nullptr;
@@ -58,7 +60,6 @@ private:
 
 	Selecting selecting = Selecting::MEMBER;
 
-	bool isBattling = false;
 
 	float pendingWaitTime = 0;
 

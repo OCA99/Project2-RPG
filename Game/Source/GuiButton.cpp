@@ -126,7 +126,10 @@ bool GuiButton::Draw(Render* render)
 			break;
 		case GuiControlState::PRESSED:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ (drawBounds.w + 1) * 2,0,drawBounds.w + 1,drawBounds.h + 1}), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			if(id == 14)
+				render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			else
+				render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			break;
 		case GuiControlState::SELECTED:
 			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
