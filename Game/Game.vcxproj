@@ -109,6 +109,7 @@
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\GuiSlider.cpp" />
     <ClCompile Include="Source\HumanoidSystem.cpp" />
+    <ClCompile Include="Source\ItemManager.cpp" />
     <ClCompile Include="Source\LogoFadeSystem.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\GuiSlider.h" />
     <ClInclude Include="Source\HumanoidSystem.h" />
+    <ClInclude Include="Source\ItemManager.h" />
     <ClInclude Include="Source\LogoFadeSystem.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\MenuFadeSystem.h" />

@@ -73,6 +73,7 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Source\QuestManager.cpp" />
+    <ClCompile Include="Source\ItemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -199,6 +200,7 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\QuestManager.h" />
+    <ClInclude Include="Source\ItemManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
