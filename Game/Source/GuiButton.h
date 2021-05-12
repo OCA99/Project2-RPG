@@ -17,6 +17,8 @@ public:
 	bool Draw(Render* render);
 	bool Deactivate();
 
+	bool playFxOnce = true;
+
 };
 
 #endif // __GUIBUTTON_H__

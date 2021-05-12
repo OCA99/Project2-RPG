@@ -1,4 +1,6 @@
 #include "GuiCheckBox.h"
+#include "GuiManager.h"
+#include "Audio.h"
 #include "Window.h"
 
 GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::CHECKBOX, id)
@@ -39,11 +41,16 @@ bool GuiCheckBox::Update(Input* input, float dt)
 			// If mouse button pressed -> Generate event!
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
+				app->audio->PlayFx(6, 0);
 				checked = !checked;
 				return NotifyObserver();
 			}
 		}
-		else state = GuiControlState::NORMAL;
+		else
+		{
+			playFxOnce = true;
+			state = GuiControlState::NORMAL;
+		}
 	}
 
 	return true;
@@ -68,6 +75,14 @@ bool GuiCheckBox::Draw(Render* render)
 		}
 		break;
 	case GuiControlState::FOCUSED:
+		if (app->ui->lastId != id) playFxOnce = true;
+
+		if (playFxOnce)
+		{
+			app->audio->PlayFx(8, 0);
+			playFxOnce = false;
+			app->ui->lastId = id;
+		}
 		if (checked)
 		{
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0, 50, 183, 50 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);

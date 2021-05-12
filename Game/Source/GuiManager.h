@@ -69,6 +69,8 @@ public:
 
 	int fxVolume = 100;
 	int musicVolume = 100;
+
+	int lastId = 0;
 };
 
 #endif // __GUIMANAGER_H__
