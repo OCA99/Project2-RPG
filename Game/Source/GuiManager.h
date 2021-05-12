@@ -66,6 +66,7 @@ public:
 	SDL_Texture* audioTex;
 	SDL_Texture* controlsTex;
 	SDL_Texture* onOffTex;
+	SDL_Texture* backArrowTex;
 
 	int fxVolume = 100;
 	int musicVolume = 100;

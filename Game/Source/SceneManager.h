@@ -71,6 +71,8 @@ public:
 	float volSpeed = 50.0f;
 	bool isFinished = false;
 
+	bool changingScene = false;
+
 	bool startPressed;
 
 private:

@@ -15,7 +15,6 @@ void EventHandler::FireEvent(MapEvent* e)
 
 	if (type == "changeArea")
 	{
-
 		MapScene* s = new MapScene(e->attributes->at("target").c_str());
 
 		int playerX = std::stoi(e->attributes->at("playerX"));
@@ -27,6 +26,7 @@ void EventHandler::FireEvent(MapEvent* e)
 		{
 			app->audio->PlayFx(4, 0);
 		}
+		app->scene->changingScene = true;
 		app->scene->playerPositionToBeLoaded = fPoint(playerX, playerY);
 	}
 }

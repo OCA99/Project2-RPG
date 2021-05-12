@@ -161,6 +161,8 @@ bool BattleManager::Update(float dt)
 		LOG("Nuts %d, %d", currentAction, currentTarget);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) selecting = Selecting::ACTION;
+
 	if (currentParty == 1 && pendingWaitTime <= 0)
 	{
 		PlayAITurn();
@@ -408,7 +410,7 @@ void BattleManager::Draw()
 				app->fonts->BlitText(x + 25, y + 13, 1, a->name.c_str());
 
 				if (j == currentAction) {
-					app->render->DrawTexture(selectionArrowHorizontal, x + 80, y + 12, NULL, 0.3f);
+					if(selecting != Selecting::TARGET) app->render->DrawTexture(selectionArrowHorizontal, x + 80, y + 12, NULL, 0.3f);
 				}
 			}
 		}

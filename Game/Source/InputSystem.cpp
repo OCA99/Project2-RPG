@@ -49,7 +49,7 @@ void InputSystem::tick(ECS::World* world, float dt)
 		else
 			keyboardMovement->speed = 70.0f;
 
-		if (app->dialog->currentDialog == nullptr)
+		if (app->dialog->currentDialog == nullptr && !app->scene->changingScene)
 			p->Translate(total.Normalize() * keyboardMovement->speed * dt);
 		else
 			p->Translate(fPoint(0, 0));

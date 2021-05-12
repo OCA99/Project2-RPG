@@ -42,6 +42,7 @@ bool GuiManager::Start()
 	audioTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/audio.png");
 	controlsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/controls.png");
 	onOffTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/on_off.png");
+	backArrowTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/back_arrow.png");
 
 	return true;
 }
@@ -119,6 +120,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		break;
 	case 14:
 		buttonTex = backButtonTex;
+		textTex = backArrowTex;
 		break;
 	default:
 		break;
