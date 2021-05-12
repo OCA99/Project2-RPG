@@ -120,6 +120,7 @@
     <ClCompile Include="Source\NPCMovementSystem.cpp" />
     <ClCompile Include="Source\PartyManager.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
+    <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Render.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Source\InputSystem.h" />
     <ClInclude Include="Source\PositionSystem.h" />
     <ClInclude Include="Source\Prefab.h" />
+    <ClInclude Include="Source\QuestManager.h" />
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneManager.h" />

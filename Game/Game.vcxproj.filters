@@ -72,6 +72,7 @@
     <ClCompile Include="Source\SceneTransitionSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\QuestManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Source\SceneTransitionSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\QuestManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
