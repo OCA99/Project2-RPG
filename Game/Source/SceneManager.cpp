@@ -94,7 +94,7 @@ bool SceneManager::Update(float dt)
 					app->volumeDown = true;
 
 				}
-				LOG("%f", app->volume);
+				//LOG("%f", app->volume);
 				if (app->volume == 0.0f) 
 				{
 					app->volume = 0.0f;
