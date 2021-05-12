@@ -151,7 +151,7 @@ bool SceneManager::PostUpdate(float dt)
 
 	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu)
 	{
-		
+		app->audio->PlayFx(8, 0);
 		if(startPressed)menu = !menu;
 		startPressed = false;
 	}
@@ -207,6 +207,7 @@ bool SceneManager::PostUpdate(float dt)
 			{
 				if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 				{
+					app->audio->PlayFx(6, 0);
 					optionsMenu = false;
 					audioSelected = false;
 					controlsSelected = false;

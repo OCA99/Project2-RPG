@@ -18,7 +18,7 @@ public:
 	bool Draw(Render* render);
 
 	bool checked;
-
+	bool playFxOnce = true;
 private:
 	SDL_Rect checkedBounds;
 };

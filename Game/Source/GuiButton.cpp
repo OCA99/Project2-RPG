@@ -4,6 +4,7 @@
 #include "Debug.h"
 #include "Audio.h"
 #include "SceneManager.h"
+#include "GuiManager.h"
 
 
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::BUTTON, id)
@@ -50,7 +51,6 @@ bool GuiButton::Update(Input* input, float dt)
 		{
 			state = GuiControlState::FOCUSED;
 
-
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = GuiControlState::PRESSED;
@@ -65,7 +65,11 @@ bool GuiButton::Update(Input* input, float dt)
 				return NotifyObserver();
 			}
 		}
-		else if (state != GuiControlState::SELECTED) state = GuiControlState::NORMAL;
+		else if (state != GuiControlState::SELECTED)
+		{
+			playFxOnce = true;
+			state = GuiControlState::NORMAL;
+		}
 		
 	}
 	return true;
@@ -107,6 +111,14 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::FOCUSED:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ drawBounds.w + 1,0,drawBounds.w + 1,drawBounds.h + 1}), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			if (app->ui->lastId != id) playFxOnce = true;
+
+			if (playFxOnce)
+			{
+				app->audio->PlayFx(8, 0);
+				playFxOnce = false;
+				app->ui->lastId = id;
+			}
 			break;
 		case GuiControlState::NORMAL:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);

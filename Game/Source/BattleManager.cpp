@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "PartyManager.h"
+#include "Audio.h"
 #include "Render.h"
 #include "Window.h"
 #include "Input.h"
@@ -91,10 +92,12 @@ bool BattleManager::Update(float dt)
 
 	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->pads[0].a == true) && currentParty == 0)
 	{
+
 		if (selecting == Selecting::MEMBER)
 			selecting = Selecting::ACTION;
 		else if (selecting == Selecting::ACTION)
 		{
+			app->audio->PlayFx(6, 0);
 			selecting = Selecting::TARGET;
 
 			Member* m = p->list.at(currentMember);
@@ -128,11 +131,13 @@ bool BattleManager::Update(float dt)
 	{
 		if (selecting == Selecting::ACTION)
 		{
+			app->audio->PlayFx(8, 0);
 			currentAction -= 1;
 			if (currentAction < 0) currentAction = 0;
 		}
 		if (selecting == Selecting::TARGET)
 		{
+			app->audio->PlayFx(8, 0);
 			currentTarget += 1;
 			if (currentTarget == targets.size()) currentTarget -= 1;
 		}
@@ -143,11 +148,13 @@ bool BattleManager::Update(float dt)
 	{
 		if (selecting == Selecting::ACTION)
 		{
+			app->audio->PlayFx(8, 0);
 			currentAction += 1;
 			if (currentAction == p->list.at(currentMember)->data.actions.size()) currentAction -= 1;
 		}
 		if (selecting == Selecting::TARGET)
 		{
+			app->audio->PlayFx(8, 0);
 			currentTarget -= 1;
 			if (currentTarget < 0) currentTarget = 0;
 		}
@@ -218,6 +225,9 @@ void BattleManager::DoAction()
 
 	Member* m = p->list.at(currentMember);
 	Action* a = m->data.actions.at(currentAction);
+
+	if (currentAction == 0) app->audio->PlayFx(9, 0);
+	if (currentAction == 1) app->audio->PlayFx(10, 0);
 
 	Member* t = nullptr;
 	if (!targets.empty())

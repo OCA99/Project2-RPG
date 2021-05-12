@@ -68,6 +68,7 @@ bool DialogSystem::Update(float dt)
 	if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_DOWN || pad.l_y > 0.0f || pad.down == true) && currentDialog != nullptr) {
 		if (downPressed)
 		{
+			app->audio->PlayFx(8, 0);
 			selectedOption += 1;
 			if (selectedOption == currentDialog->children->size())
 				selectedOption = currentDialog->children->size() - 1;
@@ -81,6 +82,7 @@ bool DialogSystem::Update(float dt)
 	if ((app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_DOWN || pad.l_y < 0.0f || pad.up == true) && currentDialog != nullptr) {
 		if (upPressed)
 		{
+			app->audio->PlayFx(8, 0);
 			selectedOption -= 1;
 			if (selectedOption < 0) selectedOption = 0;
 		}
