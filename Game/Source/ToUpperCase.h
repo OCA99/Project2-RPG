@@ -3,7 +3,7 @@
 
 #include <string>
 
-std::string ToUpperCase(std::string input)
+inline std::string ToUpperCase(std::string input)
 {
 	std::string output = "";
 
