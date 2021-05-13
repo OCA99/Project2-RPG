@@ -164,10 +164,10 @@ void ItemManager::ShowDescription()
 		{
 			if (y < playerItemList.Count())
 			{
-				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 29, item->data->bounds.y + 15, &SDL_Rect({ 0,0,128,32 }), 1.5, 0, 0, 0, 0, false);
+				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 32, item->data->bounds.y + 30, &SDL_Rect({ 0,0,384,96 }), 0.5f, 0, 0, 0, 0, false);
 
 				std::string text = ToUpperCase(playerItemList[y]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 32, item->data->bounds.y + 20, 0, text.c_str());
+				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 0, text.c_str());
 			}
 
 		}
