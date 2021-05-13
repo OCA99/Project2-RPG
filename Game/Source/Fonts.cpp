@@ -102,23 +102,33 @@ void Fonts::BlitText(int x, int y, int fontId, const char* text) const
 	spriteRect.w = font->charW;
 	spriteRect.h = font->charH;
 
+	int _x = x;
+	int marginY = 0;
+	
+
 	for (uint i = 0; i < len; ++i)
 	{
 		// Find the location of the current character in the lookup table
 		for (uint j = 0; j < font->totalLength; ++j)
 		{
+			if(text[i] == '|')
+			{
+				marginY = marginY + 10;
+				_x = x;
+				i++;
+			}
 			if (font->table[j] == text[i])
 			{
 				// Retrieve the position of the current character in the sprite
 				spriteRect.x = (j % font->columns) * spriteRect.w;
 				spriteRect.y = (j / font->columns) * spriteRect.h;
 				// Blit the character at its proper position
-				app->render->DrawTexture(font->texture, x, y, &spriteRect, 1.0f, 1.0f, 0.0f, INT_MAX, INT_MAX, false);
+				app->render->DrawTexture(font->texture, _x, y + marginY, &spriteRect, 1.0f, 1.0f, 0.0f, INT_MAX, INT_MAX, false);
 				break;
 			}
 		}
 		// Advance the position where we blit the next character
-		x += spriteRect.w;
+		_x += spriteRect.w;
 	}
 }
 
