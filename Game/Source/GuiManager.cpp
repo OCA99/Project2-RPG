@@ -23,27 +23,27 @@ bool GuiManager::Awake(pugi::xml_node& config)
 
 bool GuiManager::Start()
 {
-	menuButtonTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/menu_button.png");
-	optionsButtonsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/options_buttons.png");
+	menuButtonTex = app->tex->Load("Textures/UI/MainPauseMenu/menu_button.png");
+	optionsButtonsTex = app->tex->Load("Textures/UI/OptionsMenu/options_buttons.png");
+	
+	
+	sliderTex = app->tex->Load("Textures/UI/OptionsMenu/volume_slider.png");
+	backButtonTex = app->tex->Load("Textures/UI/OptionsMenu/back_button.png");
+	checkBoxTex = app->tex->Load("Textures/UI/OptionsMenu/checkbox.png");
 
-
-	sliderTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/volume_slider.png");
-	backButtonTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/back_button.png");
-	checkBoxTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/checkbox.png");
-
-	startTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/start.png");
-	continueTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/continue.png");
-	optionsTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/options.png");
-	exitTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/exit.png");
-	saveTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/save.png");
-	loadTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/load.png");
-	mainMenuTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/main_menu_text.png");
-	graphicsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/graphics.png");
-	audioTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/audio.png");
-	controlsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/controls.png");
-	onOffTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/on_off.png");
-	backArrowTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/back_arrow.png");
-	pixelTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/pixel.png");
+	startTex = app->tex->Load("Textures/UI/MainPauseMenu/start.png");
+	continueTex = app->tex->Load("Textures/UI/MainPauseMenu/continue.png");
+	optionsTex = app->tex->Load("Textures/UI/MainPauseMenu/options.png");
+	exitTex = app->tex->Load("Textures/UI/MainPauseMenu/exit.png");
+	saveTex = app->tex->Load("Textures/UI/MainPauseMenu/save.png");
+	loadTex = app->tex->Load("Textures/UI/MainPauseMenu/load.png");
+	mainMenuTex = app->tex->Load("Textures/UI/MainPauseMenu/main_menu_text.png");
+	graphicsTex = app->tex->Load("Textures/UI/OptionsMenu/graphics.png");
+	audioTex = app->tex->Load("Textures/UI/OptionsMenu/audio.png");
+	controlsTex = app->tex->Load("Textures/UI/OptionsMenu/controls.png");
+	onOffTex = app->tex->Load("Textures/UI/OptionsMenu/on_off.png");
+	backArrowTex = app->tex->Load("Textures/UI/OptionsMenu/back_arrow.png");
+	pixelTex = app->tex->Load("Textures/UI/OptionsMenu/pixel.png");
 
 	return true;
 }

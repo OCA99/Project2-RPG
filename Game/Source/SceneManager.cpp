@@ -48,13 +48,13 @@ bool SceneManager::Start()
 	//MapScene* s = new MapScene("Town.tmx");
 
 	LogoScene* s = new LogoScene();
-	menuTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/pause_menu.png");
-	optionsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/options_menu.png");
+	menuTex = app->tex->Load("Textures/UI/MainPauseMenu/pause_menu.png");
+	optionsTex = app->tex->Load("Textures/UI/OptionsMenu/options_menu.png");
 
-	audioMenuTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/audio_menu.png");
-	graphicsMenuTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/graphics_menu.png");
+	audioMenuTex = app->tex->Load("Textures/UI/OptionsMenu/audio_menu.png");
+	graphicsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/graphics_menu.png");
 
-	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
+	app->audio->songToBeLoaded = "Audio/Music/Originals/town_main.wav";
 
 	sceneToBeLoaded = (Scene*)s;
 	playerPositionToBeLoaded = fPoint(30, 250);
