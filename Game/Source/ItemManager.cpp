@@ -141,12 +141,15 @@ void ItemManager::ShowDescription()
 	ListItem<GuiControl*>* item = buttons.start;
 	while (item)
 	{
-		if(!item->data->itemCheck)
-			app->render->DrawTexture(itemDescTex, item->data->bounds.x, item->data->bounds.y + 50, &SDL_Rect({ 0,0,128,32 }), 1, 0, 0, 0, 0, false);
-	
+		//Draw Texture
+		if (item->data->itemCheck)
+		{
+			app->render->DrawTexture(itemDescTex, item->data->bounds.x + 29, item->data->bounds.y + 15, &SDL_Rect({ 0,0,128,32 }), 1.5, 0, 0, 0, 0, false);
+
+		}
+
 		item = item->next;
 	}
-	//Draw Texture
 	//Draw Text
 	/*std::string text = ToUpperCase(item->description.GetString());
 	app->fonts->BlitText(button->bounds.x + 50, button->bounds.y + 20, 0, text.c_str());*/
