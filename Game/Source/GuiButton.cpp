@@ -7,6 +7,8 @@
 #include "GuiManager.h"
 #include "ItemManager.h"
 
+#include "Log.h"
+
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
@@ -41,6 +43,10 @@ bool GuiButton::Update(Input* input, float dt)
 	if (id == 16 && state == GuiControlState::FOCUSED)
 	{
 			itemCheck = !itemCheck;
+	}
+	if (id == 16 && state != GuiControlState::FOCUSED)
+	{
+		itemCheck = false;
 	}
 
 
