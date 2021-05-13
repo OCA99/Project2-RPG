@@ -34,6 +34,7 @@ public:
 
 	void DoAction();
 	void CheckBattleEnd();
+	void CheckAndAdvanceQuests();
 
 	void WaitTime(float time);
 
@@ -60,6 +61,8 @@ private:
 
 	Selecting selecting = Selecting::MEMBER;
 
+
+	ListItem<Quest*>* C;
 
 	float pendingWaitTime = 0;
 

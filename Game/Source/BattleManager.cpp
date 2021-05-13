@@ -2,6 +2,7 @@
 
 #include "App.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 #include "Scene.h"
 #include "PartyManager.h"
 #include "Audio.h"
@@ -38,7 +39,7 @@ bool BattleManager::Start()
 	selectionArrowGreen = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_green.png");
 	selectionArrowRed = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_red.png");
 	
-
+	C = app->quests->questsActive.start;
 	return true;
 }
 
@@ -295,6 +296,7 @@ void BattleManager::CheckBattleEnd()
 	}
 
 	if (A || B) end = true;
+
 }
 
 void BattleManager::WaitTime(float time)
