@@ -3,6 +3,7 @@
 #include "Module.h"
 #include <string>
 #include <vector>
+#include "QuestManager.h"
 
 #include "SDL/include/SDL.h"
 
