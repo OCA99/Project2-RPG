@@ -23,8 +23,8 @@ bool Fonts::Awake(pugi::xml_node& config)
 bool Fonts::Start()
 {
 	char lookupTable[] = { "0123456789.,\"!'-^ABCDEFGHIJKLMNOPQRSTUVWXYZ.:?  " };
-	LoadFont("Textures/Fonts/white.png", lookupTable, 3);
-	LoadFont("Textures/Fonts/black.png", lookupTable, 3);
+	LoadFont("Assets/Textures/Fonts/white.png", lookupTable, 3);
+	LoadFont("Assets/Textures/Fonts/black.png", lookupTable, 3);
 
 	return true;
 }

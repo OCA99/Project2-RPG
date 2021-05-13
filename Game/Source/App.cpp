@@ -14,7 +14,6 @@
 #include "BattleManager.h"
 #include "QuestManager.h"
 #include "ItemManager.h"
-#include "AssetsManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -30,7 +29,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	win = new Window();
 	input = new Input();
 	render = new Render();
-	assetsManager = new AssetsManager();
 	tex = new Textures();
 	audio = new Audio();
 	dialog = new DialogSystem();
@@ -49,7 +47,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(input);
 	AddModule(tex);
-	AddModule(assetsManager);
 	AddModule(audio);
 	AddModule(map);
 	AddModule(scene);

@@ -31,13 +31,13 @@ bool BattleManager::Awake()
 
 bool BattleManager::Start()
 {
-	characterBar = app->tex->Load("Textures/UI/BattleMenu/character_bar.png");
-	actionBox = app->tex->Load("Textures/UI/BattleMenu/action_box.png");
-	healthBars = app->tex->Load("Textures/UI/BattleMenu/health_bars.png");
-	selectionArrow = app->tex->Load("Textures/UI/BattleMenu/selection_arrow.png");
-	selectionArrowHorizontal = app->tex->Load("Textures/UI/BattleMenu/selection_arrow_horizontal.png");
-	selectionArrowGreen = app->tex->Load("Textures/UI/BattleMenu/selection_arrow_green.png");
-	selectionArrowRed = app->tex->Load("Textures/UI/BattleMenu/selection_arrow_red.png");
+	characterBar = app->tex->Load("Assets/Textures/UI/BattleMenu/character_bar.png");
+	actionBox = app->tex->Load("Assets/Textures/UI/BattleMenu/action_box.png");
+	healthBars = app->tex->Load("Assets/Textures/UI/BattleMenu/health_bars.png");
+	selectionArrow = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow.png");
+	selectionArrowHorizontal = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_horizontal.png");
+	selectionArrowGreen = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_green.png");
+	selectionArrowRed = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_red.png");
 	
 	C = app->quests->questsActive.start;
 	return true;
