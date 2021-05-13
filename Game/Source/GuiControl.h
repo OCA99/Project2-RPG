@@ -96,6 +96,9 @@ public:
 	//Font font;              // Text font
 
 	SceneManager* observer;        // Observer module (it should probably be an array/list)
+
+	bool itemCheck = false;
+
 };
 
 #endif // __GUICONTROL_H__

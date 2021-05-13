@@ -123,8 +123,8 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		buttonTex = backButtonTex;
 		textTex = backArrowTex;
 		break;
-	case 15:
-		buttonTex = menuButtonTex;
+	case 16:
+		buttonTex = pixelTex;
 		textTex = pixelTex;
 		break;
 	default:

@@ -5,7 +5,6 @@
 #include "Render.h"
 #include "Fonts.h"
 #include "DialogSytem.h"
-#include "GuiManager.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
@@ -60,11 +59,13 @@ bool ItemManager::Start()
 	}
 
 	//TEMPORAL
+
 	playerItemList.Add(SearchForItem(SString("Wooden Sword")));
 	playerItemList.Add(SearchForItem(SString("Leather Helmet")));
 	playerItemList.Add(SearchForItem(SString("Magic Dust")));
 
 	invMenu = app->tex->Load("Assets/Textures/UI/HUD/charactermenu.png");
+	itemDescTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/item_description.png");
 
 	return true;
 }
@@ -83,12 +84,15 @@ bool ItemManager::PostUpdate(float dt)
 
 	if (invOpened)
 	{
-		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({0,0,1080,720}), 0.5f, 1, 0, 0, 0, false);
+		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1080,720 }), 0.5f, 1, 0, 0, 0, false);
 		DrawPlayerItems();
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 15); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		CreateButtons();
+		ShowDescription();
 	}
+
 	if (!invOpened)
 		app->ui->DestroyAllGuiControls();
+
 	return true;
 }
 
@@ -107,10 +111,10 @@ void ItemManager::DrawPlayerItems()
 	{
 		//Draw Texture
 		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0, 0, 0, 0), 1.0f, 1, 0, 0, 0, false);
+
 		//DRAW TEXT
 		std::string text = ToUpperCase(item->data->title.GetString());
 		app->fonts->BlitText(75, 80 + (32 * y), 0, text.c_str());
-
 
 		++y;
 		item = item->next;
@@ -130,5 +134,35 @@ Item* ItemManager::SearchForItem(SString& itemTitle)
 	}
 	LOG("couldn't find %s in the item list", itemTitle.GetString());
 	return nullptr;
+}
+
+void ItemManager::ShowDescription()
+{
+	ListItem<GuiControl*>* item = buttons.start;
+	while (item)
+	{
+		if(!item->data->itemCheck)
+			app->render->DrawTexture(itemDescTex, item->data->bounds.x, item->data->bounds.y + 50, &SDL_Rect({ 0,0,128,32 }), 1, 0, 0, 0, 0, false);
+	
+		item = item->next;
+	}
+	//Draw Texture
+	//Draw Text
+	/*std::string text = ToUpperCase(item->description.GetString());
+	app->fonts->BlitText(button->bounds.x + 50, button->bounds.y + 20, 0, text.c_str());*/
+
+}
+
+void ItemManager::CreateButtons()
+{
+	ListItem<Item*>* item = playerItemList.start;
+	y = 0;
+	while (item)
+	{
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 16)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+
+		y++;
+		item = item->next;
+	}
 }
 
