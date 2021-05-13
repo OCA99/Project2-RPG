@@ -60,11 +60,9 @@ bool ItemManager::Start()
 		itemNode = itemNode.next_sibling("item");
 	}
 
-	//TEMPORAL
-
-	playerItemList.Add(SearchForItem(SString("Wooden Sword")));
-	playerItemList.Add(SearchForItem(SString("Leather Helmet")));
-	playerItemList.Add(SearchForItem(SString("Magic Dust")));
+	//playerItemList.Add(SearchForItem(SString("Wooden Sword")));
+	//playerItemList.Add(SearchForItem(SString("Leather Helmet")));
+	//playerItemList.Add(SearchForItem(SString("Magic Dust")));
 
 	invMenu = app->tex->Load("Assets/Textures/UI/HUD/charactermenu.png");
 	itemDescTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/item_description.png");
@@ -83,17 +81,17 @@ bool ItemManager::PostUpdate(float dt)
 	if (app->scene->currentScene->type == Scene::TYPE::MAP)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			invOpened = !invOpened;
+			invOpened = !invOpened;//Open or close Inv
 
-		if (invOpened)
+		if (invOpened)//If the inventory is opened bool
 		{
 			app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-			DrawPlayerItems();
-			CreateButtons();
-			ShowDescription();
+			DrawPlayerItems();//Draw Items Image and Title
+			CreateButtons();//Create Buttons
+			ShowDescription();//Show
 		}
 
-		if (!invOpened)
+		if (!invOpened)//If it close, we delete the buttons
 		{
 			ListItem<GuiControl*>* item = buttons.start;
 			while (item)
@@ -136,7 +134,6 @@ void ItemManager::DrawPlayerItems()
 		item = item->next;
 	}
 
-
 }
 
 Item* ItemManager::SearchForItem(SString& itemTitle)
@@ -174,12 +171,12 @@ void ItemManager::ShowDescription()
 		++y;
 		item = item->next;
 	}
-	//Draw Text
 
 }
 
 void ItemManager::CreateButtons()
 {
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 17);//CREATE EXIT BUTTON
 	if (buttons.Count() <= 0)
 	{
 		ListItem<Item*>* item = playerItemList.start;
