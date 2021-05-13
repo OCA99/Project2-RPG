@@ -57,6 +57,8 @@ public:
 
 	Item* SearchForItem(SString& itemTitle);
 
+	void CreateHovers();
+
 public:
 	SDL_Texture* invMenu;
 	//List<Quest*> questsList;
@@ -65,6 +67,7 @@ public:
 	List<Item*> playerItemList;//Player Items
 	bool tempDraw = true;//ignore this
 	int y = 0;
+	bool invOpened = false;
 	//List<Quest*> questsActive;
 	//List<Quest*> questsFinished;
 };
