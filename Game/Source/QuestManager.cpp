@@ -324,6 +324,11 @@ bool QuestManager::CheckObjectivesCompletion()
 	//	CompleteQuest(6);
 	/////////////////////////////////////////////////////////////////////////////
 
+	//IDEA -> PASS THE OBJECTIVE AND THE NUMBER VIA XML AND WITH type (0 gather, 1 kill, 2 delivery, 3 dialogue) clasify in three functions for CheckingObjectiveCompletion
+	//GATHER -> attach and id or name atribute to entities sort all the entities searching for the one requested and comprove the number u killed if u kill a new one change in XML
+	//KILL -> attach and id or name atribute to entities sort all the entities searching for the one requested and comprove the number u killed if u kill a new one change in XML
+	//DELIVERY -> button ID with CompleteQuest
+	//DIALOGUE -> some random hardcoded shit
 	return true;
 }
 
