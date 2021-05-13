@@ -230,6 +230,8 @@ bool QuestManager::CheckQuestsLogic()
 	// (remember to give rewards --> look at 2 functions of ModulePlayer)
 	/////////////////////////////////////////////////////////////////////////////
 	ListItem<Quest*>* activeQuestsList = questsActive.start;
+	ListItem<Quest*>* inactiveQuestsList = questsInactive.start;
+
 	while (activeQuestsList != nullptr)
 	{
 		if (activeQuestsList->data->isCompleted == true)
@@ -248,7 +250,7 @@ bool QuestManager::CheckQuestsLogic()
 	// ToDo 6: Implement the code that gives a basic chainquest logic. If an id in finished list meets the
 	// requiredId from the inactive list, do the corresponding changes 
 	/////////////////////////////////////////////////////////////////////////////
-	ListItem<Quest*>* inactiveQuestsList = questsInactive.start;
+	
 	while (inactiveQuestsList != NULL)
 	{
 		if (inactiveQuestsList->data->requiredId != 0)

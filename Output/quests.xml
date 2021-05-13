@@ -25,13 +25,13 @@
 		objective = "talk"
 		progress = "0"
 		quantity = "1"
-		demandingNPC = "Thyma"
+		demandingNPC = "thyma"
 		rewardingNPC = "tlady"
 		rewardXP = "100"
 		rewardGold = "100"
 		requiredId = "0"
 		isCompleted = "false"
-		status = "1"
+		status = "0"
 	/>
 	 <!--  Gathering quest, active when quest 1 is completed --> 
 	<quest 
