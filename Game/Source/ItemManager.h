@@ -12,6 +12,8 @@
 
 #include <string>
 
+#define MAX_ITEMS 8
+
 using namespace std;
 
 class Font;
@@ -55,7 +57,7 @@ public:
 	void DrawPlayerItems();
 
 	//Give item to a player, USE TITLE AS PARAMETER
-	void GiveItemToPlayer(SString& itemTitle) { playerItemList.Add(SearchForItem(itemTitle)); } 
+	void GiveItemToPlayer(SString& itemTitle);
 
 	//Search for an item BY ITS TITLE(NAME)
 	Item* SearchForItem(SString& itemTitle); 

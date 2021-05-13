@@ -60,9 +60,16 @@ bool ItemManager::Start()
 		itemNode = itemNode.next_sibling("item");
 	}
 
-	//playerItemList.Add(SearchForItem(SString("Wooden Sword")));
-	//playerItemList.Add(SearchForItem(SString("Leather Helmet")));
-	//playerItemList.Add(SearchForItem(SString("Magic Dust")));
+	GiveItemToPlayer(SString("Wooden Sword"));
+	GiveItemToPlayer(SString("Leather Helmet"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+
 
 	invMenu = app->tex->Load("Assets/Textures/UI/HUD/charactermenu.png");
 	itemDescTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/item_description.png");
@@ -97,9 +104,9 @@ bool ItemManager::PostUpdate(float dt)
 			while (item)
 			{
 
-				if(item->data->id == 16)
+				if (item->data->id == 16)
 					app->ui->DestroyGuiControl(item->data);
-					
+
 				item = item->next;
 			}
 			buttons.Clear();
@@ -134,6 +141,19 @@ void ItemManager::DrawPlayerItems()
 		item = item->next;
 	}
 
+}
+
+void ItemManager::GiveItemToPlayer(SString& itemTitle)
+{
+	{
+		if (playerItemList.Count() >= MAX_ITEMS)
+		{
+			LOG("You can't add more items to your bag");
+		}
+		else
+			playerItemList.Add(SearchForItem(itemTitle));
+
+	}
 }
 
 Item* ItemManager::SearchForItem(SString& itemTitle)
