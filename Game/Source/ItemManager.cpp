@@ -91,7 +91,14 @@ bool ItemManager::PostUpdate(float dt)
 	}
 
 	if (!invOpened)
-		app->ui->DestroyAllGuiControls();
+	{
+		ListItem<GuiControl*>* item = buttons.start;
+		while (item)
+		{
+			app->ui->DestroyGuiControl(item->data);
+			item = item->next;
+		}
+	}
 
 	return true;
 }
@@ -139,20 +146,26 @@ Item* ItemManager::SearchForItem(SString& itemTitle)
 void ItemManager::ShowDescription()
 {
 	ListItem<GuiControl*>* item = buttons.start;
+	y = 0;
 	while (item)
 	{
 		//Draw Texture
+		if (y > playerItemList.Count()) y = 0;
 		if (item->data->itemCheck)
 		{
-			app->render->DrawTexture(itemDescTex, item->data->bounds.x + 29, item->data->bounds.y + 15, &SDL_Rect({ 0,0,128,32 }), 1.5, 0, 0, 0, 0, false);
+			if (y < playerItemList.Count())
+			{
+				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 29, item->data->bounds.y + 15, &SDL_Rect({ 0,0,128,32 }), 1.5, 0, 0, 0, 0, false);
+
+				std::string text = ToUpperCase(playerItemList[y]->description.GetString());
+				app->fonts->BlitText(item->data->bounds.x + 29, item->data->bounds.y + 15, 0, text.c_str());
+			}
 
 		}
-
+		++y;
 		item = item->next;
 	}
 	//Draw Text
-	/*std::string text = ToUpperCase(item->description.GetString());
-	app->fonts->BlitText(button->bounds.x + 50, button->bounds.y + 20, 0, text.c_str());*/
 
 }
 
