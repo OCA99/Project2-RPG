@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "App.h"
 #include "Textures.h"
+#include "GuiManager.h"
 
 #include "External/PugiXml/src/pugixml.hpp"
 #include "SString.h"
@@ -57,19 +58,23 @@ public:
 
 	Item* SearchForItem(SString& itemTitle);
 
-	void CreateHovers();
+	void ShowDescription();
+
+	void CreateButtons();
 
 public:
 	SDL_Texture* invMenu;
-	//List<Quest*> questsList;
-	//List<Quest*> questsInactive;
+	SDL_Texture* itemDescTex;
+
 	List<Item*> itemList;//ALL Items
 	List<Item*> playerItemList;//Player Items
-	bool tempDraw = true;//ignore this
+	List<GuiControl*> buttons;//Buttons
+
 	int y = 0;
+
+	bool tempDraw = true;//ignore this
 	bool invOpened = false;
-	//List<Quest*> questsActive;
-	//List<Quest*> questsFinished;
+
 };
 
 

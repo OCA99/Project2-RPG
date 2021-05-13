@@ -5,7 +5,7 @@
 #include "Audio.h"
 #include "SceneManager.h"
 #include "GuiManager.h"
-
+#include "ItemManager.h"
 
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -38,6 +38,12 @@ bool GuiButton::Update(Input* input, float dt)
 		if (id == 11 || id == 12) state = GuiControlState::NORMAL;
 		if (id == 13) state = GuiControlState::SELECTED;
 	}
+	if (id == 16 && state == GuiControlState::FOCUSED)
+	{
+			itemCheck = !itemCheck;
+	}
+
+
 
 
 	if (state != GuiControlState::DISABLED)
