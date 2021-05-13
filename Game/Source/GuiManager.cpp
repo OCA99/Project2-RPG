@@ -43,6 +43,7 @@ bool GuiManager::Start()
 	controlsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/controls.png");
 	onOffTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/on_off.png");
 	backArrowTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/back_arrow.png");
+	pixelTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/pixel.png");
 
 	return true;
 }
@@ -121,6 +122,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	case 14:
 		buttonTex = backButtonTex;
 		textTex = backArrowTex;
+		break;
+	case 15:
+		buttonTex = menuButtonTex;
+		textTex = pixelTex;
 		break;
 	default:
 		break;

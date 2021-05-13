@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Fonts.h"
 #include "DialogSytem.h"
+#include "GuiManager.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
@@ -76,12 +77,18 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
-	SDL_Rect rec = { 0,0,1280,720 };
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
+
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		invOpened = !invOpened;
+
+	if (invOpened)
 	{
-		app->render->DrawTexture(invMenu,0, 0, &rec, 0.5f, 1, 0, 0, 0, false);
+		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({0,0,1080,720}), 0.5f, 1, 0, 0, 0, false);
 		DrawPlayerItems();
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 15); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 	}
+	if (!invOpened)
+		app->ui->DestroyAllGuiControls();
 	return true;
 }
 
@@ -99,10 +106,10 @@ void ItemManager::DrawPlayerItems()
 	while (item)
 	{
 		//Draw Texture
-		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0,0,0,0), 1.0f,1,0,0,0,false);
+		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0, 0, 0, 0), 1.0f, 1, 0, 0, 0, false);
 		//DRAW TEXT
 		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(75, 80 + (32*y), 0, text.c_str());
+		app->fonts->BlitText(75, 80 + (32 * y), 0, text.c_str());
 
 
 		++y;

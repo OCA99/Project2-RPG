@@ -52,11 +52,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(dialog);
 	AddModule(fonts);
+	AddModule(items);
 	AddModule(ui);
 	AddModule(debug);
 	AddModule(party);
 	AddModule(battle);
-	AddModule(items);
 	AddModule(quests);
 
 	// Render last to swap buffer
