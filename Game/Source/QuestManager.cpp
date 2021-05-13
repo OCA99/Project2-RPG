@@ -231,8 +231,7 @@ bool QuestManager::CheckQuestsLogic()
 			activeQuestsList->data->status = 2;
 			questsActive.Del(activeQuestsList);
 			questsFinished.Add(activeQuestsList->data);
-			/*app->player->RewardXP(activeQuestsList->data->rewardXP);
-			app->player->RewardGold(activeQuestsList->data->rewardGold);*/
+			//REWARDS();
 		}
 
 		activeQuestsList = activeQuestsList->next;
@@ -287,66 +286,6 @@ bool QuestManager::CheckQuestsLogic()
 bool QuestManager::CheckObjectivesCompletion()
 {
 	//// Debug: Complete quest with id selected
-	//if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	//{
-	//	//ListItem<Entity*>* L;
-	//	switch (debugId)
-	//	{
-	//	case 1: // Quest 1
-	//		app->player->mushroomCount = 8;
-	//		L = app->entities->entities.start;
-	//		while (L != NULL)
-	//		{
-	//			if (L->data->entityType == EntityType::ITEM_MUSHROOM)
-	//				app->entities->entities.Del(L);
-	//			L = L->next;
-	//		}
-	//		++debugId;
-	//		break;
-	//	case 2: // Quest 2
-	//		app->player->chopTreeCount = 10;
-	//		L = app->entities->entities.start;
-	//		while (L != NULL)
-	//		{
-	//			if (L->data->entityType == EntityType::ITEM_TREE)
-	//				app->entities->entities.Del(L);
-	//			L = L->next;
-	//		}
-	//		++debugId;
-	//		break;
-	//	case 3:
-	//		app->player->beachRubbish = 6;
-	//		L = app->entities->entities.start;
-	//		while (L != NULL)
-	//		{
-	//			if (L->data->entityType == EntityType::ITEM_RUBBISH)
-	//				app->entities->entities.Del(L);
-	//			L = L->next;
-	//		}
-	//		++debugId;
-	//		break;
-	//	case 4:
-	//		app->player->turtleKilled = true;
-	//		L = app->entities->entities.start;
-	//		while (L != NULL)
-	//		{
-	//			if (L->data->entityType == EntityType::TURTLE)
-	//				app->entities->entities.Del(L);
-	//			L = L->next;
-	//		}
-	//		++debugId;
-	//		break;
-	//	case 5:
-	//		app->player->snailDelivered = true;
-	//		L = app->entities->entities.start;
-	//		while (L != NULL)
-	//		{
-	//			if (L->data->entityType == EntityType::ITEM_SNAIL)
-	//				app->entities->entities.Del(L);
-	//			L = L->next;
-	//		}
-	//		++debugId;
-	//		break;
 	//	case 6:
 	//		app->player->monsterKilled = true;
 	//		L = app->entities->entities.start;
@@ -403,5 +342,20 @@ bool QuestManager::CompleteQuest(int id)
 		L = L->next;
 	}
 	return true;
+}
+
+int QuestManager::AcceptQuest(int id)
+{
+	ListItem<Quest*>* L = questsInactive.start;
+	while (L != nullptr)
+	{
+		if (id == L->data->id)
+		{
+			L->data->status = 1;
+			questsActive.Add(L->data);
+			questsInactive.Del(L);
+		}
+		L = L->next;
+	}
 }
 /////////////////////////////////////////////////////////////////////////////
