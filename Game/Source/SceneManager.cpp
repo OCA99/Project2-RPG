@@ -456,12 +456,10 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		controlsSelected = false;
 		graphicsSelected = false;
 		buttons = false;
+		app->items->invOpened = false;
 		break;
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
-		break;
-	case 17:
-		app->items->invOpened = false;
 		break;
 	default:
 		break;
