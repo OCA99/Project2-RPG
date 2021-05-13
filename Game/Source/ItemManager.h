@@ -58,7 +58,7 @@ public:
 	Item* SearchForItem(SString& itemTitle);
 
 public:
-
+	SDL_Texture* invMenu;
 	//List<Quest*> questsList;
 	//List<Quest*> questsInactive;
 	List<Item*> itemList;//ALL Items

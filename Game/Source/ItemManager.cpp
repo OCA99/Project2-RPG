@@ -1,16 +1,18 @@
 #include "ItemManager.h"
 #include "App.h"
 #include "Module.h"
-
+#include "Input.h"
 #include "Render.h"
-
+#include "Fonts.h"
+#include "DialogSytem.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
 #include "Log.h"
 
-#include <string>
+
 #include <iostream>
+#include "ToUpperCase.h"
 using namespace std;
 
 ItemManager::ItemManager() : Module()
@@ -61,7 +63,7 @@ bool ItemManager::Start()
 	playerItemList.Add(SearchForItem(SString("Leather Helmet")));
 	playerItemList.Add(SearchForItem(SString("Magic Dust")));
 
-
+	invMenu = app->tex->Load("Assets/Textures/UI/HUD/charactermenu.png");
 
 	return true;
 }
@@ -74,7 +76,12 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
-	DrawPlayerItems();
+	SDL_Rect rec = { 0,0,1280,720 };
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
+	{
+		app->render->DrawTexture(invMenu,0, 0, &rec, 0.5);
+		DrawPlayerItems();
+	}
 	return true;
 }
 
@@ -92,7 +99,12 @@ void ItemManager::DrawPlayerItems()
 	while (item)
 	{
 		//Draw Texture
-		app->render->DrawTexture(item->data->itemTex, 0, 16 * y, (SDL_Rect*)(0,0,0,0), 1);
+		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0,0,0,0), 1);
+		//DRAW TEXT
+		std::string text = ToUpperCase(item->data->title.GetString());
+		app->fonts->BlitText(75, 80 + (32*y), 0, text.c_str());
+
+
 		++y;
 		item = item->next;
 	}
