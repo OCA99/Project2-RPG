@@ -430,7 +430,6 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 11: //graphics window button
 		RemoveButtons();
-		app->ui->DestroyAllGuiControls();
 		graphicsSelected = true;
 		audioSelected = false;
 		controlsSelected = false;
@@ -438,7 +437,6 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 12: //audio window button
 		RemoveButtons();
-		app->ui->DestroyAllGuiControls();
 		audioSelected = true;
 		graphicsSelected = false;
 		controlsSelected = false;
@@ -446,7 +444,6 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 13: //controls window button
 		RemoveButtons();
-		app->ui->DestroyAllGuiControls();
 		controlsSelected = true;
 		audioSelected = false;
 		graphicsSelected = false;
@@ -458,7 +455,6 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		audioSelected = false;
 		controlsSelected = false;
 		graphicsSelected = false;
-		app->ui->DestroyAllGuiControls();
 		buttons = false;
 		break;
 	case 15: //fullscreen checkbox
