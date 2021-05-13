@@ -42,7 +42,7 @@ bool GuiButton::Update(Input* input, float dt)
 	}
 	if (id == 16 && state == GuiControlState::FOCUSED)
 	{
-			itemCheck = !itemCheck;
+		if (!itemCheck) itemCheck = true;
 	}
 	if (id == 16 && state != GuiControlState::FOCUSED)
 	{
