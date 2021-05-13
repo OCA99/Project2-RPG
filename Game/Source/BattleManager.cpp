@@ -39,7 +39,7 @@ bool BattleManager::Start()
 	selectionArrowGreen = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_green.png");
 	selectionArrowRed = app->tex->Load("Assets/Textures/UI/BattleMenu/selection_arrow_red.png");
 	
-	C = app->quests->questsActive.start;
+	//C = app->quests->questsActive.start;
 	return true;
 }
 

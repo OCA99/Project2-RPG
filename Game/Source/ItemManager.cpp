@@ -79,9 +79,9 @@ bool ItemManager::Update(float dt)
 }
 
 bool ItemManager::PostUpdate(float dt)
-{/*
+{
 	if (app->scene->currentScene->type == Scene::TYPE::MAP)
-	{*/
+	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 			invOpened = !invOpened;
 
@@ -107,7 +107,7 @@ bool ItemManager::PostUpdate(float dt)
 			buttons.Clear();
 		}
 
-	/*}*/
+	}
 
 	return true;
 }
@@ -167,7 +167,7 @@ void ItemManager::ShowDescription()
 				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 29, item->data->bounds.y + 15, &SDL_Rect({ 0,0,128,32 }), 1.5, 0, 0, 0, 0, false);
 
 				std::string text = ToUpperCase(playerItemList[y]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 29, item->data->bounds.y + 15, 0, text.c_str());
+				app->fonts->BlitText(item->data->bounds.x + 32, item->data->bounds.y + 20, 0, text.c_str());
 			}
 
 		}
