@@ -344,7 +344,7 @@ bool QuestManager::CompleteQuest(int id)
 	return true;
 }
 
-int QuestManager::AcceptQuest(int id)
+bool QuestManager::AcceptQuest(int id)
 {
 	ListItem<Quest*>* L = questsInactive.start;
 	while (L != nullptr)
@@ -353,9 +353,30 @@ int QuestManager::AcceptQuest(int id)
 		{
 			L->data->status = 1;
 			questsActive.Add(L->data);
+			//find a way to only delete one quest and not the whole List 
 			questsInactive.Del(L);
+			//-
 		}
 		L = L->next;
 	}
+	return true;
+}
+
+bool QuestManager::AbandonQuest(int id)
+{
+	ListItem<Quest*>* L = questsActive.start;
+	while (L != nullptr)
+	{
+		if (id == L->data->id)
+		{
+			L->data->status = 1;
+			//find a way to only delete one quest and not the whole List 
+			questsActive.Del(L);
+			//-
+			questsInactive.Add(L->data);
+		}
+		L = L->next;
+	}
+	return true;
 }
 /////////////////////////////////////////////////////////////////////////////

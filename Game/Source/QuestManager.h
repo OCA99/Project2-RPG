@@ -52,8 +52,8 @@ public:
 	bool CheckQuestsLogic();
 	bool CheckObjectivesCompletion();
 
-	int AcceptQuest(int id);
-
+	bool AcceptQuest(int id);
+	bool AbandonQuest(int id);
 	bool CompleteQuest(int id);
 
 	bool DrawActiveQuests();
