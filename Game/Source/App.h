@@ -22,6 +22,7 @@ class GuiManager;
 class Debug;
 class PartyManager;
 class BattleManager;
+class QuestManager;
 class ItemManager;
 
 class App
@@ -92,6 +93,7 @@ public:
 	PartyManager* party;
 	BattleManager* battle;
 	ItemManager* items;
+	QuestManager* quests;
 
 private:
 
