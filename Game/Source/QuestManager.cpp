@@ -1,6 +1,7 @@
 #include "QuestManager.h"
 #include "Log.h"
 #include "App.h"
+#include "Fonts.h"
 #include "Module.h"
 #include "External/PugiXml/src/pugixml.hpp"
 //#include "ModulePlayer.h"
@@ -13,6 +14,8 @@
 //#include "EntityManager.h"
 //#include "Entity.h"
 //#include "ModuleCollisions.h"
+
+#include "ToUpperCase.h"
 
 #include <string>
 #include <iostream>
@@ -92,10 +95,11 @@ bool QuestManager::Update(float dt)
 	CheckQuestsLogic();
 	CheckObjectivesCompletion();
 
+
 	return true;
 }
 
-bool QuestManager::PostUpdate()
+bool QuestManager::PostUpdate(float dt)
 {
 	DrawActiveQuests();
 	return true;
@@ -119,6 +123,7 @@ bool QuestManager::CleanUp()
 ///////////////////////////////////////////////////////////////////////////
 bool QuestManager::DrawActiveQuests()
 {
+	std::string text;
 	string numToStr;
 	const char* numToStr2;
 	ListItem<Quest*>* L = questsActive.start;
@@ -128,12 +133,12 @@ bool QuestManager::DrawActiveQuests()
 		{
 		case 1: // new quest chain 1
 			// Title Drawing
-			//app->render->DrawText(font, L->data->title.GetString(), 0, 60, 60, 0, { 255,255,255,255 });
+			text = ToUpperCase(L->data->title.GetString());
+			app->fonts->BlitText(0, 0, 1, text.c_str());
 
 			// Amount of mushrooms taken
-			//numToStr = to_string(app->player->mushroomCount);
-			numToStr2 = numToStr.c_str();
-			//app->render->DrawText(font, numToStr2, 280, 63, 60, 0, { 255,255,255,200 });
+			numToStr = to_string(L->data->progress);
+			app->fonts->BlitText(50, 0, 1, numToStr.c_str());
 
 			// Description Drawing if pressed L
 			///////////////////////////////////////////////////////////////////////////
@@ -225,6 +230,8 @@ bool QuestManager::CheckQuestsLogic()
 	// (remember to give rewards --> look at 2 functions of ModulePlayer)
 	/////////////////////////////////////////////////////////////////////////////
 	ListItem<Quest*>* activeQuestsList = questsActive.start;
+	ListItem<Quest*>* inactiveQuestsList = questsInactive.start;
+
 	while (activeQuestsList != nullptr)
 	{
 		if (activeQuestsList->data->isCompleted == true)
@@ -243,7 +250,7 @@ bool QuestManager::CheckQuestsLogic()
 	// ToDo 6: Implement the code that gives a basic chainquest logic. If an id in finished list meets the
 	// requiredId from the inactive list, do the corresponding changes 
 	/////////////////////////////////////////////////////////////////////////////
-	ListItem<Quest*>* inactiveQuestsList = questsInactive.start;
+	
 	while (inactiveQuestsList != NULL)
 	{
 		if (inactiveQuestsList->data->requiredId != 0)
