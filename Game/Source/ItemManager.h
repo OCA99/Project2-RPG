@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "App.h"
+#include "Textures.h"
 
 #include "External/PugiXml/src/pugixml.hpp"
 #include "SString.h"
@@ -31,6 +32,7 @@ public:
 	SString objective; // target to the enemy who drops
 	SString rewardingNPC; // Name of rewarding NPC
 	SString texturePath; //Texture Path
+	SDL_Texture* itemTex = nullptr;
 };
 
 class ItemManager : public Module
@@ -62,6 +64,7 @@ public:
 	List<Item*> itemList;//ALL Items
 	List<Item*> playerItemList;//Player Items
 	bool tempDraw = true;//ignore this
+	int y = 0;
 	//List<Quest*> questsActive;
 	//List<Quest*> questsFinished;
 };

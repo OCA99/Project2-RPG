@@ -1,7 +1,7 @@
 #include "ItemManager.h"
 #include "App.h"
 #include "Module.h"
-#include "Textures.h"
+
 #include "Render.h"
 
 
@@ -51,7 +51,7 @@ bool ItemManager::Start()
 		item->buyCost = itemNode.attribute("buyCost").as_int();
 		item->questItem = itemNode.attribute("questItem").as_bool();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
-
+		item->itemTex = app->tex->Load(SString("Assets/Textures/Items/%s", item->texturePath.GetString()).GetString());
 		itemList.Add(item);
 		itemNode = itemNode.next_sibling("item");
 	}
@@ -87,17 +87,15 @@ bool ItemManager::CleanUp()
 
 void ItemManager::DrawPlayerItems()
 {
-	//SDL_Rect rec = { 0,0,16,16 };
-	//ListItem<Item*>* item = playerItemList.start;
-	//int y = 0;
-	//while (item)
-	//{
-	//	//Draw Texture
-	//	SDL_Texture* tex = app->tex->Load(SString("Assets/Textures/Items/%s", item->data->texturePath.GetString()).GetString());
-	//	app->render->DrawTexture(tex, 0, 16 * y, &rec, 1);
-	//	y++;
-	//	item = item->next;
-	//}
+	ListItem<Item*>* item = playerItemList.start;
+	y = 0;
+	while (item)
+	{
+		//Draw Texture
+		app->render->DrawTexture(item->data->itemTex, 0, 16 * y, (SDL_Rect*)(0,0,0,0), 1);
+		++y;
+		item = item->next;
+	}
 
 
 }
