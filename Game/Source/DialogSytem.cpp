@@ -8,6 +8,7 @@
 #include "Fonts.h"
 #include "Window.h"
 #include "Textures.h"
+#include "QuestManager.h"
 
 #include <utility>
 
@@ -200,6 +201,8 @@ bool DialogSystem::LoadDialog(const char* filename)
 		// Get the dialog root.
 		pugi::xml_node dialogRoot = dialogFile.child("dialog");
 		std::string id = dialogRoot.attribute("id").as_string();
+		optionRoot = dialogRoot.child("options");
+		nameNPC = optionRoot.attribute("speaker").as_string();
 		// Parse the dialog XML into the tree structure.
 		DialogNode* dialog = ParseDialogXML(dialogRoot);
 		// Insert the dialog into the dictionary.
@@ -217,6 +220,20 @@ void DialogSystem::StartDialog(const char* id)
 	if (dialogues.find(id) == dialogues.end()) return;
 	// If it does exist, set it to currentDialog and run NextDialog() to start.
 	currentDialog = dialogues.at(id);
+
+	ListItem<Quest*>* activeQuestsList = app->quests->questsActive.start;
+	while (activeQuestsList != nullptr)
+	{
+		if (activeQuestsList->data->rewardingNPC == nameNPC.c_str())
+		{
+			activeQuestsList->data->progress += 1;
+			activeQuestsList->data->status = 2;
+		}
+
+		activeQuestsList = activeQuestsList->next;
+	}
+
+	LOG("hola");
 	NextDialog();
 }
 
@@ -226,6 +243,7 @@ void DialogSystem::NextDialog()
 
 	// If we have reached the end, currentDialog will be nullptr.
 	if (currentDialog == nullptr) return;
+
 
 	// If the currentDialog is DIALOG, it means we are at the root of the tree. We can just skip to the first child.
 	if (currentDialog->type == DialogNode::NodeType::DIALOG)

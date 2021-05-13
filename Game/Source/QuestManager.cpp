@@ -95,6 +95,7 @@ bool QuestManager::Update(float dt)
 	CheckQuestsLogic();
 	CheckObjectivesCompletion();
 
+
 	return true;
 }
 
