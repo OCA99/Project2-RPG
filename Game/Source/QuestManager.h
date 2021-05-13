@@ -23,6 +23,7 @@ public:
 	SString title; // Quest title
 	SString description; // Quest description
 	SString objective; // Object gathered or monster killer or NPC talked
+	int progress; //progress of the objective
 	int quantity; // Amount of objective required for the quest
 	SString demandingNPC; // Name of NPC quest giver
 	SString rewardingNPC; // Name of rewarding NPC

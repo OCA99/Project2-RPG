@@ -54,6 +54,7 @@ bool QuestManager::Start()
 		quest->title = questNode.attribute("title").as_string();
 		quest->description = questNode.attribute("description").as_string();
 		quest->objective = questNode.attribute("objective").as_string();
+		quest->progress = questNode.attribute("progress").as_int();
 		quest->quantity = questNode.attribute("quantity").as_int();
 		quest->demandingNPC = questNode.attribute("demandingNPC").as_string();
 		quest->rewardingNPC = questNode.attribute("rewardingNPC").as_string();
@@ -285,45 +286,15 @@ bool QuestManager::CheckQuestsLogic()
 
 bool QuestManager::CheckObjectivesCompletion()
 {
-	//// Debug: Complete quest with id selected
-	//	case 6:
-	//		app->player->monsterKilled = true;
-	//		L = app->entities->entities.start;
-	//		while (L != NULL)
-	//		{
-	//			if (L->data->entityType == EntityType::MONSTER)
-	//				app->entities->entities.Del(L);
-	//			L = L->next;
-	//		}
-	//		++debugId;
-	//	default:
-	//		break;
-	//	}
-
-	//}
-	//
-	//// ToDo 8: Go to the xml and read about what the conditions of each quests is
-	//// All variables are declared and managed by the ModulePlayer
-	///////////////////////////////////////////////////////////////////////////////
-	//if (app->player->mushroomCount == 8)
-	//	CompleteQuest(1);
-
-	//if (app->player->chopTreeCount == 10)
-	//	CompleteQuest(2);
-	//
-	//if (app->player->beachRubbish == 6)
-	//	CompleteQuest(3);
-
-	//if (app->player->turtleKilled == true)
-	//	CompleteQuest(4);
-
-	//if (app->player->snailDelivered == true)
-	//	CompleteQuest(5);
-
-	//if (app->player->monsterKilled == true)
-	//	CompleteQuest(6);
-	/////////////////////////////////////////////////////////////////////////////
-
+	ListItem<Quest*>* C = questsActive.start;
+	while (C != nullptr)
+	{
+		if (C->data->progress == C->data->quantity)
+		{
+			CompleteQuest(C->data->id);
+		}
+		C = C->next;
+	}
 	//IDEA -> PASS THE OBJECTIVE AND THE NUMBER VIA XML AND WITH type (0 gather, 1 kill, 2 delivery, 3 dialogue) clasify in three functions for CheckingObjectiveCompletion
 	//GATHER -> attach and id or name atribute to entities sort all the entities searching for the one requested and comprove the number u killed if u kill a new one change in XML
 	//KILL -> attach and id or name atribute to entities sort all the entities searching for the one requested and comprove the number u killed if u kill a new one change in XML
@@ -374,7 +345,7 @@ bool QuestManager::AbandonQuest(int id)
 	{
 		if (id == L->data->id)
 		{
-			L->data->status = 1;
+			L->data->status = 0;
 			//find a way to only delete one quest and not the whole List 
 			questsActive.Del(L);
 			//-
