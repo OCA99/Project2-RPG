@@ -25,8 +25,8 @@ bool GuiManager::Start()
 {
 	menuButtonTex = app->tex->Load("Assets/Textures/UI/MainPauseMenu/menu_button.png");
 	optionsButtonsTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/options_buttons.png");
-	
-	
+
+
 	sliderTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/volume_slider.png");
 	backButtonTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/back_button.png");
 	checkBoxTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/checkbox.png");
@@ -57,7 +57,7 @@ bool GuiManager::Update(float dt)
 
 bool GuiManager::PostUpdate(float dt)
 {
-		DrawAll();
+	DrawAll();
 
 	return true;
 }
@@ -182,8 +182,13 @@ void GuiManager::DestroyAllGuiControls()
 
 	for (int i = 0; i < u; i++)
 	{
+		if (controls.At(0)->data->id != 16)
+		{
 		delete controls.At(0)->data;
 		controls.Del(controls.At(0));
+
+		}
+
 	}
 }
 

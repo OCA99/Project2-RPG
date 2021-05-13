@@ -12,6 +12,8 @@
 
 #include <string>
 
+#define MAX_ITEMS 8
+
 using namespace std;
 
 class Font;
@@ -43,7 +45,6 @@ public:
 
 	~ItemManager();
 
-	// Called before the first frame
 	bool Start();
 
 	bool Update(float dt);
@@ -52,14 +53,19 @@ public:
 
 	bool CleanUp();
 
+	//Draw Items Icon & Title
 	void DrawPlayerItems();
 
-	void GiveItemToPlayer(SString& itemTitle) { playerItemList.Add(SearchForItem(itemTitle)); }
+	//Give item to a player, USE TITLE AS PARAMETER
+	void GiveItemToPlayer(SString& itemTitle);
 
-	Item* SearchForItem(SString& itemTitle);
+	//Search for an item BY ITS TITLE(NAME)
+	Item* SearchForItem(SString& itemTitle); 
 
-	void ShowDescription();
+	//Draw the box with te Description Text
+	void ShowDescription(); 
 
+	//Create Description & Exit Buttons
 	void CreateButtons();
 
 public:
@@ -68,12 +74,11 @@ public:
 
 	List<Item*> itemList;//ALL Items
 	List<Item*> playerItemList;//Player Items
-	List<GuiControl*> buttons;//Buttons
+	List<GuiControl*> buttons;//Buttons List
 
-	int y = 0;
+	int y = 0;//Logistic Tool
 
-	bool tempDraw = true;//ignore this
-	bool invOpened = false;
+	bool invOpened = false;//True = Opened, False = closed.
 
 };
 

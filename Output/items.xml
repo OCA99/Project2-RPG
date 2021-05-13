@@ -2,7 +2,7 @@
 	<itemGuideline
 		type = "(int)This is the item type for the item 1 (0 weapon, 1 armor, 2 potion)" 
 		title = "(string)This is a title for item"
-		description = "(string)This is a description for the item"
+		description = "(string)This is a description for the item USE|FOR LINE BREAK(WITHOUT SPACES)"
 		objective = "(string)This is the objective for the enemy who drops the item"
 		quantity = "(int)This is the quantity of items"
 		rewardingNPC = "(string)This is the name of the NPC that rewards you the item"
@@ -15,7 +15,7 @@
 	<item
 		type = "0"
 		title = "Wooden Sword"
-		description = "An ordinary wooden sword"
+		description = "An ordinary wooden|sword"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"
@@ -28,7 +28,7 @@
 	<item
 		type = "1"
 		title = "Leather Helmet"
-		description = "it will protect your ears on cold nights"
+		description = "it will protect your|ears on cold nights"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"
@@ -41,7 +41,7 @@
 	<item
 		type = "2"
 		title = "Magic Dust"
-		description = "this magic dust will keep you going for a while"
+		description = "this magic dust will|keep you going for a|while"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"

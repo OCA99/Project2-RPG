@@ -5,6 +5,8 @@
 #include "Render.h"
 #include "Fonts.h"
 #include "DialogSytem.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
@@ -58,11 +60,16 @@ bool ItemManager::Start()
 		itemNode = itemNode.next_sibling("item");
 	}
 
-	//TEMPORAL
+	GiveItemToPlayer(SString("Wooden Sword"));
+	GiveItemToPlayer(SString("Leather Helmet"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
+	GiveItemToPlayer(SString("Magic Dust"));
 
-	playerItemList.Add(SearchForItem(SString("Wooden Sword")));
-	playerItemList.Add(SearchForItem(SString("Leather Helmet")));
-	playerItemList.Add(SearchForItem(SString("Magic Dust")));
 
 	invMenu = app->tex->Load("Assets/Textures/UI/HUD/charactermenu.png");
 	itemDescTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/item_description.png");
@@ -78,26 +85,33 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
-
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-		invOpened = !invOpened;
-
-	if (invOpened)
+	if (app->scene->currentScene->type == Scene::TYPE::MAP)
 	{
-		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1080,720 }), 0.5f, 1, 0, 0, 0, false);
-		DrawPlayerItems();
-		CreateButtons();
-		ShowDescription();
-	}
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			invOpened = !invOpened;//Open or close Inv
 
-	if (!invOpened)
-	{
-		ListItem<GuiControl*>* item = buttons.start;
-		while (item)
+		if (invOpened)//If the inventory is opened bool
 		{
-			app->ui->DestroyGuiControl(item->data);
-			item = item->next;
+			app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+			DrawPlayerItems();//Draw Items Image and Title
+			CreateButtons();//Create Buttons
+			ShowDescription();//Show
 		}
+
+		if (!invOpened)//If it close, we delete the buttons
+		{
+			ListItem<GuiControl*>* item = buttons.start;
+			while (item)
+			{
+
+				if (item->data->id == 16)
+					app->ui->DestroyGuiControl(item->data);
+
+				item = item->next;
+			}
+			buttons.Clear();
+		}
+
 	}
 
 	return true;
@@ -127,7 +141,19 @@ void ItemManager::DrawPlayerItems()
 		item = item->next;
 	}
 
+}
 
+void ItemManager::GiveItemToPlayer(SString& itemTitle)
+{
+	{
+		if (playerItemList.Count() >= MAX_ITEMS)
+		{
+			LOG("You can't add more items to your bag");
+		}
+		else
+			playerItemList.Add(SearchForItem(itemTitle));
+
+	}
 }
 
 Item* ItemManager::SearchForItem(SString& itemTitle)
@@ -155,30 +181,33 @@ void ItemManager::ShowDescription()
 		{
 			if (y < playerItemList.Count())
 			{
-				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 29, item->data->bounds.y + 15, &SDL_Rect({ 0,0,128,32 }), 1.5, 0, 0, 0, 0, false);
+				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 32, item->data->bounds.y + 30, &SDL_Rect({ 0,0,384,96 }), 0.5f, 0, 0, 0, 0, false);
 
 				std::string text = ToUpperCase(playerItemList[y]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 29, item->data->bounds.y + 15, 0, text.c_str());
+				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 0, text.c_str());
 			}
 
 		}
 		++y;
 		item = item->next;
 	}
-	//Draw Text
 
 }
 
 void ItemManager::CreateButtons()
 {
-	ListItem<Item*>* item = playerItemList.start;
-	y = 0;
-	while (item)
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//CREATE EXIT BUTTON
+	if (buttons.Count() <= 0)
 	{
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 16)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-
-		y++;
-		item = item->next;
+		ListItem<Item*>* item = playerItemList.start;
+		y = 0;
+		while (item)
+		{
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 16)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			y++;
+			item = item->next;
+		}
 	}
+
 }
 

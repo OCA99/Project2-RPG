@@ -3,6 +3,7 @@
 #include "Module.h"
 #include <string>
 #include <vector>
+#include "QuestManager.h"
 
 #include "SDL/include/SDL.h"
 
@@ -62,7 +63,7 @@ private:
 	Selecting selecting = Selecting::MEMBER;
 
 
-	ListItem<Quest*>* C;
+	//ListItem<Quest*>* C;
 
 	float pendingWaitTime = 0;
 
