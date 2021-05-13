@@ -27,7 +27,7 @@ protected:
 
 		if (member->type == Type::PLAYER1)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/Battle/toisto_battle_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/toisto_battle_sprites.png");
 			nMember->assign<Sprite>(t, 0.3f,2);
 
 			nMember->assign<Animator>();
@@ -40,7 +40,7 @@ protected:
 		}
 		else if (member->type == Type::PLAYER2)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/Battle/thyma_battle_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/thyma_battle_sprites.png");
 			nMember->assign<Sprite>(t, 0.3f,2);
 
 			nMember->assign<Animator>();
@@ -52,7 +52,7 @@ protected:
 		}
 		else if (member->type == Type::SKELETON)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/Battle/skeleton_battle_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/skeleton_battle_sprites.png");
 			nMember->assign<Sprite>(t, 0.3f,2);
 
 			nMember->assign<Animator>();
@@ -64,7 +64,7 @@ protected:
 		}
 		else if (member->type == Type::SHROOM1)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/Battle/shroom_battle_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/shroom_battle_sprites.png");
 			nMember->assign<Sprite>(t, 0.3f,2);
 
 			nMember->assign<Animator>();
@@ -76,7 +76,7 @@ protected:
 		}
 		else if (member->type == Type::SHROOM2)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/Battle/shroom2_battle_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/shroom2_battle_sprites.png");
 			nMember->assign<Sprite>(t, 0.3f,2);
 
 			nMember->assign<Animator>();

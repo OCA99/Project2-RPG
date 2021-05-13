@@ -1,7 +1,6 @@
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
-#include "AssetsManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -64,15 +63,11 @@ bool Textures::CleanUp()
 // Load new texture from file path
 SDL_Texture* const Textures::Load(const char* path)
 {
+
 	SDL_Texture* texture = NULL;
+	SDL_Surface* surface = IMG_Load(path);
 
-	// (SOLVED) TODO 7: Load the texture using the SDL_RWops structure
-	SDL_RWops* rw = app->assetsManager->LoadAsset(path);
-	SDL_Surface* surface = NULL;
-	if (rw != nullptr)
-		surface = IMG_Load_RW(rw, 0);
-
-	if (surface == NULL)
+	if(surface == NULL)
 	{
 		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
 	}
@@ -82,9 +77,7 @@ SDL_Texture* const Textures::Load(const char* path)
 		SDL_FreeSurface(surface);
 	}
 
-	// (SOLVED) TODO 7: Close the allocated SDL_RWops structure
-	if (rw != nullptr)
-		SDL_RWclose(rw);
+	textures.Add(texture);
 
 	return texture;
 }

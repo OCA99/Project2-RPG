@@ -32,7 +32,7 @@ protected:
 
 		if (type == Type::TAVERN)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/NPC/tavern_lady_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/NPC/tavern_lady_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
@@ -61,7 +61,7 @@ protected:
 		}
 		else if (type == Type::REAPER)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/NPC/demon_reaper_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/NPC/demon_reaper_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
@@ -90,7 +90,7 @@ protected:
 		}
 		else if (type == Type::CUSTOMER)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/NPC/blacksmith_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/NPC/blacksmith_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
@@ -119,7 +119,7 @@ protected:
 		}
 		else if (type == Type::THYMA)
 		{
-			SDL_Texture* t = app->tex->Load("Textures/Characters/thyma_good_sprites.png");
+			SDL_Texture* t = app->tex->Load("Assets/Textures/Characters/thyma_good_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();

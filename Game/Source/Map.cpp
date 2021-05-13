@@ -5,7 +5,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Debug.h"
-#include "AssetsManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -265,10 +264,7 @@ bool Map::Load(const char* filename)
 	bool ret = true;
 	SString tmp("%s%s", folder.GetString(), filename);
 
-	char* buffer = nullptr;
-	size_t size = app->assetsManager->LoadXML(tmp.GetString(), &buffer);
-
-	pugi::xml_parse_result result = mapFile.load_buffer(buffer, size);
+	pugi::xml_parse_result result = mapFile.load_file(tmp.GetString());
 
 	if (result == NULL)
 	{

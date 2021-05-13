@@ -29,7 +29,7 @@ QuestManager::~QuestManager()
 
 bool QuestManager::Start()
 {
-	//font = new Font("Fonts/dungeon_font3.xml", app->tex);
+	//font = new Font("Assets/Fonts/dungeon_font3.xml", app->tex);
 
 	// ToDo 2: Load the xml file, parse the result, and make a node pointing to quests parent
 	///////////////////////////////////////////////////////////////////////////
