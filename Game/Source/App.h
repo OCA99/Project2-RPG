@@ -24,6 +24,7 @@ class PartyManager;
 class BattleManager;
 class QuestManager;
 class ItemManager;
+class AssetsManager;
 
 class App
 {
@@ -94,6 +95,7 @@ public:
 	BattleManager* battle;
 	ItemManager* items;
 	QuestManager* quests;
+	AssetsManager* assetsManager;
 
 private:
 

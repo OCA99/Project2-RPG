@@ -20,11 +20,11 @@
   </window>
 
   <dialog>
-    <folder>Assets/Dialog/</folder>
+    <folder>Dialog/</folder>
   </dialog>
 
   <map>
-    <folder>Assets/Textures/Maps/</folder>
+    <folder>Textures/Maps/</folder>
   </map>
 
 

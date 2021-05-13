@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Module.h"
+#include "QuestManager.h"
 #include <string>
 #include <vector>
 
