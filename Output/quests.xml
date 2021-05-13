@@ -36,19 +36,19 @@
 	 <!--  Gathering quest, active when quest 1 is completed --> 
 	<quest 
 		id = "2"
-		type = "0"
-		title = "Chop 10 trees:"
-		description = "Go to the forest close to the beack and chop 10 trees from it."
-		objective = "tree"
+		type = "1"
+		title = "Kill 3 skeletons:"
+		description = "The forest is getting dangerous, we need you to get rid of the monsters."
+		objective = "skeleton"
 		progress = "0"
-		quantity = "10"
+		quantity = "3"
 		demandingNPC = "None"
 		rewardingNPC = "None"
 		rewardXP = "300"
 		rewardGold = "125"
-		requiredId = "1"
+		requiredId = "0"
 		isCompleted = "false"
-		status = "0"
+		status = "1"
 	/>
 	 <!--  Gathering quest, active at start --> 
 	<quest
