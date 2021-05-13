@@ -183,11 +183,11 @@ bool SceneManager::PostUpdate(float dt)
 
 				if (buttons == false)
 				{
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 4);//continue
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 5);//save
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 6);//load
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2);//options
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 7);//back to menu
+					menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 4));//continue
+					menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 5));//save
+					menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 6));//load
+					menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2));//options
+					menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 7));//back to menu
 					buttons = true;
 				}
 
@@ -225,12 +225,13 @@ bool SceneManager::PostUpdate(float dt)
 
 					if (buttons == false)
 					{
-						app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15); //fullscreen checkbox
-						app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16); //vsync checkbox
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15)); //fullscreen checkbox
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16)); //vsync checkbox
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
 
 						buttons = true;
 					}
@@ -242,13 +243,13 @@ bool SceneManager::PostUpdate(float dt)
 
 					if (buttons == false)
 					{
-						app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 330 / 2, 300/2, 30/2 }), 8); //general volume slider
-						app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 412 / 2, 300 / 2, 30 / 2 }), 9); //music volume slider
-						app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 494 / 2, 300 / 2, 30 / 2 }), 10); //fx volume slider
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 330 / 2, 300/2, 30/2 }), 8)); //general volume slider
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 412 / 2, 300 / 2, 30 / 2 }), 9)); //music volume slider
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 494 / 2, 300 / 2, 30 / 2 }), 10)); //fx volume slider
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
 
 						buttons = true;
 					}
@@ -259,10 +260,10 @@ bool SceneManager::PostUpdate(float dt)
 
 					if (buttons == false)
 					{
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
-						app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
+						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
 
 						buttons = true;
 					}
@@ -409,7 +410,9 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		return false;
 		break;
 	case 4: //continue (exit menu) button
+		app->ui->DestroyAllGuiControls();
 		menu = 0;
+		RemoveButtons();
 		break;
 	case 5: //save
 		app->RequestSave();
@@ -426,6 +429,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		menu = false;
 		break;
 	case 11: //graphics window button
+		RemoveButtons();
 		app->ui->DestroyAllGuiControls();
 		graphicsSelected = true;
 		audioSelected = false;
@@ -433,6 +437,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		buttons = false;
 		break;
 	case 12: //audio window button
+		RemoveButtons();
 		app->ui->DestroyAllGuiControls();
 		audioSelected = true;
 		graphicsSelected = false;
@@ -440,6 +445,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		buttons = false;
 		break;
 	case 13: //controls window button
+		RemoveButtons();
 		app->ui->DestroyAllGuiControls();
 		controlsSelected = true;
 		audioSelected = false;
@@ -447,6 +453,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		buttons = false;
 		break;
 	case 14: //back button
+		RemoveButtons();
 		optionsMenu = false;
 		audioSelected = false;
 		controlsSelected = false;
@@ -466,4 +473,15 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 	//8,9,10 are audio sliders
 
 	return true;
+}
+
+void SceneManager::RemoveButtons()
+{
+	ListItem<GuiControl*>* item = menuButtons.start;
+	while (item)
+	{
+		app->ui->DestroyGuiControl(item->data);
+		item = item->next;
+	}
+	menuButtons.Clear();
 }

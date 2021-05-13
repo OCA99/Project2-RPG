@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Point.h"
+#include "List.h"
 
 struct SDL_Texture;
 class Scene;
@@ -45,21 +46,23 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	void RemoveButtons();
+
 public:
+	Scene* currentScene = nullptr;
 	Scene* sceneToBeLoaded = nullptr;
 	fPoint playerPositionToBeLoaded;
+	List<GuiControl*> menuButtons;//Buttons List
 
-	Scene* currentScene = nullptr;
 
 	SDL_Texture* menuTex;
 	SDL_Texture* optionsTex;
-
 	SDL_Texture* graphicsMenuTex;
-	bool graphicsSelected;
-
 	SDL_Texture* audioMenuTex;
-	bool audioSelected;
 
+
+	bool graphicsSelected;
+	bool audioSelected;
 	bool controlsSelected;
 
 	bool menu = false;
