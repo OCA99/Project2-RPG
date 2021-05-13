@@ -5,6 +5,8 @@
 #include "Render.h"
 #include "Fonts.h"
 #include "DialogSytem.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
@@ -77,28 +79,35 @@ bool ItemManager::Update(float dt)
 }
 
 bool ItemManager::PostUpdate(float dt)
-{
+{/*
+	if (app->scene->currentScene->type == Scene::TYPE::MAP)
+	{*/
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+			invOpened = !invOpened;
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-		invOpened = !invOpened;
-
-	if (invOpened)
-	{
-		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1080,720 }), 0.5f, 1, 0, 0, 0, false);
-		DrawPlayerItems();
-		CreateButtons();
-		ShowDescription();
-	}
-
-	if (!invOpened)
-	{
-		ListItem<GuiControl*>* item = buttons.start;
-		while (item)
+		if (invOpened)
 		{
-			app->ui->DestroyGuiControl(item->data);
-			item = item->next;
+			app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+			DrawPlayerItems();
+			CreateButtons();
+			ShowDescription();
 		}
-	}
+
+		if (!invOpened)
+		{
+			ListItem<GuiControl*>* item = buttons.start;
+			while (item)
+			{
+
+				if(item->data->id == 16)
+					app->ui->DestroyGuiControl(item->data);
+					
+				item = item->next;
+			}
+			buttons.Clear();
+		}
+
+	/*}*/
 
 	return true;
 }
@@ -171,14 +180,17 @@ void ItemManager::ShowDescription()
 
 void ItemManager::CreateButtons()
 {
-	ListItem<Item*>* item = playerItemList.start;
-	y = 0;
-	while (item)
+	if (buttons.Count() <= 0)
 	{
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 16)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-
-		y++;
-		item = item->next;
+		ListItem<Item*>* item = playerItemList.start;
+		y = 0;
+		while (item)
+		{
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 16)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			y++;
+			item = item->next;
+		}
 	}
+
 }
 
