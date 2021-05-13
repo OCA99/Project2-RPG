@@ -15,6 +15,7 @@
 #include "Audio.h"
 #include "SceneTransitionSystem.h"
 #include "GuiCheckBox.h"
+#include "ItemManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -455,6 +456,9 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
+		break;
+	case 17:
+		app->items->invOpened = false;
 		break;
 	default:
 		break;

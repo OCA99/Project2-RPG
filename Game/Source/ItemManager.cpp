@@ -180,6 +180,7 @@ void ItemManager::ShowDescription()
 
 void ItemManager::CreateButtons()
 {
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 17);//CREATE EXIT BUTTON
 	if (buttons.Count() <= 0)
 	{
 		ListItem<Item*>* item = playerItemList.start;

@@ -127,6 +127,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		buttonTex = pixelTex;
 		textTex = pixelTex;
 		break;
+	case 17:
+		buttonTex = optionsButtonsTex;
+		textTex = audioTex;
+		break;
 	default:
 		break;
 	}
