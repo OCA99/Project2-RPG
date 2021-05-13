@@ -233,6 +233,19 @@ void DialogSystem::StartDialog(const char* id)
 		activeQuestsList = activeQuestsList->next;
 	}
 
+	ListItem<Quest*>* inactiveQuestsList = app->quests->questsInactive.start;
+	while (inactiveQuestsList != nullptr)
+	{
+		if (inactiveQuestsList->data->demandingNPC == nameNPC.c_str())
+		{
+			inactiveQuestsList->data->status = 1;
+			app->quests->questsInactive.Del(inactiveQuestsList);
+			app->quests->questsActive.Add(inactiveQuestsList->data);
+		}
+
+		inactiveQuestsList = inactiveQuestsList->next;
+	}
+
 	LOG("hola");
 	NextDialog();
 }
