@@ -79,7 +79,7 @@ bool ItemManager::PostUpdate(float dt)
 	SDL_Rect rec = { 0,0,1280,720 };
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
 	{
-		app->render->DrawTexture(invMenu,0, 0, &rec, 0.5);
+		app->render->DrawTexture(invMenu,0, 0, &rec, 0.5f, 1, 0, 0, 0, false);
 		DrawPlayerItems();
 	}
 	return true;
@@ -99,7 +99,7 @@ void ItemManager::DrawPlayerItems()
 	while (item)
 	{
 		//Draw Texture
-		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0,0,0,0), 1);
+		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0,0,0,0), 1.0f,1,0,0,0,false);
 		//DRAW TEXT
 		std::string text = ToUpperCase(item->data->title.GetString());
 		app->fonts->BlitText(75, 80 + (32*y), 0, text.c_str());
