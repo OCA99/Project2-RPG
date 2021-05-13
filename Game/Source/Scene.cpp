@@ -59,27 +59,27 @@ void MapScene::Load(fPoint playerPosition)
 	
 	if (s == "Town.tmx")
 	{
-		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_main.wav";
+		app->audio->songToBeLoaded = "Audio/Music/Originals/town_main.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "Tavern.tmx")
 	{
-		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_tavern.wav";
+		app->audio->songToBeLoaded = "Audio/Music/Originals/town_tavern.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "Forest.tmx")
 	{
-		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_main.wav";
+		app->audio->songToBeLoaded = "Audio/Music/Originals/forest_main.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "NPC House.tmx")
 	{
-		app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_house.wav";
+		app->audio->songToBeLoaded = "Audio/Music/Originals/town_house.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 	else if (s == "Graveyard.tmx")
 	{
-		app->audio->songToBeLoaded = "Assets/Audio/Music/graveyard_main.ogg";
+		app->audio->songToBeLoaded = "Audio/Music/graveyard_main.ogg";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
 
@@ -104,18 +104,18 @@ void LogoScene::Load()
 
 	e->assign<Position>(fPoint(150, 50));
 
-	app->audio->LoadFx("Assets/Audio/Fx/logo.ogg");//1
-	app->audio->LoadFx("Assets/Audio/Fx/action_interact.ogg");//2
-	app->audio->LoadFx("Assets/Audio/Fx/title.ogg");//3
-	app->audio->LoadFx("Assets/Audio/Fx/action_door.ogg");//4
-	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//5
-	app->audio->LoadFx("Assets/Audio/Fx/menu_interact.ogg");//6
-	app->audio->LoadFx("Assets/Audio/Fx/player_footsteps_ground.ogg");//7
-	app->audio->LoadFx("Assets/Audio/Fx/menu_travel.ogg");//8
-	app->audio->LoadFx("Assets/Audio/Fx/all_attack.ogg");//9
-	app->audio->LoadFx("Assets/Audio/Fx/all_heal.ogg");//10
+	app->audio->LoadFx("Audio/Fx/logo.ogg");//1
+	app->audio->LoadFx("Audio/Fx/action_interact.ogg");//2
+	app->audio->LoadFx("Audio/Fx/title.ogg");//3
+	app->audio->LoadFx("Audio/Fx/action_door.ogg");//4
+	app->audio->LoadFx("Audio/Fx/player_footsteps_ground.ogg");//5
+	app->audio->LoadFx("Audio/Fx/menu_interact.ogg");//6
+	app->audio->LoadFx("Audio/Fx/player_footsteps_ground.ogg");//7
+	app->audio->LoadFx("Audio/Fx/menu_travel.ogg");//8
+	app->audio->LoadFx("Audio/Fx/all_attack.ogg");//9
+	app->audio->LoadFx("Audio/Fx/all_heal.ogg");//10
 
-	SDL_Texture* t = app->tex->Load("Assets/Textures/logo.png");
+	SDL_Texture* t = app->tex->Load("Textures/logo.png");
 
 	e->assign<Sprite>(t, 0.2f);
 
@@ -132,16 +132,16 @@ void MenuScene::Load()
 	world->registerSystem(new SpriteSystem());
 	world->registerSystem(new MenuFadeSystem());
 
-	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/town_blacksmith.wav";
+	app->audio->songToBeLoaded = "Audio/Music/Originals/town_blacksmith.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
-	SDL_Texture* t = app->tex->Load("Assets/Textures/UI/MainPauseMenu/main_menu.png");
+	SDL_Texture* t = app->tex->Load("Textures/UI/MainPauseMenu/main_menu.png");
 
 	ECS::Entity* e = world->create();
 	e->assign<Position>(fPoint(0, 0));
 	e->assign<Sprite>(t, 0.5f);
 
-	t = app->tex->Load("Assets/Textures/UI/MainPauseMenu/game_title.png");
+	t = app->tex->Load("Textures/UI/MainPauseMenu/game_title.png");
 	//app->audio->PlayFx(3, 0);
 	e = world->create();
 	e->assign<Position>(fPoint(0, -105));
@@ -158,7 +158,7 @@ void MenuScene::Load()
 
 void BattleScene::Load()
 {
-	app->audio->songToBeLoaded = "Assets/Audio/Music/Originals/forest_battle.wav";
+	app->audio->songToBeLoaded = "Audio/Music/Originals/forest_battle.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
 	Scene::Load();
@@ -166,7 +166,7 @@ void BattleScene::Load()
 	world->registerSystem(new BattleMemberSystem());
 	world->registerSystem(new AnimatorSystem());
 
-	SDL_Texture* t = app->tex->Load("Assets/Textures/Battle/battle_forest.png");
+	SDL_Texture* t = app->tex->Load("Textures/Battle/battle_forest.png");
 	ECS::Entity* e = world->create();
 	app->render->camera.x = app->render->camera.y = 0;
 	e->assign<Position>(fPoint(0, 0));
