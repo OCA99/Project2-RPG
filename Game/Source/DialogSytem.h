@@ -61,6 +61,8 @@ private:
 
 	std::string folder;
 	pugi::xml_document dialogFile;
+	pugi::xml_node optionRoot;
+	std::string nameNPC;
 
 	SDL_Texture* dialogFrame;
 	SDL_Texture* tavernLady;
