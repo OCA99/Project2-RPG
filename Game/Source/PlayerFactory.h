@@ -22,7 +22,7 @@ protected:
 		ECS::Entity* player = world->create();
 		player->assign<Position>();
 
-		SDL_Texture* t = app->tex->Load("Assets/Textures/Characters/toisto_good_sprites.png");
+		SDL_Texture* t = app->tex->Load("Textures/Characters/toisto_good_sprites.png");
 		player->assign<Sprite>(t, 0.8f);
 
 		player->assign<Animator>();

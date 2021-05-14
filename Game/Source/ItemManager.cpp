@@ -55,7 +55,7 @@ bool ItemManager::Start()
 		item->buyCost = itemNode.attribute("buyCost").as_int();
 		item->questItem = itemNode.attribute("questItem").as_bool();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
-		item->itemTex = app->tex->Load(SString("Assets/Textures/Items/%s", item->texturePath.GetString()).GetString());
+		item->itemTex = app->tex->Load(SString("Textures/Items/%s", item->texturePath.GetString()).GetString());
 		itemList.Add(item);
 		itemNode = itemNode.next_sibling("item");
 	}
@@ -71,8 +71,8 @@ bool ItemManager::Start()
 	GiveItemToPlayer(SString("Magic Dust"));
 
 
-	invMenu = app->tex->Load("Assets/Textures/UI/HUD/charactermenu.png");
-	itemDescTex = app->tex->Load("Assets/Textures/UI/OptionsMenu/item_description.png");
+	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
+	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
 	return true;
 }
