@@ -203,6 +203,9 @@
     <ClInclude Include="Source\QuestManager.h" />
     <ClInclude Include="Source\ItemManager.h" />
     <ClInclude Include="Source\AssetsManager.h" />
+    <ClInclude Include="Source\External\simplify.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
