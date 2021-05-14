@@ -8,6 +8,7 @@
 #include "Fonts.h"
 #include "Window.h"
 #include "Textures.h"
+#include "AssetsManager.h"
 #include "QuestManager.h"
 
 #include <utility>
@@ -35,11 +36,11 @@ bool DialogSystem::Awake(pugi::xml_node& config)
 
 bool DialogSystem::Start()
 {
-	dialogFrame = app->tex->Load("Assets/Textures/Dialogue/frame.png");
-	tavernLady = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
-	reaperSr = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
-	customer = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
-	thyma = app->tex->Load("Assets/Textures/Dialogue/thyma_good_dialogue.png");
+	dialogFrame = app->tex->Load("Textures/Dialogue/frame.png");
+	tavernLady = app->tex->Load("Textures/Dialogue/tavern_lady_dialogue.png");
+	reaperSr = app->tex->Load("Textures/Dialogue/reaper_dialogue.png");
+	customer = app->tex->Load("Textures/Dialogue/blacksmith_dialogue.png");
+	thyma = app->tex->Load("Textures/Dialogue/thyma_good_dialogue.png");
 
 	aPressed = true;
 	downPressed = true;
@@ -188,7 +189,10 @@ bool DialogSystem::LoadDialog(const char* filename)
 	LOG("%s\n", path.c_str());
 
 	// Load the file.
-	pugi::xml_parse_result result = dialogFile.load_file(path.c_str());
+	char* buffer = nullptr;
+	size_t size = app->assetsManager->LoadXML(path.c_str(), &buffer);
+
+	pugi::xml_parse_result result = dialogFile.load_buffer(buffer, size);
 
 	if (result == NULL) {
 		LOG("Could not load map xml file %s. pugi error: %s", path.c_str(), result.description());
