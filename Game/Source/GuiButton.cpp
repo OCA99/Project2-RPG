@@ -40,11 +40,11 @@ bool GuiButton::Update(Input* input, float dt)
 		if (id == 11 || id == 12) state = GuiControlState::NORMAL;
 		if (id == 13) state = GuiControlState::SELECTED;
 	}
-	if (id == 16 && state == GuiControlState::FOCUSED)
+	if (id == 17 && state == GuiControlState::FOCUSED)
 	{
 		if (!itemCheck) itemCheck = true;
 	}
-	if (id == 16 && state != GuiControlState::FOCUSED)
+	if (id == 17 && state != GuiControlState::FOCUSED)
 	{
 		itemCheck = false;
 	}
