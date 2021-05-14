@@ -3,18 +3,14 @@
 #include "App.h"
 #include "Fonts.h"
 #include "Module.h"
-#include "External/PugiXml/src/pugixml.hpp"
-//#include "ModulePlayer.h"
 #include "List.h"
 #include "Input.h"
 #include "Render.h"
-//#include "Font.h"
-#include "Textures.h"
-#include "SDL/include/SDL_scancode.h"
-//#include "EntityManager.h"
-//#include "Entity.h"
-//#include "ModuleCollisions.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
+#include "External/PugiXml/src/pugixml.hpp"
+#include "SDL/include/SDL_scancode.h"
 #include "ToUpperCase.h"
 
 #include <string>
@@ -91,6 +87,13 @@ bool QuestManager::Start()
 
 		questNode = questNode.next_sibling("quest");
 	}
+
+	questMenuTex = app->tex->Load("Assets/Textures/UI/HUD/quests_menu.png");
+	customerTex = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
+	reaperTex = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
+	tavernTex = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
+	thymaTex = app->tex->Load("Assets/Textures/Dialogue/thyma_good_dialogue.png");
+
 	return true;
 }
 
@@ -99,6 +102,8 @@ bool QuestManager::Update(float dt)
 	CheckQuestsLogic();
 	CheckObjectivesCompletion();
 
+	if ((app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN))
+		questInvOpened = !questInvOpened;//Open or close Inv
 
 	return true;
 }
@@ -106,6 +111,7 @@ bool QuestManager::Update(float dt)
 bool QuestManager::PostUpdate(float dt)
 {
 	DrawActiveQuests();
+	if (questInvOpened) DrawQuestUi();
 	return true;
 }
 
@@ -224,6 +230,20 @@ bool QuestManager::DrawActiveQuests()
 		L = L->next;
 	}
 	return true;
+}
+void QuestManager::DrawQuestUi()
+{
+	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+	ListItem<Quest*>* item = questsActive.start;
+	int i = 0;
+	while (item)
+	{
+		std::string text = ToUpperCase(item->data->title.GetString());
+		app->fonts->BlitText(40, 80 + (32 * i), 0, text.c_str());
+		item = item->next;
+		++i;
+	}
+
 }
 ///////////////////////////////////////////////////////////////////////////
 
