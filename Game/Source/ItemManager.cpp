@@ -104,7 +104,7 @@ bool ItemManager::PostUpdate(float dt)
 			while (item)
 			{
 
-				if (item->data->id == 16)
+				if (item->data->id == 17)
 					app->ui->DestroyGuiControl(item->data);
 
 				item = item->next;
@@ -203,7 +203,7 @@ void ItemManager::CreateButtons()
 		y = 0;
 		while (item)
 		{
-			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 16)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			y++;
 			item = item->next;
 		}
