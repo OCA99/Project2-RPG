@@ -26,7 +26,7 @@ bool GuiButton::Update(Input* input, float dt)
 	if (app->scene->graphicsSelected)
 	{
 		if (id == 12 || id == 13) state = GuiControlState::NORMAL;
-		if(id == 11) state = GuiControlState::SELECTED;
+		if (id == 11) state = GuiControlState::SELECTED;
 	}
 
 	if (app->scene->audioSelected)
@@ -48,7 +48,13 @@ bool GuiButton::Update(Input* input, float dt)
 	{
 		itemCheck = false;
 	}
-
+	if (id == 19 && state == GuiControlState::PRESSED)
+	{
+		if (!questCheck) questCheck = true;
+	}else
+	{
+		questCheck = false;
+	}
 
 
 
@@ -59,7 +65,7 @@ bool GuiButton::Update(Input* input, float dt)
 
 		// Check collision between mouse and button bounds
 		if ((mouseX > bounds.x) && (mouseX < (bounds.x + bounds.w)) &&
-			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h)) &&  state != GuiControlState::SELECTED)
+			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h)) && state != GuiControlState::SELECTED)
 		{
 			state = GuiControlState::FOCUSED;
 
@@ -82,7 +88,7 @@ bool GuiButton::Update(Input* input, float dt)
 			playFxOnce = true;
 			state = GuiControlState::NORMAL;
 		}
-		
+
 	}
 	return true;
 }
@@ -121,7 +127,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::DISABLED:
 			break;
 		case GuiControlState::FOCUSED:
-			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ drawBounds.w + 1,0,drawBounds.w + 1,drawBounds.h + 1}), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ drawBounds.w + 1,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			if (app->ui->lastId != id) playFxOnce = true;
 
@@ -137,8 +143,8 @@ bool GuiButton::Draw(Render* render)
 			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			break;
 		case GuiControlState::PRESSED:
-			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ (drawBounds.w + 1) * 2,0,drawBounds.w + 1,drawBounds.h + 1}), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			if(id == 14)
+			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ (drawBounds.w + 1) * 2,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			if (id == 14)
 				render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			else
 				render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);

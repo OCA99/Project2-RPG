@@ -123,10 +123,13 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		buttonTex = backButtonTex;
 		textTex = backArrowTex;
 		break;
-	case 16:
+	case 17:
 		buttonTex = pixelTex;
 		textTex = pixelTex;
 		break;
+	case 19:
+		buttonTex = optionsButtonsTex;
+		textTex = audioTex;
 	default:
 		break;
 	}
@@ -182,7 +185,7 @@ void GuiManager::DestroyAllGuiControls()
 
 	for (int i = 0; i < u; i++)
 	{
-		if (controls.At(0)->data->id != 17)
+		if (controls.At(0)->data->id != 17 && controls.At(0)->data->id != 19)
 		{
 		delete controls.At(0)->data;
 		controls.Del(controls.At(0));

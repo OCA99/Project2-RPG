@@ -457,6 +457,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		graphicsSelected = false;
 		buttons = false;
 		app->items->invOpened = false;
+		app->quests->questInvOpened = false;
 		break;
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();

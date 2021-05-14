@@ -88,11 +88,13 @@ bool QuestManager::Start()
 		questNode = questNode.next_sibling("quest");
 	}
 
-	questMenuTex = app->tex->Load("Assets/Textures/UI/HUD/quests_menu.png");
+	//questMenuTex = app->tex->Load("Assets/Textures/UI/HUD/quests_menu.png");
+	questMenuTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 	customerTex = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
 	reaperTex = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
 	tavernTex = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
 	thymaTex = app->tex->Load("Assets/Textures/Dialogue/thyma_good_dialogue.png");
+
 
 	return true;
 }
@@ -105,13 +107,35 @@ bool QuestManager::Update(float dt)
 	if ((app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN))
 		questInvOpened = !questInvOpened;//Open or close Inv
 
+	if (questInvOpened)
+		CreateQuestButtons();
+
 	return true;
 }
 
 bool QuestManager::PostUpdate(float dt)
 {
 	DrawActiveQuests();
-	if (questInvOpened) DrawQuestUi();
+
+	if (questInvOpened)
+	{
+		DrawQuestUi();
+		ShowQuestDescription();
+	}
+	if (!questInvOpened)//If it close, we delete the buttons
+	{
+		ListItem<GuiControl*>* item = questButtons.start;
+		while (item)
+		{
+
+			if (item->data->id == 19)
+				app->ui->DestroyGuiControl(item->data);
+
+			item = item->next;
+		}
+		questButtons.Clear();
+	}
+
 	return true;
 }
 
@@ -233,8 +257,9 @@ bool QuestManager::DrawActiveQuests()
 }
 void QuestManager::DrawQuestUi()
 {
-	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+	//app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 	ListItem<Quest*>* item = questsActive.start;
+	
 	int i = 0;
 	while (item)
 	{
@@ -245,7 +270,48 @@ void QuestManager::DrawQuestUi()
 	}
 
 }
-///////////////////////////////////////////////////////////////////////////
+
+void QuestManager::ShowQuestDescription()
+{
+	ListItem<GuiControl*>* item = questButtons.start;
+	y = 0;
+	while (item)
+	{
+		//Draw Texture
+		if (y > questButtons.Count()) y = 0;
+		if (item->data->questCheck)
+		{
+			if (y < questsActive.Count())
+			{
+				LOG("JSAKJDKLA");
+
+				std::string text = ToUpperCase(questsActive[y]->description.GetString());
+				app->fonts->BlitText(item->data->bounds.x + 200, item->data->bounds.y + 35, 0, text.c_str());
+			}
+
+		}
+		++y;
+		item = item->next;
+	}
+
+}
+
+void QuestManager::CreateQuestButtons()
+{
+	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//Back Button 14
+	if (questButtons.Count() <= 0)
+	{
+		ListItem<Quest*>* item = questsActive.start;
+		y = 0;
+		while (item)
+		{
+			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			y++;
+			item = item->next;
+		}
+	}
+
+}
 
 bool QuestManager::CheckQuestsLogic()
 {
