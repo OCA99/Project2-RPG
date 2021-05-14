@@ -23,7 +23,7 @@ QuestManager::QuestManager() : Module()
 	name.Create("quests");
 }
 
-QuestManager::~QuestManager() 
+QuestManager::~QuestManager()
 {
 }
 
@@ -59,6 +59,8 @@ bool QuestManager::Start()
 		quest->demandingNPC = questNode.attribute("demandingNPC").as_string();
 		quest->rewardingNPC = questNode.attribute("rewardingNPC").as_string();
 		quest->reward = questNode.attribute("reward").as_string();
+		quest->rewardQuantity = questNode.attribute("rewardQuantity").as_string();
+
 		quest->rewardXP = questNode.attribute("rewardXP").as_int();
 		quest->rewardGold = questNode.attribute("rewardGold").as_int();
 		quest->requiredId = questNode.attribute("requiredId").as_int();
@@ -67,7 +69,7 @@ bool QuestManager::Start()
 
 		if (quest->demandingNPC != nullptr)
 		{
-			
+
 
 		}
 
@@ -183,7 +185,7 @@ bool QuestManager::DrawActiveQuests()
 				//app->render->DrawText(font, L->data->description.GetString(), 300, 70, 45, 0, { 200,200,200,155 });
 			///////////////////////////////////////////////////////////////////////////
 
-			break;
+				break;
 		case 2: // quest chain 1 (quest 2)
 			// Title Drawing
 			//app->render->DrawText(font, L->data->title.GetString(), 0, 60, 60, 0, { 255,255,255,255 });
@@ -199,7 +201,7 @@ bool QuestManager::DrawActiveQuests()
 				//app->render->DrawText(font, L->data->description.GetString(), 200, 70, 45, 0, { 200,200,200,155 });
 			///////////////////////////////////////////////////////////////////////////
 
-			break;
+				break;
 
 		case 3: // new quest chain 2
 			// Title Drawing
@@ -216,7 +218,7 @@ bool QuestManager::DrawActiveQuests()
 				//app->render->DrawText(font, L->data->description.GetString(), 245, 110, 45, 0, { 200,200,200,155 });
 			///////////////////////////////////////////////////////////////////////////
 
-			break;
+				break;
 		case 4: // quest chain 2 (quest 2)
 			// Title Drawing
 			//app->render->DrawText(font, L->data->title.GetString(), 0, 100, 60, 0, { 255,255,255,255 });
@@ -227,7 +229,7 @@ bool QuestManager::DrawActiveQuests()
 				//app->render->DrawText(font, L->data->description.GetString(), 0, 140, 45, 0, { 200,200,200,155 });
 			///////////////////////////////////////////////////////////////////////////
 
-			break;
+				break;
 		case 5:
 			// Title Drawing
 			//app->render->DrawText(font, L->data->title.GetString(), 0, 60, 60, 0, { 255,255,255,255 });
@@ -238,7 +240,7 @@ bool QuestManager::DrawActiveQuests()
 				//app->render->DrawText(font, L->data->description.GetString(), 0, 100, 45, 0, { 200,200,200,155 });
 			///////////////////////////////////////////////////////////////////////////
 
-			break;
+				break;
 		case 6:
 			// Title Drawing
 			//app->render->DrawText(font, L->data->title.GetString(), 0, 60, 60, 0, { 255,255,255,255 });
@@ -249,11 +251,11 @@ bool QuestManager::DrawActiveQuests()
 				//app->render->DrawText(font, L->data->description.GetString(), 0, 100, 45, 0, { 200,200,200,155 });
 			///////////////////////////////////////////////////////////////////////////
 
-			break;
+				break;
 		default:
 			break;
 		}
-		
+
 		L = L->next;
 	}
 	return true;
@@ -262,7 +264,7 @@ void QuestManager::DrawQuestUi()
 {
 	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 	ListItem<Quest*>* item = questsActive.start;
-	
+
 	int i = 0;
 	while (item)
 	{
@@ -290,16 +292,25 @@ void QuestManager::ShowQuestDescription()
 				std::string text = ToUpperCase(questsActive[y]->description.GetString());
 				app->fonts->BlitText(235, 100, 0, text.c_str());
 
+				//DRAW QEST OBJECTIVE
+				text = ToUpperCase(questsActive[y]->title.GetString());
+				app->fonts->BlitText(235, 300, 0, text.c_str());
+				text = ToUpperCase(to_string(questsActive[y]->quantity));
+				app->fonts->BlitText(450, 300, 0, text.c_str());
 
 				//DRAW NPC TEXTURE
 				if (questsActive[y]->demandingNPC == SString("customer")) app->render->DrawTexture(customerTex, 10, 15, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("reaper")) app->render->DrawTexture(reaperTex, 10, 18, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("tgirl")) app->render->DrawTexture(tavernTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("thyma")) app->render->DrawTexture(thymaTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-				
+
 				//DRAW REWARDS
 				Item* tempItem = app->items->SearchForItem(questsActive[y]->reward);
 				app->render->DrawTexture(tempItem->itemTex, 300, 190, &SDL_Rect({ 0,0,16,16 }), 1.5f, 1, 0, 0, 0, false);
+	
+				//Draw Reward Quantity
+				text = ToUpperCase(questsActive[y]->rewardQuantity.GetString());
+				app->fonts->BlitText(330, 200, 0, text.c_str());
 			}
 
 		}
@@ -353,7 +364,7 @@ bool QuestManager::CheckQuestsLogic()
 	// ToDo 6: Implement the code that gives a basic chainquest logic. If an id in finished list meets the
 	// requiredId from the inactive list, do the corresponding changes 
 	/////////////////////////////////////////////////////////////////////////////
-	
+
 	while (inactiveQuestsList != NULL)
 	{
 		if (inactiveQuestsList->data->requiredId != 0)
@@ -374,7 +385,7 @@ bool QuestManager::CheckQuestsLogic()
 		inactiveQuestsList = inactiveQuestsList->next;
 	}
 	/////////////////////////////////////////////////////////////////////////////
-	
+
 	// Complex ChainQuests Hardcoded to put it at active list
 	/*if (app->player->chopTreeCount == 10 && app->player->turtleKilled)
 	{
