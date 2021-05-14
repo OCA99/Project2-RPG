@@ -47,9 +47,9 @@ bool QuestManager::Start()
 	questNode = questNode.child("quest");
 	while (questNode != NULL)
 	{
-		Quest* quest = new Quest();
+		Quest* quest = new Quest(questNode);
 
-		quest->id = questNode.attribute("id").as_int();
+		/*quest->id = questNode.attribute("id").as_int();
 		quest->type = questNode.attribute("type").as_int();
 		quest->title = questNode.attribute("title").as_string();
 		quest->description = questNode.attribute("description").as_string();
@@ -65,7 +65,7 @@ bool QuestManager::Start()
 		quest->rewardGold = questNode.attribute("rewardGold").as_int();
 		quest->requiredId = questNode.attribute("requiredId").as_int();
 		quest->isCompleted = questNode.attribute("isCompleted").as_bool();
-		quest->status = questNode.attribute("status").as_int();
+		quest->status = questNode.attribute("status").as_int();*/
 
 		if (quest->demandingNPC != nullptr)
 		{
