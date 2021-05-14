@@ -76,6 +76,7 @@ bool BattleManager::Update(float dt)
 		o = app->party->allyParty;
 	}
 
+	
 	while (currentMember < p->list.size() && p->list.at(currentMember)->data.dead)
 		currentMember += 1;
 
