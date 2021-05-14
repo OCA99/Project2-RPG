@@ -145,6 +145,7 @@
     <ClInclude Include="Source\DialogSytem.h" />
     <ClInclude Include="Source\ECS.h" />
     <ClInclude Include="Source\EventHandler.h" />
+    <ClInclude Include="Source\External\simplify.h" />
     <ClInclude Include="Source\Fonts.h" />
     <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\GuiCheckBox.h" />

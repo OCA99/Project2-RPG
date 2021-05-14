@@ -12,6 +12,8 @@
 
 #include "NPCFactory.h"
 
+#include "simplify.h"
+
 #include <math.h>
 #include <algorithm>
 
@@ -505,7 +507,9 @@ bool Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 	{
 		// L03: DONE: Load Tileset image
 		SString tmp("%s%s", folder.GetString(), image.attribute("source").as_string(""));
-		set->texture = app->tex->Load(tmp.GetString());
+		std::string path = tmp.GetString();
+		std::string simplifiedPath = simplify(path);
+		set->texture = app->tex->Load(simplifiedPath.c_str());
 		set->texWidth = image.attribute("width").as_int(0);
 		set->texHeight = image.attribute("height").as_int(0);
 		set->numTilesWidth = set->texWidth / set->tileWidth;
