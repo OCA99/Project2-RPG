@@ -17,10 +17,12 @@ public:
 	SString title; // Quest title
 	SString description; // Quest description
 	SString objective; // Object gathered or monster killer or NPC talked
+	SString rewardingNPC; // Name of rewarding NPC
+	SString demandingNPC; // Name of NPC quest giver
+	SString reward; // Name of NPC quest giver
+	SString rewardQuantity; // Name of NPC quest giver
 	int progress; //progress of the objective
 	int quantity; // Amount of objective required for the quest
-	SString demandingNPC; // Name of NPC quest giver
-	SString rewardingNPC; // Name of rewarding NPC
 	int rewardXP; // Quantity of XP rewarded
 	int rewardGold; // Quantity of Gold rewarded
 	int requiredId; // For a quest chain if it requires another quest ID completed before

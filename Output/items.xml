@@ -12,42 +12,68 @@
 		texturePath = "(const char*) This is the texture path"
 	/>
 	 <!--  WEAPON --> 
-	<item
-		type = "0"
-		title = "Wooden Sword"
-		description = "An ordinary wooden|sword"
-		objective = "None"
-		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "5"
-		buyCost = "15"
-		questItem = "true"
-		texturePath = "wooden_sword.png"
-	/>
+
 	<!-- ARMOR --> 
-	<item
-		type = "1"
-		title = "Leather Helmet"
-		description = "it will protect your|ears on cold nights"
-		objective = "None"
-		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "5"
-		buyCost = "15"
-		questItem = "true"
-		texturePath = "leather_helmet.png"
-	/>
-	<!-- POTIONS --> 
+
+	<!-- EXTRAS --> 
 	<item
 		type = "2"
-		title = "Magic Dust"
-		description = "this magic dust will|keep you going for a|while"
+		title = "Coin"
+		description = "just a simple coin"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"
-		sellCost = "5"
-		buyCost = "15"
+		sellCost = "0"
+		buyCost = "0"
 		questItem = "true"
-		texturePath = "magic_dust.png"
+		texturePath = "coin.png"
+	/>
+	<item
+		type = "2"
+		title = "Coin Stack"
+		description = "a bag of shiny coins"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "0"
+		buyCost = "0"
+		questItem = "true"
+		texturePath = "coin_stack.png"
+	/>
+	<item
+		type = "2"
+		title = "HP Potion"
+		description = "a potion with|healing properties|that heals|50hp"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "50"
+		buyCost = "100"
+		questItem = "true"
+		texturePath = "hp_potion.png"
+	/>
+	<item
+		type = "2"
+		title = "EXP Potion"
+		description = "a potion with raw|properties|that increases|50exp"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "50"
+		buyCost = "100"
+		questItem = "true"
+		texturePath = "exp_potion.png"
+	/>
+	<item
+		type = "2"
+		title = "Treasure Chest"
+		description = "A valuable chest with a large amount of coins inside"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "0"
+		buyCost = "0"
+		questItem = "true"
+		texturePath = "chest.png"
 	/>
 </items>

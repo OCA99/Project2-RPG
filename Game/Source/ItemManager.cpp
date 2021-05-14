@@ -60,16 +60,16 @@ bool ItemManager::Start()
 		itemNode = itemNode.next_sibling("item");
 	}
 
-	GiveItemToPlayer(SString("Wooden Sword"));
-	GiveItemToPlayer(SString("Leather Helmet"));
-	GiveItemToPlayer(SString("Magic Dust"));
-	GiveItemToPlayer(SString("Magic Dust"));
-	GiveItemToPlayer(SString("Magic Dust"));
-	GiveItemToPlayer(SString("Magic Dust"));
-	GiveItemToPlayer(SString("Magic Dust"));
-	GiveItemToPlayer(SString("Magic Dust"));
-	GiveItemToPlayer(SString("Magic Dust"));
-
+	GiveItemToPlayer(SString("Coin"));
+	GiveItemToPlayer(SString("Coin"));
+	GiveItemToPlayer(SString("Coin Stack"));
+	GiveItemToPlayer(SString("Coin Stack"));
+	GiveItemToPlayer(SString("HP Potion"));
+	GiveItemToPlayer(SString("HP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("Treasure Chest"));
+	
 
 	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
