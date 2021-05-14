@@ -48,7 +48,7 @@ bool GuiButton::Update(Input* input, float dt)
 	{
 		itemCheck = false;
 	}
-	if (id == 19 && state == GuiControlState::PRESSED)
+	if (id == 19 && state == GuiControlState::SELECTED)
 	{
 		if (!questCheck) questCheck = true;
 	}else

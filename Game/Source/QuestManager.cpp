@@ -8,6 +8,7 @@
 #include "Render.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "ItemManager.h"
 
 #include "External/PugiXml/src/pugixml.hpp"
 #include "SDL/include/SDL_scancode.h"
@@ -57,6 +58,7 @@ bool QuestManager::Start()
 		quest->quantity = questNode.attribute("quantity").as_int();
 		quest->demandingNPC = questNode.attribute("demandingNPC").as_string();
 		quest->rewardingNPC = questNode.attribute("rewardingNPC").as_string();
+		quest->reward = questNode.attribute("reward").as_string();
 		quest->rewardXP = questNode.attribute("rewardXP").as_int();
 		quest->rewardGold = questNode.attribute("rewardGold").as_int();
 		quest->requiredId = questNode.attribute("requiredId").as_int();
@@ -88,12 +90,11 @@ bool QuestManager::Start()
 		questNode = questNode.next_sibling("quest");
 	}
 
-	//questMenuTex = app->tex->Load("Assets/Textures/UI/HUD/quests_menu.png");
-	questMenuTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
-	customerTex = app->tex->Load("Assets/Textures/Dialogue/blacksmith_dialogue.png");
-	reaperTex = app->tex->Load("Assets/Textures/Dialogue/reaper_dialogue.png");
-	tavernTex = app->tex->Load("Assets/Textures/Dialogue/tavern_lady_dialogue.png");
-	thymaTex = app->tex->Load("Assets/Textures/Dialogue/thyma_good_dialogue.png");
+	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
+	customerTex = app->tex->Load("Textures/Dialogue/blacksmith_dialogue.png");
+	reaperTex = app->tex->Load("Textures/Dialogue/reaper_dialogue.png");
+	tavernTex = app->tex->Load("Textures/Dialogue/tavern_lady_dialogue.png");
+	thymaTex = app->tex->Load("Textures/Dialogue/thyma_good_dialogue.png");
 
 
 	return true;
@@ -101,6 +102,7 @@ bool QuestManager::Start()
 
 bool QuestManager::Update(float dt)
 {
+
 	CheckQuestsLogic();
 	CheckObjectivesCompletion();
 
@@ -115,6 +117,7 @@ bool QuestManager::Update(float dt)
 
 bool QuestManager::PostUpdate(float dt)
 {
+
 	DrawActiveQuests();
 
 	if (questInvOpened)
@@ -257,7 +260,7 @@ bool QuestManager::DrawActiveQuests()
 }
 void QuestManager::DrawQuestUi()
 {
-	//app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 	ListItem<Quest*>* item = questsActive.start;
 	
 	int i = 0;
@@ -283,10 +286,20 @@ void QuestManager::ShowQuestDescription()
 		{
 			if (y < questsActive.Count())
 			{
-				LOG("JSAKJDKLA");
-
+				//DRAW QUEST DESCRIPTION.
 				std::string text = ToUpperCase(questsActive[y]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 200, item->data->bounds.y + 35, 0, text.c_str());
+				app->fonts->BlitText(235, 100, 0, text.c_str());
+
+
+				//DRAW NPC TEXTURE
+				if (questsActive[y]->demandingNPC == SString("customer")) app->render->DrawTexture(customerTex, 10, 15, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				if (questsActive[y]->demandingNPC == SString("reaper")) app->render->DrawTexture(reaperTex, 10, 18, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				if (questsActive[y]->demandingNPC == SString("tgirl")) app->render->DrawTexture(tavernTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				if (questsActive[y]->demandingNPC == SString("thyma")) app->render->DrawTexture(thymaTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				
+				//DRAW REWARDS
+				Item* tempItem = app->items->SearchForItem(questsActive[y]->reward);
+				app->render->DrawTexture(tempItem->itemTex, 300, 190, &SDL_Rect({ 0,0,16,16 }), 1.5f, 1, 0, 0, 0, false);
 			}
 
 		}
