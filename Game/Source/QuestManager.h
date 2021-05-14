@@ -5,6 +5,9 @@
 #include "List.h"
 #include "SString.h"
 #include "App.h"
+#include "Textures.h"
+#include "GuiManager.h"
+
 #include "External/PugiXml/src/pugixml.hpp"
 
 #include <string>
@@ -59,12 +62,25 @@ public:
 
 	bool DrawActiveQuests();
 
+	void DrawQuestUi();
+
 public:
 
 	List<Quest*> questsList;
 	List<Quest*> questsInactive;
 	List<Quest*> questsActive;
 	List<Quest*> questsFinished;
+
+	//Quest Menu Properties
+	SDL_Texture* questMenuTex;//Quest Menu Texture
+	SDL_Texture* customerTex;//Quest Menu Texture
+	SDL_Texture* reaperTex;//Quest Menu Texture
+	SDL_Texture* tavernTex;//Quest Menu Texture
+	SDL_Texture* thymaTex;//Quest Menu Texture
+
+	List<GuiControl*> questButtons;//Buttons List - Need it, Don't delete.
+
+	bool questInvOpened = false;//proof of whether it is open or not
 
 	Font* font;
 
