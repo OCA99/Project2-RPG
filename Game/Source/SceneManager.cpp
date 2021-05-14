@@ -462,6 +462,8 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
 		break;
+	case 19:
+
 	default:
 		break;
 	}

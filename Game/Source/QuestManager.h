@@ -30,10 +30,11 @@ public:
 	int quantity; // Amount of objective required for the quest
 	SString demandingNPC; // Name of NPC quest giver
 	SString rewardingNPC; // Name of rewarding NPC
+	SString reward; //Reward Item
+	SString rewardQuantity; // Reward quantity
 	int rewardXP; // Quantity of XP rewarded
 	int rewardGold; // Quantity of Gold rewarded
 	int requiredId; // For a quest chain if it requires another quest ID completed before
-	SString reward; //Reward Item
 	bool isCompleted; // true --> Quest completed // false --> Quest not completed
 	int status; // 0 inactive, 1 active, 2 completed
 };

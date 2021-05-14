@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "GuiManager.h"
 #include "ItemManager.h"
+#include "QuestManager.h"
 
 #include "Log.h"
 
@@ -50,10 +51,14 @@ bool GuiButton::Update(Input* input, float dt)
 	}
 	if (id == 19 && state == GuiControlState::SELECTED)
 	{
+		for (int i = 0; i< app->quests->questButtons.Count() ; ++i)
+		{
+			app->quests->questButtons[i]->questCheck = false;
+		}
+
 		if (!questCheck) questCheck = true;
-	}else
-	{
-		questCheck = false;
+		state = GuiControlState::NORMAL;
+
 	}
 
 
