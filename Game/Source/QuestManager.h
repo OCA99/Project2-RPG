@@ -38,6 +38,7 @@ class Font;
 //	int status; // 0 inactive, 1 active, 2 completed
 //};
 
+
 class QuestManager : public Module
 {
 public:
