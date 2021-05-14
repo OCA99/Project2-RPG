@@ -98,6 +98,7 @@ public:
 	SceneManager* observer;        // Observer module (it should probably be an array/list)
 
 	bool itemCheck = false;
+	bool questCheck = false;
 
 };
 

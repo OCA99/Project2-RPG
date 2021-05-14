@@ -64,6 +64,10 @@ public:
 
 	void DrawQuestUi();
 
+	void ShowQuestDescription();
+
+	void CreateQuestButtons();
+
 public:
 
 	List<Quest*> questsList;
@@ -85,6 +89,7 @@ public:
 	Font* font;
 
 	int debugId = 1;
+	int y = 0;
 };
 
 
