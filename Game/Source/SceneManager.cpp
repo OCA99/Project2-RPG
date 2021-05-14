@@ -149,7 +149,20 @@ bool SceneManager::PostUpdate(float dt)
 	fullscreen.w = w;
 	fullscreen.h = h;
 
-	app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
+	int squares = 16;
+	int squareSize = fullscreen.w / squares;
+
+	for (int i = 0; i < squares; i++) {
+		for (int j = 0; j < squares; j++) {
+			SDL_Rect rect;
+			float prop = std::min(alpha, 255.0f) / 255.0f;
+			if ((i - j) % 2 == 0)
+				rect = SDL_Rect({ i * squareSize, j * squareSize, squareSize, int(std::round(squareSize * prop)) });
+			else
+				rect = SDL_Rect({ i * squareSize, j * squareSize + int(std::round(squareSize * (1 - prop))), squareSize, int(std::round(squareSize * prop)) });
+			app->render->DrawRectangle(rect, 0, 0, 0, 255, true, false);
+		}
+	}
 
 	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling)
 	{
