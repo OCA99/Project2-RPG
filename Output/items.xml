@@ -1,0 +1,53 @@
+<items>
+	<itemGuideline
+		type = "(int)This is the item type for the item 1 (0 weapon, 1 armor, 2 potion)" 
+		title = "(string)This is a title for item"
+		description = "(string)This is a description for the item USE|FOR LINE BREAK(WITHOUT SPACES)"
+		objective = "(string)This is the objective for the enemy who drops the item"
+		quantity = "(int)This is the quantity of items"
+		rewardingNPC = "(string)This is the name of the NPC that rewards you the item"
+		sellCost = "(int)This is the quantity of gold given when selling on the shop"
+		buyCost= "(int)This is the quantity of Gold requiered for the item on the shop"
+		questItem = "(bool)This is a true / false if item is requiered on a quest"
+		texturePath = "(const char*) This is the texture path"
+	/>
+	 <!--  WEAPON --> 
+	<item
+		type = "0"
+		title = "Wooden Sword"
+		description = "An ordinary wooden|sword"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "5"
+		buyCost = "15"
+		questItem = "true"
+		texturePath = "wooden_sword.png"
+	/>
+	<!-- ARMOR --> 
+	<item
+		type = "1"
+		title = "Leather Helmet"
+		description = "it will protect your|ears on cold nights"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "5"
+		buyCost = "15"
+		questItem = "true"
+		texturePath = "leather_helmet.png"
+	/>
+	<!-- POTIONS --> 
+	<item
+		type = "2"
+		title = "Magic Dust"
+		description = "this magic dust will|keep you going for a|while"
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "5"
+		buyCost = "15"
+		questItem = "true"
+		texturePath = "magic_dust.png"
+	/>
+</items>
