@@ -234,6 +234,16 @@ bool QuestManager::DrawActiveQuests()
 void QuestManager::DrawQuestUi()
 {
 	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+	ListItem<Quest*>* item = questsActive.start;
+	int i = 0;
+	while (item)
+	{
+		std::string text = ToUpperCase(item->data->title.GetString());
+		app->fonts->BlitText(40, 80 + (32 * i), 0, text.c_str());
+		item = item->next;
+		++i;
+	}
+
 }
 ///////////////////////////////////////////////////////////////////////////
 
