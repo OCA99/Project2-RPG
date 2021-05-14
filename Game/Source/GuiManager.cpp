@@ -182,7 +182,7 @@ void GuiManager::DestroyAllGuiControls()
 
 	for (int i = 0; i < u; i++)
 	{
-		if (controls.At(0)->data->id != 16)
+		if (controls.At(0)->data->id != 17)
 		{
 		delete controls.At(0)->data;
 		controls.Del(controls.At(0));
