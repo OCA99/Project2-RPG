@@ -148,7 +148,7 @@ void ItemManager::GiveItemToPlayer(SString& itemTitle)
 	{
 		if (playerItemList.Count() >= MAX_ITEMS)
 		{
-			LOG("You can't add more items to your bag");
+			std::cout << "You can't add more items to your bag" << std::endl;
 		}
 		else
 			playerItemList.Add(SearchForItem(itemTitle));
