@@ -1,0 +1,13 @@
+<dialog id="CUSTOMER">
+	<options speaker="customer" value="Glug, glug, glug, glug, do ya won a capple of tea?">
+		<option value="No thanks">
+			<line speaker="customer" value="Freezing tea!"></line>
+		</option>
+		<option value="Get out of my way">
+			<line speaker="customer" value="*coughs*"></line>
+		</option>
+		<option value="Oh... my god...">
+			<line speaker="customer" value="..."></line>
+		</option>
+	</options>
+</dialog>
