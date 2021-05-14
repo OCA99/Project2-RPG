@@ -173,6 +173,18 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 
+	if (currentScene->type == Scene::TYPE::MENU && !optionsMenu)
+	{
+		if (!buttons)
+		{
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0); //start
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1); //continue
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
+			buttons = true;
+		}
+	}
+
 	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
 
 		if (menu)
@@ -205,71 +217,7 @@ bool SceneManager::PostUpdate(float dt)
 
 				Mix_VolumeMusic(app->volume);
 			}
-			else
-			{
-				if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-				{
-					app->audio->PlayFx(6, 0);
-					optionsMenu = false;
-					audioSelected = false;
-					controlsSelected = false;
-					graphicsSelected = false;
-					app->ui->DestroyAllGuiControls();
-					buttons = false;
-				}
-				app->render->DrawTexture(optionsTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-
-				if(graphicsSelected)
-				{
-					app->render->DrawTexture(graphicsMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-
-					if (buttons == false)
-					{
-
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15)); //fullscreen checkbox
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16)); //vsync checkbox
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
-
-						buttons = true;
-					}
-				}
-
-				if(audioSelected)
-				{
-					app->render->DrawTexture(audioMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-
-					if (buttons == false)
-					{
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 330 / 2, 300/2, 30/2 }), 8)); //general volume slider
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 412 / 2, 300 / 2, 30 / 2 }), 9)); //music volume slider
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 494 / 2, 300 / 2, 30 / 2 }), 10)); //fx volume slider
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
-
-						buttons = true;
-					}
-				}
-
-				if (controlsSelected)
-				{
-
-					if (buttons == false)
-					{
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
-						menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
-
-						buttons = true;
-					}
-				}
-
-			}
+		
 		}
 
 		if (menu == false)
@@ -294,6 +242,72 @@ bool SceneManager::PostUpdate(float dt)
 			app->ui->DestroyAllGuiControls();
 			buttons = false;
 		}
+	}
+
+	if(optionsMenu)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			app->audio->PlayFx(6, 0);
+			optionsMenu = false;
+			audioSelected = false;
+			controlsSelected = false;
+			graphicsSelected = false;
+			app->ui->DestroyAllGuiControls();
+			buttons = false;
+		}
+		app->render->DrawTexture(optionsTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+		if (graphicsSelected)
+		{
+			app->render->DrawTexture(graphicsMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+			if (buttons == false)
+			{
+
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15)); //fullscreen checkbox
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16)); //vsync checkbox
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
+
+				buttons = true;
+			}
+		}
+
+		if (audioSelected)
+		{
+			app->render->DrawTexture(audioMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+			if (buttons == false)
+			{
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 330 / 2, 300 / 2, 30 / 2 }), 8)); //general volume slider
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 412 / 2, 300 / 2, 30 / 2 }), 9)); //music volume slider
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 494 / 2, 300 / 2, 30 / 2 }), 10)); //fx volume slider
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
+
+				buttons = true;
+			}
+		}
+
+		if (controlsSelected)
+		{
+
+			if (buttons == false)
+			{
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11)); //graphics button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12)); //audio button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13)); //controls button
+				menuButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14)); //back button
+
+				buttons = true;
+			}
+		}
+
 	}
 	return ret;
 }
