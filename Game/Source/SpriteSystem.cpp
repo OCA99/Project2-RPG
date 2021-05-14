@@ -36,6 +36,7 @@ void SpriteSystem::tick(ECS::World* world, float dt)
 	{
 		RenderQueue q = queue->at(i);
 		app->render->DrawTexture(q.texture, q.x, q.y, q.section, q.scale);
+
 	}
 
 	queue->clear();

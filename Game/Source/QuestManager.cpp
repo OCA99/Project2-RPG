@@ -67,8 +67,12 @@ bool QuestManager::Start()
 		quest->isCompleted = questNode.attribute("isCompleted").as_bool();
 		quest->status = questNode.attribute("status").as_int();
 
-		// ToDo 3: Order the different lists (questsActive, questsInactive, questsFinished & questsList) with its respective quests (watch status)
-		///////////////////////////////////////////////////////////////////////////
+		if (quest->demandingNPC != nullptr)
+		{
+			
+
+		}
+
 		if (quest->status == 0) // 0 inactive but loaded
 		{
 			questsInactive.Add(quest);
