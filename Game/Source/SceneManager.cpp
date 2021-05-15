@@ -53,6 +53,7 @@ bool SceneManager::Start()
 	menuTex = app->tex->Load("Textures/UI/MainPauseMenu/pause_menu.png");
 	optionsTex = app->tex->Load("Textures/UI/OptionsMenu/options_menu.png");
 	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
+	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
 
 	audioMenuTex = app->tex->Load("Textures/UI/OptionsMenu/audio_menu.png");
 	graphicsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/graphics_menu.png");
@@ -203,17 +204,8 @@ bool SceneManager::PostUpdate(float dt)
 
 	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
 
-		if (app->quests->questInvOpened)
-		{
-			app->render->DrawTexture(questMenuTex,0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-
-			if (buttons == false)
-			{
-				//app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59/2 , 36/2, 30, 30 }), 14);//Back Button 14
-				buttons = true;
-			}
-
-		}
+		if (app->quests->questInvOpened) app->render->DrawTexture(questMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		if (app->items->invOpened) app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 
 		if (menu)
 		{

@@ -108,7 +108,10 @@ bool QuestManager::Update(float dt)
 	CheckObjectivesCompletion();
 
 	if (app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && !app->scene->menu && !app->items->invOpened)
+	{
+		if (questInvOpened) app->ui->DestroyAllGuiControls();
 		questInvOpened = !questInvOpened;//Open or close Inv
+	}
 
 	if (questInvOpened)
 		CreateQuestButtons();

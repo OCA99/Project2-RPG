@@ -49,7 +49,7 @@ public:
 	SDL_Texture* menuButtonTex;
 	SDL_Texture* optionsButtonsTex;
 	SDL_Texture* questButtonTex;
-
+	SDL_Texture* invButtonTex;
 
 	SDL_Texture* buttonTex;
 	SDL_Texture* sliderTex;

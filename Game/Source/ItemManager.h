@@ -83,7 +83,6 @@ public:
 
 
 public:
-	SDL_Texture* invMenu;
 	SDL_Texture* itemDescTex;
 
 	List<Item*> itemList;//ALL Items
