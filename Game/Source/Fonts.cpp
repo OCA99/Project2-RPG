@@ -39,7 +39,7 @@ int Fonts::LoadFont(const char* texturePath, const char* characters, uint rows)
 		return id;
 	}
 
-	SDL_Texture* tex = app->tex->Load(texturePath);
+	SDL_Texture** tex = app->tex->Load(texturePath);
 	if (tex == nullptr || strlen(characters) >= MAX_FONT_CHARS)
 	{
 		LOG("Could not load font at %s with characters '%s'", texturePath, characters);
@@ -67,9 +67,9 @@ int Fonts::LoadFont(const char* texturePath, const char* characters, uint rows)
 	font.rows = rows;
 
 	font.totalLength = strlen(characters);
-	strcpy_s(font.table, characters);
+	font.table = characters;
 	font.columns = (font.totalLength / rows);
-	app->tex->GetSize(font.texture, font.charW, font.charH);
+	app->tex->GetSize(*font.texture, font.charW, font.charH);
 	font.charW = font.charW / font.columns;
 	font.charH = font.charH / font.rows;
 

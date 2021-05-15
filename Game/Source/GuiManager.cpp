@@ -70,8 +70,8 @@ bool GuiManager::CleanUp()
 GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	GuiControl* control = nullptr;
-	SDL_Texture* textTex = nullptr;
-	SDL_Texture* buttonTex = nullptr;
+	SDL_Texture** textTex = nullptr;
+	SDL_Texture** buttonTex = nullptr;
 
 	switch (id)
 	{

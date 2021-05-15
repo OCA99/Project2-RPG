@@ -62,7 +62,7 @@ public:
 		return true;
 	}
 
-	void SetTexture(SDL_Texture* tex)
+	void SetTexture(SDL_Texture** tex)
 	{
 		texture = tex;
 		section = { 0, 0, 0, 0 };
@@ -89,8 +89,8 @@ public:
 	SDL_Color color;        // Tint color
 
 
-	SDL_Texture* texture;   // Texture atlas reference
-	SDL_Texture* texture2;
+	SDL_Texture** texture;   // Texture atlas reference
+	SDL_Texture** texture2;
 	SDL_Rect section;       // Texture atlas base section
 
 	//Font font;              // Text font

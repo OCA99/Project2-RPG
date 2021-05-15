@@ -8,7 +8,7 @@
 #include "Log.h"
 
 
-GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture* tex) : GuiControl(GuiControlType::SLIDER, id)
+GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex) : GuiControl(GuiControlType::SLIDER, id)
 {
 	this->bounds = bounds;
 	this->text = text;

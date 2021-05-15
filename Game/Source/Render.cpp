@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "Input.h"
+#include "Textures.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -74,6 +76,9 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+		app->tex->ReloadAllTextures();
+
 	return true;
 }
 
@@ -108,7 +113,7 @@ void Render::ResetViewPort()
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float scale, float speed, double angle, int pivotX, int pivotY, bool useCamera) const
+bool Render::DrawTexture(SDL_Texture** texture, int x, int y, const SDL_Rect* section, float scale, float speed, double angle, int pivotX, int pivotY, bool useCamera) const
 {
 	bool ret = true;
 	uint winScale = app->win->GetScale();
@@ -132,7 +137,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	}
 	else
 	{
-		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+		SDL_QueryTexture(*texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
 	rect.w *= winScale * scale;
@@ -148,7 +153,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	if(SDL_RenderCopyEx(renderer, *texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
