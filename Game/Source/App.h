@@ -56,6 +56,7 @@ public:
 	const char* GetArgv(int index) const;
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
+	void UpdateVolume();
 
 private:
 
@@ -76,6 +77,7 @@ private:
 
 	// Call modules after each loop iteration
 	bool PostUpdate();
+
 
 public:
 
@@ -114,7 +116,7 @@ private:
 	pugi::xml_node configApp;
 
 	float minTime;
-	float frameCap = 60.0f;
+	float frameCap = 1000.0f;
 	Timer timer;
 
 	bool requestLoad = false;
@@ -124,7 +126,9 @@ private:
 
 public:
 	float dt;
-	float volume;
+	float volume = 100;
+	float volumeMusic = 100;
+	float volumeFx = 100;
 	bool volumeUp = false;
 	bool volumeDown = false;
 

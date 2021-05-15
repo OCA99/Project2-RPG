@@ -4,7 +4,9 @@
 #include "Module.h"
 
 #include "List.h"
+#include "SDL_image/include/SDL_image.h"
 #include <map>
+#include <vector>
 
 struct SDL_Texture;
 struct SDL_Surface;
@@ -31,12 +33,12 @@ public:
 	SDL_Texture* const Load(const char* path);
 	SDL_Texture* const LoadSurface(SDL_Surface* surface);
 	bool UnLoad(SDL_Texture* texture);
-	void GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
+	void GetSize(SDL_Texture* texture, uint& width, uint& height) const;
+
+	void ReloadAllTextures();
 
 public:
-
-	List<SDL_Texture*> textures;
-	std::map<const char*, SDL_Texture* const> textureCache;
+	std::map<const char*, SDL_Texture*> textures;
 };
 
 
