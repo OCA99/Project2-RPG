@@ -89,7 +89,6 @@ public:
 	List<Item*> playerItemList;//Player Items
 	List<GuiControl*> buttons;//Buttons List
 	List<GuiControl*> actionButtons;//Buttons List
-	GuiControl* exitButton;
 
 	int y = 0;//Logistic Tool
 

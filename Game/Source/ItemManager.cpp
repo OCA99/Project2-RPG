@@ -85,6 +85,7 @@ bool ItemManager::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened)
 		invOpened = !invOpened;//Open or close Inv
+	
 
 	if (invOpened)
 	{
@@ -211,7 +212,6 @@ void ItemManager::CreateButtons()
 {
 	if (buttons.Count() <= 0)
 	{
-		exitButton = app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14);//CREATE EXIT BUTTON
 		ListItem<Item*>* item = playerItemList.start;
 		y = 0;
 		while (item)
@@ -221,13 +221,14 @@ void ItemManager::CreateButtons()
 			y++;
 			item = item->next;
 		}
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14));//CREATE EXIT BUTTON
 	}
 
 }
 
 void ItemManager::DeleteButtons()
 {
-	app->ui->DestroyGuiControl(exitButton);
+
 	ListItem<GuiControl*>* item = buttons.start;
 	while (item)
 	{
