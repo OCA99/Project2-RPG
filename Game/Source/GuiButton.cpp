@@ -51,7 +51,7 @@ bool GuiButton::Update(Input* input, float dt)
 		{
 			app->items->buttons[i]->itemSingleCheck = false;
 		}
-
+		app->items->DeleteActionButtons();
 		if (!itemSingleCheck) itemSingleCheck = true;
 
 		state = GuiControlState::NORMAL;
@@ -67,7 +67,7 @@ bool GuiButton::Update(Input* input, float dt)
 		{
 			app->quests->questButtons[i]->questCheck = false;
 		}
-
+	
 		if (!questCheck) questCheck = true;
 		state = GuiControlState::NORMAL;
 

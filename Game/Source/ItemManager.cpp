@@ -202,8 +202,8 @@ void ItemManager::CreateActionButtons(int y)
 {
 	if (actionButtons.Count() <= 0)
 	{
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 25 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 45 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 
 	}
 	CheckActionButtons();
