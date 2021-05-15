@@ -230,8 +230,16 @@ void DialogSystem::StartDialog(const char* id)
 	{
 		if (activeQuestsList->data->rewardingNPC == nameNPC.c_str())
 		{
-			activeQuestsList->data->progress += 1;
-			activeQuestsList->data->status = 2;
+			if (activeQuestsList->data->progress == activeQuestsList->data->quantity)
+			{
+				activeQuestsList->data->status = 2;
+				app->quests->CheckObjectivesCompletion();
+			}
+			if (activeQuestsList->data->type == 3)
+			{
+				activeQuestsList->data->progress += 1;
+			}
+			
 		}
 
 		activeQuestsList = activeQuestsList->next;

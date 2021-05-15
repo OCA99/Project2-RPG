@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 #include "DialogSytem.h"
 #include "Map.h"
 #include "Fonts.h"
@@ -12,7 +13,6 @@
 #include "Debug.h"
 #include "PartyManager.h"
 #include "BattleManager.h"
-#include "QuestManager.h"
 #include "ItemManager.h"
 #include "AssetsManager.h"
 

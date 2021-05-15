@@ -267,8 +267,8 @@ void PartyManager::InitializeParties()
 	//allyParty->PrintPartyDescription();
 
 	enemyParty = new Party("ENEMY PARTY");
-	Member* kmush = new Member("King Mush", SHROOM1, 60.0f, 18.0f, false);
-	Member* mush = new Member("Lil Mush", SHROOM2, 40.0f, 15.0f, false);
+	Member* kmush = new Member("KingMush", SHROOM1, 60.0f, 18.0f, false);
+	Member* mush = new Member("LilMush", SHROOM2, 40.0f, 15.0f, false);
 	Member* bones = new Member("Mr.Bones", SKELETON, 50.0f, 12.0f, false);
 	enemyParty->AddMember(kmush);
 	enemyParty->AddMember(bones);

@@ -314,6 +314,7 @@ struct QuestList
 		receiver = info;
 	}
 
+	/*
 	void LoadActive(List<Quest*>* active)
 	{
 		Quest* first = active->start->data;
@@ -328,7 +329,7 @@ struct QuestList
 		}
 
 	}
-
+	
 	void LoadInactive(List<Quest*>* inactive)
 	{
 		Quest* first = inactive->start->data;
@@ -342,9 +343,7 @@ struct QuestList
 		}
 
 	}
-
-
-
+	*/
 	pugi::xml_node node;
 
 	bool active = false;

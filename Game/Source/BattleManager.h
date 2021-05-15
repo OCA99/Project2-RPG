@@ -63,7 +63,7 @@ private:
 
 	Selecting selecting = Selecting::MEMBER;
 
-
+	ListItem<Quest*>* activeQuestsList;
 	//ListItem<Quest*>* C;
 
 	float pendingWaitTime = 0;

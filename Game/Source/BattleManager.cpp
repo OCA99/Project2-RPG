@@ -3,6 +3,7 @@
 #include "App.h"
 #include "SceneManager.h"
 #include "QuestManager.h"
+#include "Quest.h"
 #include "Scene.h"
 #include "PartyManager.h"
 #include "Audio.h"
@@ -31,6 +32,8 @@ bool BattleManager::Awake()
 
 bool BattleManager::Start()
 {
+	activeQuestsList = app->quests->questsActive.start;
+
 	characterBar = app->tex->Load("Textures/UI/BattleMenu/character_bar.png");
 	actionBox = app->tex->Load("Textures/UI/BattleMenu/action_box.png");
 	healthBars = app->tex->Load("Textures/UI/BattleMenu/health_bars.png");
@@ -76,7 +79,22 @@ bool BattleManager::Update(float dt)
 		o = app->party->allyParty;
 	}
 
-	
+	if (p->list.at(currentMember)->data.dead)
+	{
+		while (activeQuestsList != nullptr)
+		{
+ 			if (p->list.at(currentMember)->name == activeQuestsList->data->objective.GetString())
+			{
+				if (activeQuestsList->data->progress < activeQuestsList->data->quantity)
+				{
+					activeQuestsList->data->progress += 3;
+				}
+			}
+			activeQuestsList = activeQuestsList->next;
+			
+		}
+	}
+
 	while (currentMember < p->list.size() && p->list.at(currentMember)->data.dead)
 		currentMember += 1;
 

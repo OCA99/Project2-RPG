@@ -40,11 +40,11 @@
 		type = "1"
 		title = "Kill 3 skeletons:"
 		description = "The forest is getting dangerous, we need|you to get rid of the monsters."
-		objective = "skeleton"
+		objective = "Mr.Bones"
 		progress = "0"
 		quantity = "3"
 		demandingNPC = "reaper"
-		rewardingNPC = "None"
+		rewardingNPC = "reaper"
 		reward = "Coin"
 		rewardQuantity = "x2"
 		rewardXP = "300"
@@ -62,7 +62,7 @@
 		objective = "rubbish"
 		progress = "0"
 		quantity = "6"
-		demandingNPC = "tlady"
+		demandingNPC = "None"
 		rewardingNPC = "None"
 		reward = "Coin Stack"
 		rewardQuantity = "x1"
@@ -70,7 +70,7 @@
 		rewardGold = "105"
 		requiredId = "0"
 		isCompleted = "false"
-		status = "1"
+		status = "0"
 	/>
 	 <!--  Killing quest, active when quest 3 is completed --> 
 	<quest
