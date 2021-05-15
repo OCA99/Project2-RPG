@@ -107,7 +107,7 @@ bool QuestManager::Update(float dt)
 	CheckQuestsLogic();
 	CheckObjectivesCompletion();
 
-	if ((app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN))
+	if (app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && !app->scene->menu && !app->items->invOpened)
 		questInvOpened = !questInvOpened;//Open or close Inv
 
 	if (questInvOpened)
@@ -123,7 +123,7 @@ bool QuestManager::PostUpdate(float dt)
 
 	if (questInvOpened)
 	{
-		if(!app->scene->buttons) CreateQuestButtons();
+		if(!app->scene->buttons && !app->scene->menu && !app->items) CreateQuestButtons();
 		DrawQuestUi();
 		ShowQuestDescription();
 	}
@@ -268,7 +268,7 @@ void QuestManager::DrawQuestUi()
 	while (item)
 	{
 		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(40, 80 + (32 * i), 0, text.c_str());
+		app->fonts->BlitText(40, 80 + (32 * i), 1, text.c_str());
 		item = item->next;
 		++i;
 	}
@@ -300,7 +300,7 @@ void QuestManager::ShowQuestDescription()
 				//DRAW NPC TEXTURE
 				if (questsActive[y]->demandingNPC == SString("customer")) app->render->DrawTexture(customerTex, 10, 15, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("reaper")) app->render->DrawTexture(reaperTex, 10, 18, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-				if (questsActive[y]->demandingNPC == SString("tgirl")) app->render->DrawTexture(tavernTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				if (questsActive[y]->demandingNPC == SString("tlady")) app->render->DrawTexture(tavernTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("thyma")) app->render->DrawTexture(thymaTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 
 				//DRAW REWARDS

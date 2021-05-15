@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Fonts.h"
 #include "DialogSytem.h"
+#include "QuestManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
 
@@ -87,7 +88,7 @@ bool ItemManager::PostUpdate(float dt)
 {
 	if (app->scene->currentScene->type == Scene::TYPE::MAP)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened)
 			invOpened = !invOpened;//Open or close Inv
 
 		if (invOpened)//If the inventory is opened bool
