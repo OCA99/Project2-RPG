@@ -78,7 +78,6 @@ public:
 	List<Quest*> questsFinished;
 
 	//Quest Menu Properties
-	SDL_Texture* questMenuTex;//Quest Menu Texture
 	SDL_Texture* customerTex;//Quest Menu Texture
 	SDL_Texture* reaperTex;//Quest Menu Texture
 	SDL_Texture* tavernTex;//Quest Menu Texture
