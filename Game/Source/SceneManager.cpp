@@ -13,6 +13,7 @@
 #include "GuiManager.h"
 #include "QuestManager.h"
 #include "BattleManager.h"
+#include "ItemManager.h"
 #include "Audio.h"
 #include "SceneTransitionSystem.h"
 #include "GuiCheckBox.h"
@@ -166,7 +167,7 @@ bool SceneManager::PostUpdate(float dt)
 		}
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling)
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened)
 	{
 		app->audio->PlayFx(8, 0);
 		if(startPressed)menu = !menu;
@@ -188,7 +189,7 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 
-	if (currentScene->type == Scene::TYPE::MENU && !optionsMenu)
+	if (currentScene->type == Scene::TYPE::MENU && !optionsMenu && !app->quests->questInvOpened)
 	{
 		if (!buttons)
 		{
