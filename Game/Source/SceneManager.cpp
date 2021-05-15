@@ -209,7 +209,7 @@ bool SceneManager::PostUpdate(float dt)
 
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59/2 , 36/2, 30, 30 }), 14);//Back Button 14
+				//app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59/2 , 36/2, 30, 30 }), 14);//Back Button 14
 				buttons = true;
 			}
 

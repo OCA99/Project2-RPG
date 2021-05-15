@@ -81,6 +81,8 @@ bool ItemManager::Start()
 bool ItemManager::Update(float dt)
 {
 
+
+
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP)
 		invOpened = !invOpened;//Open or close Inv
 
@@ -106,7 +108,7 @@ bool ItemManager::PostUpdate(float dt)
 
 	if (!invOpened)//If it close, we delete the buttons
 	{
-		DeleteButtons();
+		CleanUp();
 	}
 
 	return true;
@@ -114,7 +116,8 @@ bool ItemManager::PostUpdate(float dt)
 
 bool ItemManager::CleanUp()
 {
-
+	DeleteButtons();
+	DeleteActionButtons();
 
 	return true;
 }
@@ -167,59 +170,42 @@ Item* ItemManager::SearchForItem(SString& itemTitle)
 void ItemManager::ShowDescription()
 {
 	ListItem<GuiControl*>* item = buttons.start;
-	y = 0;
+	int b = 0;
 	while (item)
 	{
-		//Draw Texture
-		if (y > playerItemList.Count()) y = 0;
+		if (b > playerItemList.Count()) 
+			b = 0;
 		if (item->data->itemSingleCheck)
-			ShowActions(y);
+			CreateActionButtons(b);
 		if (item->data->itemCheck)
 		{
-			if (y < playerItemList.Count())
+			
+			if (b < playerItemList.Count())
 			{
+				//Draw Texture
 				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 32, item->data->bounds.y + 30, &SDL_Rect({ 0,0,384,96 }), 0.5f, 0, 0, 0, 0, false);
 
-				std::string text = ToUpperCase(playerItemList[y]->description.GetString());
+				//Draw Text
+				std::string text = ToUpperCase(playerItemList[b]->description.GetString());
 				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 0, text.c_str());
 			}
 
 		}
-		++y;
+		++b;
 		item = item->next;
 	}
 
 }
 
-void ItemManager::ShowActions(int y)
+void ItemManager::CreateActionButtons(int y)
 {
 	if (actionButtons.Count() <= 0)
 	{
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 250 , 65 + 32 * y ,384,96 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 250 , 65 + 200 * y , 384, 96 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 25 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 45 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 
 	}
-	int a = 0;
-	ListItem<GuiControl*>* item = actionButtons.start;
-	while (item)
-	{
-
-		if (item->data->itemUsed)
-		{
-			
-		//item->data->itemUsed = false;
-			//DeleteActionButtons();
-			//actionButtons[a]->singleItemCheck = false;
-			UseItem(playerItemList[y - 1]);
-			LOG("ITEM USED");
-		
-		}
-		 item->data->Draw(app->render);
-
-		item = item->next;
-	}
-
-	
+	CheckActionButtons();
 
 }
 
@@ -227,12 +213,13 @@ void ItemManager::CreateButtons()
 {
 	if (buttons.Count() <= 0)
 	{
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14));//CREATE EXIT BUTTON
+		exitButton = app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//CREATE EXIT BUTTON
 		ListItem<Item*>* item = playerItemList.start;
 		y = 0;
 		while (item)
 		{
 			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			LOG("%d", y);
 			y++;
 			item = item->next;
 		}
@@ -242,12 +229,13 @@ void ItemManager::CreateButtons()
 
 void ItemManager::DeleteButtons()
 {
+	app->ui->DestroyGuiControl(exitButton);
 	ListItem<GuiControl*>* item = buttons.start;
 	while (item)
 	{
 
-		if (item->data->id == 17 || item->data->id == 14)
-			app->ui->DestroyGuiControl(item->data);
+		//if (item->data->id == 17 || item->data->id == 14)
+		app->ui->DestroyGuiControl(item->data);
 
 		item = item->next;
 	}
@@ -267,20 +255,65 @@ void ItemManager::DeleteActionButtons()
 	actionButtons.Clear();
 }
 
-void ItemManager::UseItem(Item* itemtoUse)
+void ItemManager::UseItem(Item* itemtoUse, int y)
 {
 	//EFECTO DE CADA ITEM
+
+	//int i = playerItemList.Find(itemtoUse);
+	//ListItem<Item*>* c = playerItemList.At(i);
+	//playerItemList.Del(c);
+	int a = 0;
+
 	ListItem<Item*>* item = playerItemList.start;
 	while (item)
 	{
-		if (item->data == itemtoUse)
+		if (a == y)
 		{
-			playerItemList.Del(item);
-			useItem = false;
-			break;
+			ListItem<Item*>* c = playerItemList.At(a);
+			playerItemList.Del(c);
 		}
 
+
+		a++;
 		item = item->next;
 	}
+
+}
+
+void ItemManager::CheckActionButtons()
+{
+	y = 0;
+	ListItem<GuiControl*>* item = buttons.start;
+	while (item)
+	{
+		if (actionButtons.Count() > 0 && actionButtons[0]->itemUsed == false)
+		{
+			actionButtons[0]->Draw(app->render);
+			actionButtons[1]->Draw(app->render);
+
+		}
+
+		if (actionButtons.Count() > 0  && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
+		{
+			LOG("%d", y);
+			item->data->itemSingleCheck = false;
+			item->data->itemUsed = false;
+			//app->ui->DestroyGuiControl(buttons[y]);
+			//ELIMINAR ITEM
+				//DeleteActionButtons();
+				//actionButtons[a]->singleItemCheck = false;
+			UseItem(playerItemList[y], y);
+			DeleteButtons();
+			DeleteActionButtons();
+			LOG("ITEM USED");
+
+		}
+
+
+		//item->data->Draw(app->render);
+		++y;
+		item = item->next;
+	}
+
 }
 
