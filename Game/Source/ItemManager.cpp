@@ -69,7 +69,6 @@ bool ItemManager::Start()
 	GiveItemToPlayer(SString("HP Potion"));
 	GiveItemToPlayer(SString("HP Potion"));
 	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
 	GiveItemToPlayer(SString("Treasure Chest"));
 
 
@@ -260,12 +259,31 @@ void ItemManager::DeleteActionButtons()
 void ItemManager::UseItem(Item* itemtoUse, int y)
 {
 	//EFECTO DE CADA ITEM
+	if (itemtoUse->title == SString("HP Potion"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.Addhealth(15.f);
+	}
+	if (itemtoUse->title == SString("EXP Potion"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddExp(20.f);
+	}
+	if (itemtoUse->title == SString("Coin"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddMoney(1);
+	}
+	if (itemtoUse->title == SString("Coin Stack"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddMoney(50.f);
+	}
+	if (itemtoUse->title == SString("Treasure Chest"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
+	}
 
-	//int i = playerItemList.Find(itemtoUse);
-	//ListItem<Item*>* c = playerItemList.At(i);
-	//playerItemList.Del(c);
+
+
+
 	int a = 0;
-
 	ListItem<Item*>* item = playerItemList.start;
 	while (item)
 	{
@@ -323,46 +341,86 @@ void ItemManager::DrawPlayerStats()
 {
 	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
 	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
-	float a = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+	float hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+	float exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+
 	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 143) / 100;
+	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 143) / 100;
 
 	app->render->DrawRectangle({ 357,367,143, 9 }, 147, 147, 147, 255);//BASE COLOR
+	app->render->DrawRectangle({ 357,392,143, 9 }, 147, 147, 147, 255);//BASE COLOR
 
-	if(a > 85)
+	if(hp > 85)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 85, 95, 255);//BLUE
 	
-	if (a <= 85)
+	if (hp <= 85)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 89, 83, 255);// LIGHT BLUE
 
-	if (a <= 75)
+	if (hp <= 75)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 51, 81, 48, 255);//DARK GREEN
 
-	if (a <= 67)
+	if (hp <= 67)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 71, 89, 50, 255);//GREEN
 
-	if (a <= 60)
+	if (hp <= 60)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 100, 106, 51, 255);//LIGHT GREEN
 
-	if (a <= 50)
+	if (hp <= 50)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 100, 51, 255);//YELLOW
 
-	if (a <= 40)
+	if (hp <= 40)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 90, 52, 255);//LIGHT GREEN
 
-	if (a <= 30)
+	if (hp <= 30)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 77, 52, 255);//ORANGE
 
-	if (a <= 20)
+	if (hp <= 20)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 60, 49, 255);//DARK ORANGE
 
-	if (a <= 10)
+	if (hp <= 10)
 		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 49, 49, 255);//DARK RED
 
+
+	if (exp > 85)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
+
+	if (exp <= 85)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+
+	if (exp <= 75)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
+
+	if (exp <= 67)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
+
+	if (exp <= 60)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+
+	if (exp <= 50)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
+
+	if (exp <= 40)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+
+	if (exp <= 30)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
+
+	if (exp <= 20)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
+
+	if (exp <= 10)
+		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
+
+
 	//Draw HP NUMBER
-	std::string text = ToUpperCase(to_string((int)a));
-	app->fonts->BlitText(506, 297, 0, text.c_str());
-	text = ToUpperCase(SString("HP").GetString());
-	app->fonts->BlitText(525, 297, 0, text.c_str());
+	std::string text = ToUpperCase(to_string((int)hp));
+	app->fonts->BlitText(297, 297, 0, text.c_str());
+	//Draw EXP
+	text = ToUpperCase(to_string((int)exp));
+	app->fonts->BlitText(297, 322, 0, text.c_str());
+	//Draw Money
+	text = ToUpperCase(to_string(app->party->allyParty->FindByName("Thyma")->data.GetMoney()));
+	app->fonts->BlitText(582, 233, 0, text.c_str());
 
 }
 
