@@ -216,6 +216,8 @@ public:
 		return nullptr;
 	}
 
+	std::string currentMapName;
+
 private:
 
 	// L03: Methods to load all required map data
