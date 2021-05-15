@@ -11,6 +11,8 @@ Quest::Quest(pugi::xml_node node)
 	progress = node.attribute("progress").as_int();
 	quantity = node.attribute("quantity").as_int();
 	demandingNPC = node.attribute("demandingNPC").as_string();
+	reward = node.attribute("reward").as_string();
+	rewardQuantity = node.attribute("rewardQuantity").as_string();
 	rewardingNPC = node.attribute("rewardingNPC").as_string();
 	rewardXP = node.attribute("rewardXP").as_int();
 	rewardGold = node.attribute("rewardGold").as_int();

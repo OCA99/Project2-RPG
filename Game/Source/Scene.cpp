@@ -55,7 +55,7 @@ void MapScene::Load(fPoint playerPosition)
 
 
 	std::string s = filename;
-	e->assign<SceneFade>(250);
+	e->assign<SceneFade>(250, 16);
 	
 	if (s == "Town.tmx")
 	{
