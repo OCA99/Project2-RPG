@@ -48,6 +48,7 @@ public:
 
 	SDL_Texture* menuButtonTex;
 	SDL_Texture* optionsButtonsTex;
+	SDL_Texture* questButtonTex;
 
 
 	SDL_Texture* buttonTex;

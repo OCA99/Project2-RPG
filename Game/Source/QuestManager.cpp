@@ -92,7 +92,6 @@ bool QuestManager::Start()
 		questNode = questNode.next_sibling("quest");
 	}
 
-	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
 	customerTex = app->tex->Load("Textures/Dialogue/blacksmith_dialogue.png");
 	reaperTex = app->tex->Load("Textures/Dialogue/reaper_dialogue.png");
 	tavernTex = app->tex->Load("Textures/Dialogue/tavern_lady_dialogue.png");
@@ -124,6 +123,7 @@ bool QuestManager::PostUpdate(float dt)
 
 	if (questInvOpened)
 	{
+		if(!app->scene->buttons) CreateQuestButtons();
 		DrawQuestUi();
 		ShowQuestDescription();
 	}
@@ -133,7 +133,7 @@ bool QuestManager::PostUpdate(float dt)
 		while (item)
 		{
 
-			if (item->data->id == 19)
+			if (item->data->id == 18)
 				app->ui->DestroyGuiControl(item->data);
 
 			item = item->next;
@@ -262,7 +262,6 @@ bool QuestManager::DrawActiveQuests()
 }
 void QuestManager::DrawQuestUi()
 {
-	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 	ListItem<Quest*>* item = questsActive.start;
 
 	int i = 0;
@@ -325,14 +324,13 @@ void QuestManager::ShowQuestDescription()
 
 void QuestManager::CreateQuestButtons()
 {
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//Back Button 14
 	if (questButtons.Count() <= 0)
 	{
 		ListItem<Quest*>* item = questsActive.start;
 		y = 0;
 		while (item)
 		{
-			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 18)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			y++;
 			item = item->next;
 		}

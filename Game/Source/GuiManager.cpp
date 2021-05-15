@@ -43,6 +43,7 @@ bool GuiManager::Start()
 	controlsTex = app->tex->Load("Textures/UI/OptionsMenu/controls.png");
 	onOffTex = app->tex->Load("Textures/UI/OptionsMenu/on_off.png");
 	backArrowTex = app->tex->Load("Textures/UI/OptionsMenu/back_arrow.png");
+	questButtonTex = app->tex->Load("Textures/UI/HUD/quest_button.png");
 	pixelTex = app->tex->Load("Textures/UI/OptionsMenu/pixel.png");
 
 	return true;
@@ -127,8 +128,8 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		buttonTex = pixelTex;
 		textTex = pixelTex;
 		break;
-	case 19:
-		buttonTex = pixelTex;
+	case 18:
+		buttonTex = questButtonTex;
 		textTex = pixelTex;
 	default:
 		break;
@@ -185,7 +186,7 @@ void GuiManager::DestroyAllGuiControls()
 
 	for (int i = 0; i < u; i++)
 	{
-		if (controls.At(0)->data->id != 17 && controls.At(0)->data->id != 19)
+		if (controls.At(0)->data->id != 17 && controls.At(0)->data->id != 18)
 		{
 		delete controls.At(0)->data;
 		controls.Del(controls.At(0));
