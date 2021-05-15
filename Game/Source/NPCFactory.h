@@ -5,6 +5,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Point.h"
+#include "QuestManager.h"
 
 static class NPCFactory : public Prefab
 {
@@ -15,6 +16,7 @@ public:
 		CUSTOMER,
 		THYMA
 	};
+
 
 	static ECS::Entity* Create(ECS::World* world, fPoint position, Type type, float radius = 14)
 	{
@@ -29,10 +31,11 @@ protected:
 	{
 		ECS::Entity* npc = world->create();
 		npc->assign<Position>();
-		npc->assign<Quest>();
+		npc->assign<QuestList>();
 
 		if (type == Type::TAVERN)
 		{
+			SString name = "tlady";
 			SDL_Texture* t = app->tex->Load("Textures/NPC/tavern_lady_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -59,6 +62,12 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "tavern.xml", "TEST");
+
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
+
 		}
 		else if (type == Type::REAPER)
 		{

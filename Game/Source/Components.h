@@ -299,9 +299,49 @@ struct BattleMember
 	Member* member;
 };
 
+struct Quest;
+
+
 struct QuestList
 {
-	List<Quest*> questsList;
+	SString receiver;
+
+	List<Quest*> questsActive;
+	List<Quest*> questsInactive;
+
+	void SetReceiver(SString info)
+	{
+		receiver = info;
+	}
+
+	void LoadActive(List<Quest*>* active)
+	{
+		Quest* first = active->start->data;
+		for (int i = 0; i <= active->Count(); i++)
+		{
+			if (first->demandingNPC == receiver)
+			{
+				questsActive.Add(first);
+			}
+			first = active->start->next->data;
+
+		}
+
+	}
+
+	void LoadInactive(List<Quest*>* inactive)
+	{
+		Quest* first = inactive->start->data;
+		for (int i = 0; i <= inactive->Count(); i++)
+		{
+			if (first->demandingNPC == receiver)
+			{
+				questsActive.Add(first);
+			}
+			first = inactive->start->next->data;
+		}
+
+	}
 
 
 
