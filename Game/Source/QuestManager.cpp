@@ -305,8 +305,11 @@ void QuestManager::ShowQuestDescription()
 				if (questsActive[y]->demandingNPC == SString("thyma")) app->render->DrawTexture(thymaTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 
 				//DRAW REWARDS
-				Item* tempItem = app->items->SearchForItem(questsActive[y]->reward);
-				app->render->DrawTexture(tempItem->itemTex, 300, 190, &SDL_Rect({ 0,0,16,16 }), 1.5f, 1, 0, 0, 0, false);
+				if (Item* tempItem = app->items->SearchForItem(questsActive[y]->reward))//If there is not a reward it will not crash with this if
+				{
+					app->render->DrawTexture(tempItem->itemTex, 300, 190, &SDL_Rect({ 0,0,16,16 }), 1.5f, 1, 0, 0, 0, false);
+
+				}
 	
 				//Draw Reward Quantity
 				text = ToUpperCase(questsActive[y]->rewardQuantity.GetString());
