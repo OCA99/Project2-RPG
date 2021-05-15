@@ -45,7 +45,18 @@ bool GuiButton::Update(Input* input, float dt)
 	{
 		if (!itemCheck) itemCheck = true;
 	}
-	if (id == 17 && state != GuiControlState::FOCUSED)
+	if (id == 17 && state == GuiControlState::SELECTED)
+	{
+		for (int i = 0; i < app->items->buttons.Count(); ++i)
+		{
+			app->items->buttons[i]->itemUsed = false;
+		}
+		if (!itemUsed) itemUsed = true;
+		app->items->DeleteActionButtons();
+		state = GuiControlState::NORMAL;
+		
+	}
+	if (id == 17 && state != GuiControlState::FOCUSED && state != GuiControlState::SELECTED)
 	{
 		itemCheck = false;
 	}
