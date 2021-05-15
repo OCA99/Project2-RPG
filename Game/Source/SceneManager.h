@@ -46,13 +46,10 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
-	void RemoveButtons();
-
 public:
 	Scene* currentScene = nullptr;
 	Scene* sceneToBeLoaded = nullptr;
 	fPoint playerPositionToBeLoaded;
-	List<GuiControl*> menuButtons;//Buttons List
 
 
 	SDL_Texture* menuTex;
