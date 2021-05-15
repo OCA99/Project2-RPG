@@ -221,7 +221,7 @@ void ItemManager::CreateButtons()
 			y++;
 			item = item->next;
 		}
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14));//CREATE EXIT BUTTON
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14));//CREATE EXIT BUTTON
 	}
 
 }

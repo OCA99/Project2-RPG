@@ -8,26 +8,32 @@
 #include "Log.h"
 
 
-GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture* tex) : GuiControl(GuiControlType::SLIDER, id)
+GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture* tex, int sliderValue) : GuiControl(GuiControlType::SLIDER, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->texture = tex;
 	slider = { bounds.x, bounds.y, 30, 30 };
 
+	unit = bounds.w / 100.0f;
+
 	// el musicVolume iii fxVolume empieza en 100 en guiManager, no se cambia en ningún lao, tmbién se tiene q hacer q cuando lo pruebes
 	//suene al volumen q toca pq cuando estamos en menu la musica se capea a 25.
 	if (id == 8)
 	{
-		value = app->ui->musicVolume;
+		value = app->volume;
 	}
 	else if (id == 9)
 	{
-		value = app->ui->fxVolume;
+		value = app->volumeMusic;
+	}
+	else if (id == 10)
+	{
+		value = app->volumeFx;
 	}
 
 	value = round(value);
-	sliderPosx = ((value * unit) + bounds.x) - unit;
+	sliderPosx = ((value * unit) + bounds.x) - 5 - 10;
 }
 
 GuiSlider::~GuiSlider()
@@ -53,23 +59,24 @@ bool GuiSlider::Update(Input* input, float dt)
 		{
 			state = GuiControlState::FOCUSED;
 
-			unit = bounds.w / 100.0f;
-			value = (mouseX - bounds.x) / unit;
+			value = (mouseX - bounds.x) / unit - 5;
 			value = round(value);
 
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				state = GuiControlState::PRESSED;
-				sliderPosx = ((value * unit) + bounds.x) - unit - 5;
+				sliderPosx = ((value * unit) + bounds.x);
 			}
 
 			// If mouse button pressed -> Generate event!
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
 				state = GuiControlState::SELECTED;
+				NotifyObserver();
 			}
 		}
 		else state = GuiControlState::NORMAL;
+
 	}
 
 	return true;
@@ -106,4 +113,10 @@ bool GuiSlider::Draw(Render* render)
 	}
 
 	return false;
+}
+
+void GuiSlider::SetValue(int v)
+{
+	value = v;
+	sliderPosx = ((value * unit) + bounds.x) - unit - 5;
 }

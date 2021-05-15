@@ -17,6 +17,7 @@
 #include "Audio.h"
 #include "SceneTransitionSystem.h"
 #include "GuiCheckBox.h"
+#include "GuiSlider.h"
 #include "ItemManager.h"
 
 #include "Defs.h"
@@ -106,7 +107,7 @@ bool SceneManager::Update(float dt)
 					app->volumeDown = false;
 				}
 
-				Mix_VolumeMusic(app->volume);
+				app->UpdateVolume();
 			}
 			else
 			{
@@ -421,6 +422,7 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 {
 	Scene* s;
+	GuiSlider* slider;
 
 	switch (control->id)
 	{
@@ -462,6 +464,21 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		s = (Scene*)(new MenuScene());
 		sceneToBeLoaded = s;
 		menu = false;
+		break;
+	case 8:
+		slider = (GuiSlider*)control;
+		app->volume = slider->value;
+		app->UpdateVolume();
+		break;
+	case 9:
+		slider = (GuiSlider*)control;
+		app->volumeMusic = slider->value;
+		app->UpdateVolume();
+		break;
+	case 10:
+		slider = (GuiSlider*)control;
+		app->volumeFx = slider->value;
+		app->UpdateVolume();
 		break;
 	case 11: //graphics window button
 		app->ui->DestroyAllGuiControls();

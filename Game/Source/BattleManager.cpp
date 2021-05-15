@@ -37,10 +37,8 @@ bool BattleManager::Start()
 	characterBar = app->tex->Load("Textures/UI/BattleMenu/character_bar.png");
 	actionBox = app->tex->Load("Textures/UI/BattleMenu/action_box.png");
 	healthBars = app->tex->Load("Textures/UI/BattleMenu/health_bars.png");
-	selectionArrow = app->tex->Load("Textures/UI/BattleMenu/selection_arrow.png");
 	selectionArrowHorizontal = app->tex->Load("Textures/UI/BattleMenu/selection_arrow_horizontal.png");
-	selectionArrowGreen = app->tex->Load("Textures/UI/BattleMenu/selection_arrow_green.png");
-	selectionArrowRed = app->tex->Load("Textures/UI/BattleMenu/selection_arrow_red.png");
+	selectionArrows = app->tex->Load("Textures/UI/BattleMenu/selection_arrows.png");
 	
 	//C = app->quests->questsActive.start;
 	return true;
@@ -418,7 +416,7 @@ void BattleManager::Draw()
 
 		if (i == currentMember && currentParty == 0)
 		{
-			app->render->DrawTexture(selectionArrow, 75, 30 + i * 80.5f, NULL, .5f);
+			app->render->DrawTexture(selectionArrows, 70, 30 + i * 80.5f, &SDL_Rect({ 104, 0, 52, 57 }), .5f);
 
 			std::vector<Action*>* actions = &party->list.at(i)->data.actions;
 			for (int j = 0; j < actions->size(); j++) {
@@ -440,7 +438,7 @@ void BattleManager::Draw()
 	if (selecting == Selecting::TARGET && currentParty == 0) {
 		for (int i = 0; i < party->list.size(); i++) {
 			if (party->list.at(i) == targets.at(currentTarget)) {
-				app->render->DrawTexture(selectionArrowGreen, 75, 30 + i * 80.5f, NULL, .5f);
+				app->render->DrawTexture(selectionArrows, 70, 30 + i * 80.5f, &SDL_Rect({ 0, 0, 52, 57 }), .5f);
 			}
 		}
 
@@ -448,7 +446,7 @@ void BattleManager::Draw()
 
 		for (int i = 0; i < party->list.size(); i++) {
 			if (party->list.at(i) == targets.at(currentTarget)) {
-				app->render->DrawTexture(selectionArrowRed, 495, 10 + i * 80.5f, NULL, .5f);
+				app->render->DrawTexture(selectionArrows, 495, -5 + i * 80.5f, &SDL_Rect({ 52, 0, 52, 57 }), .5f);
 			}
 		}
 	}

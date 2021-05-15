@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255, Uint8 a = 255);
+	GuiControl* CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255, Uint8 a = 255, int sliderValue = 0);
 	void DestroyGuiControl(GuiControl* entity);
 
 	void DestroyAllGuiControls();
@@ -72,9 +72,6 @@ public:
 	SDL_Texture* itemTex;
 	SDL_Texture* useItemText;
 	SDL_Texture* discardItemText;
-
-	int fxVolume = 100;
-	int musicVolume = 100;
 
 	int lastId = 0;
 };
