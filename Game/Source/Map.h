@@ -32,7 +32,7 @@ struct TileSet
 	int	tileWidth;
 	int	tileHeight;
 
-	SDL_Texture** texture;
+	SDL_Texture* texture;
 	int	texWidth;
 	int	texHeight;
 	int	numTilesWidth;

@@ -64,9 +64,9 @@ private:
 	pugi::xml_node optionRoot;
 	std::string nameNPC;
 
-	SDL_Texture** dialogFrame;
-	SDL_Texture** tavernLady;
-	SDL_Texture** reaperSr;
-	SDL_Texture** customer;
-	SDL_Texture** thyma;
+	SDL_Texture* dialogFrame;
+	SDL_Texture* tavernLady;
+	SDL_Texture* reaperSr;
+	SDL_Texture* customer;
+	SDL_Texture* thyma;
 };

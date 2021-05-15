@@ -20,7 +20,7 @@ public:
 	virtual void unconfigure(ECS::World* world) override;
 
 	struct RenderQueue {
-		SDL_Texture** texture;
+		SDL_Texture* texture;
 		int x;
 		int y;
 		const SDL_Rect* section = nullptr;

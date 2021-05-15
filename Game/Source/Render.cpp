@@ -32,13 +32,19 @@ bool Render::Awake(pugi::xml_node& config)
 
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
-	if(config.child("vsync").attribute("value").as_bool(true) == true)
+	/*if(config.child("vsync").attribute("value").as_bool(true) == true)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
+		vsync = true;
 		LOG("Using vsync");
-	}
+	}*/
 
 	renderer = SDL_CreateRenderer(app->win->window, -1, flags);
+
+	if(config.child("vsync").attribute("value").as_bool(true) == true)
+	{
+		SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
+	}
 
 	SDL_RenderSetLogicalSize(renderer, app->win->screenSurface->w, app->win->screenSurface->h);
 
@@ -77,7 +83,15 @@ bool Render::PreUpdate()
 bool Render::Update(float dt)
 {
 	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-		app->tex->ReloadAllTextures();
+	{
+		bool b;
+		vsync = !vsync;
+		if (vsync)
+			b = SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "1", SDL_HINT_OVERRIDE);
+		else
+			b = SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "0", SDL_HINT_OVERRIDE);
+		LOG("set %d", b);
+	}
 
 	return true;
 }
@@ -113,7 +127,7 @@ void Render::ResetViewPort()
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture** texture, int x, int y, const SDL_Rect* section, float scale, float speed, double angle, int pivotX, int pivotY, bool useCamera) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float scale, float speed, double angle, int pivotX, int pivotY, bool useCamera) const
 {
 	bool ret = true;
 	uint winScale = app->win->GetScale();
@@ -137,7 +151,7 @@ bool Render::DrawTexture(SDL_Texture** texture, int x, int y, const SDL_Rect* se
 	}
 	else
 	{
-		SDL_QueryTexture(*texture, NULL, NULL, &rect.w, &rect.h);
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
 	rect.w *= winScale * scale;
@@ -153,7 +167,7 @@ bool Render::DrawTexture(SDL_Texture** texture, int x, int y, const SDL_Rect* se
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, *texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

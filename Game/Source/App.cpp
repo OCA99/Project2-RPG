@@ -24,6 +24,8 @@
 #include <sstream>
 #include <stdlib.h>
 
+#include "SDL_mixer/include/SDL_mixer.h"
+
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -206,6 +208,8 @@ void App::FinishUpdate()
 
 	//LOG("%f\n", 1.0f / std::max(dt, minTime));
 
+	//LOG("fps: %d", int(1.0f / dt));
+
 	if (dt < minTime)
 	{
 		SDL_Delay(minTime - dt);
@@ -275,6 +279,15 @@ bool App::PostUpdate()
 	}
 
 	return ret;
+}
+
+void App::UpdateVolume()
+{
+	float general = app->volume / 100.0f;
+	float music = app->volumeMusic / 100.0f * general;
+	float fx = app->volumeFx / 100.0f * general;
+	Mix_VolumeMusic(music * MIX_MAX_VOLUME);
+	Mix_Volume(-1, fx * MIX_MAX_VOLUME);
 }
 
 // Called before quitting
