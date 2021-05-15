@@ -55,7 +55,7 @@
 	<item
 		type = "2"
 		title = "EXP Potion"
-		description = "a potion with raw|properties|that increases|20exp"
+		description = "a potion with raw|properties|that increases|17exp"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"

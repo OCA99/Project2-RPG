@@ -22,7 +22,7 @@ struct Data {
 	//Numero en la Party
 	int id;
 	float health = 0;
-	float exp = 0;
+	float exp = 20;
 	float maxHealth;
 	float power;
 	bool dead = false;
