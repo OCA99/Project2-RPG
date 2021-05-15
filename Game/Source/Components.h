@@ -5,6 +5,8 @@
 #include "App.h"
 #include "DialogSytem.h"
 #include "External/SDL/include/SDL.h"
+#include "External/PugiXml/src/pugixml.hpp"
+#include "Quest.h"
 
 #include <map>
 #include <string>
@@ -295,4 +297,13 @@ struct BattleMember
 	BattleMember(Member* member) : member(member) {}
 
 	Member* member;
+};
+
+struct QuestList
+{
+	List<Quest*> questsList;
+
+
+
+	pugi::xml_node node;
 };
