@@ -49,21 +49,20 @@ bool Textures::Start()
 bool Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
-	std::map<const char*, SDL_Texture**>::iterator item;
+	std::map<const char*, SDL_Texture*>::iterator item;
 
-	for(item = textures.begin(); item != textures.end(); item = item++)
+	for(item = textures.begin(); item != textures.end(); item++)
 	{
-		SDL_DestroyTexture(*item->second);
+		SDL_DestroyTexture(item->second);
 	}
 
 	textures.clear();
-	textureMemory.clear();
 	IMG_Quit();
 	return true;
 }
 
 // Load new texture from file path
-SDL_Texture** const Textures::Load(const char* path)
+SDL_Texture* const Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
 
@@ -83,8 +82,7 @@ SDL_Texture** const Textures::Load(const char* path)
 		SDL_FreeSurface(surface);
 	}
 
-	textures.insert(std::make_pair(path, &texture));
-	textureMemory.push_back(texture);
+	textures.insert(std::make_pair(path, texture));
 
 	// (SOLVED) TODO 7: Close the allocated SDL_RWops structure
 	if (rw != nullptr)
@@ -94,26 +92,16 @@ SDL_Texture** const Textures::Load(const char* path)
 }
 
 // Unload texture
-bool Textures::UnLoad(SDL_Texture** texture)
+bool Textures::UnLoad(SDL_Texture* texture)
 {
-	std::map<const char*, SDL_Texture**>::iterator item;
+	std::map<const char*, SDL_Texture*>::iterator item;
 
 	for(item = textures.begin(); item != textures.end(); item++)
 	{
-		if(*texture == *item->second)
+		if(texture == item->second)
 		{
-			SDL_DestroyTexture(*item->second);
+			SDL_DestroyTexture(item->second);
 			textures.erase(item);
-		}
-	}
-
-	std::vector<SDL_Texture*>::iterator mitem;
-
-	for (mitem = textureMemory.begin(); mitem != textureMemory.end(); mitem++)
-	{
-		if (*texture == *mitem)
-		{
-			textureMemory.erase(mitem);
 		}
 	}
 
@@ -141,15 +129,13 @@ void Textures::GetSize(SDL_Texture* texture, uint& width, uint& height) const
 
 void Textures::ReloadAllTextures()
 {
-	std::map<const char*, SDL_Texture**>::iterator item;
-
-	textureMemory.clear();
+	std::map<const char*, SDL_Texture*>::iterator item;
 
 	for (item = textures.begin(); item != textures.end(); item++)
 	{
-		SDL_DestroyTexture(*item->second);
-		SDL_Texture* tex = *Load(item->first);
+		SDL_DestroyTexture(item->second);
+		SDL_Texture* tex = Load(item->first);
 		LOG("RELOAD");
-		item->second = &tex;
+		item->second = tex;
 	}
 }

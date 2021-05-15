@@ -35,7 +35,7 @@ public:
 	SString objective; // target to the enemy who drops
 	SString rewardingNPC; // Name of rewarding NPC
 	SString texturePath; //Texture Path
-	SDL_Texture** itemTex = nullptr;
+	SDL_Texture* itemTex = nullptr;
 };
 
 class ItemManager : public Module
@@ -69,8 +69,8 @@ public:
 	void CreateButtons();
 
 public:
-	SDL_Texture** invMenu;
-	SDL_Texture** itemDescTex;
+	SDL_Texture* invMenu;
+	SDL_Texture* itemDescTex;
 
 	List<Item*> itemList;//ALL Items
 	List<Item*> playerItemList;//Player Items

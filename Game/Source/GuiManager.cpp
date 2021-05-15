@@ -67,11 +67,11 @@ bool GuiManager::CleanUp()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int sliderValue)
 {
 	GuiControl* control = nullptr;
-	SDL_Texture** textTex = nullptr;
-	SDL_Texture** buttonTex = nullptr;
+	SDL_Texture* textTex = nullptr;
+	SDL_Texture* buttonTex = nullptr;
 
 	switch (id)
 	{
@@ -155,7 +155,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		control->color.a = a;
 		break;
 	case GuiControlType::SLIDER:
-		control = new GuiSlider(id, bounds, sliderTex);
+		control = new GuiSlider(id, bounds, sliderTex, sliderValue);
 		control->SetObserver(app->scene);//preguntar EDU que onda
 		control->color.r = r;
 		control->color.g = g;

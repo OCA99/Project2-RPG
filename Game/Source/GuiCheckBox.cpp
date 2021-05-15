@@ -3,7 +3,7 @@
 #include "Audio.h"
 #include "Window.h"
 
-GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex) : GuiControl(GuiControlType::CHECKBOX, id)
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::CHECKBOX, id)
 {
 	this->bounds = bounds;
 	this->checkedBounds = { bounds.x + 15, bounds.y + 15, 50, 50 };
