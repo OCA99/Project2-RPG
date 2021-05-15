@@ -45,7 +45,9 @@ bool GuiManager::Start()
 	backArrowTex = app->tex->Load("Textures/UI/OptionsMenu/back_arrow.png");
 	questButtonTex = app->tex->Load("Textures/UI/HUD/quest_button.png");
 	pixelTex = app->tex->Load("Textures/UI/OptionsMenu/pixel.png");
-	itemTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
+	itemTex = app->tex->Load("Textures/UI/OptionsMenu/item_action.png");
+	useItemText = app->tex->Load("Textures/UI/OptionsMenu/useitem.png");
+	discardItemText = app->tex->Load("Textures/UI/OptionsMenu/discarditem.png");
 	return true;
 }
 
@@ -133,12 +135,12 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		textTex = pixelTex;
 		break;
 	case 19:
-		buttonTex = optionsButtonsTex;
-		textTex = graphicsTex;
+		buttonTex = itemTex;
+		textTex = useItemText;
 		break;
 	case 20:
 		buttonTex = itemTex;
-		textTex = optionsTex;
+		textTex = discardItemText;
 		break;
 	default:
 		break;

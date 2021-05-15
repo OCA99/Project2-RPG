@@ -70,6 +70,8 @@ public:
 	SDL_Texture* backArrowTex;
 	SDL_Texture* pixelTex;
 	SDL_Texture* itemTex;
+	SDL_Texture* useItemText;
+	SDL_Texture* discardItemText;
 
 	int fxVolume = 100;
 	int musicVolume = 100;

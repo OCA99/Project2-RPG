@@ -51,14 +51,15 @@ bool GuiButton::Update(Input* input, float dt)
 		{
 			app->items->buttons[i]->itemSingleCheck = false;
 		}
+
 		if (!itemSingleCheck) itemSingleCheck = true;
-		app->items->DeleteActionButtons();
+
 		state = GuiControlState::NORMAL;
 		
 	}
 	if (id == 17 && state != GuiControlState::FOCUSED && state != GuiControlState::SELECTED)
 	{
-		itemCheck = false;
+		if (itemCheck) itemCheck = false;
 	}
 	if (id == 18 && state == GuiControlState::SELECTED)
 	{
@@ -73,8 +74,10 @@ bool GuiButton::Update(Input* input, float dt)
 	}
 	if (id == 19 && state == GuiControlState::SELECTED)
 	{
+
 		if (!itemUsed) itemUsed = true;
 		state = GuiControlState::NORMAL;
+		LOG("ITEM SELECTED");
 
 	}
 	else

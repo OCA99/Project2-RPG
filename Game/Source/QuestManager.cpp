@@ -326,6 +326,7 @@ void QuestManager::CreateQuestButtons()
 {
 	if (questButtons.Count() <= 0)
 	{
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59 / 2 , 36 / 2, 30, 30 }), 14);//Back Button 14
 		ListItem<Quest*>* item = questsActive.start;
 		y = 0;
 		while (item)

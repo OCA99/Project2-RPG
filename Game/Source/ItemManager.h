@@ -66,7 +66,7 @@ public:
 	void ShowDescription(); 
 
 	//Show Item Actions
-	void ShowActions(int y);
+	void CreateActionButtons(int y);
 
 	//Create Description & Exit Buttons
 	void CreateButtons();
@@ -75,9 +75,11 @@ public:
 
 	void DeleteActionButtons();
 
-	void UseItem(Item* itemToUse);
+	void UseItem(Item* itemToUse, int y);
 
 	void RemoveItem();
+
+	void CheckActionButtons();
 
 
 public:
@@ -88,6 +90,7 @@ public:
 	List<Item*> playerItemList;//Player Items
 	List<GuiControl*> buttons;//Buttons List
 	List<GuiControl*> actionButtons;//Buttons List
+	GuiControl* exitButton;
 
 	int y = 0;//Logistic Tool
 
