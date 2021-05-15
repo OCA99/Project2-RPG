@@ -98,8 +98,8 @@ public:
 	SceneManager* observer;        // Observer module (it should probably be an array/list)
 
 	bool itemCheck = false; // Check if Item is Hovered
+	bool itemSingleCheck = false;
 	bool itemUsed = false; // Check if Item has been Selected
-
 	bool questCheck = false; // Check if Quest has been Selected
 
 };

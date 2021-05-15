@@ -506,7 +506,7 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		app->win->ToggleFullscreen();
 		break;
 	case 19:
-		app->items->useItem = true;
+		//app->items->useItem = true;
 		break;
 	case 20:
 		break;
