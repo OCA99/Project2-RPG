@@ -77,8 +77,6 @@ public:
 
 	void UseItem(Item* itemToUse, int y);
 
-	void RemoveItem();
-
 	void CheckActionButtons();
 
 

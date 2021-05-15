@@ -77,12 +77,21 @@ bool GuiButton::Update(Input* input, float dt)
 
 		if (!itemUsed) itemUsed = true;
 		state = GuiControlState::NORMAL;
-		LOG("ITEM SELECTED");
 
 	}
 	else
 	{
 		if (itemUsed) itemUsed = false;
+	}
+	if (id == 20 && state == GuiControlState::SELECTED)
+	{
+		if (!discarItem) discarItem = true;
+		state = GuiControlState::NORMAL;
+
+	}
+	else
+	{
+		if (discarItem) discarItem = false;
 	}
 
 
