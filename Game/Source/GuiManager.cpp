@@ -25,7 +25,7 @@ bool GuiManager::Start()
 {
 	menuButtonTex = app->tex->Load("Textures/UI/MainPauseMenu/menu_button.png");
 	optionsButtonsTex = app->tex->Load("Textures/UI/OptionsMenu/options_buttons.png");
-	
+	invButtonTex = app->tex->Load("Textures/UI/HUD/inventory_button.png");
 	
 	sliderTex = app->tex->Load("Textures/UI/OptionsMenu/volume_slider.png");
 	backButtonTex = app->tex->Load("Textures/UI/OptionsMenu/back_button.png");
@@ -127,11 +127,11 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		textTex = backArrowTex;
 		break;
 	case 17:
-		buttonTex = pixelTex;
+		buttonTex = invButtonTex;
 		textTex = pixelTex;
 		break;
 	case 18:
-		buttonTex = pixelTex;
+		buttonTex = questButtonTex;
 		textTex = pixelTex;
 		break;
 	case 19:

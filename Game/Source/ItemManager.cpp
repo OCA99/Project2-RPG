@@ -6,6 +6,7 @@
 #include "Fonts.h"
 #include "DialogSytem.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 #include "Scene.h"
 #include "PartyManager.h"
 
@@ -72,7 +73,6 @@ bool ItemManager::Start()
 	GiveItemToPlayer(SString("Treasure Chest"));
 
 
-	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
 	return true;
@@ -83,13 +83,11 @@ bool ItemManager::Update(float dt)
 
 
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP)
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened)
 		invOpened = !invOpened;//Open or close Inv
 
 	if (invOpened)
 	{
-		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-
 		CreateButtons();
 	}
 
@@ -101,7 +99,6 @@ bool ItemManager::PostUpdate(float dt)
 	
 	if (invOpened)//If the inventory is opened bool
 	{
-		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 		DrawPlayerItems();//Draw Items Image and Title
 		ShowDescription();//Show
 		DrawPlayerStats();
@@ -134,7 +131,7 @@ void ItemManager::DrawPlayerItems()
 
 		//DRAW TEXT
 		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(75, 80 + (32 * y), 0, text.c_str());
+		app->fonts->BlitText(75, 80 + (32 * y), 1, text.c_str());
 
 		++y;
 		item = item->next;
@@ -188,7 +185,7 @@ void ItemManager::ShowDescription()
 
 				//Draw Text
 				std::string text = ToUpperCase(playerItemList[b]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 0, text.c_str());
+				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 1, text.c_str());
 			}
 
 		}
@@ -214,12 +211,12 @@ void ItemManager::CreateButtons()
 {
 	if (buttons.Count() <= 0)
 	{
-		exitButton = app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//CREATE EXIT BUTTON
+		exitButton = app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14);//CREATE EXIT BUTTON
 		ListItem<Item*>* item = playerItemList.start;
 		y = 0;
 		while (item)
 		{
-			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			LOG("%d", y);
 			y++;
 			item = item->next;
