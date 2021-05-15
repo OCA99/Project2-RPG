@@ -11,7 +11,9 @@
 #include "Components.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "QuestManager.h"
 #include "BattleManager.h"
+#include "ItemManager.h"
 #include "Audio.h"
 #include "SceneTransitionSystem.h"
 #include "GuiCheckBox.h"
@@ -51,6 +53,8 @@ bool SceneManager::Start()
 	LogoScene* s = new LogoScene();
 	menuTex = app->tex->Load("Textures/UI/MainPauseMenu/pause_menu.png");
 	optionsTex = app->tex->Load("Textures/UI/OptionsMenu/options_menu.png");
+	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
+	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
 
 	audioMenuTex = app->tex->Load("Textures/UI/OptionsMenu/audio_menu.png");
 	graphicsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/graphics_menu.png");
@@ -165,7 +169,7 @@ bool SceneManager::PostUpdate(float dt)
 		}
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling)
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened)
 	{
 		app->audio->PlayFx(8, 0);
 		if(startPressed)menu = !menu;
@@ -187,7 +191,7 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 
-	if (currentScene->type == Scene::TYPE::MENU && !optionsMenu)
+	if (currentScene->type == Scene::TYPE::MENU && !optionsMenu && !app->quests->questInvOpened)
 	{
 		if (!buttons)
 		{
@@ -201,8 +205,12 @@ bool SceneManager::PostUpdate(float dt)
 
 	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
 
+		if (app->quests->questInvOpened) app->render->DrawTexture(questMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		if (app->items->invOpened) app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+
 		if (menu)
 		{
+
 			if (!optionsMenu)
 			{
 				app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
@@ -234,7 +242,7 @@ bool SceneManager::PostUpdate(float dt)
 		
 		}
 
-		if (menu == false)
+		if (menu == false && !app->quests->questInvOpened)
 		{
 			if (app->volume < 100 && app->volumeDown == false)
 			{
@@ -253,7 +261,7 @@ bool SceneManager::PostUpdate(float dt)
 
 
 			Mix_VolumeMusic(app->volume);
-			app->ui->DestroyAllGuiControls();
+			if(buttons)app->ui->DestroyAllGuiControls();
 			buttons = false;
 		}
 	}
@@ -507,6 +515,10 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		app->win->ToggleFullscreen();
 		break;
 	case 19:
+		//app->items->useItem = true;
+		break;
+	case 20:
+		break;
 
 	default:
 		break;

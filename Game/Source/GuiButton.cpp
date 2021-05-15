@@ -45,20 +45,53 @@ bool GuiButton::Update(Input* input, float dt)
 	{
 		if (!itemCheck) itemCheck = true;
 	}
-	if (id == 17 && state != GuiControlState::FOCUSED)
+	if (id == 17 && state == GuiControlState::SELECTED)
 	{
-		itemCheck = false;
+		for (int i = 0; i < app->items->buttons.Count(); ++i)
+		{
+			app->items->buttons[i]->itemSingleCheck = false;
+		}
+		app->items->DeleteActionButtons();
+		if (!itemSingleCheck) itemSingleCheck = true;
+
+		state = GuiControlState::NORMAL;
+		
 	}
-	if (id == 19 && state == GuiControlState::SELECTED)
+	if (id == 17 && state != GuiControlState::FOCUSED && state != GuiControlState::SELECTED)
+	{
+		if (itemCheck) itemCheck = false;
+	}
+	if (id == 18 && state == GuiControlState::SELECTED)
 	{
 		for (int i = 0; i< app->quests->questButtons.Count() ; ++i)
 		{
 			app->quests->questButtons[i]->questCheck = false;
 		}
-
+	
 		if (!questCheck) questCheck = true;
 		state = GuiControlState::NORMAL;
 
+	}
+	if (id == 19 && state == GuiControlState::SELECTED)
+	{
+
+		if (!itemUsed) itemUsed = true;
+		state = GuiControlState::NORMAL;
+
+	}
+	else
+	{
+		if (itemUsed) itemUsed = false;
+	}
+	if (id == 20 && state == GuiControlState::SELECTED)
+	{
+		if (!discarItem) discarItem = true;
+		state = GuiControlState::NORMAL;
+
+	}
+	else
+	{
+		if (discarItem) discarItem = false;
 	}
 
 
@@ -149,7 +182,7 @@ bool GuiButton::Draw(Render* render)
 			break;
 		case GuiControlState::PRESSED:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ (drawBounds.w + 1) * 2,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			if (id == 14)
+			if (id == 14 || id == 19 || id == 20)
 				render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			else
 				render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);

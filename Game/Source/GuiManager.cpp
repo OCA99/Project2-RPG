@@ -25,7 +25,7 @@ bool GuiManager::Start()
 {
 	menuButtonTex = app->tex->Load("Textures/UI/MainPauseMenu/menu_button.png");
 	optionsButtonsTex = app->tex->Load("Textures/UI/OptionsMenu/options_buttons.png");
-	
+	invButtonTex = app->tex->Load("Textures/UI/HUD/inventory_button.png");
 	
 	sliderTex = app->tex->Load("Textures/UI/OptionsMenu/volume_slider.png");
 	backButtonTex = app->tex->Load("Textures/UI/OptionsMenu/back_button.png");
@@ -43,8 +43,11 @@ bool GuiManager::Start()
 	controlsTex = app->tex->Load("Textures/UI/OptionsMenu/controls.png");
 	onOffTex = app->tex->Load("Textures/UI/OptionsMenu/on_off.png");
 	backArrowTex = app->tex->Load("Textures/UI/OptionsMenu/back_arrow.png");
+	questButtonTex = app->tex->Load("Textures/UI/HUD/quest_button.png");
 	pixelTex = app->tex->Load("Textures/UI/OptionsMenu/pixel.png");
-
+	itemTex = app->tex->Load("Textures/UI/OptionsMenu/item_action.png");
+	useItemText = app->tex->Load("Textures/UI/OptionsMenu/useitem.png");
+	discardItemText = app->tex->Load("Textures/UI/OptionsMenu/discarditem.png");
 	return true;
 }
 
@@ -124,12 +127,21 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		textTex = backArrowTex;
 		break;
 	case 17:
-		buttonTex = pixelTex;
+		buttonTex = invButtonTex;
+		textTex = pixelTex;
+		break;
+	case 18:
+		buttonTex = questButtonTex;
 		textTex = pixelTex;
 		break;
 	case 19:
-		buttonTex = pixelTex;
-		textTex = pixelTex;
+		buttonTex = itemTex;
+		textTex = useItemText;
+		break;
+	case 20:
+		buttonTex = itemTex;
+		textTex = discardItemText;
+		break;
 	default:
 		break;
 	}
@@ -185,7 +197,7 @@ void GuiManager::DestroyAllGuiControls()
 
 	for (int i = 0; i < u; i++)
 	{
-		if (controls.At(0)->data->id != 17 && controls.At(0)->data->id != 19)
+		if (controls.At(0)->data->id != 17 && controls.At(0)->data->id != 18)
 		{
 		delete controls.At(0)->data;
 		controls.Del(controls.At(0));
