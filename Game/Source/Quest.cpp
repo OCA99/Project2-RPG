@@ -7,7 +7,7 @@ Quest::Quest(pugi::xml_node node)
 	type = node.attribute("type").as_int();
 	title = node.attribute("title").as_string();
 	description = node.attribute("description").as_string();
-	objective = node.attribute("objective").as_string();
+ 	objective = node.attribute("objective").as_string();
 	progress = node.attribute("progress").as_int();
 	quantity = node.attribute("quantity").as_int();
 	demandingNPC = node.attribute("demandingNPC").as_string();
