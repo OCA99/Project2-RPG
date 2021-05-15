@@ -92,7 +92,6 @@ bool QuestManager::Start()
 		questNode = questNode.next_sibling("quest");
 	}
 
-	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
 	customerTex = app->tex->Load("Textures/Dialogue/blacksmith_dialogue.png");
 	reaperTex = app->tex->Load("Textures/Dialogue/reaper_dialogue.png");
 	tavernTex = app->tex->Load("Textures/Dialogue/tavern_lady_dialogue.png");
@@ -108,8 +107,11 @@ bool QuestManager::Update(float dt)
 	CheckQuestsLogic();
 	CheckObjectivesCompletion();
 
-	if ((app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN))
+	if (app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && !app->scene->menu && !app->items->invOpened)
+	{
+		if (questInvOpened) app->ui->DestroyAllGuiControls();
 		questInvOpened = !questInvOpened;//Open or close Inv
+	}
 
 	if (questInvOpened)
 		CreateQuestButtons();
@@ -124,6 +126,7 @@ bool QuestManager::PostUpdate(float dt)
 
 	if (questInvOpened)
 	{
+		if(!app->scene->buttons && !app->scene->menu && !app->items) CreateQuestButtons();
 		DrawQuestUi();
 		ShowQuestDescription();
 	}
@@ -133,7 +136,7 @@ bool QuestManager::PostUpdate(float dt)
 		while (item)
 		{
 
-			if (item->data->id == 19)
+			if (item->data->id == 18)
 				app->ui->DestroyGuiControl(item->data);
 
 			item = item->next;
@@ -262,14 +265,13 @@ bool QuestManager::DrawActiveQuests()
 }
 void QuestManager::DrawQuestUi()
 {
-	app->render->DrawTexture(questMenuTex, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 	ListItem<Quest*>* item = questsActive.start;
 
 	int i = 0;
 	while (item)
 	{
 		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(40, 80 + (32 * i), 0, text.c_str());
+		app->fonts->BlitText(40, 80 + (32 * i), 1, text.c_str());
 		item = item->next;
 		++i;
 	}
@@ -301,12 +303,15 @@ void QuestManager::ShowQuestDescription()
 				//DRAW NPC TEXTURE
 				if (questsActive[y]->demandingNPC == SString("customer")) app->render->DrawTexture(customerTex, 10, 15, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("reaper")) app->render->DrawTexture(reaperTex, 10, 18, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-				if (questsActive[y]->demandingNPC == SString("tgirl")) app->render->DrawTexture(tavernTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				if (questsActive[y]->demandingNPC == SString("tlady")) app->render->DrawTexture(tavernTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 				if (questsActive[y]->demandingNPC == SString("thyma")) app->render->DrawTexture(thymaTex, 10, 16, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 
 				//DRAW REWARDS
-				Item* tempItem = app->items->SearchForItem(questsActive[y]->reward);
-				app->render->DrawTexture(tempItem->itemTex, 300, 190, &SDL_Rect({ 0,0,16,16 }), 1.5f, 1, 0, 0, 0, false);
+				if (Item* tempItem = app->items->SearchForItem(questsActive[y]->reward))//If there is not a reward it will not crash with this if
+				{
+					app->render->DrawTexture(tempItem->itemTex, 300, 190, &SDL_Rect({ 0,0,16,16 }), 1.5f, 1, 0, 0, 0, false);
+
+				}
 	
 				//Draw Reward Quantity
 				text = ToUpperCase(questsActive[y]->rewardQuantity.GetString());
@@ -322,14 +327,14 @@ void QuestManager::ShowQuestDescription()
 
 void QuestManager::CreateQuestButtons()
 {
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//Back Button 14
 	if (questButtons.Count() <= 0)
 	{
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59 / 2 , 36 / 2, 30, 30 }), 14);//Back Button 14
 		ListItem<Quest*>* item = questsActive.start;
 		y = 0;
 		while (item)
 		{
-			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 18)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			y++;
 			item = item->next;
 		}

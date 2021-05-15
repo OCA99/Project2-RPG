@@ -48,7 +48,8 @@ public:
 
 	SDL_Texture* menuButtonTex;
 	SDL_Texture* optionsButtonsTex;
-
+	SDL_Texture* questButtonTex;
+	SDL_Texture* invButtonTex;
 
 	SDL_Texture* buttonTex;
 	SDL_Texture* sliderTex;
@@ -68,6 +69,9 @@ public:
 	SDL_Texture* onOffTex;
 	SDL_Texture* backArrowTex;
 	SDL_Texture* pixelTex;
+	SDL_Texture* itemTex;
+	SDL_Texture* useItemText;
+	SDL_Texture* discardItemText;
 
 	int lastId = 0;
 };

@@ -21,11 +21,21 @@ enum Type {
 struct Data {
 	//Numero en la Party
 	int id;
-	float health;
+	float health = 0;
+	float exp = 20;
 	float maxHealth;
 	float power;
 	bool dead = false;
+	int money = 0;
 	std::vector<Action*> actions;
+
+	int GetMoney() { return money; }
+	float GetHealth() { return health; }
+	float GetExp() { return exp; }
+	
+	void Addhealth(float hp) { health = health + hp; }
+	void AddMoney(int m) { money = money + m; }
+	void AddExp(float ex) { exp += exp; }
 
 	void CleanUp() {
 		for (int i = 0; i < actions.size(); i++) {
@@ -54,6 +64,7 @@ struct Member {
 	Member(std::string name, Type type);
 	Member(std::string name, Type type, float health, float damage, bool isDead);
 	~Member();
+
 };
 
 struct Action {

@@ -6,7 +6,9 @@
 #include "Fonts.h"
 #include "DialogSytem.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 #include "Scene.h"
+#include "PartyManager.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
@@ -56,6 +58,7 @@ bool ItemManager::Start()
 		item->questItem = itemNode.attribute("questItem").as_bool();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
 		item->itemTex = app->tex->Load(SString("Textures/Items/%s", item->texturePath.GetString()).GetString());
+
 		itemList.Add(item);
 		itemNode = itemNode.next_sibling("item");
 	}
@@ -67,11 +70,9 @@ bool ItemManager::Start()
 	GiveItemToPlayer(SString("HP Potion"));
 	GiveItemToPlayer(SString("HP Potion"));
 	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
 	GiveItemToPlayer(SString("Treasure Chest"));
-	
 
-	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
+
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
 	return true;
@@ -80,38 +81,33 @@ bool ItemManager::Start()
 bool ItemManager::Update(float dt)
 {
 
+
+
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened)
+		invOpened = !invOpened;//Open or close Inv
+	
+
+	if (invOpened)
+	{
+		CreateButtons();
+	}
+
 	return true;
 }
 
 bool ItemManager::PostUpdate(float dt)
 {
-	if (app->scene->currentScene->type == Scene::TYPE::MAP)
+	
+	if (invOpened)//If the inventory is opened bool
 	{
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-			invOpened = !invOpened;//Open or close Inv
+		DrawPlayerItems();//Draw Items Image and Title
+		ShowDescription();//Show
+		DrawPlayerStats();
+	}
 
-		if (invOpened)//If the inventory is opened bool
-		{
-			app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-			DrawPlayerItems();//Draw Items Image and Title
-			CreateButtons();//Create Buttons
-			ShowDescription();//Show
-		}
-
-		if (!invOpened)//If it close, we delete the buttons
-		{
-			ListItem<GuiControl*>* item = buttons.start;
-			while (item)
-			{
-
-				if (item->data->id == 17)
-					app->ui->DestroyGuiControl(item->data);
-
-				item = item->next;
-			}
-			buttons.Clear();
-		}
-
+	if (!invOpened)//If it close, we delete the buttons
+	{
+		CleanUp();
 	}
 
 	return true;
@@ -119,7 +115,8 @@ bool ItemManager::PostUpdate(float dt)
 
 bool ItemManager::CleanUp()
 {
-
+	DeleteButtons();
+	DeleteActionButtons();
 
 	return true;
 }
@@ -135,7 +132,7 @@ void ItemManager::DrawPlayerItems()
 
 		//DRAW TEXT
 		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(75, 80 + (32 * y), 0, text.c_str());
+		app->fonts->BlitText(75, 80 + (32 * y), 1, text.c_str());
 
 		++y;
 		item = item->next;
@@ -172,42 +169,256 @@ Item* ItemManager::SearchForItem(SString& itemTitle)
 void ItemManager::ShowDescription()
 {
 	ListItem<GuiControl*>* item = buttons.start;
-	y = 0;
+	int b = 0;
 	while (item)
 	{
-		//Draw Texture
-		if (y > playerItemList.Count()) y = 0;
+		if (b > playerItemList.Count()) 
+			b = 0;
+		if (item->data->itemSingleCheck)
+			CreateActionButtons(b);
 		if (item->data->itemCheck)
 		{
-			if (y < playerItemList.Count())
+			
+			if (b < playerItemList.Count())
 			{
+				//Draw Texture
 				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 32, item->data->bounds.y + 30, &SDL_Rect({ 0,0,384,96 }), 0.5f, 0, 0, 0, 0, false);
 
-				std::string text = ToUpperCase(playerItemList[y]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 0, text.c_str());
+				//Draw Text
+				std::string text = ToUpperCase(playerItemList[b]->description.GetString());
+				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 1, text.c_str());
 			}
 
 		}
-		++y;
+		++b;
 		item = item->next;
 	}
 
 }
 
+void ItemManager::CreateActionButtons(int y)
+{
+	if (actionButtons.Count() <= 0)
+	{
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+
+	}
+	CheckActionButtons();
+
+}
+
 void ItemManager::CreateButtons()
 {
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 28, 30 }), 14);//CREATE EXIT BUTTON
 	if (buttons.Count() <= 0)
 	{
 		ListItem<Item*>* item = playerItemList.start;
 		y = 0;
 		while (item)
 		{
-			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 65 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			LOG("%d", y);
 			y++;
 			item = item->next;
 		}
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14));//CREATE EXIT BUTTON
 	}
+
+}
+
+void ItemManager::DeleteButtons()
+{
+
+	ListItem<GuiControl*>* item = buttons.start;
+	while (item)
+	{
+
+		//if (item->data->id == 17 || item->data->id == 14)
+		app->ui->DestroyGuiControl(item->data);
+
+		item = item->next;
+	}
+	buttons.Clear();
+}
+
+void ItemManager::DeleteActionButtons()
+{
+	ListItem<GuiControl*>* item = actionButtons.start;
+	while (item)
+	{
+		if (item->data->id == 19 || item->data->id == 20)
+			app->ui->DestroyGuiControl(item->data);
+
+		item = item->next;
+	}
+	actionButtons.Clear();
+}
+
+void ItemManager::UseItem(Item* itemtoUse, int y)
+{
+	//EFECTO DE CADA ITEM
+	if (itemtoUse->title == SString("HP Potion"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.Addhealth(15.f);
+	}
+	if (itemtoUse->title == SString("EXP Potion"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddExp(17.f);
+	}
+	if (itemtoUse->title == SString("Coin"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddMoney(1);
+	}
+	if (itemtoUse->title == SString("Coin Stack"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddMoney(50.f);
+	}
+	if (itemtoUse->title == SString("Treasure Chest"))
+	{
+		app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
+	}
+
+
+
+
+	int a = 0;
+	ListItem<Item*>* item = playerItemList.start;
+	while (item)
+	{
+		if (a == y)
+		{
+			ListItem<Item*>* c = playerItemList.At(a);
+			playerItemList.Del(c);
+		}
+
+		a++;
+		item = item->next;
+		
+	}
+
+}
+
+void ItemManager::CheckActionButtons()
+{
+	y = 0;
+	ListItem<GuiControl*>* item = buttons.start;
+	while (item)
+	{
+		if (actionButtons.Count() > 0 && actionButtons[0]->itemUsed == false && actionButtons[0]->discarItem == false)
+		{
+			actionButtons[0]->Draw(app->render);
+			actionButtons[1]->Draw(app->render);
+
+		}
+		
+		if (actionButtons.Count() > 0  && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
+		{
+			item->data->itemSingleCheck = false;
+
+			UseItem(playerItemList[y], y);
+			DeleteButtons();
+			DeleteActionButtons();
+
+		}
+
+		if (actionButtons.Count() > 0 && actionButtons[1]->discarItem && item->data->itemSingleCheck)
+		{
+			item->data->itemSingleCheck = false;
+
+			DeleteActionButtons();
+
+		}
+
+		++y;
+		item = item->next;
+	}
+
+}
+
+void ItemManager::DrawPlayerStats()
+{
+	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
+	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
+	float hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+	float exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+
+	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 143) / 100;
+	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 143) / 100;
+
+	app->render->DrawRectangle({ 357,367,143, 9 }, 147, 147, 147, 255);//BASE COLOR
+	app->render->DrawRectangle({ 357,392,143, 9 }, 147, 147, 147, 255);//BASE COLOR
+
+	if(hp > 85)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 85, 95, 255);//BLUE
+	
+	if (hp <= 85)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+
+	if (hp <= 75)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 51, 81, 48, 255);//DARK GREEN
+
+	if (hp <= 67)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 71, 89, 50, 255);//GREEN
+
+	if (hp <= 60)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+
+	if (hp <= 50)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 100, 51, 255);//YELLOW
+
+	if (hp <= 40)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+
+	if (hp <= 30)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 77, 52, 255);//ORANGE
+
+	if (hp <= 20)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 60, 49, 255);//DARK ORANGE
+
+	if (hp <= 10)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 49, 49, 255);//DARK RED
+
+
+	if (exp > 85)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
+
+	if (exp <= 85)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+
+	if (exp <= 75)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
+
+	if (exp <= 67)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
+
+	if (exp <= 60)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+
+	if (exp <= 50)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
+
+	if (exp <= 40)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+
+	if (exp <= 30)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
+
+	if (exp <= 20)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
+
+	if (exp <= 10)
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
+
+
+	//Draw HP NUMBER
+	std::string text = ToUpperCase(to_string((int)hp));
+	app->fonts->BlitText(297, 297, 0, text.c_str());
+	//Draw EXP
+	text = ToUpperCase(to_string((int)exp));
+	app->fonts->BlitText(297, 322, 0, text.c_str());
+	//Draw Money
+	text = ToUpperCase(to_string(app->party->allyParty->FindByName("Thyma")->data.GetMoney()));
+	app->fonts->BlitText(582, 233, 0, text.c_str());
 
 }
 

@@ -62,7 +62,7 @@
 		objective = "rubbish"
 		progress = "0"
 		quantity = "6"
-		demandingNPC = "tgirl"
+		demandingNPC = "tlady"
 		rewardingNPC = "None"
 		reward = "Coin Stack"
 		rewardQuantity = "x1"

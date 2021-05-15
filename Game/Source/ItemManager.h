@@ -65,20 +65,36 @@ public:
 	//Draw the box with te Description Text
 	void ShowDescription(); 
 
+	//Show Item Actions
+	void CreateActionButtons(int y);
+
 	//Create Description & Exit Buttons
 	void CreateButtons();
 
+	void DeleteButtons();
+
+	void DeleteActionButtons();
+
+	void UseItem(Item* itemToUse, int y);
+
+	void CheckActionButtons();
+
+	void DrawPlayerStats();
+
+
 public:
-	SDL_Texture* invMenu;
 	SDL_Texture* itemDescTex;
 
 	List<Item*> itemList;//ALL Items
 	List<Item*> playerItemList;//Player Items
 	List<GuiControl*> buttons;//Buttons List
+	List<GuiControl*> actionButtons;//Buttons List
 
 	int y = 0;//Logistic Tool
 
 	bool invOpened = false;//True = Opened, False = closed.
+	bool useItem = false;
+	bool removeItem = false;
 
 };
 

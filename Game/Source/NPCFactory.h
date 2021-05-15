@@ -5,6 +5,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Point.h"
+#include "QuestManager.h"
 
 static class NPCFactory : public Prefab
 {
@@ -15,6 +16,7 @@ public:
 		CUSTOMER,
 		THYMA
 	};
+
 
 	static ECS::Entity* Create(ECS::World* world, fPoint position, Type type, float radius = 14)
 	{
@@ -29,10 +31,11 @@ protected:
 	{
 		ECS::Entity* npc = world->create();
 		npc->assign<Position>();
-		npc->assign<Quest>();
+		npc->assign<QuestList>();
 
 		if (type == Type::TAVERN)
 		{
+			SString name = "tlady";
 			SDL_Texture* t = app->tex->Load("Textures/NPC/tavern_lady_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -59,9 +62,18 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "tavern.xml", "TEST");
+
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
+
 		}
 		else if (type == Type::REAPER)
 		{
+
+			SString name = "reaper";
+
 			SDL_Texture* t = app->tex->Load("Textures/NPC/demon_reaper_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -88,9 +100,16 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "reaper.xml", "REAPER");
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 		else if (type == Type::CUSTOMER)
 		{
+
+			SString name = "customer";
+
 			SDL_Texture* t = app->tex->Load("Textures/NPC/blacksmith_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -117,9 +136,16 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "customer.xml", "CUSTOMER");
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 		else if (type == Type::THYMA)
 		{
+
+			SString name = "thyma";
+
 			SDL_Texture* t = app->tex->Load("Textures/Characters/thyma_good_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -146,6 +172,10 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "thyma.xml", "THYMA");
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 
 		return npc;
