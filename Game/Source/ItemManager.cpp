@@ -199,8 +199,8 @@ void ItemManager::CreateActionButtons(int y)
 {
 	if (actionButtons.Count() <= 0)
 	{
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 25 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 45 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 
 	}
 	CheckActionButtons();
@@ -262,7 +262,7 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 	}
 	if (itemtoUse->title == SString("EXP Potion"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddExp(20.f);
+		app->party->allyParty->FindByName("Thyma")->data.AddExp(17.f);
 	}
 	if (itemtoUse->title == SString("Coin"))
 	{
@@ -379,34 +379,34 @@ void ItemManager::DrawPlayerStats()
 
 
 	if (exp > 85)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
 
 	if (exp <= 85)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
 
 	if (exp <= 75)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
 
 	if (exp <= 67)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
 
 	if (exp <= 60)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
 
 	if (exp <= 50)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
 
 	if (exp <= 40)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
 
 	if (exp <= 30)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
 
 	if (exp <= 20)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
 
 	if (exp <= 10)
-		app->render->DrawRectangle({ 357,322,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
+		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
 
 
 	//Draw HP NUMBER
