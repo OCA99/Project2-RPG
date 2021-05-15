@@ -49,7 +49,7 @@ bool GuiButton::Update(Input* input, float dt)
 	{
 		itemCheck = false;
 	}
-	if (id == 19 && state == GuiControlState::SELECTED)
+	if (id == 18 && state == GuiControlState::SELECTED)
 	{
 		for (int i = 0; i< app->quests->questButtons.Count() ; ++i)
 		{
