@@ -346,4 +346,8 @@ struct QuestList
 
 
 	pugi::xml_node node;
+
+	bool active = false;
 };
+
+
