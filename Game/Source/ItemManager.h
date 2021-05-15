@@ -79,6 +79,8 @@ public:
 
 	void CheckActionButtons();
 
+	void DrawPlayerStats();
+
 
 public:
 	SDL_Texture* invMenu;
