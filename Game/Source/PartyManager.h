@@ -27,6 +27,9 @@ struct Data {
 	bool dead = false;
 	std::vector<Action*> actions;
 
+	float GetHealth() { return health; }
+
+
 	void CleanUp() {
 		for (int i = 0; i < actions.size(); i++) {
 			delete actions.at(i);
@@ -54,6 +57,7 @@ struct Member {
 	Member(std::string name, Type type);
 	Member(std::string name, Type type, float health, float damage, bool isDead);
 	~Member();
+
 };
 
 struct Action {

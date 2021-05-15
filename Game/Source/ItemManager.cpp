@@ -7,6 +7,7 @@
 #include "DialogSytem.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "PartyManager.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "External/PugiXml/src/pugixml.hpp"
@@ -98,12 +99,13 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
-
+	
 	if (invOpened)//If the inventory is opened bool
 	{
 		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 		DrawPlayerItems();//Draw Items Image and Title
 		ShowDescription();//Show
+		DrawPlayerStats();
 	}
 
 	if (!invOpened)//If it close, we delete the buttons
@@ -273,9 +275,9 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 			playerItemList.Del(c);
 		}
 
-
 		a++;
 		item = item->next;
+		
 	}
 
 }
@@ -311,11 +313,56 @@ void ItemManager::CheckActionButtons()
 
 		}
 
-
-		//item->data->Draw(app->render);
 		++y;
 		item = item->next;
 	}
+
+}
+
+void ItemManager::DrawPlayerStats()
+{
+	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
+	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
+	float a = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 143) / 100;
+
+	app->render->DrawRectangle({ 357,367,143, 9 }, 147, 147, 147, 255);//BASE COLOR
+
+	if(a > 85)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 85, 95, 255);//BLUE
+	
+	if (a <= 85)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+
+	if (a <= 75)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 51, 81, 48, 255);//DARK GREEN
+
+	if (a <= 67)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 71, 89, 50, 255);//GREEN
+
+	if (a <= 60)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+
+	if (a <= 50)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 100, 51, 255);//YELLOW
+
+	if (a <= 40)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+
+	if (a <= 30)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 77, 52, 255);//ORANGE
+
+	if (a <= 20)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 60, 49, 255);//DARK ORANGE
+
+	if (a <= 10)
+		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 49, 49, 255);//DARK RED
+
+	//Draw HP NUMBER
+	std::string text = ToUpperCase(to_string((int)a));
+	app->fonts->BlitText(506, 297, 0, text.c_str());
+	text = ToUpperCase(SString("HP").GetString());
+	app->fonts->BlitText(525, 297, 0, text.c_str());
 
 }
 

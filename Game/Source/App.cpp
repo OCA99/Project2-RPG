@@ -56,10 +56,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialog);
 	AddModule(fonts);
 	AddModule(ui);
+	AddModule(party);
 	AddModule(quests);
 	AddModule(items);
 	AddModule(debug);
-	AddModule(party);
 	AddModule(battle);
 
 	// Render last to swap buffer

@@ -187,7 +187,7 @@ bool BattleManager::CleanUp()
 
 void BattleManager::StartBattle()
 {
-	app->party->InitializeParties();
+	//app->party->InitializeParties();
 
 	isBattling = true;
 	currentParty = 0;
