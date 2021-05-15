@@ -29,6 +29,7 @@ protected:
 	{
 		ECS::Entity* npc = world->create();
 		npc->assign<Position>();
+		npc->assign<Quest>();
 
 		if (type == Type::TAVERN)
 		{

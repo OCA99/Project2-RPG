@@ -26,4 +26,6 @@ public:
 	int requiredId; // For a quest chain if it requires another quest ID completed before
 	bool isCompleted; // true --> Quest completed // false --> Quest not completed
 	int status; // 0 inactive, 1 active, 2 completed
+
+
 };
