@@ -75,7 +75,7 @@ public:
 
 	void DeleteActionButtons();
 
-	void UseItem(Item* itemtoDelete);
+	void UseItem(Item* itemToUse);
 
 	void RemoveItem();
 

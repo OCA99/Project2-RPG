@@ -56,6 +56,7 @@ bool ItemManager::Start()
 		item->questItem = itemNode.attribute("questItem").as_bool();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
 		item->itemTex = app->tex->Load(SString("Textures/Items/%s", item->texturePath.GetString()).GetString());
+
 		itemList.Add(item);
 		itemNode = itemNode.next_sibling("item");
 	}
@@ -80,7 +81,7 @@ bool ItemManager::Start()
 bool ItemManager::Update(float dt)
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP)	
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP)
 		invOpened = !invOpened;//Open or close Inv
 
 	if (invOpened)
@@ -96,17 +97,17 @@ bool ItemManager::Update(float dt)
 bool ItemManager::PostUpdate(float dt)
 {
 
-		if (invOpened)//If the inventory is opened bool
-		{
-			app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-			DrawPlayerItems();//Draw Items Image and Title
-			ShowDescription();//Show
-		}
+	if (invOpened)//If the inventory is opened bool
+	{
+		app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+		DrawPlayerItems();//Draw Items Image and Title
+		ShowDescription();//Show
+	}
 
-		if (!invOpened)//If it close, we delete the buttons
-		{
-			DeleteButtons();
-		}
+	if (!invOpened)//If it close, we delete the buttons
+	{
+		DeleteButtons();
+	}
 
 	return true;
 }
@@ -171,7 +172,8 @@ void ItemManager::ShowDescription()
 	{
 		//Draw Texture
 		if (y > playerItemList.Count()) y = 0;
-		if (item->data->itemUsed) ShowActions(y);
+		if (item->data->itemSingleCheck)
+			ShowActions(y);
 		if (item->data->itemCheck)
 		{
 			if (y < playerItemList.Count())
@@ -193,19 +195,31 @@ void ItemManager::ShowActions(int y)
 {
 	if (actionButtons.Count() <= 0)
 	{
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 250 , 65 + 32 * y , 50, 50 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 250 , 65 + 32 * y , 50, 50}), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 250 , 65 + 32 * y ,384,96 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 250 , 65 + 200 * y , 384, 96 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 
 	}
+	int a = 0;
 	ListItem<GuiControl*>* item = actionButtons.start;
 	while (item)
 	{
-		if (useItem)
-			UseItem(playerItemList[y]);
 
-		item->data->Draw(app->render);
+		if (item->data->itemUsed)
+		{
+			
+		//item->data->itemUsed = false;
+			//DeleteActionButtons();
+			//actionButtons[a]->singleItemCheck = false;
+			UseItem(playerItemList[y - 1]);
+			LOG("ITEM USED");
+		
+		}
+		 item->data->Draw(app->render);
+
 		item = item->next;
 	}
+
+	
 
 }
 
@@ -253,13 +267,13 @@ void ItemManager::DeleteActionButtons()
 	actionButtons.Clear();
 }
 
-void ItemManager::UseItem(Item* itemtoDelete)
+void ItemManager::UseItem(Item* itemtoUse)
 {
 	//EFECTO DE CADA ITEM
 	ListItem<Item*>* item = playerItemList.start;
 	while (item)
 	{
-		if (item->data == itemtoDelete)
+		if (item->data == itemtoUse)
 		{
 			playerItemList.Del(item);
 			useItem = false;
@@ -268,6 +282,5 @@ void ItemManager::UseItem(Item* itemtoDelete)
 
 		item = item->next;
 	}
-
 }
 

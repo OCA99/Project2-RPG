@@ -49,9 +49,9 @@ bool GuiButton::Update(Input* input, float dt)
 	{
 		for (int i = 0; i < app->items->buttons.Count(); ++i)
 		{
-			app->items->buttons[i]->itemUsed = false;
+			app->items->buttons[i]->itemSingleCheck = false;
 		}
-		if (!itemUsed) itemUsed = true;
+		if (!itemSingleCheck) itemSingleCheck = true;
 		app->items->DeleteActionButtons();
 		state = GuiControlState::NORMAL;
 		
@@ -70,6 +70,16 @@ bool GuiButton::Update(Input* input, float dt)
 		if (!questCheck) questCheck = true;
 		state = GuiControlState::NORMAL;
 
+	}
+	if (id == 19 && state == GuiControlState::SELECTED)
+	{
+		if (!itemUsed) itemUsed = true;
+		state = GuiControlState::NORMAL;
+
+	}
+	else
+	{
+		if (itemUsed) itemUsed = false;
 	}
 
 
