@@ -105,7 +105,6 @@ bool QuestManager::Update(float dt)
 {
 
 	CheckQuestsLogic();
-	CheckObjectivesCompletion();
 
 	if (app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && !app->scene->menu && !app->items->invOpened)
 	{
@@ -175,14 +174,7 @@ bool QuestManager::DrawActiveQuests()
 		{
 		case 1: // new quest chain 1
 			// Title Drawing
-			text = ToUpperCase(L->data->title.GetString());
-			app->fonts->BlitText(0, 0, 1, text.c_str());
-
-			// Amount of mushrooms taken
-			numToStr = to_string(L->data->progress);
-			app->fonts->BlitText(50, 0, 1, numToStr.c_str());
-
-			// Description Drawing if pressed L
+			
 			///////////////////////////////////////////////////////////////////////////
 			if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT)
 				//app->render->DrawText(font, L->data->description.GetString(), 300, 70, 45, 0, { 200,200,200,155 });
@@ -297,8 +289,12 @@ void QuestManager::ShowQuestDescription()
 				//DRAW QEST OBJECTIVE
 				text = ToUpperCase(questsActive[y]->title.GetString());
 				app->fonts->BlitText(235, 300, 0, text.c_str());
-				text = ToUpperCase(to_string(questsActive[y]->quantity));
+				text = ToUpperCase(to_string(questsActive[y]->progress));
 				app->fonts->BlitText(450, 300, 0, text.c_str());
+				text = ToUpperCase(to_string(questsActive[y]->quantity));
+				app->fonts->BlitText(470, 300, 0, text.c_str());
+				app->fonts->BlitText(460, 300, 0, "/");
+				
 
 				//DRAW NPC TEXTURE
 				if (questsActive[y]->demandingNPC == SString("customer")) app->render->DrawTexture(customerTex, 10, 15, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
