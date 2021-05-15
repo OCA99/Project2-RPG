@@ -163,7 +163,8 @@ void MenuScene::Load()
 
 void BattleScene::Load()
 {
-	app->audio->songToBeLoaded = "Audio/Music/Originals/forest_battle.wav";
+	if(app->map->currentMapName == "Forest.tmx") app->audio->songToBeLoaded = "Audio/Music/Originals/forest_battle.wav";
+	if(app->map->currentMapName == "Graveyard.tmx") app->audio->songToBeLoaded = "Audio/Music/Originals/graveyard_battle.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
 	Scene::Load();
@@ -171,7 +172,9 @@ void BattleScene::Load()
 	world->registerSystem(new BattleMemberSystem());
 	world->registerSystem(new AnimatorSystem());
 
-	SDL_Texture* t = app->tex->Load("Textures/Battle/battle_forest.png");
+	SDL_Texture* t = nullptr;
+	if (app->map->currentMapName == "Forest.tmx") t = app->tex->Load("Textures/Battle/battle_forest.png");
+	if (app->map->currentMapName == "Graveyard.tmx") t = app->tex->Load("Textures/Battle/battle_cemetary.png");
 	ECS::Entity* e = world->create();
 	app->render->camera.x = app->render->camera.y = 0;
 	e->assign<Position>(fPoint(0, 0));
