@@ -70,7 +70,7 @@ public:
 	bool buttons = false;
 
 	float alpha = 0;
-	float speed = 200.0f;
+	float speed = 250.0f;
 	float volSpeed = 50.0f;
 	bool isFinished = false;
 

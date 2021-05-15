@@ -45,7 +45,20 @@ void SceneTransitionSystem::tick(ECS::World* world, float dt)
 			direction *= -1;
 			alpha = 255;
 		}
-		app->render->DrawRectangle(fullscreen, 0, 0, 0, std::min(int(alpha), 255), true, false);
+
+		int squareSize = fullscreen.w / sceneFade->squares;
+
+		for (int i = 0; i < sceneFade->squares; i++) {
+			for (int j = 0; j < sceneFade->squares; j++) {
+				SDL_Rect rect;
+				float prop = std::min(alpha, 255.0f) / 255.0f;
+				if ((i - j) % 2 == 0)
+					rect = SDL_Rect({ i * squareSize, j * squareSize, squareSize, int(std::round(squareSize * prop))});
+				else
+					rect = SDL_Rect({ i * squareSize, j * squareSize + int(std::round(squareSize * (1 - prop))), squareSize, int(std::round(squareSize * prop))});
+				app->render->DrawRectangle(rect, 0, 0, 0, 255, true, false);
+			}
+		}
 
 		if (alpha <= 10)
 		{

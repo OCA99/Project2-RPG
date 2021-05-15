@@ -284,9 +284,10 @@ struct MenuFade
 
 struct SceneFade
 {
-	SceneFade(float speed) : speed(speed) {}
+	SceneFade(float speed, int squares) : speed(speed), squares(squares) {}
 
 	float speed;
+	float squares;
 };
 
 struct Member;
