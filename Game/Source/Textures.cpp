@@ -49,14 +49,14 @@ bool Textures::Start()
 bool Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
-	ListItem<SDL_Texture*>* item;
+	std::map<const char*, SDL_Texture*>::iterator item;
 
-	for(item = textures.start; item != NULL; item = item->next)
+	for(item = textures.begin(); item != textures.end(); item++)
 	{
-		SDL_DestroyTexture(item->data);
+		SDL_DestroyTexture(item->second);
 	}
 
-	textures.Clear();
+	textures.clear();
 	IMG_Quit();
 	return true;
 }
@@ -82,29 +82,30 @@ SDL_Texture* const Textures::Load(const char* path)
 		SDL_FreeSurface(surface);
 	}
 
+	textures.insert(std::make_pair(path, texture));
+
 	// (SOLVED) TODO 7: Close the allocated SDL_RWops structure
 	if (rw != nullptr)
 		SDL_RWclose(rw);
 
-	return texture;
+	return textures.at(path);
 }
 
 // Unload texture
 bool Textures::UnLoad(SDL_Texture* texture)
 {
-	ListItem<SDL_Texture*>* item;
+	std::map<const char*, SDL_Texture*>::iterator item;
 
-	for(item = textures.start; item != NULL; item = item->next)
+	for(item = textures.begin(); item != textures.end(); item++)
 	{
-		if(texture == item->data)
+		if(texture == item->second)
 		{
-			SDL_DestroyTexture(item->data);
-			textures.Del(item);
-			return true;
+			SDL_DestroyTexture(item->second);
+			textures.erase(item);
 		}
 	}
 
-	return false;
+	return true;
 }
 
 // Translate a surface into a texture
@@ -116,16 +117,25 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 	{
 		LOG("Unable to create texture from surface! SDL Error: %s\n", SDL_GetError());
 	}
-	else
-	{
-		textures.Add(texture);
-	}
 
 	return texture;
 }
 
 // Retrieve size of a texture
-void Textures::GetSize(const SDL_Texture* texture, uint& width, uint& height) const
+void Textures::GetSize(SDL_Texture* texture, uint& width, uint& height) const
 {
-	SDL_QueryTexture((SDL_Texture*)texture, NULL, NULL, (int*) &width, (int*) &height);
+	SDL_QueryTexture(texture, NULL, NULL, (int*) &width, (int*) &height);
+}
+
+void Textures::ReloadAllTextures()
+{
+	std::map<const char*, SDL_Texture*>::iterator item;
+
+	for (item = textures.begin(); item != textures.end(); item++)
+	{
+		SDL_DestroyTexture(item->second);
+		SDL_Texture* tex = Load(item->first);
+		LOG("RELOAD");
+		item->second = tex;
+	}
 }

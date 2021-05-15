@@ -1,6 +1,8 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "Input.h"
+#include "Textures.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -30,13 +32,19 @@ bool Render::Awake(pugi::xml_node& config)
 
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
-	if(config.child("vsync").attribute("value").as_bool(true) == true)
+	/*if(config.child("vsync").attribute("value").as_bool(true) == true)
 	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
+		vsync = true;
 		LOG("Using vsync");
-	}
+	}*/
 
 	renderer = SDL_CreateRenderer(app->win->window, -1, flags);
+
+	if(config.child("vsync").attribute("value").as_bool(true) == true)
+	{
+		SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
+	}
 
 	SDL_RenderSetLogicalSize(renderer, app->win->screenSurface->w, app->win->screenSurface->h);
 
@@ -74,6 +82,17 @@ bool Render::PreUpdate()
 
 bool Render::Update(float dt)
 {
+	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		bool b;
+		vsync = !vsync;
+		if (vsync)
+			b = SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "1", SDL_HINT_OVERRIDE);
+		else
+			b = SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "0", SDL_HINT_OVERRIDE);
+		LOG("set %d", b);
+	}
+
 	return true;
 }
 
