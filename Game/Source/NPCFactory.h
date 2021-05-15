@@ -71,6 +71,9 @@ protected:
 		}
 		else if (type == Type::REAPER)
 		{
+
+			SString name = "reaper";
+
 			SDL_Texture* t = app->tex->Load("Textures/NPC/demon_reaper_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -97,9 +100,16 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "reaper.xml", "REAPER");
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 		else if (type == Type::CUSTOMER)
 		{
+
+			SString name = "customer";
+
 			SDL_Texture* t = app->tex->Load("Textures/NPC/blacksmith_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -126,9 +136,16 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "customer.xml", "CUSTOMER");
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 		else if (type == Type::THYMA)
 		{
+
+			SString name = "thyma";
+
 			SDL_Texture* t = app->tex->Load("Textures/Characters/thyma_good_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
@@ -155,6 +172,10 @@ protected:
 			collider.h += radius * 3;
 
 			npc->assign<DialogTrigger>(collider, "thyma.xml", "THYMA");
+
+			npc->get<QuestList>()->SetReceiver(name);
+			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
+			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 
 		return npc;
