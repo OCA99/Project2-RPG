@@ -100,6 +100,7 @@ public:
 	bool itemCheck = false; // Check if Item is Hovered
 	bool itemSingleCheck = false;
 	bool itemUsed = false; // Check if Item has been Selected
+	bool discarItem = false;
 	bool questCheck = false; // Check if Quest has been Selected
 
 };

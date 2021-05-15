@@ -286,26 +286,28 @@ void ItemManager::CheckActionButtons()
 	ListItem<GuiControl*>* item = buttons.start;
 	while (item)
 	{
-		if (actionButtons.Count() > 0 && actionButtons[0]->itemUsed == false)
+		if (actionButtons.Count() > 0 && actionButtons[0]->itemUsed == false && actionButtons[0]->discarItem == false)
 		{
 			actionButtons[0]->Draw(app->render);
 			actionButtons[1]->Draw(app->render);
 
 		}
-
+		
 		if (actionButtons.Count() > 0  && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
 		{
-			LOG("%d", y);
 			item->data->itemSingleCheck = false;
-			item->data->itemUsed = false;
-			//app->ui->DestroyGuiControl(buttons[y]);
-			//ELIMINAR ITEM
-				//DeleteActionButtons();
-				//actionButtons[a]->singleItemCheck = false;
+
 			UseItem(playerItemList[y], y);
 			DeleteButtons();
 			DeleteActionButtons();
-			LOG("ITEM USED");
+
+		}
+
+		if (actionButtons.Count() > 0 && actionButtons[1]->discarItem && item->data->itemSingleCheck)
+		{
+			item->data->itemSingleCheck = false;
+
+			DeleteActionButtons();
 
 		}
 
