@@ -43,7 +43,7 @@
 	<item
 		type = "2"
 		title = "HP Potion"
-		description = "a potion with|healing properties|that heals|50hp"
+		description = "a potion with|healing properties|that heals|15hp"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"
@@ -55,7 +55,7 @@
 	<item
 		type = "2"
 		title = "EXP Potion"
-		description = "a potion with raw|properties|that increases|50exp"
+		description = "a potion with raw|properties|that increases|20exp"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"
@@ -67,7 +67,7 @@
 	<item
 		type = "2"
 		title = "Treasure Chest"
-		description = "A valuable chest with a large amount of coins inside"
+		description = "A valuable chest|with a large amount|of coins inside"
 		objective = "None"
 		quantity = "1"
 		rewardingNPC = "None"
