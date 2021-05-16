@@ -116,7 +116,6 @@ void PuzzleManager::SewerEntrancePuzzle()
 		key2 = false;
 		key3 = false;
 		app->audio->PlayFx(13, 0);
-		LOG("1 Completed");
 	}
 }
 
@@ -134,8 +133,6 @@ void PuzzleManager::CagePuzzle()
 		key5 = false;
 		key6 = false;
 		app->audio->PlayFx(13, 0);
-
-		LOG("2 Completed");
 	}
 
 }
