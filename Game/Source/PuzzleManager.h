@@ -2,6 +2,7 @@
 #define __PUZZLEMANAGER_H__
 
 #include "Module.h"
+#include "Textures.h"
 
 #include "SString.h"
 
@@ -31,8 +32,14 @@ public:
 	void CagePuzzle();
 	void MagicGemPuzzle();
 
+	void DrawCagePuzzle();
+
+
 public:
-	ActivePuzzle currentPuzzle = ActivePuzzle::SEWERENTRANCE;
+
+	ActivePuzzle currentPuzzle = ActivePuzzle::CAGEPUZZLE;
+	SDL_Texture** noteTex = nullptr;
+	SDL_Texture** passwordTex = nullptr;
 
 	//Properties
 	bool key1 = false;

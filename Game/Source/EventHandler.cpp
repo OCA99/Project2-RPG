@@ -38,22 +38,50 @@ void EventHandler::FireEvent(MapEvent* e)
 			app->scene->playerPositionToBeLoaded = fPoint(playerX, playerY);
 		}
 	}
-
+	
 	//PUZZLE EVENTS
 	if (type == "puzzleSensor")
 	{
 		switch (e->eventId)
 		{
 		case 0:
-			if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
+			{
+				if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
+			}
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
+			{
+				if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
+				if (app->puzzleManager->key2) app->puzzleManager->key2 = false;
+			}
 			LOG("ONE");
 			break;
 		case 1:
-			if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
+			{
+				if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
+
+			}
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
+			{
+				if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
+				if (app->puzzleManager->key1) app->puzzleManager->key1 = false;
+			}
+
 			LOG("TWO");
 			break;
 		case 2:
-			if (!app->puzzleManager->key3) app->puzzleManager->key3 = true;
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
+			{
+				if (!app->puzzleManager->key3) app->puzzleManager->key3 = true;
+
+			}
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
+			{
+				if (app->puzzleManager->key1) app->puzzleManager->key1 = false;
+				if (app->puzzleManager->key2) app->puzzleManager->key2 = false;
+			}
+		
 			LOG("three");
 			break;
 		default:
