@@ -68,10 +68,6 @@ bool ItemManager::Start()
 	GiveItemToPlayer(SString("Coin Stack"));
 	GiveItemToPlayer(SString("Coin Stack"));
 	GiveItemToPlayer(SString("HP Potion"));
-	GiveItemToPlayer(SString("HP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("Treasure Chest"));
-
 
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
@@ -81,10 +77,13 @@ bool ItemManager::Start()
 bool ItemManager::Update(float dt)
 {
 
+	if (!app->input->pads[0].y) yPressed = true;
 
-
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened && app->dialog->currentDialog == nullptr)
+	if ((app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || (app->input->pads[0].y && yPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened && app->dialog->currentDialog == nullptr)
+	{
+		yPressed = false;
 		invOpened = !invOpened;//Open or close Inv
+	}
 	
 
 	if (invOpened)
@@ -147,8 +146,9 @@ void ItemManager::GiveItemToPlayer(SString& itemTitle)
 		{
 			std::cout << "You can't add more items to your bag" << std::endl;
 		}
-		else
-			playerItemList.Add(SearchForItem(itemTitle));
+		else if (playerItemList.Add(SearchForItem(itemTitle)) == nullptr)
+			LOG("There is no Reward for this Quest");
+		else{ playerItemList.Add(SearchForItem(itemTitle)); }
 
 	}
 }
@@ -342,72 +342,75 @@ void ItemManager::DrawPlayerStats()
 	float hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
 	float exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
 
-	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 143) / 100;
-	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 143) / 100;
+	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
+	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
 
-	app->render->DrawRectangle({ 357,367,143, 9 }, 147, 147, 147, 255);//BASE COLOR
-	app->render->DrawRectangle({ 357,392,143, 9 }, 147, 147, 147, 255);//BASE COLOR
+	int barPosX = 714 / 2;
+	int barPosY = 734 / 2;
+
+	app->render->DrawRectangle({ barPosX,barPosY,286/2, 18/2 }, 147, 147, 147, 255);//BASE COLOR
+	app->render->DrawRectangle({ barPosX,barPosY + 25,286/2, 18/2 }, 147, 147, 147, 255);//BASE COLOR
 
 	if(hp > 85)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 85, 95, 255);//BLUE
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 50, 85, 95, 255);//BLUE
 	
 	if (hp <= 85)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 50, 89, 83, 255);// LIGHT BLUE
 
 	if (hp <= 75)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 51, 81, 48, 255);//DARK GREEN
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 51, 81, 48, 255);//DARK GREEN
 
 	if (hp <= 67)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 71, 89, 50, 255);//GREEN
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 71, 89, 50, 255);//GREEN
 
 	if (hp <= 60)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 100, 106, 51, 255);//LIGHT GREEN
 
 	if (hp <= 50)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 100, 51, 255);//YELLOW
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 123, 100, 51, 255);//YELLOW
 
 	if (hp <= 40)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 123, 90, 52, 255);//LIGHT GREEN
 
 	if (hp <= 30)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 77, 52, 255);//ORANGE
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 123, 77, 52, 255);//ORANGE
 
 	if (hp <= 20)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 60, 49, 255);//DARK ORANGE
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 102, 60, 49, 255);//DARK ORANGE
 
 	if (hp <= 10)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 49, 49, 255);//DARK RED
+		app->render->DrawRectangle({ barPosX,barPosY,(int)health, 9 }, 102, 49, 49, 255);//DARK RED
 
 
 	if (exp > 85)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
 
 	if (exp <= 85)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
 
 	if (exp <= 75)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
 
 	if (exp <= 67)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
 
 	if (exp <= 60)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
 
 	if (exp <= 50)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
 
 	if (exp <= 40)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
 
 	if (exp <= 30)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
 
 	if (exp <= 20)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
 
 	if (exp <= 10)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
+		app->render->DrawRectangle({ barPosX,barPosY + 25,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
 
 
 	//Draw HP NUMBER

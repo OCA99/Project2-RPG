@@ -238,6 +238,7 @@ void DialogSystem::StartDialog(const char* id)
 			if (activeQuestsList->data->type == 3)
 			{
 				activeQuestsList->data->progress += 1;
+				app->quests->CheckObjectivesCompletion();
 			}
 			
 		}
