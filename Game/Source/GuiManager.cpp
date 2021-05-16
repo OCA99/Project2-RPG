@@ -7,6 +7,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Debug.h"
+#include "Fonts.h"
 
 GuiManager::GuiManager() : Module()
 {
@@ -62,6 +63,11 @@ bool GuiManager::PostUpdate(float dt)
 {
 	DrawAll();
 
+	/*int fps = 1.0f / dt;
+
+	std::string s = std::to_string(fps);
+	app->fonts->BlitText(10, 10, 0, s.c_str());*/
+
 	return true;
 }
 
@@ -73,8 +79,8 @@ bool GuiManager::CleanUp()
 GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int sliderValue)
 {
 	GuiControl* control = nullptr;
-	SDL_Texture* textTex = nullptr;
-	SDL_Texture* buttonTex = nullptr;
+	SDL_Texture** textTex = nullptr;
+	SDL_Texture** buttonTex = nullptr;
 
 	switch (id)
 	{
