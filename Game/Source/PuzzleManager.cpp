@@ -2,7 +2,6 @@
 #include "App.h"
 #include "SceneManager.h"
 #include "Scene.h"
-#include "Render.h"
 
 #include <iostream>
 
@@ -27,8 +26,7 @@ bool PuzzleManager::Awake()
 // Called before the first frame
 bool PuzzleManager::Start()
 {
-	noteTex = app->tex->Load("Textures/Puzzles/note.png");
-	passwordTex = app->tex->Load("Textures/Puzzles/code_lock.png");
+
 	return true;
 }
 
@@ -71,28 +69,6 @@ bool PuzzleManager::PostUpdate(float dt)
 {
 	bool ret = true;
 
-
-	if (app->scene->currentScene->type == Scene::TYPE::MAP)
-	{
-		switch (currentPuzzle)
-		{
-		case PuzzleManager::ActivePuzzle::NONE:
-			break;
-		case PuzzleManager::ActivePuzzle::SEWERENTRANCE:
-			
-			break;
-		case PuzzleManager::ActivePuzzle::CAGEPUZZLE:
-			DrawCagePuzzle();
-			break;
-		case PuzzleManager::ActivePuzzle::MAGICGEM:
-		
-			break;
-		default:
-			break;
-		}
-	}
-
-
 	return ret;
 }
 
@@ -113,26 +89,8 @@ void PuzzleManager::SewerEntrancePuzzle()
 
 void PuzzleManager::CagePuzzle()
 {
-
-
 }
 
 void PuzzleManager::MagicGemPuzzle()
 {
-}
-
-void PuzzleManager::DrawCagePuzzle()
-{
-	if (key1 && !key2)
-	{
-		
-		//app->render->DrawRectangle({ 0,0,200,200 }, 255, 255, 255, 255,true,false);
-		app->render->DrawTexture(noteTex, 0, 0, &SDL_Rect({ 0, 0, 1280, 720 }), 0.5f, 0, 0, 0, 0, false);
-	}
-	if (key2 && !key1)
-	{
-		app->render->DrawTexture(passwordTex, 0, 0, &SDL_Rect({ 0, 0, 1280, 720 }), 0.5f, 0, 0, 0, 0, false);
-
-	}
-
 }

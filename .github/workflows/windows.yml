@@ -46,7 +46,6 @@ jobs:
       run: |
         robocopy .\Output .\build\${{ env.RELEASE_NAME }}\Output /S
         robocopy .\build\${{ env.RELEASE_NAME }} .\build\${{ env.RELEASE_NAME }}\Output Game.exe /MOVE
-        rm -r .\build\${{ env.RELEASE_NAME }}\Output\Assets
         copy /Y .\README.md .\build\${{ env.RELEASE_NAME }}\README.md
         copy /Y .\LICENSE .\build\${{ env.RELEASE_NAME }}\LICENSE
         cd build
