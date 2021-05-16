@@ -32,11 +32,13 @@ public:
 	void MagicGemPuzzle();
 
 public:
-	ActivePuzzle currentPuzzle = ActivePuzzle::NONE;
+	ActivePuzzle currentPuzzle = ActivePuzzle::SEWERENTRANCE;
 
 	//Properties
-	//SEWER ENTRANCE
-	int activeKeys = 0;
+	bool key1 = false;
+	bool key2 = false;
+	bool key3 = false;
+	bool completed = false;
 
 
 };

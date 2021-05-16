@@ -80,8 +80,11 @@ bool PuzzleManager::CleanUp()
 
 void PuzzleManager::SewerEntrancePuzzle()
 {
-
-
+	if (key1 == true && key2 == true && key3 == true)
+	{
+		if (!completed) completed = true;
+		currentPuzzle = ActivePuzzle::CAGEPUZZLE;
+	}
 }
 
 void PuzzleManager::CagePuzzle()
