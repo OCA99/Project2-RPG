@@ -15,10 +15,10 @@
  <tileset firstgid="1817" name="collider_colors" tilewidth="16" tileheight="16" tilecount="6" columns="6">
   <image source="../collider_colors.png" trans="c634ff" width="96" height="16"/>
  </tileset>
- <tileset firstgid="1823" name="tomb" tilewidth="16" tileheight="16" tilecount="24" columns="6">
-  <image source="../Environment/tomb.png" trans="c634ff" width="96" height="64"/>
+ <tileset firstgid="1823" name="tomb" tilewidth="16" tileheight="16" tilecount="12" columns="3">
+  <image source="../Environment/tomb.png" trans="c634ff" width="48" height="64"/>
  </tileset>
- <tileset firstgid="1847" name="event_colors" tilewidth="16" tileheight="16" tilecount="12" columns="12">
+ <tileset firstgid="1835" name="event_colors" tilewidth="16" tileheight="16" tilecount="12" columns="12">
   <image source="../event_colors.png" trans="c634ff" width="192" height="16"/>
  </tileset>
  <layer id="1" name="ground" width="96" height="110">
@@ -56416,9 +56416,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1826"/>
-   <tile gid="1827"/>
-   <tile gid="1828"/>
+   <tile gid="1823"/>
+   <tile gid="1824"/>
+   <tile gid="1825"/>
    <tile gid="37"/>
    <tile/>
    <tile/>
@@ -56444,9 +56444,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1826"/>
-   <tile gid="1827"/>
-   <tile gid="1828"/>
+   <tile gid="1823"/>
+   <tile gid="1824"/>
+   <tile gid="1825"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56472,9 +56472,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1826"/>
-   <tile gid="1827"/>
-   <tile gid="1828"/>
+   <tile gid="1823"/>
+   <tile gid="1824"/>
+   <tile gid="1825"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56512,9 +56512,9 @@
    <tile gid="37"/>
    <tile/>
    <tile/>
-   <tile gid="1832"/>
-   <tile gid="1833"/>
-   <tile gid="1834"/>
+   <tile gid="1826"/>
+   <tile gid="1827"/>
+   <tile gid="1828"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56540,9 +56540,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1832"/>
-   <tile gid="1833"/>
-   <tile gid="1834"/>
+   <tile gid="1826"/>
+   <tile gid="1827"/>
+   <tile gid="1828"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56568,9 +56568,9 @@
    <tile/>
    <tile/>
    <tile gid="40"/>
-   <tile gid="1832"/>
-   <tile gid="1833"/>
-   <tile gid="1834"/>
+   <tile gid="1826"/>
+   <tile gid="1827"/>
+   <tile gid="1828"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56608,9 +56608,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1838"/>
-   <tile gid="1839"/>
-   <tile gid="1840"/>
+   <tile gid="1829"/>
+   <tile gid="1830"/>
+   <tile gid="1831"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56636,9 +56636,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1838"/>
-   <tile gid="1839"/>
-   <tile gid="1840"/>
+   <tile gid="1829"/>
+   <tile gid="1830"/>
+   <tile gid="1831"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56664,9 +56664,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1838"/>
-   <tile gid="1839"/>
-   <tile gid="1840"/>
+   <tile gid="1829"/>
+   <tile gid="1830"/>
+   <tile gid="1831"/>
    <tile/>
    <tile/>
    <tile gid="38"/>
@@ -56704,9 +56704,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1844"/>
-   <tile gid="1845"/>
-   <tile gid="1846"/>
+   <tile gid="1832"/>
+   <tile gid="1833"/>
+   <tile gid="1834"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56732,9 +56732,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1844"/>
-   <tile gid="1845"/>
-   <tile gid="1846"/>
+   <tile gid="1832"/>
+   <tile gid="1833"/>
+   <tile gid="1834"/>
    <tile/>
    <tile/>
    <tile/>
@@ -56760,9 +56760,9 @@
    <tile/>
    <tile/>
    <tile gid="37"/>
-   <tile gid="1844"/>
-   <tile gid="1845"/>
-   <tile gid="1846"/>
+   <tile gid="1832"/>
+   <tile gid="1833"/>
+   <tile gid="1834"/>
    <tile/>
    <tile/>
    <tile/>
@@ -63408,7 +63408,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="4" name="navigation" width="96" height="110" visible="0">
+ <layer id="4" name="navigation" width="96" height="110">
   <properties>
    <property name="draw" type="int" value="0"/>
    <property name="navigation" type="int" value="1"/>
@@ -73976,7 +73976,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="9" name="changeAreaSensors" width="96" height="110" visible="0">
+ <layer id="9" name="changeAreaSensors" width="96" height="110">
   <properties>
    <property name="draw" type="int" value="0"/>
    <property name="event" type="int" value="1"/>
@@ -75374,7 +75374,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1848"/>
+   <tile gid="1836"/>
    <tile/>
    <tile/>
    <tile/>
@@ -84493,9 +84493,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1847"/>
-   <tile gid="1847"/>
-   <tile gid="1847"/>
+   <tile gid="1835"/>
+   <tile gid="1835"/>
+   <tile gid="1835"/>
    <tile/>
    <tile/>
    <tile/>
@@ -84545,7 +84545,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="11" name="puzzleSensors" width="96" height="110" visible="0">
+ <layer id="11" name="puzzleSensors" width="96" height="110">
   <properties>
    <property name="draw" type="int" value="0"/>
    <property name="event" type="int" value="1"/>
@@ -88314,9 +88314,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1848"/>
+   <tile gid="1836"/>
    <tile/>
-   <tile gid="1849"/>
+   <tile gid="1837"/>
    <tile/>
    <tile/>
    <tile/>
@@ -88507,7 +88507,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1847"/>
+   <tile gid="1835"/>
    <tile/>
    <tile/>
    <tile/>
@@ -88535,7 +88535,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1848"/>
+   <tile gid="1836"/>
    <tile/>
    <tile/>
    <tile/>
@@ -88563,7 +88563,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1850"/>
+   <tile gid="1838"/>
    <tile/>
    <tile/>
    <tile/>
