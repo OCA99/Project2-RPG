@@ -7,62 +7,45 @@ void NPCQuestSystem::tick(ECS::World* world, float dt)
 {
 	ListItem<Quest*>* active = app->quests->questsActive.start;
 	ListItem<Quest*>* inactive = app->quests->questsInactive.start;
+	ListItem<Quest*>* finished = app->quests->questsFinished.start;
 
 	LoadTex();
 
-	if (active != nullptr)
-	{
-		//app->render->DrawTexture(exclamation, 10, 18, &SDL_Rect({ 32,32,10,16 }), 0.5f, 1, 0, 0, 0, false);
-	}
-
 	world->each<QuestList>([&](ECS::Entity* entity, ECS::ComponentHandle<QuestList> QuestList) {
+		//ACTIVE TO FINISHED
 		while (active != nullptr)
 		{
-			if (active->data->isCompleted == true)
+			if (active->data->status == 2)
 			{
-				active->data->status = 2;
+				QuestList->qFinished.Add(active->data);
 				QuestList->qActive.Del(active);
-				QuestList->qInactive.Add(active->data);
 			}
-
 			active = active->next;
 		}
 
-
+		//INACTIVE TO ACTIVE
 		while (inactive != nullptr)
 		{
-			if (inactive->data->requiredId != 0)
+			if (inactive->data->status == 1)
 			{
-				QuestList->qInactive.Del(inactive);
 				QuestList->qActive.Add(inactive->data);
-
+				QuestList->qInactive.Del(inactive);
 			}
-
+			app->render->DrawTexture(exclamation, QuestList->position.x + 8, QuestList->position.y - 14, &SDL_Rect({ 32,32,10,16 }), 0.5f, 1, 0, 0, 0, true);
+			
 			inactive = inactive->next;
 		}
 
+		//ACTIVE TO INACTIVE
 		while (active != nullptr)
 		{
-			if (active->data->isCompleted == true)
+			if (active->data->status == 0)
 			{
-				active->data->status = 2;
+				QuestList->qInactive.Add(inactive->data);
 				QuestList->qActive.Del(active);
 			}
 			active = active->next;
 		}
-
-		while (inactive != nullptr)
-		{
-			if (inactive->data->isCompleted == true)
-			{
-				inactive->data->status = 1;
-				QuestList->qInactive.Del(inactive);
-			}
-			inactive = inactive->next;
-		}
-
-
-		
 
 	});
 	
@@ -70,8 +53,7 @@ void NPCQuestSystem::tick(ECS::World* world, float dt)
 }
 
 
-void NPCQuestSystem::LoadTex(SDL_Texture** tex)
-
+void NPCQuestSystem::LoadTex()
 {
 	if (loaded == false && app->quests->exclamation != nullptr) 
 	{

@@ -17,7 +17,7 @@ public:
 
 	void LoadTex();
 
-	SDL_Texture* exclamation;
+	SDL_Texture** exclamation;
 
 	bool loaded = false;
 
