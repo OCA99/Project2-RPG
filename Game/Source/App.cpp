@@ -35,6 +35,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	assetsManager = new AssetsManager();
 	tex = new Textures();
 	audio = new Audio();
+	quests = new QuestManager();
 	dialog = new DialogSystem();
 	map = new Map();
 	scene = new SceneManager();
@@ -44,7 +45,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	party = new PartyManager();
 	battle = new BattleManager();
 	items = new ItemManager();
-	quests = new QuestManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

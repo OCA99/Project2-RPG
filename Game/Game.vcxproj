@@ -120,6 +120,7 @@
     <ClCompile Include="Source\InputSystem.cpp" />
     <ClCompile Include="Source\MenuFadeSystem.cpp" />
     <ClCompile Include="Source\NPCMovementSystem.cpp" />
+    <ClCompile Include="Source\NPCQuestSystems.cpp" />
     <ClCompile Include="Source\PartyManager.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
     <ClCompile Include="Source\Quest.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Source\MenuFadeSystem.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\NPCMovementSystem.h" />
+    <ClInclude Include="Source\NPCQuestSystem.h" />
     <ClInclude Include="Source\PartyManager.h" />
     <ClInclude Include="Source\PlayerFactory.h" />
     <ClInclude Include="Source\InputSystem.h" />

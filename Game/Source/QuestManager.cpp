@@ -1,14 +1,12 @@
 #include "QuestManager.h"
 #include "Log.h"
-#include "App.h"
 #include "Fonts.h"
-#include "Module.h"
-#include "List.h"
 #include "Input.h"
 #include "Render.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "ItemManager.h"
+
 
 #include "External/PugiXml/src/pugixml.hpp"
 #include "SDL/include/SDL_scancode.h"
@@ -49,27 +47,8 @@ bool QuestManager::Start()
 	{
 		Quest* quest = new Quest(questNode);
 
-		/*quest->id = questNode.attribute("id").as_int();
-		quest->type = questNode.attribute("type").as_int();
-		quest->title = questNode.attribute("title").as_string();
-		quest->description = questNode.attribute("description").as_string();
-		quest->objective = questNode.attribute("objective").as_string();
-		quest->progress = questNode.attribute("progress").as_int();
-		quest->quantity = questNode.attribute("quantity").as_int();
-		quest->demandingNPC = questNode.attribute("demandingNPC").as_string();
-		quest->rewardingNPC = questNode.attribute("rewardingNPC").as_string();
-		quest->reward = questNode.attribute("reward").as_string();
-		quest->rewardQuantity = questNode.attribute("rewardQuantity").as_string();
-
-		quest->rewardXP = questNode.attribute("rewardXP").as_int();
-		quest->rewardGold = questNode.attribute("rewardGold").as_int();
-		quest->requiredId = questNode.attribute("requiredId").as_int();
-		quest->isCompleted = questNode.attribute("isCompleted").as_bool();
-		quest->status = questNode.attribute("status").as_int();*/
-
 		if (quest->demandingNPC != nullptr)
 		{
-
 
 		}
 
@@ -96,8 +75,11 @@ bool QuestManager::Start()
 	reaperTex = app->tex->Load("Textures/Dialogue/reaper_dialogue.png");
 	tavernTex = app->tex->Load("Textures/Dialogue/tavern_lady_dialogue.png");
 	thymaTex = app->tex->Load("Textures/Dialogue/thyma_good_dialogue.png");
+	exclamation = app->tex->Load("Textures/UI/HUD/alert_marks.png");
 
+	//questsys = new NPCQuestSystem();
 
+	//questsys->LoadTex(exclamation);
 	return true;
 }
 
