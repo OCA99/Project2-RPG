@@ -54,7 +54,7 @@ bool GuiSlider::Update(Input* input, float dt)
 		input->GetMousePosition(mouseX, mouseY);
 
 		// Check collision between mouse and button bounds
-		if ((mouseX > bounds.x + 5) && (mouseX < (bounds.x + bounds.w) - 8) &&
+		if ((mouseX > bounds.x + 5) && (mouseX < (bounds.x + bounds.w) - 6) &&
 			(mouseY > bounds.y) && (mouseY < (bounds.y + bounds.h)))
 		{
 			state = GuiControlState::FOCUSED;
@@ -71,6 +71,7 @@ bool GuiSlider::Update(Input* input, float dt)
 			// If mouse button pressed -> Generate event!
 			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
 			{
+				app->audio->PlayFx(8, 0);
 				state = GuiControlState::SELECTED;
 				NotifyObserver();
 			}
