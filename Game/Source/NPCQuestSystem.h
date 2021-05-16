@@ -14,8 +14,8 @@ public:
 
 	virtual void tick(ECS::World* world, float dt) override;
 
-	void LoadTex(SDL_Texture* tex);
+	void LoadTex(SDL_Texture** tex);
 
-	SDL_Texture* exclamation;
+	SDL_Texture** exclamation;
 };
 
