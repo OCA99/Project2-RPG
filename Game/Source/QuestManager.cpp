@@ -222,7 +222,7 @@ void QuestManager::ShowQuestDescription()
 				app->fonts->BlitText(235, 100, 0, text.c_str());
 
 				//DRAW QEST OBJECTIVE
-				text = ToUpperCase(questsActive[y]->title.GetString());
+				text = ToUpperCase(questsActive[y]->objective.GetString());
 				app->fonts->BlitText(235, 300, 0, text.c_str());
 				text = ToUpperCase(to_string(questsActive[y]->progress));
 				app->fonts->BlitText(450, 300, 0, text.c_str());
