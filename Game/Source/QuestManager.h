@@ -49,6 +49,7 @@ public:
 	void CreateQuestButtons();
 
 	void ExclamationDraw();
+	void InterrogantDraw();
 
 public:
 
