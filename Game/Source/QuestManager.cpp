@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "SceneManager.h"
+#include "DialogSytem.h"
 #include "Scene.h"
 #include "ItemManager.h"
 
@@ -88,7 +89,7 @@ bool QuestManager::Update(float dt)
 
 	CheckQuestsLogic();
 
-	if (app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && !app->scene->menu && !app->items->invOpened)
+	if (app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN && !app->scene->menu && !app->items->invOpened && app->dialog->currentDialog == nullptr)
 	{
 		if (questInvOpened) app->ui->DestroyAllGuiControls();
 		questInvOpened = !questInvOpened;//Open or close Inv
@@ -337,6 +338,7 @@ bool QuestManager::CheckQuestsLogic()
 			questsActive.Del(activeQuestsList);
 			questsFinished.Add(activeQuestsList->data);
 			//REWARDS();
+			app->items->GiveItemToPlayer(activeQuestsList->data->reward);
 		}
 
 		activeQuestsList = activeQuestsList->next;

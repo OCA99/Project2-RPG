@@ -84,6 +84,11 @@ void MapScene::Load(fPoint playerPosition)
 		app->audio->songToBeLoaded = "Audio/Music/graveyard_main.ogg";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
+	else if (s == "Sewers.tmx")
+	{
+		app->audio->songToBeLoaded = "Audio/Music/town_blacksmith.ogg";
+		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
+	}
 
 	PlayerFactory::Create(world, playerPosition);
 
@@ -134,7 +139,7 @@ void MenuScene::Load()
 	world->registerSystem(new SpriteSystem());
 	world->registerSystem(new MenuFadeSystem());
 
-	app->audio->songToBeLoaded = "Audio/Music/Originals/town_blacksmith.wav";
+	app->audio->songToBeLoaded = "Audio/Music/Originals/forest_start.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
 	SDL_Texture* t = app->tex->Load("Textures/UI/MainPauseMenu/main_menu.png");
@@ -160,7 +165,8 @@ void MenuScene::Load()
 
 void BattleScene::Load()
 {
-	app->audio->songToBeLoaded = "Audio/Music/Originals/forest_battle.wav";
+	if(app->map->currentMapName == "Forest.tmx") app->audio->songToBeLoaded = "Audio/Music/Originals/forest_battle.wav";
+	if(app->map->currentMapName == "Graveyard.tmx") app->audio->songToBeLoaded = "Audio/Music/Originals/graveyard_battle.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
 	Scene::Load();
@@ -168,7 +174,9 @@ void BattleScene::Load()
 	world->registerSystem(new BattleMemberSystem());
 	world->registerSystem(new AnimatorSystem());
 
-	SDL_Texture* t = app->tex->Load("Textures/Battle/battle_forest.png");
+	SDL_Texture* t = nullptr;
+	if (app->map->currentMapName == "Forest.tmx") t = app->tex->Load("Textures/Battle/battle_forest.png");
+	if (app->map->currentMapName == "Graveyard.tmx") t = app->tex->Load("Textures/Battle/battle_cemetary.png");
 	ECS::Entity* e = world->create();
 	app->render->camera.x = app->render->camera.y = 0;
 	e->assign<Position>(fPoint(0, 0));

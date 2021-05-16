@@ -262,7 +262,6 @@ bool Map::CleanUp()
 // Load new map
 bool Map::Load(const char* filename)
 {
-	CleanUp();
 
 	bool ret = true;
 	SString tmp("%s%s", folder.GetString(), filename);
@@ -333,6 +332,8 @@ bool Map::Load(const char* filename)
 	LoadNPCs();
 
 	mapLoaded = ret;
+
+	currentMapName = filename;
 
 	return ret;
 }
