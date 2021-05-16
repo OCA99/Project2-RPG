@@ -23,7 +23,6 @@ public:
 		ECS::Entity* npc = Create(world, type, radius);
 		pos.y -= 14;
 		npc->get<Position>()->position = pos;
-		npc->get<QuestList>()->position = pos;
 
 		return npc;
 	}
@@ -32,7 +31,7 @@ protected:
 	{
 		ECS::Entity* npc = world->create();
 		npc->assign<Position>();
-		npc->assign<QuestList>();
+
 
 		if (type == Type::TAVERN)
 		{
@@ -65,9 +64,7 @@ protected:
 			npc->assign<DialogTrigger>(collider, "tavern.xml", "TEST");
 
 
-			npc->get<QuestList>()->SetReceiver(name);
-			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
-			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
+
 
 		}
 		else if (type == Type::REAPER)
@@ -102,9 +99,7 @@ protected:
 
 			npc->assign<DialogTrigger>(collider, "reaper.xml", "REAPER");
 
-			npc->get<QuestList>()->SetReceiver(name);
-			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
-			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
+
 		}
 		else if (type == Type::CUSTOMER)
 		{
@@ -138,9 +133,7 @@ protected:
 
 			npc->assign<DialogTrigger>(collider, "customer.xml", "CUSTOMER");
 
-			npc->get<QuestList>()->SetReceiver(name);
-			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
-			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
+	
 		}
 		else if (type == Type::THYMA)
 		{
@@ -174,9 +167,6 @@ protected:
 
 			npc->assign<DialogTrigger>(collider, "thyma.xml", "THYMA");
 
-			npc->get<QuestList>()->SetReceiver(name);
-			npc->get<QuestList>()->LoadActive(&app->quests->questsActive);
-			npc->get<QuestList>()->LoadInactive(&app->quests->questsInactive);
 		}
 
 		return npc;
