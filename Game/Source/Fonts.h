@@ -17,7 +17,7 @@ public:
 	std::string table;
 
 	// The font texture
-	SDL_Texture* texture = nullptr;
+	SDL_Texture** texture = nullptr;
 
 	// Length of the lookup table
 	uint totalLength;

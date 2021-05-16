@@ -52,12 +52,12 @@ public:
 	fPoint playerPositionToBeLoaded;
 
 
-	SDL_Texture* menuTex;
-	SDL_Texture* optionsTex;
-	SDL_Texture* graphicsMenuTex;
-	SDL_Texture* audioMenuTex;
-	SDL_Texture* questMenuTex;//Quest Menu Texture
-	SDL_Texture* invMenu;
+	SDL_Texture** menuTex;
+	SDL_Texture** optionsTex;
+	SDL_Texture** graphicsMenuTex;
+	SDL_Texture** audioMenuTex;
+	SDL_Texture** questMenuTex;//Quest Menu Texture
+	SDL_Texture** invMenu;
 
 	bool graphicsSelected;
 	bool audioSelected;

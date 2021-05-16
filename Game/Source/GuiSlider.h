@@ -11,7 +11,7 @@ class GuiSlider : public GuiControl
 {
 public:
 
-	GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture* tex, int sliderValue);
+	GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex, int sliderValue);
 	virtual ~GuiSlider();
 
 	bool Start();

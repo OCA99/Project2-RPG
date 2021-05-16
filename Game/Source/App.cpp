@@ -208,8 +208,6 @@ void App::FinishUpdate()
 
 	//LOG("%f\n", 1.0f / std::max(dt, minTime));
 
-	//LOG("fps: %d", int(1.0f / dt));
-
 	if (dt < minTime)
 	{
 		SDL_Delay(minTime - dt);
