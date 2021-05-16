@@ -19,6 +19,7 @@ public:
 
 	bool playFxOnce = true;
 
+	bool aPressed = false;
 
 };
 

@@ -33,14 +33,16 @@ bool GuiCheckBox::Update(Input* input, float dt)
 		{
 			state = GuiControlState::FOCUSED;
 
-			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->pads[0].a)
 			{
+				aPressed = true;
 				state = GuiControlState::PRESSED;
 			}
 
 			// If mouse button pressed -> Generate event!
-			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || (!app->input->pads[0].a && aPressed))
 			{
+				aPressed = false;
 				app->audio->PlayFx(6, 0);
 				checked = !checked;
 				return NotifyObserver();
