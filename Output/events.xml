@@ -27,8 +27,13 @@
 
 <map id="4">
     <layer id="0">
-        <event id="0" type="changeArea" target="Town.tmx" playerX="752" playerY="26"></event>
+    <event id="0" type="changeArea" target="Town.tmx" playerX="752" playerY="26"></event>
 	<event id="1" type="changeArea" target="Sewers.tmx" playerX="734" playerY="1600"></event>
+	<event id="2" type="changeArea" target="Sewers.tmx" playerX="734" playerY="1600"></event>
+    </layer>
+	<layer id="1">
+    <event id="3" type="puzzleSensor"></event>
+	
     </layer>
 </map>
 

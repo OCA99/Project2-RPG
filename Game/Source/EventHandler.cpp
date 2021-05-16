@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "SceneTransitionSystem.h"
+#include "PuzzleManager.h"
 
 #include <string>
 
