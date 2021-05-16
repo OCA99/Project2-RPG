@@ -11,13 +11,21 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **3 NPC Characters**: tavern keeper, reaper and blacksmith.
 - **Dialogue System**: 4 different dialogues implemented.
 - **Turn-based Combat System**
+- **Screens and Battle Transitions**
 - **3 types of enemies**
 - **Main Menu**
 - **Pause Menu**
 - **Battle Menu**
+- **Settings Menu**
+- **Character Menu**: including equipment, stats and inventory.
+- **Quests Menu**
 - **HUD**
 - **Keyboard and Gamepad Inputs**
 - **Save & Load**
+- **Animated Logo and Title**
+- **3 Puzzles**
+- **3 Quests**
+- **6 Types of Items**
 
 # Controls
 ## Keyboard
@@ -27,6 +35,8 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **Right Arrow**: Move player to the right.
 - **Space Bar**: Interact.
 - **ESC**: Pause and resume game.
+- **E**: Open character menu.
+- **N**: Open quests menu.
 
 ## Gamepad
 - **Joystick Up / Up Arrow**: Move player upwards.
@@ -37,9 +47,9 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **Start**: Pause and resume game.
 
 ## Debug Keys
-- **F9**: view colliders and bounds.
-- **F10**: activate god mode.
-- **F11**: toggle fullscreen.
+- **F9**: View colliders and bounds.
+- **F10**: Activate god mode.
+- **F11**: Toggle fullscreen.
 
 
 # External Libraries and Softwares
