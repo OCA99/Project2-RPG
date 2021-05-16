@@ -205,12 +205,15 @@ bool DialogSystem::LoadDialog(const char* filename)
 		// Get the dialog root.
 		pugi::xml_node dialogRoot = dialogFile.child("dialog");
 		std::string id = dialogRoot.attribute("id").as_string();
-		optionRoot = dialogRoot.child("options");
-		nameNPC = optionRoot.attribute("speaker").as_string();
-		// Parse the dialog XML into the tree structure.
-		DialogNode* dialog = ParseDialogXML(dialogRoot);
-		// Insert the dialog into the dictionary.
-		dialogues.insert(std::make_pair(id, dialog));
+		if (dialogues.find(id) == dialogues.end())
+		{
+			optionRoot = dialogRoot.child("options");
+			nameNPC = optionRoot.attribute("speaker").as_string();
+			// Parse the dialog XML into the tree structure.
+			DialogNode* dialog = ParseDialogXML(dialogRoot);
+			// Insert the dialog into the dictionary.
+			dialogues.insert(std::make_pair(id, dialog));
+		}
 
 		/* End TODO 1 */
 	}
@@ -259,7 +262,6 @@ void DialogSystem::StartDialog(const char* id)
 		inactiveQuestsList = inactiveQuestsList->next;
 	}
 
-	LOG("hola");
 	NextDialog();
 }
 

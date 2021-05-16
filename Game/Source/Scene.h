@@ -71,10 +71,18 @@ public:
 
 	~LogoScene()
 	{
+		app->tex->UnLoad(logoTexture);
 
+		if (world != nullptr)
+		{
+			world->destroyWorld();
+			world = nullptr;
+		}
 	}
 
 	void Load();
+
+	SDL_Texture** logoTexture;
 };
 
 class MenuScene : Scene
@@ -87,8 +95,18 @@ public:
 
 	~MenuScene()
 	{
+		app->tex->UnLoad(mainMenu);
+		app->tex->UnLoad(gameTitle);
 
+		if (world != nullptr)
+		{
+			world->destroyWorld();
+			world = nullptr;
+		}
 	}
+
+	SDL_Texture** mainMenu;
+	SDL_Texture** gameTitle;
 
 	void Load();
 };
@@ -103,8 +121,16 @@ public:
 
 	~BattleScene()
 	{
+		app->tex->UnLoad(background);
 
+		if (world != nullptr)
+		{
+			world->destroyWorld();
+			world = nullptr;
+		}
 	}
+
+	SDL_Texture** background;
 
 	void Load();
 };
