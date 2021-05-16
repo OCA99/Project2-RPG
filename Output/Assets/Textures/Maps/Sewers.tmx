@@ -50481,7 +50481,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="10" name="navigation" width="97" height="104" visible="0">
+ <layer id="10" name="navigation" width="97" height="104">
   <properties>
    <property name="draw" type="int" value="0"/>
    <property name="navigation" type="int" value="1"/>
@@ -53475,7 +53475,7 @@
    <tile gid="469"/>
    <tile gid="469"/>
    <tile gid="469"/>
-   <tile gid="469"/>
+   <tile/>
    <tile gid="469"/>
    <tile/>
    <tile/>
@@ -70674,7 +70674,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="12" name="puzzleSensors" width="97" height="104">
+ <layer id="12" name="puzzleSensors" width="97" height="104" visible="0">
   <properties>
    <property name="draw" type="int" value="0"/>
    <property name="event" type="int" value="1"/>
@@ -73665,11 +73665,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="458"/>
+   <tile gid="463"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="457"/>
+   <tile gid="464"/>
    <tile/>
    <tile/>
    <tile/>
@@ -73762,11 +73762,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="459"/>
+   <tile gid="462"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="459"/>
+   <tile gid="462"/>
    <tile/>
    <tile/>
    <tile/>

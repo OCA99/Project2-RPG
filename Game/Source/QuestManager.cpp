@@ -121,7 +121,11 @@ bool QuestManager::PostUpdate(float dt)
 		questButtons.Clear();
 	}
 
-	if(app->scene->currentScene->type == Scene::TYPE::MAP)ExclamationDraw();
+	if (app->scene->currentScene->type == Scene::TYPE::MAP)
+	{
+		ExclamationDraw();
+		InterrogantDraw();
+	}
 
 
 	return true;
@@ -417,7 +421,7 @@ void QuestManager::ExclamationDraw()
 
 		if (inactiveQuestsList->data->demandingNPC == "tlady" && app->map->currentMapName == "Tavern.tmx")
 		{
-			app->render->DrawTexture(exclamation, 784, 420, &SDL_Rect({ 0,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			app->render->DrawTexture(exclamation, 397, 212, &SDL_Rect({ 0,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
 		}
 
 		if (inactiveQuestsList->data->demandingNPC == "reaper" && app->map->currentMapName == "Forest.tmx")
@@ -431,5 +435,64 @@ void QuestManager::ExclamationDraw()
 		}
 
 		inactiveQuestsList = inactiveQuestsList->next;
+	}
+}
+
+
+void QuestManager::InterrogantDraw()
+{
+	ListItem<Quest*>* activeQuestsList = app->quests->questsActive.start;
+	while (activeQuestsList != nullptr)
+	{
+		if (activeQuestsList->data->progress == activeQuestsList->data->quantity)
+		{
+			if (activeQuestsList->data->rewardingNPC == "thyma" && app->map->currentMapName == "Town.tmx")
+			{
+				app->render->DrawTexture(exclamation, 84, 212, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+			if (activeQuestsList->data->rewardingNPC == "tlady" && app->map->currentMapName == "Tavern.tmx")
+			{
+				app->render->DrawTexture(exclamation, 397, 212, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+			if (activeQuestsList->data->rewardingNPC == "reaper" && app->map->currentMapName == "Forest.tmx")
+			{
+				app->render->DrawTexture(exclamation, 1509, 823, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+			if (activeQuestsList->data->rewardingNPC == "customer" && app->map->currentMapName == "NPC House.tmx")
+			{
+				app->render->DrawTexture(exclamation, 405, 246, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+		}
+		if (activeQuestsList->data->type == 3)
+		{
+			if (activeQuestsList->data->rewardingNPC == "thyma" && app->map->currentMapName == "Town.tmx")
+			{
+				app->render->DrawTexture(exclamation, 84, 212, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+			if (activeQuestsList->data->rewardingNPC == "tlady" && app->map->currentMapName == "Tavern.tmx")
+			{
+				app->render->DrawTexture(exclamation, 397, 212, &SDL_Rect({ 24,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+			if (activeQuestsList->data->rewardingNPC == "reaper" && app->map->currentMapName == "Forest.tmx")
+			{
+				app->render->DrawTexture(exclamation, 1509, 823, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+			if (activeQuestsList->data->rewardingNPC == "customer" && app->map->currentMapName == "NPC House.tmx")
+			{
+				app->render->DrawTexture(exclamation, 405, 246, &SDL_Rect({ 25,0,24,24 }), 0.5f, 1, 0, 0, 0, true);
+			}
+
+
+
+		}
+
+
+		activeQuestsList = activeQuestsList->next;
 	}
 }
