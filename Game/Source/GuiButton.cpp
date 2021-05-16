@@ -7,6 +7,7 @@
 #include "GuiManager.h"
 #include "ItemManager.h"
 #include "QuestManager.h"
+#include "PuzzleManager.h"
 
 #include "Log.h"
 
@@ -92,6 +93,16 @@ bool GuiButton::Update(Input* input, float dt)
 	else
 	{
 		if (discarItem) discarItem = false;
+	}
+	if (id == 21 && state == GuiControlState::SELECTED)
+	{
+		for (int i = 0; i < app->puzzleManager->codeButtons.Count(); ++i)
+		{
+			app->puzzleManager->codeButtons[i]->checkPuzzle = false;
+		}
+		if (!checkPuzzle) checkPuzzle = true;
+		state = GuiControlState::NORMAL;
+
 	}
 
 

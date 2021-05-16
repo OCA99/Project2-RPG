@@ -11,11 +11,6 @@
 	<event id="2" type="changeArea" target="NPC House.tmx" playerX="366" playerY="330"></event>
 	<event id="3" type="changeArea" target="Graveyard.tmx" playerX="750" playerY="1712"></event>
     </layer>
-	<layer id="2">
-    <event id="0" type="puzzleSensor"></event>
-	<event id="1" type="puzzleSensor"></event>
-	<event id="2" type="puzzleSensor"></event>
-    </layer>
 </map>
 
 <map id="2">
@@ -37,9 +32,9 @@
 	<event id="2" type="changeArea" target="Sewers.tmx" playerX="734" playerY="1600"></event>
     </layer>
 	<layer id="1">
-    <event id="0" type="puzzleSensor"></event>
-	<event id="1" type="puzzleSensor"></event>
-	<event id="2" type="puzzleSensor"></event>
+    <event id="0" type="graveyardPuzzle"></event>
+	<event id="1" type="graveyardPuzzle"></event>
+	<event id="2" type="graveyardPuzzle"></event>
     </layer>
 </map>
 
@@ -48,8 +43,8 @@
         <event id="0" type="changeArea" target="Graveyard.tmx" playerX="750" playerY="176"></event>
     </layer>
 	<layer id="1">
-    <event id="0" type="puzzleSensor"></event>
-	<event id="1" type="puzzleSensor"></event>
-	<event id="2" type="puzzleSensor"></event>
+    <event id="7" type="CagePuzzle"></event>
+	<event id="6" type="CagePuzzle"></event>
+	<event id="5" type="CagePuzzle"></event>
     </layer>
 </map>
