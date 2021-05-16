@@ -71,7 +71,6 @@ bool PartyManager::CleanUp()
 
 void PartyManager::RemoveParties()
 {
-	delete allyParty;
 	delete enemyParty;
 }
 
