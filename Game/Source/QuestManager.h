@@ -7,7 +7,6 @@
 #include "App.h"
 #include "Textures.h"
 #include "GuiManager.h"
-#include "NPCQuestSystem.h"
 #include "Quest.h"
 
 #include "External/PugiXml/src/pugixml.hpp"
@@ -48,6 +47,8 @@ public:
 	void ShowQuestDescription();
 
 	void CreateQuestButtons();
+
+	void ExclamationDraw();
 
 public:
 
