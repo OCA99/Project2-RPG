@@ -56,7 +56,7 @@ bool PartyManager::Update(float dt)
 }
 
 // Called each loop iteration
-bool PartyManager::PostUpdate()
+bool PartyManager::PostUpdate(float dt)
 {
 	bool ret = true;
 

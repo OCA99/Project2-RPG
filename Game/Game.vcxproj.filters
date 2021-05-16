@@ -79,6 +79,7 @@
     <ClCompile Include="Source\NPCQuestSystems.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PuzzleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Source\NPCQuestSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PuzzleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
