@@ -211,6 +211,16 @@ bool SceneManager::PostUpdate(float dt)
 		if (menu)
 		{
 
+			//int mousePosX = 0;
+			//int mousePosY = 0;
+
+			//app->input->GetMousePosition(mousePosX, mousePosY);
+
+			//if (pad.l_x > 0.0f) //SDL_WarpMouseGlobal(mousePosX + 10, mousePosY);
+			//if (pad.l_x < 0.0f)// SDL_WarpMouseGlobal(mousePosX - 10, mousePosY);
+			//if (pad.l_y > 0.0f) //SDL_WarpMouseGlobal(mousePosX, mousePosY - 10);
+			//if (pad.l_y < 0.0f)// SDL_WarpMouseGlobal(mousePosX, mousePosY + 10);
+
 			if (!optionsMenu)
 			{
 				app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
@@ -268,6 +278,9 @@ bool SceneManager::PostUpdate(float dt)
 
 	if(optionsMenu)
 	{
+		if (!app->input->pads[0].r1) r1Pressed = true;
+		if (!app->input->pads[0].l1) l1Pressed = true;
+
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
 			app->audio->PlayFx(6, 0);
@@ -297,6 +310,15 @@ bool SceneManager::PostUpdate(float dt)
 
 				buttons = true;
 			}
+			if (app->input->pads[0].r1 && r1Pressed)
+			{
+				app->ui->DestroyAllGuiControls();
+				audioSelected = true;
+				graphicsSelected = false;
+				controlsSelected = false;
+				buttons = false;
+				r1Pressed = false;
+			}
 		}
 
 		if (audioSelected)
@@ -315,6 +337,24 @@ bool SceneManager::PostUpdate(float dt)
 
 				buttons = true;
 			}
+			if (app->input->pads[0].r1 == true && r1Pressed)
+			{
+				app->ui->DestroyAllGuiControls();
+				audioSelected = false;
+				graphicsSelected = false;
+				controlsSelected = true;
+				buttons = false;
+				r1Pressed = false;
+			}
+			if (app->input->pads[0].l1 && l1Pressed)
+			{
+				app->ui->DestroyAllGuiControls();
+				audioSelected = false;
+				graphicsSelected = true;
+				controlsSelected = false;
+				buttons = false;
+				l1Pressed = false;
+			}
 		}
 
 		if (controlsSelected)
@@ -328,6 +368,15 @@ bool SceneManager::PostUpdate(float dt)
 				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
 
 				buttons = true;
+			}
+			if (app->input->pads[0].l1 == true && l1Pressed)
+			{
+				app->ui->DestroyAllGuiControls();
+				audioSelected = true;
+				graphicsSelected = false;
+				controlsSelected = false;
+				buttons = false;
+				l1Pressed = false;
 			}
 		}
 

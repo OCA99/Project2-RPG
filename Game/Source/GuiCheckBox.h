@@ -19,6 +19,9 @@ public:
 
 	bool checked;
 	bool playFxOnce = true;
+
+	bool aPressed = false;
+
 private:
 	SDL_Rect checkedBounds;
 };
