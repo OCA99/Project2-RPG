@@ -342,72 +342,72 @@ void ItemManager::DrawPlayerStats()
 	float hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
 	float exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
 
-	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 143) / 100;
-	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 143) / 100;
+	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
+	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
 
-	app->render->DrawRectangle({ 357,367,143, 9 }, 147, 147, 147, 255);//BASE COLOR
-	app->render->DrawRectangle({ 357,392,143, 9 }, 147, 147, 147, 255);//BASE COLOR
+	app->render->DrawRectangle({ 713,595,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
+	app->render->DrawRectangle({ 713, 645,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 
 	if(hp > 85)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 85, 95, 255);//BLUE
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 85, 95, 255, false, false);//BLUE
 	
 	if (hp <= 85)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
 	if (hp <= 75)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 51, 81, 48, 255);//DARK GREEN
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
 
 	if (hp <= 67)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 71, 89, 50, 255);//GREEN
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 71, 89, 50, 255, true, false);//GREEN
 
 	if (hp <= 60)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
 
 	if (hp <= 50)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 100, 51, 255);//YELLOW
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 123, 100, 51, 255, true, false);//YELLOW
 
 	if (hp <= 40)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
 
 	if (hp <= 30)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 123, 77, 52, 255);//ORANGE
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 123, 77, 52, 255, true, false);//ORANGE
 
 	if (hp <= 20)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 60, 49, 255);//DARK ORANGE
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
 
 	if (hp <= 10)
-		app->render->DrawRectangle({ 357,367,(int)health, 9 }, 102, 49, 49, 255);//DARK RED
+		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 102, 49, 49, 255, true, false);//DARK RED
 
 
 	if (exp > 85)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 85, 95, 255);//BLUE
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 50, 85, 95, 255, true, false);//BLUE
 
 	if (exp <= 85)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 50, 89, 83, 255);// LIGHT BLUE
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
 	if (exp <= 75)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 51, 81, 48, 255);//DARK GREEN
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
 
 	if (exp <= 67)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 71, 89, 50, 255);//GREEN
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 71, 89, 50, 255, true, false);//GREEN
 
 	if (exp <= 60)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 100, 106, 51, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
 
 	if (exp <= 50)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 100, 51, 255);//YELLOW
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 123, 100, 51, 255, true, false);//YELLOW
 
 	if (exp <= 40)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 90, 52, 255);//LIGHT GREEN
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
 
 	if (exp <= 30)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 123, 77, 52, 255);//ORANGE
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 123, 77, 52, 255, true, false);//ORANGE
 
 	if (exp <= 20)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 60, 49, 255);//DARK ORANGE
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
 
 	if (exp <= 10)
-		app->render->DrawRectangle({ 357,392,(int)experience, 9 }, 102, 49, 49, 255);//DARK RED
+		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 102, 49, 49, 255,true,false);//DARK RED
 
 
 	//Draw HP NUMBER
