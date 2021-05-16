@@ -29,4 +29,11 @@ void EventHandler::FireEvent(MapEvent* e)
 		app->scene->changingScene = true;
 		app->scene->playerPositionToBeLoaded = fPoint(playerX, playerY);
 	}
+
+	//PUZZLE EVENTS
+	if (type == "puzzleSensor")
+	{
+		LOG("PUZZLEE");
+	}
+
 }
