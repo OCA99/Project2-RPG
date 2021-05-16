@@ -118,7 +118,7 @@ private:
 	pugi::xml_node configApp;
 
 	float minTime;
-	float frameCap = 1000.0f;
+	float frameCap = 60.0f;
 	Timer timer;
 
 	bool requestLoad = false;

@@ -137,7 +137,6 @@ void Textures::ReloadAllTextures()
 	for (item = textures.begin(); item != textures.end(); item++)
 	{
 		SDL_DestroyTexture(item->second);
-		LOG("RELOAD");
 		SDL_Texture** tex = Load(item->first.c_str());
 	}
 }

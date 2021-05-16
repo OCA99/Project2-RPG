@@ -8,6 +8,7 @@
 #include "External/PugiXml/src/pugixml.hpp"
 #include "Quest.h"
 #include "QuestManager.h"
+#include "Log.h"
 
 #include <map>
 #include <string>
@@ -31,6 +32,11 @@ struct Position
 struct Sprite
 {
 	Sprite(SDL_Texture** sprite, float scale = 1.0f, int zindex = 0) : sprite(sprite), scale(scale), zindex(zindex) {}
+
+	~Sprite()
+	{
+		LOG("destruct");
+	}
 
 	SDL_Texture** sprite;
 	float scale;
