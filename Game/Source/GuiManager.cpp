@@ -49,6 +49,7 @@ bool GuiManager::Start()
 	itemTex = app->tex->Load("Textures/UI/OptionsMenu/item_action.png");
 	useItemText = app->tex->Load("Textures/UI/OptionsMenu/useitem.png");
 	discardItemText = app->tex->Load("Textures/UI/OptionsMenu/discarditem.png");
+	puzzlePassTex = app->tex->Load("Textures/Puzzles/white_button.png");
 	return true;
 }
 
@@ -147,6 +148,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	case 20:
 		buttonTex = itemTex;
 		textTex = discardItemText;
+		break;
+	case 21:
+		buttonTex = puzzlePassTex;
+		textTex = pixelTex;
 		break;
 	default:
 		break;

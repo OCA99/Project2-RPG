@@ -38,9 +38,9 @@ void EventHandler::FireEvent(MapEvent* e)
 			app->scene->playerPositionToBeLoaded = fPoint(playerX, playerY);
 		}
 	}
-	
+
 	//PUZZLE EVENTS
-	if (type == "puzzleSensor")
+	if (type == "graveyardPuzzle")
 	{
 		switch (e->eventId)
 		{
@@ -48,41 +48,59 @@ void EventHandler::FireEvent(MapEvent* e)
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 			{
 				if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
+				LOG("ONE");
 			}
-			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
-			{
-				if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
-				if (app->puzzleManager->key2) app->puzzleManager->key2 = false;
-			}
-			LOG("ONE");
 			break;
 		case 1:
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 			{
 				if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
+				LOG("TWO");
 
 			}
-			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
-			{
-				if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
-				if (app->puzzleManager->key1) app->puzzleManager->key1 = false;
-			}
 
-			LOG("TWO");
 			break;
 		case 2:
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 			{
 				if (!app->puzzleManager->key3) app->puzzleManager->key3 = true;
-
+				LOG("Three");
 			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (type == "CagePuzzle")
+	{
+		switch (e->eventId)
+		{
+		case 5:
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
 			{
 				if (app->puzzleManager->key1) app->puzzleManager->key1 = false;
 				if (app->puzzleManager->key2) app->puzzleManager->key2 = false;
+				if (app->puzzleManager->key3) app->puzzleManager->key3 = false;
+				if (app->puzzleManager->key4) app->puzzleManager->key4 = false;
+				if (app->puzzleManager->key5) app->puzzleManager->key5 = false;
+
+				app->puzzleManager->ClearButtons();
 			}
-		
-			LOG("three");
+			break;
+		case 6:
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
+			{
+				if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
+				if (app->puzzleManager->key1) app->puzzleManager->key1 = false;
+			}
+			break;
+		case 7:
+			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::CAGEPUZZLE)
+			{
+				if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
+				if (app->puzzleManager->key2) app->puzzleManager->key2 = false;
+			}
 			break;
 		default:
 			break;

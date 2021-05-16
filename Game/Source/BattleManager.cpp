@@ -33,7 +33,6 @@ bool BattleManager::Awake()
 bool BattleManager::Start()
 {
 	activeQuestsList = app->quests->questsActive.start;
-
 	characterBar = app->tex->Load("Textures/UI/BattleMenu/character_bar.png");
 	actionBox = app->tex->Load("Textures/UI/BattleMenu/action_box.png");
 	healthBars = app->tex->Load("Textures/UI/BattleMenu/health_bars.png");
@@ -46,6 +45,7 @@ bool BattleManager::Start()
 
 bool BattleManager::PreUpdate()
 {
+	activeQuestsList = app->quests->questsActive.start;
 	return true;
 }
 
@@ -90,6 +90,10 @@ bool BattleManager::Update(float dt)
 				if (activeQuestsList->data->progress < activeQuestsList->data->quantity)
 				{
 					activeQuestsList->data->progress += 3;
+					if (activeQuestsList->data->progress >= activeQuestsList->data->quantity)
+					{
+						activeQuestsList->data->progress = activeQuestsList->data->quantity;
+					}
 				}
 			}
 			activeQuestsList = activeQuestsList->next;
