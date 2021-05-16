@@ -7,6 +7,7 @@
 #include "External/SDL/include/SDL.h"
 #include "External/PugiXml/src/pugixml.hpp"
 #include "Quest.h"
+#include "QuestManager.h"
 
 #include <map>
 #include <string>
@@ -306,15 +307,24 @@ struct QuestList
 {
 	SString receiver;
 
-	List<Quest*> questsActive;
-	List<Quest*> questsInactive;
+	List<Quest*> qActive;
+	List<Quest*> qInactive;
+
+	fPoint position;
+
+	bool activeQuest = true;
+	bool inactiveQuest = true;
 
 	void SetReceiver(SString info)
 	{
 		receiver = info;
 	}
 
-	/*
+	void SetPosition(fPoint pos)
+	{
+		position = pos;
+	}
+
 	void LoadActive(List<Quest*>* active)
 	{
 		Quest* first = active->start->data;
@@ -322,10 +332,13 @@ struct QuestList
 		{
 			if (first->demandingNPC == receiver)
 			{
-				questsActive.Add(first);
+				qActive.Add(first);
 			}
-			first = active->start->next->data;
-
+			if(active->start->next != nullptr) first = active->start->next->data;
+		}
+		if (qActive.Count() == 0)
+		{
+			activeQuest = false;
 		}
 
 	}
@@ -337,13 +350,21 @@ struct QuestList
 		{
 			if (first->demandingNPC == receiver)
 			{
-				questsActive.Add(first);
+				qInactive.Add(first);
 			}
-			first = inactive->start->next->data;
+			if (inactive->start->next != nullptr) first = inactive->start->next->data;
+
+		}
+		if (qInactive.Count() == 0)
+		{
+			inactiveQuest = false;
 		}
 
+
 	}
-	*/
+
+
+	
 	pugi::xml_node node;
 
 	bool active = false;

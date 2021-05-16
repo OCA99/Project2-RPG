@@ -13,6 +13,7 @@
 #include "CameraSystem.h"
 #include "CollisionSystem.h"
 #include "NPCMovementSystem.h"
+#include "NPCQuestSystem.h"
 #include "LogoFadeSystem.h"
 #include "BattleManager.h"
 #include "PartyManager.h"
@@ -49,6 +50,7 @@ void MapScene::Load(fPoint playerPosition)
 	world->registerSystem(new InputSystem());
 	world->registerSystem(new CameraSystem());
 	world->registerSystem(new NPCMovementSystem());
+	world->registerSystem(new NPCQuestSystem());
 	world->registerSystem(new SceneTransitionSystem());
 
 	ECS::Entity* e = world->create();
