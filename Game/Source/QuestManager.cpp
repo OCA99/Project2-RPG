@@ -9,7 +9,6 @@
 #include "Scene.h"
 #include "ItemManager.h"
 
-
 #include "External/PugiXml/src/pugixml.hpp"
 #include "SDL/include/SDL_scancode.h"
 #include "ToUpperCase.h"
@@ -121,7 +120,7 @@ bool QuestManager::PostUpdate(float dt)
 		questButtons.Clear();
 	}
 
-	if (app->scene->currentScene->type == Scene::TYPE::MAP)
+	if (app->scene->currentScene->type == Scene::TYPE::MAP && !questInvOpened && !app->scene->menu && !app->items->invOpened)
 	{
 		ExclamationDraw();
 		InterrogantDraw();
