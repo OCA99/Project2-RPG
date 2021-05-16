@@ -34,6 +34,11 @@ public:
 public:
 	ActivePuzzle currentPuzzle = ActivePuzzle::NONE;
 
+	//Properties
+	//SEWER ENTRANCE
+	int activeKeys = 0;
+
+
 };
 
 #endif // __PUZZLEMANAGER_H__
