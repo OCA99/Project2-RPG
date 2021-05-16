@@ -24,6 +24,8 @@ public:
 	float unit;
 
 	SDL_Rect slider;
+
+	bool aPressed = false;
 private:
 
 	// GuiSlider specific properties

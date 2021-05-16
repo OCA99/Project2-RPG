@@ -62,15 +62,17 @@ bool GuiSlider::Update(Input* input, float dt)
 			value = (mouseX - bounds.x) / unit - 5;
 			value = round(value);
 
-			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
+			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->pads[0].a)
 			{
+				aPressed = true;
 				state = GuiControlState::PRESSED;
 				sliderPosx = ((value * unit) + bounds.x);
 			}
 
 			// If mouse button pressed -> Generate event!
-			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP)
+			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP || (!app->input->pads[0].a && aPressed))
 			{
+				aPressed = false;
 				app->audio->PlayFx(8, 0);
 				state = GuiControlState::SELECTED;
 				NotifyObserver();
