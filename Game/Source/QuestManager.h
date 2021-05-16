@@ -89,6 +89,8 @@ public:
 
 	Font* font;
 
+	bool selectPressed = true;
+
 	int debugId = 1;
 	int y = 0;
 };
