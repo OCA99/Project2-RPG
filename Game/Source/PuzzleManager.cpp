@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "Fonts.h"
 #include "SString.h"
+#include "Audio.h"
 
 #include <iostream>
 #include "ToUpperCase.h"
@@ -114,6 +115,7 @@ void PuzzleManager::SewerEntrancePuzzle()
 		key1 = false;
 		key2 = false;
 		key3 = false;
+		app->audio->PlayFx(13, 0);
 		LOG("1 Completed");
 	}
 }
@@ -131,6 +133,8 @@ void PuzzleManager::CagePuzzle()
 		key4 = false;
 		key5 = false;
 		key6 = false;
+		app->audio->PlayFx(13, 0);
+
 		LOG("2 Completed");
 	}
 
@@ -194,19 +198,34 @@ void PuzzleManager::DrawCagePuzzle()
 			{
 				if (a == 5 && !key5 && !key6)
 				{
-					if (!key4) key4 = true;
-					//Play Correct Sound
+					if (!key4)
+					{
+						key4 = true;
+						app->audio->PlayFx(11, 0);
+					}
+
 				}
 				if (a == 2 && key4 && !key6)
 				{
-					if (!key5) key5 = true;
-					//Play Correct Sound
+					if (!key5)
+					{
+						key5 = true;
+						app->audio->PlayFx(11, 0);
+					}
+					
 				}
 				if (a == 1 && key4 && key5)
 				{
-					if (!key6) key6 = true;
-					//Play Correct Sound
+					if (!key6)
+					{
+						key6 = true;
+						app->audio->PlayFx(11, 0);
+					}
+
+					
 				}
+
+				
 			}
 			a++;
 			item = item->next;

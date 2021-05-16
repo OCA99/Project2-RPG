@@ -119,6 +119,9 @@ void LogoScene::Load()
 	app->audio->LoadFx("Audio/Fx/menu_travel.ogg");//8
 	app->audio->LoadFx("Audio/Fx/all_attack.ogg");//9
 	app->audio->LoadFx("Audio/Fx/all_heal.ogg");//10
+	app->audio->LoadFx("Audio/Fx/action_equip_item.ogg");//11
+	app->audio->LoadFx("Audio/Fx/action_buy.ogg");//12
+	app->audio->LoadFx("Audio/Fx/misc_puzzle.ogg");//13
 
 	logoTexture = app->tex->Load("Textures/UI/MainPauseMenu/LogoAnim/logo_anim_tileset.png");
 
