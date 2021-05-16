@@ -152,6 +152,7 @@ public:
 
 	void OpenPartyInventory();
 	void InitializeParties();
+	void InitializeEnemyParties();
 
 	Party* allyParty = nullptr;
 	Party* enemyParty = nullptr;
