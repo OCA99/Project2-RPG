@@ -309,6 +309,7 @@ struct QuestList
 
 	List<Quest*> qActive;
 	List<Quest*> qInactive;
+	List<Quest*> qFinished;
 
 	fPoint position;
 
@@ -327,40 +328,43 @@ struct QuestList
 
 	void LoadActive(List<Quest*>* active)
 	{
-		Quest* first = active->start->data;
-		for (int i = 0; i <= active->Count(); i++)
+		if (active->start != nullptr)
 		{
-			if (first->demandingNPC == receiver)
+			Quest* first = active->start->data;
+			for (int i = 0; i <= active->Count(); i++)
 			{
-				qActive.Add(first);
+				if (first->demandingNPC == receiver)
+				{
+					qActive.Add(first);
+				}
+				if (active->start->next != nullptr) first = active->start->next->data;
 			}
-			if(active->start->next != nullptr) first = active->start->next->data;
+			if (qActive.Count() == 0)
+			{
+				activeQuest = false;
+			}
 		}
-		if (qActive.Count() == 0)
-		{
-			activeQuest = false;
-		}
-
 	}
 	
 	void LoadInactive(List<Quest*>* inactive)
 	{
-		Quest* first = inactive->start->data;
-		for (int i = 0; i <= inactive->Count(); i++)
+		if (inactive->start != nullptr)
 		{
-			if (first->demandingNPC == receiver)
+			Quest* first = inactive->start->data;
+			for (int i = 0; i <= inactive->Count(); i++)
 			{
-				qInactive.Add(first);
+				if (first->demandingNPC == receiver)
+				{
+					qInactive.Add(first);
+				}
+				if (inactive->start->next != nullptr) first = inactive->start->next->data;
+
 			}
-			if (inactive->start->next != nullptr) first = inactive->start->next->data;
-
+			if (qInactive.Count() == 0)
+			{
+				inactiveQuest = false;
+			}
 		}
-		if (qInactive.Count() == 0)
-		{
-			inactiveQuest = false;
-		}
-
-
 	}
 
 
