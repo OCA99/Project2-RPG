@@ -169,7 +169,6 @@ bool BattleManager::Update(float dt)
 			currentTarget += 1;
 			if (currentTarget == targets.size()) currentTarget -= 1;
 		}
-		LOG("Deez %d, %d", currentAction, currentTarget);
 	}
 
 	if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (app->input->pads[0].l_y < 0.0f || app->input->pads[0].up == true) && upPressed) && currentParty == 0)
@@ -187,7 +186,6 @@ bool BattleManager::Update(float dt)
 			currentTarget -= 1;
 			if (currentTarget < 0) currentTarget = 0;
 		}
-		LOG("Nuts %d, %d", currentAction, currentTarget);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) selecting = Selecting::ACTION;
@@ -291,6 +289,8 @@ void BattleManager::DoAction()
 		else currentParty = 0;
 		currentMember = 0;
 	}
+
+	CheckBattleEnd();
 }
 
 void BattleManager::CheckBattleEnd()
