@@ -57,17 +57,19 @@ public:
 	List<Quest*> questsFinished;
 
 	//Quest Menu Properties
-	SDL_Texture* customerTex;//Quest Menu Texture
-	SDL_Texture* reaperTex;//Quest Menu Texture
-	SDL_Texture* tavernTex;//Quest Menu Texture
-	SDL_Texture* thymaTex;//Quest Menu Texture
-	SDL_Texture* exclamation;//Exclamation Texture
+	SDL_Texture** customerTex;//Quest Menu Texture
+	SDL_Texture** reaperTex;//Quest Menu Texture
+	SDL_Texture** tavernTex;//Quest Menu Texture
+	SDL_Texture** thymaTex;//Quest Menu Texture
+	SDL_Texture** exclamation;
 
 	List<GuiControl*> questButtons;//Buttons List - Need it, Don't delete.
 
 	bool questInvOpened = false;//proof of whether it is open or not
 
 	Font* font;
+
+	bool selectPressed = true;
 
 	int debugId = 1;
 	int y = 0;

@@ -37,7 +37,7 @@ protected:
 		if (type == Type::TAVERN)
 		{
 			SString name = "tlady";
-			SDL_Texture* t = app->tex->Load("Textures/NPC/tavern_lady_sprites.png");
+			SDL_Texture** t = app->tex->Load("Textures/NPC/tavern_lady_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
@@ -75,7 +75,7 @@ protected:
 
 			SString name = "reaper";
 
-			SDL_Texture* t = app->tex->Load("Textures/NPC/demon_reaper_sprites.png");
+			SDL_Texture** t = app->tex->Load("Textures/NPC/demon_reaper_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
@@ -111,7 +111,7 @@ protected:
 
 			SString name = "customer";
 
-			SDL_Texture* t = app->tex->Load("Textures/NPC/blacksmith_sprites.png");
+			SDL_Texture** t = app->tex->Load("Textures/NPC/blacksmith_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();
@@ -147,7 +147,7 @@ protected:
 
 			SString name = "thyma";
 
-			SDL_Texture* t = app->tex->Load("Textures/Characters/thyma_good_sprites.png");
+			SDL_Texture** t = app->tex->Load("Textures/Characters/thyma_good_sprites.png");
 			npc->assign<Sprite>(t, 0.8f);
 
 			npc->assign<Animator>();

@@ -46,32 +46,32 @@ public:
 
 	List<GuiControl*> controls;
 
-	SDL_Texture* menuButtonTex;
-	SDL_Texture* optionsButtonsTex;
-	SDL_Texture* questButtonTex;
-	SDL_Texture* invButtonTex;
+	SDL_Texture** menuButtonTex;
+	SDL_Texture** optionsButtonsTex;
+	SDL_Texture** questButtonTex;
+	SDL_Texture** invButtonTex;
 
-	SDL_Texture* buttonTex;
-	SDL_Texture* sliderTex;
-	SDL_Texture* checkBoxTex;
-	SDL_Texture* backButtonTex;
+	SDL_Texture** buttonTex;
+	SDL_Texture** sliderTex;
+	SDL_Texture** checkBoxTex;
+	SDL_Texture** backButtonTex;
 
-	SDL_Texture* startTex;
-	SDL_Texture* continueTex;
-	SDL_Texture* optionsTex;
-	SDL_Texture* exitTex;
-	SDL_Texture* saveTex;
-	SDL_Texture* loadTex;
-	SDL_Texture* mainMenuTex;
-	SDL_Texture* graphicsTex;
-	SDL_Texture* audioTex;
-	SDL_Texture* controlsTex;
-	SDL_Texture* onOffTex;
-	SDL_Texture* backArrowTex;
-	SDL_Texture* pixelTex;
-	SDL_Texture* itemTex;
-	SDL_Texture* useItemText;
-	SDL_Texture* discardItemText;
+	SDL_Texture** startTex;
+	SDL_Texture** continueTex;
+	SDL_Texture** optionsTex;
+	SDL_Texture** exitTex;
+	SDL_Texture** saveTex;
+	SDL_Texture** loadTex;
+	SDL_Texture** mainMenuTex;
+	SDL_Texture** graphicsTex;
+	SDL_Texture** audioTex;
+	SDL_Texture** controlsTex;
+	SDL_Texture** onOffTex;
+	SDL_Texture** backArrowTex;
+	SDL_Texture** pixelTex;
+	SDL_Texture** itemTex;
+	SDL_Texture** useItemText;
+	SDL_Texture** discardItemText;
 
 	int lastId = 0;
 };

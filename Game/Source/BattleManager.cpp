@@ -51,7 +51,11 @@ bool BattleManager::PreUpdate()
 
 bool BattleManager::Update(float dt)
 {
+	
 	if (!isBattling) return true;
+	if (app->input->pads[0].a == false) aPressed = true;
+	if (app->input->pads[0].l_y == 0.0f && app->input->pads[0].down == false) downPressed = true;
+	if (app->input->pads[0].l_y == 0.0f && app->input->pads[0].up == false) upPressed = true;
 
 	if (end)
 	{
@@ -108,8 +112,9 @@ bool BattleManager::Update(float dt)
 		return true;
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->pads[0].a == true) && currentParty == 0)
+	if ((app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || (app->input->pads[0].a == true && aPressed)) && currentParty == 0)
 	{
+		aPressed = false;
 
 		if (selecting == Selecting::MEMBER)
 			selecting = Selecting::ACTION;
@@ -145,8 +150,9 @@ bool BattleManager::Update(float dt)
 		}
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || app->input->pads[0].l_y > 0.0f || app->input->pads[0].down == true) && currentParty == 0)
+	if ((app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || (app->input->pads[0].l_y > 0.0f || app->input->pads[0].down == true) && downPressed) && currentParty == 0)
 	{
+		downPressed = false;
 		if (selecting == Selecting::ACTION)
 		{
 			app->audio->PlayFx(8, 0);
@@ -162,8 +168,9 @@ bool BattleManager::Update(float dt)
 		LOG("Deez %d, %d", currentAction, currentTarget);
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || app->input->pads[0].l_y < 0.0f || app->input->pads[0].up == true) && currentParty == 0)
+	if ((app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || (app->input->pads[0].l_y < 0.0f || app->input->pads[0].up == true) && upPressed) && currentParty == 0)
 	{
+		upPressed = false;
 		if (selecting == Selecting::ACTION)
 		{
 			app->audio->PlayFx(8, 0);

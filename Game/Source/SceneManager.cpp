@@ -288,7 +288,8 @@ bool SceneManager::PostUpdate(float dt)
 			{
 
 				app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15); //fullscreen checkbox
-				app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16); //vsync checkbox
+				GuiControl* c = app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16); //vsync checkbox
+				((GuiCheckBox*)c)->checked = true;
 				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
 				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
 				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
@@ -513,6 +514,9 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
+		break;
+	case 16:
+		app->render->SwitchVsync();
 		break;
 	case 19:
 		//app->items->useItem = true;
