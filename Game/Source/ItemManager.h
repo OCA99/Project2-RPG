@@ -95,7 +95,7 @@ public:
 	bool invOpened = false;//True = Opened, False = closed.
 	bool useItem = false;
 	bool removeItem = false;
-
+	bool yPressed = true;
 };
 
 

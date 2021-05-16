@@ -66,6 +66,10 @@ private:
 
 	float pendingWaitTime = 0;
 
+	bool aPressed = true;
+	bool downPressed = true;
+	bool upPressed = true;
+
 	bool end = false;
 	float endWait = 0;
 };
