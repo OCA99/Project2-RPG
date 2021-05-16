@@ -106,6 +106,7 @@ void LogoScene::Load()
 
 	world->registerSystem(new SpriteSystem());
 	world->registerSystem(new LogoFadeSystem());
+	world->registerSystem(new AnimatorSystem());
 
 	ECS::Entity* e = world->create();
 
@@ -122,9 +123,12 @@ void LogoScene::Load()
 	app->audio->LoadFx("Audio/Fx/all_attack.ogg");//9
 	app->audio->LoadFx("Audio/Fx/all_heal.ogg");//10
 
-	SDL_Texture** t = app->tex->Load("Textures/logo.png");
+	SDL_Texture** t = app->tex->Load("Textures/UI/MainPauseMenu/LogoAnim/logo_anim_tileset.png");
 
 	e->assign<Sprite>(t, 0.2f);
+	ECS::ComponentHandle<Animator> a = e->assign<Animator>();
+	a->CreateAnimation("idle", SDL_Rect({ 0, 0, 8000, 6000 }), 5, 5, 3, false);
+	a->SetAnimation("idle");
 
 	e = world->create();
 	e->assign<LogoFade>(70);
