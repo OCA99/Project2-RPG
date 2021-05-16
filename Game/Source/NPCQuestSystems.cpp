@@ -10,7 +10,7 @@ void NPCQuestSystem::tick(ECS::World* world, float dt)
 
 	if (active != nullptr)
 	{
-		app->render->DrawTexture(exclamation, 10, 18, &SDL_Rect({ 32,32,10,16 }), 0.5f, 1, 0, 0, 0, false);
+		//app->render->DrawTexture(exclamation, 10, 18, &SDL_Rect({ 32,32,10,16 }), 0.5f, 1, 0, 0, 0, false);
 	}
 
 	world->each<QuestList>([&](ECS::Entity* entity, ECS::ComponentHandle<QuestList> QuestList) {
@@ -67,7 +67,7 @@ void NPCQuestSystem::tick(ECS::World* world, float dt)
 	
 }
 
-void NPCQuestSystem::LoadTex(SDL_Texture* tex)
+void NPCQuestSystem::LoadTex(SDL_Texture** tex)
 {
 	exclamation = tex;
 }
