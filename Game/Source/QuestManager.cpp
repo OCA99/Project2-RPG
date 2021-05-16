@@ -77,10 +77,6 @@ bool QuestManager::Start()
 	tavernTex = app->tex->Load("Textures/Dialogue/tavern_lady_dialogue.png");
 	thymaTex = app->tex->Load("Textures/Dialogue/thyma_good_dialogue.png");
 	exclamation = app->tex->Load("Textures/UI/HUD/alert_marks.png");
-
-	//questsys = new NPCQuestSystem();
-
-	//questsys->LoadTex(exclamation);
 	return true;
 }
 

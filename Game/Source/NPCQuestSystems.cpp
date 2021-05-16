@@ -8,6 +8,8 @@ void NPCQuestSystem::tick(ECS::World* world, float dt)
 	ListItem<Quest*>* active = app->quests->questsActive.start;
 	ListItem<Quest*>* inactive = app->quests->questsInactive.start;
 
+	LoadTex();
+
 	if (active != nullptr)
 	{
 		app->render->DrawTexture(exclamation, 10, 18, &SDL_Rect({ 32,32,10,16 }), 0.5f, 1, 0, 0, 0, false);
@@ -67,7 +69,11 @@ void NPCQuestSystem::tick(ECS::World* world, float dt)
 	
 }
 
-void NPCQuestSystem::LoadTex(SDL_Texture* tex)
+void NPCQuestSystem::LoadTex()
 {
-	exclamation = tex;
+	if (loaded == false && app->quests->exclamation != nullptr) 
+	{
+		exclamation = app->quests->exclamation;
+		loaded = true;
+	}
 }

@@ -72,7 +72,6 @@ public:
 	int debugId = 1;
 	int y = 0;
 
-	//NPCQuestSystem* questsys;
 };
 
 
