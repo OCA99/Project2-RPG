@@ -122,7 +122,7 @@ void LogoScene::Load()
 	app->audio->LoadFx("Audio/Fx/all_attack.ogg");//9
 	app->audio->LoadFx("Audio/Fx/all_heal.ogg");//10
 
-	SDL_Texture* t = app->tex->Load("Textures/logo.png");
+	SDL_Texture** t = app->tex->Load("Textures/logo.png");
 
 	e->assign<Sprite>(t, 0.2f);
 
@@ -142,7 +142,7 @@ void MenuScene::Load()
 	app->audio->songToBeLoaded = "Audio/Music/Originals/forest_start.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
-	SDL_Texture* t = app->tex->Load("Textures/UI/MainPauseMenu/main_menu.png");
+	SDL_Texture** t = app->tex->Load("Textures/UI/MainPauseMenu/main_menu.png");
 
 	ECS::Entity* e = world->create();
 	e->assign<Position>(fPoint(0, 0));
@@ -174,7 +174,7 @@ void BattleScene::Load()
 	world->registerSystem(new BattleMemberSystem());
 	world->registerSystem(new AnimatorSystem());
 
-	SDL_Texture* t = nullptr;
+	SDL_Texture** t = nullptr;
 	if (app->map->currentMapName == "Forest.tmx") t = app->tex->Load("Textures/Battle/battle_forest.png");
 	if (app->map->currentMapName == "Graveyard.tmx") t = app->tex->Load("Textures/Battle/battle_cemetary.png");
 	ECS::Entity* e = world->create();

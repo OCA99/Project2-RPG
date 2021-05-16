@@ -10,7 +10,7 @@
 
 #include "Log.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture* tex, SDL_Texture* textTex) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;

@@ -46,11 +46,11 @@ public:
 
 private:
 	void Draw();
-	SDL_Texture* characterBar = nullptr;
-	SDL_Texture* actionBox = nullptr;
-	SDL_Texture* healthBars = nullptr;
-	SDL_Texture* selectionArrowHorizontal = nullptr;
-	SDL_Texture* selectionArrows = nullptr;
+	SDL_Texture** characterBar = nullptr;
+	SDL_Texture** actionBox = nullptr;
+	SDL_Texture** healthBars = nullptr;
+	SDL_Texture** selectionArrowHorizontal = nullptr;
+	SDL_Texture** selectionArrows = nullptr;
 
 	char currentParty = 0;
 	char currentMember = 0;
@@ -65,6 +65,10 @@ private:
 	//ListItem<Quest*>* C;
 
 	float pendingWaitTime = 0;
+
+	bool aPressed = true;
+	bool downPressed = true;
+	bool upPressed = true;
 
 	bool end = false;
 	float endWait = 0;
