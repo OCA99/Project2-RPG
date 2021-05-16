@@ -211,15 +211,15 @@ bool SceneManager::PostUpdate(float dt)
 		if (menu)
 		{
 
-			//int mousePosX = 0;
-			//int mousePosY = 0;
+			/*int mousePosX = 0;
+			int mousePosY = 0;
 
-			//app->input->GetMousePosition(mousePosX, mousePosY);
+			app->input->GetMousePosition(mousePosX, mousePosY);
 
-			//if (pad.l_x > 0.0f) //SDL_WarpMouseGlobal(mousePosX + 10, mousePosY);
-			//if (pad.l_x < 0.0f)// SDL_WarpMouseGlobal(mousePosX - 10, mousePosY);
-			//if (pad.l_y > 0.0f) //SDL_WarpMouseGlobal(mousePosX, mousePosY - 10);
-			//if (pad.l_y < 0.0f)// SDL_WarpMouseGlobal(mousePosX, mousePosY + 10);
+			if (pad.l_x > 0.0f) SDL_WarpMouseGlobal(mousePosX + 10, mousePosY);
+			if (pad.l_x < 0.0f) SDL_WarpMouseGlobal(mousePosX - 10, mousePosY);
+			if (pad.l_y > 0.0f) SDL_WarpMouseGlobal(mousePosX, mousePosY - 10);
+			if (pad.l_y < 0.0f) SDL_WarpMouseGlobal(mousePosX, mousePosY + 10);*/
 
 			if (!optionsMenu)
 			{
