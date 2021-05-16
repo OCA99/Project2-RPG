@@ -33,11 +33,6 @@ struct Sprite
 {
 	Sprite(SDL_Texture** sprite, float scale = 1.0f, int zindex = 0) : sprite(sprite), scale(scale), zindex(zindex) {}
 
-	~Sprite()
-	{
-		LOG("destruct");
-	}
-
 	SDL_Texture** sprite;
 	float scale;
 	int zindex;

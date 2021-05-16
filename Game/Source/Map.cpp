@@ -335,6 +335,8 @@ bool Map::Load(const char* filename)
 
 	currentMapName = filename;
 
+	RELEASE_ARRAY(buffer);
+
 	return ret;
 }
 

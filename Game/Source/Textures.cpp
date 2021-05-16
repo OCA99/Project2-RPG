@@ -85,7 +85,10 @@ SDL_Texture** const Textures::Load(const char* path)
 	if (textures.find(path) == textures.end())
 		textures.insert(std::make_pair(path, texture));
 	else
+	{
+		UnLoad(&textures.at(path), false);
 		textures.at(path) = texture;
+	}
 
 	// (SOLVED) TODO 7: Close the allocated SDL_RWops structure
 	if (rw != nullptr)
@@ -95,7 +98,7 @@ SDL_Texture** const Textures::Load(const char* path)
 }
 
 // Unload texture
-bool Textures::UnLoad(SDL_Texture** texture)
+bool Textures::UnLoad(SDL_Texture** texture, bool eraseItem)
 {
 	std::map<std::string, SDL_Texture*>::iterator item;
 
@@ -104,7 +107,8 @@ bool Textures::UnLoad(SDL_Texture** texture)
 		if(*texture == item->second)
 		{
 			SDL_DestroyTexture(item->second);
-			textures.erase(item);
+			if (eraseItem)
+				textures.erase(item);
 		}
 	}
 

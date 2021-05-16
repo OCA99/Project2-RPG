@@ -53,7 +53,6 @@ void MapScene::Load(fPoint playerPosition)
 
 	ECS::Entity* e = world->create();
 
-
 	std::string s = filename;
 	e->assign<SceneFade>(250, 16);
 	
@@ -121,11 +120,11 @@ void LogoScene::Load()
 	app->audio->LoadFx("Audio/Fx/all_attack.ogg");//9
 	app->audio->LoadFx("Audio/Fx/all_heal.ogg");//10
 
-	SDL_Texture** t = app->tex->Load("Textures/UI/MainPauseMenu/LogoAnim/logo_anim_tileset.png");
+	logoTexture = app->tex->Load("Textures/UI/MainPauseMenu/LogoAnim/logo_anim_tileset.png");
 
-	e->assign<Sprite>(t, 0.2f);
+	e->assign<Sprite>(logoTexture, 1.0f);
 	ECS::ComponentHandle<Animator> a = e->assign<Animator>();
-	a->CreateAnimation("idle", SDL_Rect({ 0, 0, 8000, 6000 }), 5, 5, 3, false);
+	a->CreateAnimation("idle", SDL_Rect({ 0, 0, 1600, 1200 }), 5, 5, 3, false);
 	a->SetAnimation("idle");
 
 	e = world->create();
@@ -144,18 +143,18 @@ void MenuScene::Load()
 	app->audio->songToBeLoaded = "Audio/Music/Originals/forest_start.wav";
 	app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 
-	SDL_Texture** t = app->tex->Load("Textures/UI/MainPauseMenu/main_menu.png");
+	mainMenu = app->tex->Load("Textures/UI/MainPauseMenu/main_menu.png");
 
 	ECS::Entity* e = world->create();
 	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f);
+	e->assign<Sprite>(mainMenu, 0.5f);
 
-	t = app->tex->Load("Textures/UI/MainPauseMenu/game_title.png");
+	gameTitle = app->tex->Load("Textures/UI/MainPauseMenu/game_title.png");
 	//app->audio->PlayFx(3, 0);
 	e = world->create();
 	e->assign<Position>(fPoint(0, -105));
 	e->assign<MenuFade>(70);
-	e->assign<Sprite>(t, 0.5f, 1);
+	e->assign<Sprite>(gameTitle, 0.5f, 1);
 
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0); //start
 	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1); //continue
@@ -176,13 +175,12 @@ void BattleScene::Load()
 	world->registerSystem(new BattleMemberSystem());
 	world->registerSystem(new AnimatorSystem());
 
-	SDL_Texture** t = nullptr;
-	if (app->map->currentMapName == "Forest.tmx") t = app->tex->Load("Textures/Battle/battle_forest.png");
-	if (app->map->currentMapName == "Graveyard.tmx") t = app->tex->Load("Textures/Battle/battle_cemetary.png");
+	if (app->map->currentMapName == "Forest.tmx") background = app->tex->Load("Textures/Battle/battle_forest.png");
+	if (app->map->currentMapName == "Graveyard.tmx") background = app->tex->Load("Textures/Battle/battle_cemetary.png");
 	ECS::Entity* e = world->create();
 	app->render->camera.x = app->render->camera.y = 0;
 	e->assign<Position>(fPoint(0, 0));
-	e->assign<Sprite>(t, 0.5f, 1);
+	e->assign<Sprite>(background, 0.5f, 1);
 
 	app->battle->StartBattle();
 	for (int i = 0; i < app->party->allyParty->list.size(); i++)
