@@ -76,6 +76,9 @@ public:
 
 	bool startPressed;
 
+	bool r1Pressed = true;
+	bool l1Pressed = true;
+
 private:
 
 	
