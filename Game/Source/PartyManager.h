@@ -22,7 +22,7 @@ struct Data {
 	//Numero en la Party
 	int id;
 	float health = 0;
-	float exp = 20;
+	float exp = 10;
 	float maxHealth;
 	float power;
 	bool dead = false;
@@ -33,9 +33,13 @@ struct Data {
 	float GetHealth() { return health; }
 	float GetExp() { return exp; }
 	
-	void Addhealth(float hp) { health = health + hp; }
+	void Addhealth(float hp) 
+	{
+		health = health + hp;
+		if (health > 100) health = 100;
+	}
 	void AddMoney(int m) { money = money + m; }
-	void AddExp(float ex) { exp += exp; }
+	void AddExp(float ex) { exp = exp + ex; }
 
 	void CleanUp() {
 		for (int i = 0; i < actions.size(); i++) {

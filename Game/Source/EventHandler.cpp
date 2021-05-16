@@ -19,7 +19,6 @@ void EventHandler::FireEvent(MapEvent* e)
 
 		if (e->attributes->at("target").c_str() == std::string("Sewers.tmx") && !app->puzzleManager->completed && app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 		{
-			LOG("NOPE");
 		}
 		else
 		{
@@ -48,14 +47,14 @@ void EventHandler::FireEvent(MapEvent* e)
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 			{
 				if (!app->puzzleManager->key1) app->puzzleManager->key1 = true;
-				LOG("ONE");
+
 			}
 			break;
 		case 1:
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 			{
 				if (!app->puzzleManager->key2) app->puzzleManager->key2 = true;
-				LOG("TWO");
+
 
 			}
 
@@ -64,7 +63,6 @@ void EventHandler::FireEvent(MapEvent* e)
 			if (app->puzzleManager->currentPuzzle == PuzzleManager::ActivePuzzle::SEWERENTRANCE)
 			{
 				if (!app->puzzleManager->key3) app->puzzleManager->key3 = true;
-				LOG("Three");
 			}
 			break;
 		default:
