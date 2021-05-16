@@ -32,8 +32,9 @@
 	<event id="2" type="changeArea" target="Sewers.tmx" playerX="734" playerY="1600"></event>
     </layer>
 	<layer id="1">
-    <event id="3" type="puzzleSensor"></event>
-	
+    <event id="0" type="puzzleSensor"></event>
+	<event id="1" type="puzzleSensor"></event>
+	<event id="2" type="puzzleSensor"></event>
     </layer>
 </map>
 

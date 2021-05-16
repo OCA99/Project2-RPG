@@ -88314,7 +88314,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1836"/>
    <tile/>
+   <tile gid="1837"/>
    <tile/>
    <tile/>
    <tile/>
@@ -88505,9 +88507,9 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1835"/>
    <tile/>
    <tile/>
-   <tile gid="1838"/>
    <tile/>
    <tile/>
    <tile/>
@@ -88533,9 +88535,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="1838"/>
+   <tile gid="1836"/>
    <tile/>
    <tile/>
    <tile/>
