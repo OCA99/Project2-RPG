@@ -6,6 +6,8 @@
 #include "Debug.h"
 #include "Audio.h"
 #include "Input.h"
+#include "ItemManager.h"
+#include "QuestManager.h"
 #include "SceneManager.h"
 #include "SDL/include/SDL_scancode.h"
 
@@ -16,7 +18,7 @@ void InputSystem::tick(ECS::World* world, float dt)
 
 		fPoint total = fPoint(0.f, 0.f);
 
-		if (app->scene->menu == 0)
+		if (app->scene->menu == 0 && !app->items->invOpened && !app->quests->questInvOpened)
 		{
 			if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || pad.l_x > 0.0f || pad.right == true)
 			{
