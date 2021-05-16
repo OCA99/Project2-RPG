@@ -42,9 +42,11 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **Joystick Up / Up Arrow**: Move player upwards.
 - **Joystick Down / Down Arrow**: Move player downwards.
 - **Joystick Left / Left Arrow**: Move player to the left.
-- **Joystick Right / Right Arrow**: Move player to the right. 
-- **A Button**: Interact.
+- **Joystick Right / Right Arrow**: Move player to the right.
+- **A**: Interact.
 - **Start**: Pause and resume game.
+- **Select**: Quest menu.
+- **Y**: Character menu.
 
 ## Debug Keys
 - **F9**: View colliders and bounds.
