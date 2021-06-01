@@ -103,6 +103,7 @@
     <ClCompile Include="Source\CollisionSystem.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\DialogSytem.cpp" />
+    <ClCompile Include="Source\Easing.cpp" />
     <ClCompile Include="Source\EventHandler.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\DialogNode.h" />
     <ClInclude Include="Source\DialogSytem.h" />
+    <ClInclude Include="Source\Easing.h" />
     <ClInclude Include="Source\ECS.h" />
     <ClInclude Include="Source\EventHandler.h" />
     <ClInclude Include="Source\External\simplify.h" />
