@@ -79,6 +79,8 @@ public:
 	bool r1Pressed = true;
 	bool l1Pressed = true;
 
+	int padSpeed = 0;
+
 private:
 
 	
