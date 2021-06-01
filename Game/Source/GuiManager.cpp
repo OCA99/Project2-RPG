@@ -8,6 +8,7 @@
 #include "Audio.h"
 #include "Debug.h"
 #include "Fonts.h"
+#include "Easing.h"
 
 GuiManager::GuiManager() : Module()
 {
@@ -82,6 +83,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	GuiControl* control = nullptr;
 	SDL_Texture** textTex = nullptr;
 	SDL_Texture** buttonTex = nullptr;
+	SplineType* eType = nullptr;
 
 	switch (id)
 	{
@@ -162,7 +164,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		control = new GuiButton(id, bounds, buttonTex, textTex);
+		control = new GuiButton(id, bounds, buttonTex, textTex,eType);
 		control->SetObserver(app->scene);
 		control->color.r = r;
 		control->color.g = g;
