@@ -20,6 +20,11 @@
 #include "GuiSlider.h"
 #include "ItemManager.h"
 
+#include <Windows.h>
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -160,7 +165,7 @@ bool SceneManager::PostUpdate(float dt)
 	for (int i = 0; i < squares; i++) {
 		for (int j = 0; j < squares; j++) {
 			SDL_Rect rect;
-			float prop = std::min(alpha, 255.0f) / 255.0f;
+			float prop = min(alpha, 255.0f) / 255.0f;
 			if ((i - j) % 2 == 0)
 				rect = SDL_Rect({ i * squareSize, j * squareSize, squareSize, int(std::round(squareSize * prop)) });
 			else
@@ -177,7 +182,6 @@ bool SceneManager::PostUpdate(float dt)
 	}
 
 	if (pad.start == false) startPressed = true;
-	//ret = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
@@ -190,6 +194,32 @@ bool SceneManager::PostUpdate(float dt)
 		app->RequestLoad();
 		LOG("loading");
 	}
+	if (menu || currentScene->type == Scene::TYPE::MENU || optionsMenu || app->quests->questInvOpened || app->items->invOpened) {
+		
+		POINT mousePos;
+		GetCursorPos(&mousePos);
+
+		if (pad.l_x > 0.0f || app->input->pads[0].right)
+		{
+			SetCursorPos(mousePos.x + padSpeed, mousePos.y);
+			mousePos.x += padSpeed;
+		}
+		if (pad.l_x < 0.0f || app->input->pads[0].left)
+		{
+			SetCursorPos(mousePos.x - padSpeed, mousePos.y);
+			mousePos.x -= padSpeed;
+		}
+		if (pad.l_y < 0.0f || app->input->pads[0].up)
+		{
+			SetCursorPos(mousePos.x, mousePos.y - padSpeed);
+			mousePos.y -= padSpeed;
+		}
+		if (pad.l_y > 0.0f || app->input->pads[0].down)
+		{
+			SetCursorPos(mousePos.x, mousePos.y + padSpeed);
+			mousePos.y += padSpeed;
+		}
+	}
 
 	if (currentScene->type == Scene::TYPE::MENU && !optionsMenu && !app->quests->questInvOpened)
 	{
@@ -200,26 +230,19 @@ bool SceneManager::PostUpdate(float dt)
 			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
 			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
 			buttons = true;
+			padSpeed = 2;
 		}
 	}
-
+	
 	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
+
+		padSpeed = 6;
 
 		if (app->quests->questInvOpened) app->render->DrawTexture(questMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		if (app->items->invOpened) app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 
 		if (menu)
 		{
-
-			/*int mousePosX = 0;
-			int mousePosY = 0;
-
-			app->input->GetMousePosition(mousePosX, mousePosY);
-
-			if (pad.l_x > 0.0f) SDL_WarpMouseGlobal(mousePosX + 10, mousePosY);
-			if (pad.l_x < 0.0f) SDL_WarpMouseGlobal(mousePosX - 10, mousePosY);
-			if (pad.l_y > 0.0f) SDL_WarpMouseGlobal(mousePosX, mousePosY - 10);
-			if (pad.l_y < 0.0f) SDL_WarpMouseGlobal(mousePosX, mousePosY + 10);*/
 
 			if (!optionsMenu)
 			{
