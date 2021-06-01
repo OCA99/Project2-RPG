@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "SceneManager.h"
 #include "App.h"
+#include "Easing.h"
 
 #include "Point.h"
 #include "SString.h"
@@ -92,6 +93,9 @@ public:
 	SDL_Texture** texture;   // Texture atlas reference
 	SDL_Texture** texture2;
 	SDL_Rect section;       // Texture atlas base section
+
+	SplineType* eType;
+
 
 	//Font font;              // Text font
 

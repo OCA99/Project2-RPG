@@ -12,12 +12,13 @@
 
 #include "Log.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex, SplineType* esType) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->texture = tex;
 	this->texture2 = textTex;
+	this->eType = esType;
 }
 
 GuiButton::~GuiButton()
