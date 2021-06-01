@@ -33,7 +33,9 @@ bool GuiCheckBox::Update(Input* input, float dt)
 		{
 			state = GuiControlState::FOCUSED;
 
-			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT || app->input->pads[0].a)
+			if (input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)	state = GuiControlState::PRESSED;
+
+			if (app->input->pads[0].a)
 			{
 				aPressed = true;
 				state = GuiControlState::PRESSED;
@@ -47,6 +49,8 @@ bool GuiCheckBox::Update(Input* input, float dt)
 				checked = !checked;
 				return NotifyObserver();
 			}
+
+			if (!app->input->pads[0].a) aPressed = false;
 		}
 		else
 		{
