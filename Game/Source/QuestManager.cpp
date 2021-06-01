@@ -90,7 +90,15 @@ bool QuestManager::Update(float dt)
 	}
 
 	if (questInvOpened)
-		CreateQuestButtons();
+	{
+		if (buttons)
+		{
+			CreateQuestButtons();
+			buttons = false;
+		}
+	}
+
+	if (!questInvOpened) buttons = true;
 
 	return true;
 }

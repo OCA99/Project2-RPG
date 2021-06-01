@@ -85,8 +85,14 @@ bool ItemManager::Update(float dt)
 
 	if (invOpened)
 	{
-		CreateButtons();
+		if (createButtons)
+		{
+			CreateButtons();
+			createButtons = false;
+		}
 	}
+
+	if (!invOpened) createButtons = true;
 
 	return true;
 }
