@@ -77,6 +77,9 @@
     <ClCompile Include="Source\Quest.cpp" />
     <ClCompile Include="Source\AssetsManager.cpp" />
     <ClCompile Include="Source\PuzzleManager.cpp" />
+    <ClCompile Include="Source\Easing.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -208,6 +211,9 @@
     <ClInclude Include="Source\AssetsManager.h" />
     <ClInclude Include="Source\External\simplify.h" />
     <ClInclude Include="Source\PuzzleManager.h" />
+    <ClInclude Include="Source\Easing.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
