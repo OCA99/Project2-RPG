@@ -174,7 +174,7 @@ bool SceneManager::PostUpdate(float dt)
 		}
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened)
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened && startPressed)
 	{
 		app->audio->PlayFx(8, 0);
 		if(startPressed)menu = !menu;
@@ -199,25 +199,27 @@ bool SceneManager::PostUpdate(float dt)
 		POINT mousePos;
 		GetCursorPos(&mousePos);
 
+		float dtSpeed = padSpeed * dt;
+
 		if (pad.l_x > 0.0f || app->input->pads[0].right)
 		{
-			SetCursorPos(mousePos.x + padSpeed, mousePos.y);
-			mousePos.x += padSpeed;
+			SetCursorPos(mousePos.x + dtSpeed, mousePos.y);
+			mousePos.x += dtSpeed;
 		}
 		if (pad.l_x < 0.0f || app->input->pads[0].left)
 		{
-			SetCursorPos(mousePos.x - padSpeed, mousePos.y);
-			mousePos.x -= padSpeed;
+			SetCursorPos(mousePos.x - dtSpeed, mousePos.y);
+			mousePos.x -= dtSpeed;
 		}
 		if (pad.l_y < 0.0f || app->input->pads[0].up)
 		{
-			SetCursorPos(mousePos.x, mousePos.y - padSpeed);
-			mousePos.y -= padSpeed;
+			SetCursorPos(mousePos.x, mousePos.y - dtSpeed);
+			mousePos.y -= dtSpeed;
 		}
 		if (pad.l_y > 0.0f || app->input->pads[0].down)
 		{
-			SetCursorPos(mousePos.x, mousePos.y + padSpeed);
-			mousePos.y += padSpeed;
+			SetCursorPos(mousePos.x, mousePos.y + dtSpeed);
+			mousePos.y += dtSpeed;
 		}
 	}
 

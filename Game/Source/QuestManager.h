@@ -68,6 +68,7 @@ public:
 	List<GuiControl*> questButtons;//Buttons List - Need it, Don't delete.
 
 	bool questInvOpened = false;//proof of whether it is open or not
+	bool buttons = true;
 
 	Font* font;
 

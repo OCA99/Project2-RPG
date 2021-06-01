@@ -93,6 +93,8 @@ public:
 	int y = 0;//Logistic Tool
 
 	bool invOpened = false;//True = Opened, False = closed.
+	bool createButtons = true;
+
 	bool useItem = false;
 	bool removeItem = false;
 	bool yPressed = true;
