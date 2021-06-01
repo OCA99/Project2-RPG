@@ -59,9 +59,9 @@ public:
 	SDL_Texture** questMenuTex;//Quest Menu Texture
 	SDL_Texture** invMenu;
 
-	bool graphicsSelected;
-	bool audioSelected;
-	bool controlsSelected;
+	bool graphicsSelected = false;
+	bool audioSelected = false;
+	bool controlsSelected = false;
 
 	bool menu = false;
 	bool optionsMenu = false;
