@@ -1,0 +1,1043 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Component Id="cmpE6DD64A66068AFAD6408866C225487FA" Guid="*">
+                <File Id="fil575AAE623D2AEBF3FCA5BC0DBE7DB10C" KeyPath="yes" Source="$(var.HarvestPath)\Assets.zip" />
+            </Component>
+            <Component Id="cmpFF71769B2BBCCDDA5899221C0383FF13" Guid="*">
+                <File Id="fil475044D3B362116413DCC77EDFD27780" KeyPath="yes" Source="$(var.HarvestPath)\config.xml" />
+            </Component>
+            <Component Id="cmp8BE8A4F1893993DD59B398C614A070B6" Guid="*">
+                <File Id="fil0BC67BA06F7367DA7EE5DF09CDB9AB54" KeyPath="yes" Source="$(var.HarvestPath)\events.xml" />
+            </Component>
+            <Component Id="cmpCA27B3F29D861AC4DC645353C471C800" Guid="*">
+                <File Id="fil86F436E60D212391BB9565AA3A27E0DF" KeyPath="yes" Source="$(var.HarvestPath)\items.xml" />
+            </Component>
+            <Component Id="cmp1F57F0C183386F6CB76DFB6831324C61" Guid="*">
+                <File Id="fil9FC49E6F7FAC0CE7407384FB2213594D" KeyPath="yes" Source="$(var.HarvestPath)\libFLAC-8.dll" />
+            </Component>
+            <Component Id="cmp53AC5F9E73E9F382D83B2DDB8FC4A274" Guid="*">
+                <File Id="filB0481D081032C11D9AA4357885DCFBEA" KeyPath="yes" Source="$(var.HarvestPath)\libjpeg-9.dll" />
+            </Component>
+            <Component Id="cmpB15AE4983A5B9E34AD6E1A3CBC321773" Guid="*">
+                <File Id="filEB22510F8EE19E65BB48C689EC7F955E" KeyPath="yes" Source="$(var.HarvestPath)\libmikmod-2.dll" />
+            </Component>
+            <Component Id="cmpF6D3330C841E531C0D276FF890E3AA2C" Guid="*">
+                <File Id="fil1959B543738A6E527F307AC2C6DAF656" KeyPath="yes" Source="$(var.HarvestPath)\libmodplug-1.dll" />
+            </Component>
+            <Component Id="cmpCF1E215A80FB6EC3FF19F7AE9C7107E5" Guid="*">
+                <File Id="fil4F78FCCDED085E2F3CD75BF27B00F761" KeyPath="yes" Source="$(var.HarvestPath)\libogg-0.dll" />
+            </Component>
+            <Component Id="cmp12F0C448A405134CF5FCE8B012ED00DC" Guid="*">
+                <File Id="fil420B14BA8DA79A96AF1D7EAD529FA341" KeyPath="yes" Source="$(var.HarvestPath)\libpng16-16.dll" />
+            </Component>
+            <Component Id="cmp02F18F0337B51135127B4818FC8BA4BF" Guid="*">
+                <File Id="fil5F8964F487E16D3F850CFBCE50D6A5A3" KeyPath="yes" Source="$(var.HarvestPath)\libtiff-5.dll" />
+            </Component>
+            <Component Id="cmpB2478D88F2CA3BDA61B643B58AD5DC07" Guid="*">
+                <File Id="fil54D57DAA0450ECAE0B0E1A84569502A9" KeyPath="yes" Source="$(var.HarvestPath)\libvorbis-0.dll" />
+            </Component>
+            <Component Id="cmpA4357E7EB673F1EE343273DA70FB26B5" Guid="*">
+                <File Id="fil890CAF239431C5D329F21E7067A86342" KeyPath="yes" Source="$(var.HarvestPath)\libvorbisfile-3.dll" />
+            </Component>
+            <Component Id="cmpD71BC20E6E35F777B22C7193C11827A6" Guid="*">
+                <File Id="fil8FADA4F5318900C4F35589E0D0B7A44E" KeyPath="yes" Source="$(var.HarvestPath)\libwebp-4.dll" />
+            </Component>
+            <Component Id="cmp494E092250B7C893DA1C32C4422DF045" Guid="*">
+                <File Id="filC769F729191056761AF8236A31B87EAE" KeyPath="yes" Source="$(var.HarvestPath)\physfs.dll" />
+            </Component>
+            <Component Id="cmp1B6874D880D574EED2604B5AB3D06CC3" Guid="*">
+                <File Id="fil0A7819211E2A4DB3BC9276E785B0E8EA" KeyPath="yes" Source="$(var.HarvestPath)\quests.xml" />
+            </Component>
+            <Component Id="cmpC27FF44AFECF57237FFAD7E5327A5A83" Guid="*">
+                <File Id="fil4B82DC508A8DF3C7BA5E8C5D1EDDAD5F" KeyPath="yes" Source="$(var.HarvestPath)\save_game.xml" />
+            </Component>
+            <Component Id="cmp77F2718815C37DF1CD595A4164461B7A" Guid="*">
+                <File Id="filC50EEA5B1CD3382FF2ED29C29DF6B8AF" KeyPath="yes" Source="$(var.HarvestPath)\SDL2.dll" />
+            </Component>
+            <Component Id="cmpD5527425E607FED29E84E1424D4A0F52" Guid="*">
+                <File Id="fil988E917E88F23B6D471ACDB40E2A55F6" KeyPath="yes" Source="$(var.HarvestPath)\SDL2_image.dll" />
+            </Component>
+            <Component Id="cmp23267DA5F20E5C06C5B8F213F7E64543" Guid="*">
+                <File Id="fil965E1BEB465B3CA406A4B93ADE2B40D8" KeyPath="yes" Source="$(var.HarvestPath)\SDL2_mixer.dll" />
+            </Component>
+            <Component Id="cmpC53F9FF68F51CD4BDE0229F9F8E5B98E" Guid="*">
+                <File Id="fil7BA528B3CC592675F5B42ECCA40D9B57" KeyPath="yes" Source="$(var.HarvestPath)\SDL2_ttf.dll" />
+            </Component>
+            <Component Id="cmp41CEE65AB13B22EA16057B45894D25B4" Guid="*">
+                <File Id="filBB697C908AF3834B05D04338D5A47334" KeyPath="yes" Source="$(var.HarvestPath)\smpeg2.dll" />
+            </Component>
+            <Component Id="cmpF4A8048A71525C11F1A3E739F4D244F4" Guid="*">
+                <File Id="filA804FE7264B6C5149D3FAFCCD50945CD" KeyPath="yes" Source="$(var.HarvestPath)\zlib1.dll" />
+            </Component>
+            <Directory Id="dirA23B699A6BC60FD64219767AB7139367" Name="Assets">
+                <Directory Id="dir463085BDACCD08F10B980781AB1F5A7C" Name="Audio">
+                    <Component Id="cmpE4039E19B8A28FDF8F9875692FB892FB" Guid="*">
+                        <File Id="fil6D4F925C4343A081CC8A30B3EA5D0ED4" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\.DS_Store" />
+                    </Component>
+                    <Directory Id="dirB1BA19247721A577EEF5665B6BA22019" Name="Fx">
+                        <Component Id="cmp3F1D54012554D2E15C83F0CA2CFE71D0" Guid="*">
+                            <File Id="filE0E5F0B708EC60A4B9354830146E19A1" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\action_buy.ogg" />
+                        </Component>
+                        <Component Id="cmp0805E8222E4ABCE8152DE09936639F7D" Guid="*">
+                            <File Id="fil3BE0FFEE2AF3B6BCC539A62A49CE072D" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\action_door.ogg" />
+                        </Component>
+                        <Component Id="cmpA6EE2F7E1548F37AF7E5BC075854F415" Guid="*">
+                            <File Id="filF1A617FBD507431DC00084114091ED4B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\action_equip_item.ogg" />
+                        </Component>
+                        <Component Id="cmpC320D9CF50314809403F803E28108187" Guid="*">
+                            <File Id="filD7A151F9AD723E68FD95260D424D8248" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\action_interact.ogg" />
+                        </Component>
+                        <Component Id="cmpC87A3B0C3E12AC2E1207DBE566E9C281" Guid="*">
+                            <File Id="fil152A8B5AF4EB7D72AF72B49A3F785393" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\action_sell.ogg" />
+                        </Component>
+                        <Component Id="cmp0298519FAAFABB1CC20A4819E1DDD845" Guid="*">
+                            <File Id="fil9C222C5953A24E464FFE7F8897DE592C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\action_talk.ogg" />
+                        </Component>
+                        <Component Id="cmp384294C81AA87DE010CCA2DD063C7DBF" Guid="*">
+                            <File Id="filA56814380D86E87D7FBE23190933B9CA" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\all_attack.ogg" />
+                        </Component>
+                        <Component Id="cmpF77A6B3193EEB39121D4500E5CB9503C" Guid="*">
+                            <File Id="fil0C443E9863B587910B97F4E95C88450C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\all_death.ogg" />
+                        </Component>
+                        <Component Id="cmp6D2B8C463EEFCA3C85A63F18B0E2815C" Guid="*">
+                            <File Id="fil671F978D6A16D923AC75D81A520F9B23" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\all_heal.ogg" />
+                        </Component>
+                        <Component Id="cmp79E7AD83A4052C94ABA069D4E165B5D4" Guid="*">
+                            <File Id="filB6B0DDBD76D519EB46218B0385E87F72" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\item_potion.ogg" />
+                        </Component>
+                        <Component Id="cmpA365B4F269331AEB1082A3F90133883D" Guid="*">
+                            <File Id="fil8C01A86E1FAB4ACFEC31156371F40060" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\item_potion_2.ogg" />
+                        </Component>
+                        <Component Id="cmpC72A14F43B3349316BA0617B4607D0BF" Guid="*">
+                            <File Id="filE52A6FEAE2A982D1DA5F6BFF03566774" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\item_use.ogg" />
+                        </Component>
+                        <Component Id="cmpC2154412DA11E21E268939E7502F6195" Guid="*">
+                            <File Id="filBFBF8D8E8619ED008369B9DBB3D01372" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\LICENSE" />
+                        </Component>
+                        <Component Id="cmpC4E1C5C72413EAE367DAAF1BBD891DC5" Guid="*">
+                            <File Id="fil29A964468054953C22B2897FBEBC09E9" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\logo.ogg" />
+                        </Component>
+                        <Component Id="cmp1D1B2DBD5B4CB13E7D114848ED77F397" Guid="*">
+                            <File Id="filF0CA0F7BD57B558338506214EFDA2F39" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\menu_interact.ogg" />
+                        </Component>
+                        <Component Id="cmp8C4FB0EAB5A3AF6D52CBAF62FBC04FEB" Guid="*">
+                            <File Id="fil5801154618552275020876A38BA5F03B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\menu_travel.ogg" />
+                        </Component>
+                        <Component Id="cmpE12CB0094714C0360A3B3ABDAF87A26F" Guid="*">
+                            <File Id="filB347C94D602C0E3CFA0288ABE8C6CAD7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\misc_branch_fall.ogg" />
+                        </Component>
+                        <Component Id="cmp2A5219E1A7DD365C84AEAF72EF62D85B" Guid="*">
+                            <File Id="fil65486EE266EE23E897DA1D02D01214FC" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\misc_puzzle.ogg" />
+                        </Component>
+                        <Component Id="cmp12B0AB8883A60B41070BC65D06FEE56F" Guid="*">
+                            <File Id="fil09FA5FAB9D4B7DB21B31F5584EE39679" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\player_footsteps_ground.ogg" />
+                        </Component>
+                        <Component Id="cmp1593A57049BE17A705E47296B39EC036" Guid="*">
+                            <File Id="fil66CCDAFCA39D953184012609883119FE" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\player_footsteps_grounds.ogg" />
+                        </Component>
+                        <Component Id="cmpD323932CDDC42FF897370E3D0A0ADDFD" Guid="*">
+                            <File Id="fil4DBE5C8744B3F8064568A5DB51F1E4BB" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\player_footsteps_stone.ogg" />
+                        </Component>
+                        <Component Id="cmpEE5C9A1DCAE12DCB483AD452385A9BDB" Guid="*">
+                            <File Id="fil41D76BF582A69509BF363672F50CE2C0" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\player_lvlup.ogg" />
+                        </Component>
+                        <Component Id="cmpAD52CCFE6F9219A48BAEE90B297E79F2" Guid="*">
+                            <File Id="fil5ACC7084E6B30C45338B9A42C5A8CC88" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\player_xpgain.ogg" />
+                        </Component>
+                        <Component Id="cmp61623DFB206431E16F0A666CAB44074E" Guid="*">
+                            <File Id="fil471A185CD54C6066576A870124CABB15" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\title.ogg" />
+                        </Component>
+                        <Directory Id="dir8466260A1D6AD58173733B1286509192" Name="Originals (Not ogg format)">
+                            <Component Id="cmp9A0436A26BDF8C0FBF3E1774139C0EF5" Guid="*">
+                                <File Id="filD4E1B0694757D7F43DFB6892362B73B4" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\action_buy.wav" />
+                            </Component>
+                            <Component Id="cmpFE09974281449CAF254A7654BD3B812B" Guid="*">
+                                <File Id="filF21DC9D08A18DC924F3E8D0BC22C564E" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\action_door.wav" />
+                            </Component>
+                            <Component Id="cmp03408A362481A693086C538AD4B06363" Guid="*">
+                                <File Id="fil523FA4ECBBAECD1FF63D8E677D73AB8C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\action_equip_item.mp3" />
+                            </Component>
+                            <Component Id="cmpFF926F48D8ECEDEBB40D94D346F3175B" Guid="*">
+                                <File Id="fil5D65D77E5AB812816A0E87D2F377BEAC" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\action_interact.wav" />
+                            </Component>
+                            <Component Id="cmpCDC08829A959FE79302E3FBD1E550E11" Guid="*">
+                                <File Id="fil3FBEC7A337AFD176C5E0429C0C6CEE8F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\action_sell.wav" />
+                            </Component>
+                            <Component Id="cmp8F3E269DDF88AC3F4D8C97FEA5CE4ED7" Guid="*">
+                                <File Id="fil02AB7C698866181A266BA2F30B6AD68F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\action_talk.wav" />
+                            </Component>
+                            <Component Id="cmp7589948F20EF3F3CC474B4E02DA57308" Guid="*">
+                                <File Id="fil695064C60FAB5875BCCF9E1B11245CB0" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\all_attack.wav" />
+                            </Component>
+                            <Component Id="cmpE07A7715AA7BA93175F7A5F971FEAF77" Guid="*">
+                                <File Id="fil6648AA490BED3A2FF61BD2ECA4B5DA6B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\all_death.wav" />
+                            </Component>
+                            <Component Id="cmp08148FDC56EA0763B17BB353B1669F37" Guid="*">
+                                <File Id="fil6BA554AE39616F668DE53D92D2B679B9" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\item_potion.wav" />
+                            </Component>
+                            <Component Id="cmpB540490EAB76E76B83809D4BCDF38217" Guid="*">
+                                <File Id="filE2083192BC8211E62CDC30E6F28D0AF6" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\item_potion_2.wav" />
+                            </Component>
+                            <Component Id="cmpB080136225124AD42E177C79199BFEE8" Guid="*">
+                                <File Id="fil99E2D9A7E33770927775F8FCB9FB4D73" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\item_use.wav" />
+                            </Component>
+                            <Component Id="cmpEDD5AECD4A70F0DDDB594C543132CEE1" Guid="*">
+                                <File Id="filAA00B12475101C0E23ACA86DDB641F50" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\logo.wav" />
+                            </Component>
+                            <Component Id="cmp2EAF1D3D21CD31A445747FDA634B4DC5" Guid="*">
+                                <File Id="fil2239379342CB69C4D4BC4F9E83228B6C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\menu_back.wav" />
+                            </Component>
+                            <Component Id="cmp5A2513DFAE8DC1BC719588FCBE0C7DC0" Guid="*">
+                                <File Id="fil4B6D1EEBF3A5EC81B74F6AEE6890F127" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\menu_travel.wav" />
+                            </Component>
+                            <Component Id="cmp983CA3DC7DE66A819CE01EA2C5E71624" Guid="*">
+                                <File Id="fil822E49E6F469BA150089574900D66D62" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\misc_branch_fall.wav" />
+                            </Component>
+                            <Component Id="cmp99BA28EC8962E649959ED6E5C2E37140" Guid="*">
+                                <File Id="fil43280379798C7E3ADE4C9D53BD6443F4" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\misc_puzzle.wav" />
+                            </Component>
+                            <Component Id="cmpFFB6C9AD6FDBB0C3391B4C8F054BDCBA" Guid="*">
+                                <File Id="fil7F56F11FE191668C8A66BCEB40625111" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\player_footsteps_ground-1.wav" />
+                            </Component>
+                            <Component Id="cmpC2041263630BB4F76FB86413501E6DD8" Guid="*">
+                                <File Id="fil85AF366F13A24658DE2C3BCAADD102FD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\player_footsteps_stone.wav" />
+                            </Component>
+                            <Component Id="cmp99B4849D46BE2DAB26FBE30AC0060FE9" Guid="*">
+                                <File Id="fil915E74A9A0FC67B47EC785478A7168C3" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\player_lvlup.flac" />
+                            </Component>
+                            <Component Id="cmpA6A1A862F096C06C9163EAA3523C5DB3" Guid="*">
+                                <File Id="fil3CA3FEEB93DAC180689034746E9444A8" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\player_xpgain.wav" />
+                            </Component>
+                            <Component Id="cmpEE127BC55BFC583E9F40D3756159B950" Guid="*">
+                                <File Id="fil4EC247DD32124E093057EF65931F7E36" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Fx\Originals (Not ogg format)\title.wav" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir7D2AFE12C4C9F2AC8B2BC63DD9D9E0AA" Name="Music">
+                        <Component Id="cmp0413DCBB97120A674CB4B84EFB0DA40D" Guid="*">
+                            <File Id="filA3DD6702C726105A55F25FBA21AD9120" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\.DS_Store" />
+                        </Component>
+                        <Component Id="cmp7D93D7E7F1A7FE154D2D6379D43DE703" Guid="*">
+                            <File Id="fil3CB9D5FD34699F5FBD1D6DF9C5102C93" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\forest_battle.ogg" />
+                        </Component>
+                        <Component Id="cmp5244AD11BC152D4FDF1C3FB127A33AE2" Guid="*">
+                            <File Id="filF4A08381ED6186E8FE5E0702D01D6D24" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\forest_main.ogg" />
+                        </Component>
+                        <Component Id="cmpFA19E60A4339D962B377F162FF1AD258" Guid="*">
+                            <File Id="fil5BA1A3124E50073DFE482B9E2373F8A7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\forest_start.ogg" />
+                        </Component>
+                        <Component Id="cmp75540E19F726A07129084227C0B376C3" Guid="*">
+                            <File Id="fil9A1404A46D51F3C915882E18303D8B02" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\graveyard_battle.ogg" />
+                        </Component>
+                        <Component Id="cmpE31CC1C127530DA3442386327C9A78F1" Guid="*">
+                            <File Id="fil6E9D8E9D200A8B383881DB1A12ED501B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\graveyard_main.ogg" />
+                        </Component>
+                        <Component Id="cmp04FFEB8E32AEEB3EE95F361599DE84BE" Guid="*">
+                            <File Id="filFCB199050A90E68990DB42C9CA53613D" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\LICENSE" />
+                        </Component>
+                        <Component Id="cmp427CE54B566583C0C46692809499EF9A" Guid="*">
+                            <File Id="fil14FD4671C49CED3A0F1719CB76373843" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\sewers_bad.ogg" />
+                        </Component>
+                        <Component Id="cmp4D8922EF3297826CDBBAE5F9AA588317" Guid="*">
+                            <File Id="fil266FA2653032F2E02AB8ECC88F7710BD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\sewers_battle.ogg" />
+                        </Component>
+                        <Component Id="cmp9A9189CD9933AFD3BC3AB86597BFC56C" Guid="*">
+                            <File Id="fil5660854AD3FA94ACBD7A32279B50196C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\sewers_boss.ogg" />
+                        </Component>
+                        <Component Id="cmpE32A6D6DD615129BA5D4A7B94C95B5D2" Guid="*">
+                            <File Id="fil65C90F7D0F7F609598B7A6BBFD5A19D3" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\sewers_main.ogg" />
+                        </Component>
+                        <Component Id="cmpFA53C23511A042B66DF657DBE49A8119" Guid="*">
+                            <File Id="fil447F0BA5929E61B1D927F9607DB2639E" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\town_blacksmith.ogg" />
+                        </Component>
+                        <Component Id="cmp43E6E9E86B17E11ACFF39F271C480B25" Guid="*">
+                            <File Id="fil3396BD206FD285EEDE9EA7A75CA6CF7C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\town_house.ogg" />
+                        </Component>
+                        <Component Id="cmpE6F754C08886A091989365A9C8BEF14E" Guid="*">
+                            <File Id="fil6175CD8F76174CBB368A2219C639EDFB" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\town_main.ogg" />
+                        </Component>
+                        <Component Id="cmp933D1AF93E7C696BD7285B674366C3DD" Guid="*">
+                            <File Id="filFFF116A406BF03F8FA464C7B21959AAD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\town_tavern.ogg" />
+                        </Component>
+                        <Directory Id="dir648746D4E3A4F0BFAF81E2214171F9B2" Name="Originals">
+                            <Component Id="cmp09DDAF0D03AACEF5CE006281A38828B8" Guid="*">
+                                <File Id="fil6E5E7893A33DE701100B4C7B5E2F1499" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\forest_battle.wav" />
+                            </Component>
+                            <Component Id="cmp6F800882D90889068C864D94DE2A1063" Guid="*">
+                                <File Id="fil5FD4E6FC52BE04844AFE3783700D7CD2" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\forest_main.wav" />
+                            </Component>
+                            <Component Id="cmp5EB1EA60B5F4156A09A91C741B2A884B" Guid="*">
+                                <File Id="fil74C4A3E0195E170A090D19BFB8491557" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\forest_start.wav" />
+                            </Component>
+                            <Component Id="cmpEAD1A9AF82E9CC4FE4B1FD07F5737BA7" Guid="*">
+                                <File Id="fil9A9F58A9D17878858B41E1DB914EF5D3" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\graveyard_battle.wav" />
+                            </Component>
+                            <Component Id="cmp1C3FC731868F1C39690467B06E24506C" Guid="*">
+                                <File Id="fil8A485471C18DB6A0FBF9D7E6F7B9871A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\graveyard_main.wav" />
+                            </Component>
+                            <Component Id="cmpD7A1528F0C6F271928F5367976D47ABD" Guid="*">
+                                <File Id="fil54DD167C361847018509524F7A918346" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\sewers_bad.wav" />
+                            </Component>
+                            <Component Id="cmp4F16A8776E7EFD0017512502FB77C1C9" Guid="*">
+                                <File Id="fil0EB42D8A9908BEA6A9920B9AF2F8C5B9" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\sewers_battle.wav" />
+                            </Component>
+                            <Component Id="cmpE0116778655B400F3BEB4CAB2502CF3A" Guid="*">
+                                <File Id="fil939DE55CB012EF25B8DC9A7D466247FF" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\sewers_boss.wav" />
+                            </Component>
+                            <Component Id="cmpE33B9914872777D855FA5A5660885CD2" Guid="*">
+                                <File Id="filA28FA436F7020D203E811EE81D9A0380" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\sewers_main.wav" />
+                            </Component>
+                            <Component Id="cmp002FF6EBDC0046A13AFC9C0396439E1C" Guid="*">
+                                <File Id="fil1D933D229F37F7A08473D28F2A742CA7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\town_blacksmith.wav" />
+                            </Component>
+                            <Component Id="cmp9BEFD57988BD5C279062B6B43C10BFFF" Guid="*">
+                                <File Id="filEEEB2291A0D234FFDC95E2418D99B367" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\town_house.wav" />
+                            </Component>
+                            <Component Id="cmp1852E6DF80D384FAC1D4C0DC9105DC67" Guid="*">
+                                <File Id="fil205D8AC1096F5C15955D6572080A1D2F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\town_main.wav" />
+                            </Component>
+                            <Component Id="cmpF5A96602EB3F81964DBE703F48871787" Guid="*">
+                                <File Id="filEF9AF23278C1012DBF5BBC49171FF24C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Audio\Music\Originals\town_tavern.wav" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+                <Directory Id="dir50BA618C38F5E04A0489DC0808E697C4" Name="Dialog">
+                    <Component Id="cmpBCAE0EADC4F43E6EA8A9430D33247962" Guid="*">
+                        <File Id="filD51FC36A87CB9D124D3FF0617E6A34F0" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Dialog\customer.xml" />
+                    </Component>
+                    <Component Id="cmp7063BBF2A7B6815AB4D2701ED497DE6A" Guid="*">
+                        <File Id="filAEE13B0D3E86B11216384A602D737E7F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Dialog\reaper.xml" />
+                    </Component>
+                    <Component Id="cmpA381B5797EC468C8189898319BFC6678" Guid="*">
+                        <File Id="fil8DBFDD75679BE3C504FEB63B46DE9265" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Dialog\tavern.xml" />
+                    </Component>
+                    <Component Id="cmp71FF3A45D65C600F641E70E68020ACA9" Guid="*">
+                        <File Id="fil44CC826E49A73ADADC0E5EF68F72BC49" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Dialog\thyma.xml" />
+                    </Component>
+                </Directory>
+                <Directory Id="dir63CBFD29729F0DABFCA7B036C0EAB21A" Name="Textures">
+                    <Component Id="cmp877CB9AC1BBD3A3ABCD13166D14D1B97" Guid="*">
+                        <File Id="filD74414807D8E9257A1AD45A3BE8B5817" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\collider_colors.png" />
+                    </Component>
+                    <Component Id="cmpF9FE7816E0892E6F87EEA0CE5A435DE0" Guid="*">
+                        <File Id="fil420FF0F4CB11858F1F0ACCA67AFFA326" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\event_colors.png" />
+                    </Component>
+                    <Component Id="cmp2624C04688E64F879A1D20DD610ADA69" Guid="*">
+                        <File Id="fil4ED6EA4BE82CC55D90142A25C84D5783" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\LICENSE" />
+                    </Component>
+                    <Component Id="cmpBF3C2BB1FE90CB0FE5A8463009AE68A8" Guid="*">
+                        <File Id="fil80AFAC692DA0CCA6B14081F0CC715BBA" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\logo.png" />
+                    </Component>
+                    <Component Id="cmpCF53006500AAE3D65462FD61C10C4CBF" Guid="*">
+                        <File Id="fil71B4787480D12E4C31B2BB66FEF8C5E8" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\npc_colors.png" />
+                    </Component>
+                    <Component Id="cmp166E1D359550BD0E96BFB881FFB79E92" Guid="*">
+                        <File Id="filBDB895F54BAB980767AB1B011ABC1697" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\title_screen.png" />
+                    </Component>
+                    <Directory Id="dirCA979D46A286027A8923186C6D4BE882" Name="Battle">
+                        <Component Id="cmp312109816F56665D94F1038445AEAF4C" Guid="*">
+                            <File Id="filF508A8C944F1A0C44264BB50BB2980A2" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\attack_sprites.png" />
+                        </Component>
+                        <Component Id="cmp747A21B2F0C06BC2DDC44AFDB49ACBDB" Guid="*">
+                            <File Id="filC78BB77FFB396F5B36A4C98853F83EF1" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\battle_cemetary.png" />
+                        </Component>
+                        <Component Id="cmp44BB8BD78271B6916E01F0981873D618" Guid="*">
+                            <File Id="fil1A0AF040145DC86B4877530E525E5D45" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\battle_forest.png" />
+                        </Component>
+                        <Component Id="cmpE71BB683DA3ECF69AC911E3987F9DFF8" Guid="*">
+                            <File Id="filFF306F7F18D9CBA7922DA97EB0D937BC" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\shroom2_battle_sprites.png" />
+                        </Component>
+                        <Component Id="cmp1D4A5F9E44051FE71B7390EB17F89CA9" Guid="*">
+                            <File Id="filE8290715DA31EBB970D448C81740DDCB" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\shroom_battle_sprites.png" />
+                        </Component>
+                        <Component Id="cmp53D524C5A204F6AF67F6E440FE38B6A2" Guid="*">
+                            <File Id="fil4AA3006522D03A3ECB10B4307813B94F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\skeleton_battle_sprites.png" />
+                        </Component>
+                        <Component Id="cmpDD255598E9F95586518D99C4E15CFCA6" Guid="*">
+                            <File Id="fil44834B1F7C222CF3D7224DFE2E2C2792" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\thyma_battle_sprites.png" />
+                        </Component>
+                        <Component Id="cmpD752F4288F8AE9E3D403A9153B7033A3" Guid="*">
+                            <File Id="fil808768F8B698B99C475D29F798EE8B84" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\tmp.png" />
+                        </Component>
+                        <Component Id="cmpE6D03521130E2A9739CE3CA4CF807016" Guid="*">
+                            <File Id="fil6521A4509D232531AD5618E4B0AD1EDC" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Battle\toisto_battle_sprites.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dirB316266B5B686D42312FFC7F939F4B4E" Name="Characters">
+                        <Component Id="cmp074781DA53601AB11CDBB4991DE85815" Guid="*">
+                            <File Id="filA2527028C7D0DACC05EC9A719873180F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Characters\thyma_evil_sprites.png" />
+                        </Component>
+                        <Component Id="cmp6AEF728F05C7328B30E3E9A81FE4332B" Guid="*">
+                            <File Id="fil9E9476D6C877E453F8784E72FFEA1520" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Characters\thyma_good_sprites.png" />
+                        </Component>
+                        <Component Id="cmp0F135B6AD3F3D0E88B39F4C786738362" Guid="*">
+                            <File Id="fil7DBDE9054F2FB7E0F0A4DB48A02BABF4" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Characters\toisto_evil_sprites.png" />
+                        </Component>
+                        <Component Id="cmp36FA3BCCED2D977EEFBE484B7538D2A8" Guid="*">
+                            <File Id="filC87D1E30C754EB44272724CDB15A7668" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Characters\toisto_good_sprites.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dirF3D4DEBFB48E11AE1E9CA61A8D2616A0" Name="Dialogue">
+                        <Component Id="cmpB0D435CFBD4390FBECBC19A6788D9936" Guid="*">
+                            <File Id="filBEC21200F3A0E7823AE16F12888FA512" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\blacksmith_dialogue.png" />
+                        </Component>
+                        <Component Id="cmp2E8EE2526BF116B08C08C29C340425BB" Guid="*">
+                            <File Id="fil898CCA5748352C802A5DDCC9D7D62031" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\frame.png" />
+                        </Component>
+                        <Component Id="cmpBB95BA87EB89249E0DBDD9016D25E570" Guid="*">
+                            <File Id="fil3C23E1895959FD09148C93851A834B1F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\reaper_dialogue.png" />
+                        </Component>
+                        <Component Id="cmp837D3ABCECC5EB6026EE5CC755F28DC9" Guid="*">
+                            <File Id="fil936BC29E0F1439E9BAC5AC0098684D68" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\tavern_lady_dialogue.png" />
+                        </Component>
+                        <Component Id="cmp9276B1363E63F72213C7955D0575CDD2" Guid="*">
+                            <File Id="fil10C71A9F808D7710E1EF52B4B5B2D48B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\thyma_evil_dialogue.png" />
+                        </Component>
+                        <Component Id="cmp1E339C6CEA4A92D1A0EB60DF3BB1A708" Guid="*">
+                            <File Id="fil19F88306BD69222CC6EFB69EFDA614E5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\thyma_good_dialogue.png" />
+                        </Component>
+                        <Component Id="cmpB495B162D2C6EA41C47BFBB9252E15A4" Guid="*">
+                            <File Id="fil8C20BD8BAE86E5434A239B3DA36A3C9B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\toisto_evil_dialogue.png" />
+                        </Component>
+                        <Component Id="cmp0161F1E56CA1A82169BE8943692C130C" Guid="*">
+                            <File Id="fil35D3EB357AEB7177E4867A8DE2D19E78" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Dialogue\toisto_good_dialogue.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir9B2A400D517508B9B4B89BA2D44557CC" Name="Enemies">
+                        <Component Id="cmp3222BA47D6F3886BCEFE4F37ED91C11D" Guid="*">
+                            <File Id="filE3355997F5E346641FC17E3512A2AB62" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Enemies\Fungus - red.png" />
+                        </Component>
+                        <Component Id="cmpA8EE659429207E81BD33DBD24A4522A2" Guid="*">
+                            <File Id="fil8CC7F4B939C2166E5762EF0FCAD14E73" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Enemies\skeleton_sprites.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir36F3238913183C8A3C2B10B929C5DC27" Name="Environment">
+                        <Component Id="cmpBE2CFDBEFCBB337C2C4EA0FCF943FF92" Guid="*">
+                            <File Id="fil3D289769933EA4356A068CBFC6BA3B30" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\atlas_16x.png" />
+                        </Component>
+                        <Component Id="cmpDEDE71D5D24803C16048598A56119ED2" Guid="*">
+                            <File Id="fil991AA391D53FA600687319F1E4830351" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\Bronze Chest.png" />
+                        </Component>
+                        <Component Id="cmp1D3ADF3F2BE248FC85D93B519F828585" Guid="*">
+                            <File Id="fil65DD7A5583E978514218BDAA282B7F49" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\graveyard_16x16.png" />
+                        </Component>
+                        <Component Id="cmpFF4F3C713E9F960EE9B36FF7543070C1" Guid="*">
+                            <File Id="fil78B36BB7D35F7EF71B63E1B4807B7DA1" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\interiors_16x16.png" />
+                        </Component>
+                        <Component Id="cmpA2ADB9A6CFC1233AACB3315F18D02779" Guid="*">
+                            <File Id="filC66AAE028F004CD90FB9678C0CBD4980" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\note_wall.png" />
+                        </Component>
+                        <Component Id="cmp70B0074DB3D1097C087C1AF37F67A6C1" Guid="*">
+                            <File Id="fil117450616F1A2556AFD24FBB470A4C21" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\room_builder_16x16.png" />
+                        </Component>
+                        <Component Id="cmpE53A9D13C70381E10ED4EAD6D5FD7967" Guid="*">
+                            <File Id="fil766E4BE16EA05D40E4F7DB3CC54404FB" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\serene_village_16x16.png" />
+                        </Component>
+                        <Component Id="cmpBFAF062233DC2993670D722FAFFC7A6E" Guid="*">
+                            <File Id="filB15A8E3EEE540BDEA49E391ED22B0826" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\shiny_door.png" />
+                        </Component>
+                        <Component Id="cmpEDA7516F3D65AC0914A3D608C9CACBEB" Guid="*">
+                            <File Id="fil3B8961B96DB527D80871365568F5B120" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\tileset - complete 16x16.png" />
+                        </Component>
+                        <Component Id="cmp75B69DE0894B0153AD1721BF199C9836" Guid="*">
+                            <File Id="fil60B669AC1BB04F0CBBFE7D72EF170875" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\tileset - sewers 16x16.png" />
+                        </Component>
+                        <Component Id="cmpC0EA7F8A45C5DC0B225A57A53FE15AA0" Guid="*">
+                            <File Id="filC87E4223CA98EC162C5BC576BA8AF44D" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\tileset_graveyard.png" />
+                        </Component>
+                        <Component Id="cmpCCD27D8FC5CF8EDB2F8AED03738DCE4D" Guid="*">
+                            <File Id="fil369A1B264E5F46CCFCC2947D08FD8992" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Environment\tomb.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir7F38AA2B1DD101F7F77C86FA7E8785C3" Name="Fonts">
+                        <Component Id="cmpD22B92789E26DD67C36B6BC7124D2B84" Guid="*">
+                            <File Id="fil9BFB84EEC3DC0EC639377220F79F4ED2" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Fonts\black.png" />
+                        </Component>
+                        <Component Id="cmpEB43050DFF9DCA5BD2F469EC891555E1" Guid="*">
+                            <File Id="fil6C4E67C56A572BA0395407D061E078C6" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Fonts\LICENSE" />
+                        </Component>
+                        <Component Id="cmp79EAE2F4171B48740E2E26A678CFABA4" Guid="*">
+                            <File Id="filFD7484CF1E16C1EBA720EF2B7B4F8741" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Fonts\white.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir359929BF4161EE4C57FE07ED4A6BD59F" Name="Items">
+                        <Component Id="cmp140B1F9851306B54AFD1A1A245CE0B34" Guid="*">
+                            <File Id="fil2FAF13958FE06B0DB8B6F32A53A8E2F5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Items\chest.png" />
+                        </Component>
+                        <Component Id="cmp5CDDFEC085782C2AF989F308B91A5A06" Guid="*">
+                            <File Id="fil4F60B0C29987C9A9EBF55BFC919CF516" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Items\coin.png" />
+                        </Component>
+                        <Component Id="cmp271E01B7A11963556D12D7DD8C128E0B" Guid="*">
+                            <File Id="fil9BE29CB708CC612E4F529CB7ADB3B42F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Items\coin_stack.png" />
+                        </Component>
+                        <Component Id="cmpC43DD6DA22C164AC47CB5CB42464FBAC" Guid="*">
+                            <File Id="filAA929D016DC77D84FDF5C213DFB6E639" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Items\exp_potion.png" />
+                        </Component>
+                        <Component Id="cmp8C17593872FF8F2F5A5E63FAE825A6FD" Guid="*">
+                            <File Id="fil0F774EC1CA64B4A4FC37AB41B628D313" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Items\hp_potion.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir56DB46B751DFD942656E24C969AB0D75" Name="Maps">
+                        <Component Id="cmpA75740672BBC7A20CDBD106D4D9610C5" Guid="*">
+                            <File Id="fil4AF23F90A83239BA328808D865EA08B4" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Forest.tmx" />
+                        </Component>
+                        <Component Id="cmpCFEB0F439A61604F7D62FC9274A30FEE" Guid="*">
+                            <File Id="fil26A8ED3F71AD171792A2A6BAD59F42B9" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Graveyard (all purple).tmx" />
+                        </Component>
+                        <Component Id="cmpF72706C57965FDE30C79C7E209DCE665" Guid="*">
+                            <File Id="fil00359CBCF910F4B2EDAAF913500E2714" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Graveyard.tmx" />
+                        </Component>
+                        <Component Id="cmp4EEA5FB0D0FCCD702694C58A36148676" Guid="*">
+                            <File Id="fil944034A451BFD7B60DF4BB6690F9BD64" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\NPC House.tmx" />
+                        </Component>
+                        <Component Id="cmp5788CAFE94A5D7F4F68C585B44ACFD79" Guid="*">
+                            <File Id="filB05FE117E660CD115C65DD96F9925F8A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Sewers.tmx" />
+                        </Component>
+                        <Component Id="cmpE4BECA1F93974DA0C04D0BC450F7F699" Guid="*">
+                            <File Id="fil3A00342F594087C779BBEA6A7AFB2F81" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Tavern (16x16 backup).tmx" />
+                        </Component>
+                        <Component Id="cmp506A3CB620410CAAFEDD5C16099256BE" Guid="*">
+                            <File Id="fil1B7047662622CE2DB04F11095C03C320" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Tavern.tmx" />
+                        </Component>
+                        <Component Id="cmp7801DECF68D4AF9DAD3902277467559D" Guid="*">
+                            <File Id="fil8E0300A58AE2696A4A056FFF206465FD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Maps\Town.tmx" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir4C6169A28F77CF4EFEF77537390D816C" Name="NPC">
+                        <Component Id="cmp506A8FFE7A566863148921DBFC3B208F" Guid="*">
+                            <File Id="fil4A57407EF6CE3939A1B40DF5DF949476" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\NPC\blacksmith_sprites.png" />
+                        </Component>
+                        <Component Id="cmpE61ABFE32A419F551FC5D47A2228A924" Guid="*">
+                            <File Id="fil64DFB85D591CD8D7F1FA787A79818633" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\NPC\demon_reaper_sprites.png" />
+                        </Component>
+                        <Component Id="cmp07285865DB050587D5A533201D2BA834" Guid="*">
+                            <File Id="fil7E4C129EA598F8A2CADA5AD6E6FBF827" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\NPC\tavern_lady_sprites.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir59AC68D021EEFD04A6232468061982B5" Name="Puzzles">
+                        <Component Id="cmpB39385FDB1FFA551240ADE062163F9C5" Guid="*">
+                            <File Id="filA418655CC7B157BC72C779A71DFD16D5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Puzzles\buttons.png" />
+                        </Component>
+                        <Component Id="cmp97082188BB3D6F68800C23DC38002D23" Guid="*">
+                            <File Id="fil08A18FE8781D074FFE2A403DBDFD6507" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Puzzles\code_lock.png" />
+                        </Component>
+                        <Component Id="cmpC00B5AFBA0CFA6EB235D4A58EE90D586" Guid="*">
+                            <File Id="fil0E5CE295F1AAADBE83185424FA0D6591" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Puzzles\note.png" />
+                        </Component>
+                        <Component Id="cmp2DFFB4AEC675ED994765EAF2A5D38CAB" Guid="*">
+                            <File Id="filF59DFA3423C9056A061474B0B4E394C4" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Puzzles\red_button.png" />
+                        </Component>
+                        <Component Id="cmp79D0CA859F5F58A84634259762274196" Guid="*">
+                            <File Id="fil75526F0A85C7F8BBE97F4A2AAF50FD38" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Puzzles\white_button.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dir8612E17230526C10776B418A268ED5D7" Name="Transitions">
+                        <Component Id="cmpBB73365E7FEC37E23EB234DABF12C9FC" Guid="*">
+                            <File Id="fil2260DA926536B97B3BA09BD8481E9442" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\Transitions\battle_transition.png" />
+                        </Component>
+                    </Directory>
+                    <Directory Id="dirF9776CF29D96F3D322BEC979C8B44884" Name="UI">
+                        <Directory Id="dirC6B96FBCD780089C1D88403FF12A897E" Name="BattleMenu">
+                            <Component Id="cmp76D77DB686030E6E1816B871DE311824" Guid="*">
+                                <File Id="fil79F44E19BA03004F67EC835D35C123B5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\action_box.png" />
+                            </Component>
+                            <Component Id="cmpFFD737B1ABD55595B539607FA214AEAB" Guid="*">
+                                <File Id="fil08CBDC7D1DD7006E081E40DDB516B997" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\battle_ui.png" />
+                            </Component>
+                            <Component Id="cmpFB011FBC82C618EA99106298EC72144B" Guid="*">
+                                <File Id="fil6DE85D996B64FECEBF3B4C4B3049E65B" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\battle_ui_abilities.png" />
+                            </Component>
+                            <Component Id="cmpB58F31D171F9995D4BE595448A3125D7" Guid="*">
+                                <File Id="fil09CC580A4D244781485ED472660ADFAD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\character_bar.png" />
+                            </Component>
+                            <Component Id="cmpEEA0DB6C1098C9210C2EC95FBE039E41" Guid="*">
+                                <File Id="fil11EB47FEC3F820E51EDA58BA0D3ABE00" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\health_bars.png" />
+                            </Component>
+                            <Component Id="cmpC591495217C43A498E7503EF518BCBF3" Guid="*">
+                                <File Id="filB172D320B24F0DFAC1B8DB6DDD38B134" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\selection_arrows.png" />
+                            </Component>
+                            <Component Id="cmpA74F1AD558188BDF72C45C0B2DB51F88" Guid="*">
+                                <File Id="filC1938FF52D66445CAAAA70FFEBDB86EE" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\BattleMenu\selection_arrow_horizontal.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dirBB0E167916C0D4550B5260916C1C0D86" Name="HUD">
+                            <Component Id="cmpFC75354E4552A00573783BFF40533380" Guid="*">
+                                <File Id="filCB8F7421B3CAEE286DECA6D09FCBA6CD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\alert_marks.png" />
+                            </Component>
+                            <Component Id="cmpDCC3B53C6F251B79A67F2E11F0943488" Guid="*">
+                                <File Id="fil42C48A6E10E9A9EC14C2E3430A0AF465" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\alert_marks_try.png" />
+                            </Component>
+                            <Component Id="cmp65FD2B92074C51A02FAB6A3F65D391F4" Guid="*">
+                                <File Id="fil14BEED020ECE908C992E9FDCB0B24EEB" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\charactermenu.png" />
+                            </Component>
+                            <Component Id="cmp2114C05EAC995C6E24316D33E36C9F56" Guid="*">
+                                <File Id="filD385896243C80630D973BDF3AB272C66" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\hud.png" />
+                            </Component>
+                            <Component Id="cmp5B26FFA2B0FCD40E042154937F740372" Guid="*">
+                                <File Id="fil5D31EEC44D862B428803FEA5EDF03A1E" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\inventory_button.png" />
+                            </Component>
+                            <Component Id="cmp5E456DAF4F95D7F89AE007EFFA8BA59E" Guid="*">
+                                <File Id="filEF830BB92BA3D067735DF8C7B5CFC427" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\quest_button.png" />
+                            </Component>
+                            <Component Id="cmp67794528DE9E0682A17399824CDEFCE7" Guid="*">
+                                <File Id="fil20FC050B859F7C5D080017A20ABA7FAB" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\HUD\quest_menu.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dirA780605E38932F0EB03DD5DA5384400D" Name="MainPauseMenu">
+                            <Component Id="cmpEDCF5915813C619E4E482F9D451979D9" Guid="*">
+                                <File Id="fil1D120DC69AF5AB21EADDAD22489286DE" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\continue.png" />
+                            </Component>
+                            <Component Id="cmp066FA602C4E38D1FAF231E90455DF9EC" Guid="*">
+                                <File Id="fil55A4337CF38365E2343531374F252DCD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\exit.png" />
+                            </Component>
+                            <Component Id="cmp75D59E8D173AD2EE5E5735B4D774AAFA" Guid="*">
+                                <File Id="fil37070E39F3FC66F3DDD036620C0A2022" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\game_title.png" />
+                            </Component>
+                            <Component Id="cmpFD2732017A6BDE3C715F3F3AB97F2DCA" Guid="*">
+                                <File Id="fil2983FFF93110D247152FDEDE5AB4EDCD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\load.png" />
+                            </Component>
+                            <Component Id="cmp9DC5F1030EFAEF480E721DD7036D31D9" Guid="*">
+                                <File Id="filD7D02751A16D96CF0544F25579B6C250" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\main_menu.png" />
+                            </Component>
+                            <Component Id="cmpA48B8E5A81B9F1AB6C334606E56F8C86" Guid="*">
+                                <File Id="fil20E822BC21B06B61085B21134B05176A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\main_menu_text.png" />
+                            </Component>
+                            <Component Id="cmp8CB13C80741D4F050DBC0186ABC486A9" Guid="*">
+                                <File Id="filC1F9B90960E3FBDF38300E041D2DB031" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\menu_button.png" />
+                            </Component>
+                            <Component Id="cmp1A4727A048EE75F78848AA6B52C10C45" Guid="*">
+                                <File Id="fil5EFB05671A6164329BBEB8D075D79AAF" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\options.png" />
+                            </Component>
+                            <Component Id="cmpE9179A4A8AC7B9C5D832DB1200508764" Guid="*">
+                                <File Id="filC1AEA1B44FE6F5211A25BC1495481986" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\pause_menu.png" />
+                            </Component>
+                            <Component Id="cmp3F488BFDD2B49ED9DED7F64779206E98" Guid="*">
+                                <File Id="fil359039ABCA924B12555B709A4124C21A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\save.png" />
+                            </Component>
+                            <Component Id="cmp437371A94795845CEEBB4B5618C9DA08" Guid="*">
+                                <File Id="fil5051D8C7A71D77E2A2A129B26249BCA7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\start.png" />
+                            </Component>
+                            <Directory Id="dir6D7915F16E80CBEF16DD3DA36E30C34C" Name="Game Title">
+                                <Component Id="cmpDC29D8A229D2D2BC42E5C03C2A24FA0D" Guid="*">
+                                    <File Id="fil63B51FBA141E73B83519666A8E9A1FA2" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (1).png" />
+                                </Component>
+                                <Component Id="cmp9464469B9027A55654B99519244F4F77" Guid="*">
+                                    <File Id="fil27AA63640CC9462520DE422F35ADC005" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (2).png" />
+                                </Component>
+                                <Component Id="cmpAEE6C0EBD8EBB57395772E8B2347A664" Guid="*">
+                                    <File Id="fil1D6DD95B0BDAC75B40CC18C9273A5E2F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (3).png" />
+                                </Component>
+                                <Component Id="cmp0A429BB1C4BA84BF679C82A0B598EE31" Guid="*">
+                                    <File Id="filE64486694AB0A2E373726A69294EF86A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (4).png" />
+                                </Component>
+                                <Component Id="cmpD1643051B38212368ABE601660696666" Guid="*">
+                                    <File Id="fil8D5C18285359D64C115DD1898D72F5EA" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (5).png" />
+                                </Component>
+                                <Component Id="cmpC91F3D3DC8161AA16B7482D59CC4AC5D" Guid="*">
+                                    <File Id="fil18086CDBB624B1DB94EC70A3B471CCA1" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (6).png" />
+                                </Component>
+                                <Component Id="cmp30CC0158C0AAE54A93E613E2CA974F32" Guid="*">
+                                    <File Id="fil0866CD818B12A13C1866ABAEE21785A1" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title (7).png" />
+                                </Component>
+                                <Component Id="cmpBC13BC345783E53678F06B998D827573" Guid="*">
+                                    <File Id="filA0865E321D990FDD87BCC13647436E65" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\Game Title\game_title.png" />
+                                </Component>
+                            </Directory>
+                            <Directory Id="dir56C6FF8A0A26F88F3589810E09E62707" Name="LogoAnim">
+                                <Component Id="cmp2A38601C48DF613FBDCD25F28C31BC04" Guid="*">
+                                    <File Id="fil8D8B5F889F4C318554B744FA03A639B8" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\animation.gif" />
+                                </Component>
+                                <Component Id="cmp9204CBF11B754AE93070E23B9C91BA20" Guid="*">
+                                    <File Id="filA00B2289DE7C8CE74D10D1C472DAEB5F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\animation.pyxel" />
+                                </Component>
+                                <Component Id="cmpC52A80C7CC0994D6EB5AD2661FE87DEB" Guid="*">
+                                    <File Id="filA1F98A82123FC0FE3E71C7D1F7F334BA" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (1).png" />
+                                </Component>
+                                <Component Id="cmp6F664EE1D0E7484D57DCEA473BF342B7" Guid="*">
+                                    <File Id="filAC6DCE69A6A87EAA0AEEACB48EAB9840" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (10).png" />
+                                </Component>
+                                <Component Id="cmp6C24D9839E512746AD783D4C2CC540CB" Guid="*">
+                                    <File Id="fil1F66E79A3DAA23568AC8217ACFA7FD82" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (11).png" />
+                                </Component>
+                                <Component Id="cmp0B4FC532B407628D2D4965122C443A00" Guid="*">
+                                    <File Id="filE0E03D0F1E0DC583C8C4FDB745CD6D02" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (12).png" />
+                                </Component>
+                                <Component Id="cmpEF7F304B662908D652BED72725E1F2D4" Guid="*">
+                                    <File Id="filF5AFB27605144C139256CD8577FCDCB5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (13).png" />
+                                </Component>
+                                <Component Id="cmp59CA64013E569937254E288A9ED05E9C" Guid="*">
+                                    <File Id="fil6594CC0216D078CE2BB02D8E7FB8D90A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (14).png" />
+                                </Component>
+                                <Component Id="cmp0EE76D491F52D3CFE1FA63665A907B77" Guid="*">
+                                    <File Id="filE26D6D6CCEE0CAE9AC0866690876A266" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (15).png" />
+                                </Component>
+                                <Component Id="cmpEBA64AABB4C91DC44E527D2B8A4F692B" Guid="*">
+                                    <File Id="filE1B874984D7C5D3DB4FB48D0633EF0E7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (16).png" />
+                                </Component>
+                                <Component Id="cmpB78951B4E703035DD450C2966820CB56" Guid="*">
+                                    <File Id="fil98ADF02FC366A4FD077AC7E8DA0381FA" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (17).png" />
+                                </Component>
+                                <Component Id="cmpB23FAE4BE0509F4A550A0B8086A6E687" Guid="*">
+                                    <File Id="fil16E468158718E8905436C844FD76C13C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (18).png" />
+                                </Component>
+                                <Component Id="cmpF2170DF08000FA23B0ECEFF76A7D2C6A" Guid="*">
+                                    <File Id="filC182D1EBEE03CE79EA9DB6304FF93755" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (19).png" />
+                                </Component>
+                                <Component Id="cmp98D334A916535A7A64675B870FFA6808" Guid="*">
+                                    <File Id="fil5454E7703D5353A293B4C02A96760C38" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (2).png" />
+                                </Component>
+                                <Component Id="cmp0CF1F86496122AABBF7BE8BFD3307571" Guid="*">
+                                    <File Id="filB9FEB669DF36DC5A83013FB93AE8A583" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (3).png" />
+                                </Component>
+                                <Component Id="cmpAEFD8E3409237732896E5690F67F4B28" Guid="*">
+                                    <File Id="filB7E759E8D4E3E3145314EF2A92DFBC9D" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (4).png" />
+                                </Component>
+                                <Component Id="cmp603EEF7B2D93E09A77A7D80368166983" Guid="*">
+                                    <File Id="fil765F599C1C745EDB36135E2D9D9DD423" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (5).png" />
+                                </Component>
+                                <Component Id="cmpD2E0D96B69D209C739CE4D6BE5B77066" Guid="*">
+                                    <File Id="fil1F01AE1F052F2F77A5A3BFA916AA3291" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (6).png" />
+                                </Component>
+                                <Component Id="cmp7F8C974502F6C84D3380372129A0B37E" Guid="*">
+                                    <File Id="filB05C196E1CB75BECDA74CE1E0468BB59" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (7).png" />
+                                </Component>
+                                <Component Id="cmp3B73F4C3B5DDBE25514EFE2521E5E8DE" Guid="*">
+                                    <File Id="fil5558A2F4839FDC2D5C6E36886B618DB7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (8).png" />
+                                </Component>
+                                <Component Id="cmpC3DF991719B2A52601E7ACBA185D1305" Guid="*">
+                                    <File Id="filA579B33022601409B6CD3BB026C5DF80" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo (9).png" />
+                                </Component>
+                                <Component Id="cmp756EE033F9E4F8A609130A557C8BA7F7" Guid="*">
+                                    <File Id="fil8169F58CBBAF4E8EA47B05283C63C887" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo.png" />
+                                </Component>
+                                <Component Id="cmp3CAB4DA4BAB0A062A43A304E6B09AF88" Guid="*">
+                                    <File Id="filCA9E255DDE0FF219FB42E88156D10115" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo_anim (1).png" />
+                                </Component>
+                                <Component Id="cmpC341029FEA6A41A78CAF69B18DF09E9B" Guid="*">
+                                    <File Id="fil422CAFADC5281116A0B7EC3850A6141C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo_anim.png" />
+                                </Component>
+                                <Component Id="cmp9320935424F21B2EFB01BD2990E84ADB" Guid="*">
+                                    <File Id="filE85508EB0DA5FDBBA6C0C0A65EFE9F39" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\MainPauseMenu\LogoAnim\logo_anim_tileset.png" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dirA82FD935C9FD4539E0A064A11691A9B1" Name="OptionsMenu">
+                            <Component Id="cmpAC0ABF1D2187EF8310DBCDE8A33C3348" Guid="*">
+                                <File Id="fil4506B8688B5FC86F1AD9D62B8D96FFAF" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\audio.png" />
+                            </Component>
+                            <Component Id="cmp46DF82C8E43B31B0617A4F7A6C947898" Guid="*">
+                                <File Id="fil1DA0BEEC237C4E152EA1E7EBEA20BF4C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\audio_menu.png" />
+                            </Component>
+                            <Component Id="cmp501782A23CD95553390333D6886A5E35" Guid="*">
+                                <File Id="filCD82126DF12DCDC4049AAC24325703E0" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\back_arrow.png" />
+                            </Component>
+                            <Component Id="cmp02316576E71D9DB60A6FD2EDE6F6E240" Guid="*">
+                                <File Id="fil94B93D31397D8017514F73FA4616B526" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\back_button.png" />
+                            </Component>
+                            <Component Id="cmp52CADE5EE2E967087A1F6FCBC9488555" Guid="*">
+                                <File Id="fil805F62BA17E41DC5853F35D0D313CF4E" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\checkbox.png" />
+                            </Component>
+                            <Component Id="cmpD2ECC78D6B044BCFC82087F0DAAC683D" Guid="*">
+                                <File Id="filEDB6C99C7B1E4336199A948E3D1D35B0" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\controls.png" />
+                            </Component>
+                            <Component Id="cmpE5D4D003363D998BDF19F42755FAAE83" Guid="*">
+                                <File Id="filBCF0F5A9CA0EDA9FA85AE63B51BBEC33" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\discarditem.png" />
+                            </Component>
+                            <Component Id="cmp2718D9DB86879A4160160D0BCA326986" Guid="*">
+                                <File Id="fil80124DA116E6FE09413BC979A86E8AFD" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\fx_volume.png" />
+                            </Component>
+                            <Component Id="cmp0573964B4722ED6B2124A9AD653A87A3" Guid="*">
+                                <File Id="filC9A4C8469C63180AF6C1E12520948FD7" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\general_volume.png" />
+                            </Component>
+                            <Component Id="cmp207EA332BB3D44AADAB06A614369BB8F" Guid="*">
+                                <File Id="fil8EC4A5660CA8890B637255C709BF423C" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\graphics.png" />
+                            </Component>
+                            <Component Id="cmpB9ECA65B90155E1183BE803F4A7F6866" Guid="*">
+                                <File Id="filE04D0DB08C668B575F5A353D0092E80E" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\graphics_menu.png" />
+                            </Component>
+                            <Component Id="cmpA11343C5B6391C8B6A82E6E702FD981D" Guid="*">
+                                <File Id="fil688052FB1FEC5E5CF2BEAAF691CB606A" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\item_action.png" />
+                            </Component>
+                            <Component Id="cmp241EF2D1E3B0E80CF8BB1E6DFF98E1A2" Guid="*">
+                                <File Id="fil7C432977418BB6E560AD700AFCD28DA3" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\item_description.png" />
+                            </Component>
+                            <Component Id="cmp2A3EE9CF80B8EFE64D498AF88BBFD658" Guid="*">
+                                <File Id="filA896F530AA5D34CC5AD012ADFECF22C9" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\music_volume.png" />
+                            </Component>
+                            <Component Id="cmp43809F0C69074624ABCBBEDD61144A93" Guid="*">
+                                <File Id="filDCE58E3E92D3A549730845CB208AC744" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\on_off.png" />
+                            </Component>
+                            <Component Id="cmpF7E50BBAC3623D4DA56BB225C17D1C66" Guid="*">
+                                <File Id="filD2531952D7D9C3846D9BBE108066D4CC" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\options_buttons.png" />
+                            </Component>
+                            <Component Id="cmpCF6BDFD22B51253D1EA5953167E8D63C" Guid="*">
+                                <File Id="filBE0D1860D597F8697994B64B1F2D991F" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\options_menu.png" />
+                            </Component>
+                            <Component Id="cmp7BE646503858BC30B02EF154512536C6" Guid="*">
+                                <File Id="filE73A14C6B662E85A92C8172C6CFF27B5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\pixel.png" />
+                            </Component>
+                            <Component Id="cmp1A79C74FE87E8445115E6D3E56F24AA3" Guid="*">
+                                <File Id="fil8F7E6C497B2D5F83F0BD3AB842CE3CB1" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\useitem.png" />
+                            </Component>
+                            <Component Id="cmp5A7F9A383756228191CD39301D366C41" Guid="*">
+                                <File Id="fil81322F6B038B4CC8621E23418F317FF5" KeyPath="yes" Source="$(var.HarvestPath)\Assets\Textures\UI\OptionsMenu\volume_slider.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="HeatGenerated">
+            <ComponentRef Id="cmpE6DD64A66068AFAD6408866C225487FA" />
+            <ComponentRef Id="cmpFF71769B2BBCCDDA5899221C0383FF13" />
+            <ComponentRef Id="cmp8BE8A4F1893993DD59B398C614A070B6" />
+            <ComponentRef Id="cmpCA27B3F29D861AC4DC645353C471C800" />
+            <ComponentRef Id="cmp1F57F0C183386F6CB76DFB6831324C61" />
+            <ComponentRef Id="cmp53AC5F9E73E9F382D83B2DDB8FC4A274" />
+            <ComponentRef Id="cmpB15AE4983A5B9E34AD6E1A3CBC321773" />
+            <ComponentRef Id="cmpF6D3330C841E531C0D276FF890E3AA2C" />
+            <ComponentRef Id="cmpCF1E215A80FB6EC3FF19F7AE9C7107E5" />
+            <ComponentRef Id="cmp12F0C448A405134CF5FCE8B012ED00DC" />
+            <ComponentRef Id="cmp02F18F0337B51135127B4818FC8BA4BF" />
+            <ComponentRef Id="cmpB2478D88F2CA3BDA61B643B58AD5DC07" />
+            <ComponentRef Id="cmpA4357E7EB673F1EE343273DA70FB26B5" />
+            <ComponentRef Id="cmpD71BC20E6E35F777B22C7193C11827A6" />
+            <ComponentRef Id="cmp494E092250B7C893DA1C32C4422DF045" />
+            <ComponentRef Id="cmp1B6874D880D574EED2604B5AB3D06CC3" />
+            <ComponentRef Id="cmpC27FF44AFECF57237FFAD7E5327A5A83" />
+            <ComponentRef Id="cmp77F2718815C37DF1CD595A4164461B7A" />
+            <ComponentRef Id="cmpD5527425E607FED29E84E1424D4A0F52" />
+            <ComponentRef Id="cmp23267DA5F20E5C06C5B8F213F7E64543" />
+            <ComponentRef Id="cmpC53F9FF68F51CD4BDE0229F9F8E5B98E" />
+            <ComponentRef Id="cmp41CEE65AB13B22EA16057B45894D25B4" />
+            <ComponentRef Id="cmpF4A8048A71525C11F1A3E739F4D244F4" />
+            <ComponentRef Id="cmpE4039E19B8A28FDF8F9875692FB892FB" />
+            <ComponentRef Id="cmp3F1D54012554D2E15C83F0CA2CFE71D0" />
+            <ComponentRef Id="cmp0805E8222E4ABCE8152DE09936639F7D" />
+            <ComponentRef Id="cmpA6EE2F7E1548F37AF7E5BC075854F415" />
+            <ComponentRef Id="cmpC320D9CF50314809403F803E28108187" />
+            <ComponentRef Id="cmpC87A3B0C3E12AC2E1207DBE566E9C281" />
+            <ComponentRef Id="cmp0298519FAAFABB1CC20A4819E1DDD845" />
+            <ComponentRef Id="cmp384294C81AA87DE010CCA2DD063C7DBF" />
+            <ComponentRef Id="cmpF77A6B3193EEB39121D4500E5CB9503C" />
+            <ComponentRef Id="cmp6D2B8C463EEFCA3C85A63F18B0E2815C" />
+            <ComponentRef Id="cmp79E7AD83A4052C94ABA069D4E165B5D4" />
+            <ComponentRef Id="cmpA365B4F269331AEB1082A3F90133883D" />
+            <ComponentRef Id="cmpC72A14F43B3349316BA0617B4607D0BF" />
+            <ComponentRef Id="cmpC2154412DA11E21E268939E7502F6195" />
+            <ComponentRef Id="cmpC4E1C5C72413EAE367DAAF1BBD891DC5" />
+            <ComponentRef Id="cmp1D1B2DBD5B4CB13E7D114848ED77F397" />
+            <ComponentRef Id="cmp8C4FB0EAB5A3AF6D52CBAF62FBC04FEB" />
+            <ComponentRef Id="cmpE12CB0094714C0360A3B3ABDAF87A26F" />
+            <ComponentRef Id="cmp2A5219E1A7DD365C84AEAF72EF62D85B" />
+            <ComponentRef Id="cmp12B0AB8883A60B41070BC65D06FEE56F" />
+            <ComponentRef Id="cmp1593A57049BE17A705E47296B39EC036" />
+            <ComponentRef Id="cmpD323932CDDC42FF897370E3D0A0ADDFD" />
+            <ComponentRef Id="cmpEE5C9A1DCAE12DCB483AD452385A9BDB" />
+            <ComponentRef Id="cmpAD52CCFE6F9219A48BAEE90B297E79F2" />
+            <ComponentRef Id="cmp61623DFB206431E16F0A666CAB44074E" />
+            <ComponentRef Id="cmp9A0436A26BDF8C0FBF3E1774139C0EF5" />
+            <ComponentRef Id="cmpFE09974281449CAF254A7654BD3B812B" />
+            <ComponentRef Id="cmp03408A362481A693086C538AD4B06363" />
+            <ComponentRef Id="cmpFF926F48D8ECEDEBB40D94D346F3175B" />
+            <ComponentRef Id="cmpCDC08829A959FE79302E3FBD1E550E11" />
+            <ComponentRef Id="cmp8F3E269DDF88AC3F4D8C97FEA5CE4ED7" />
+            <ComponentRef Id="cmp7589948F20EF3F3CC474B4E02DA57308" />
+            <ComponentRef Id="cmpE07A7715AA7BA93175F7A5F971FEAF77" />
+            <ComponentRef Id="cmp08148FDC56EA0763B17BB353B1669F37" />
+            <ComponentRef Id="cmpB540490EAB76E76B83809D4BCDF38217" />
+            <ComponentRef Id="cmpB080136225124AD42E177C79199BFEE8" />
+            <ComponentRef Id="cmpEDD5AECD4A70F0DDDB594C543132CEE1" />
+            <ComponentRef Id="cmp2EAF1D3D21CD31A445747FDA634B4DC5" />
+            <ComponentRef Id="cmp5A2513DFAE8DC1BC719588FCBE0C7DC0" />
+            <ComponentRef Id="cmp983CA3DC7DE66A819CE01EA2C5E71624" />
+            <ComponentRef Id="cmp99BA28EC8962E649959ED6E5C2E37140" />
+            <ComponentRef Id="cmpFFB6C9AD6FDBB0C3391B4C8F054BDCBA" />
+            <ComponentRef Id="cmpC2041263630BB4F76FB86413501E6DD8" />
+            <ComponentRef Id="cmp99B4849D46BE2DAB26FBE30AC0060FE9" />
+            <ComponentRef Id="cmpA6A1A862F096C06C9163EAA3523C5DB3" />
+            <ComponentRef Id="cmpEE127BC55BFC583E9F40D3756159B950" />
+            <ComponentRef Id="cmp0413DCBB97120A674CB4B84EFB0DA40D" />
+            <ComponentRef Id="cmp7D93D7E7F1A7FE154D2D6379D43DE703" />
+            <ComponentRef Id="cmp5244AD11BC152D4FDF1C3FB127A33AE2" />
+            <ComponentRef Id="cmpFA19E60A4339D962B377F162FF1AD258" />
+            <ComponentRef Id="cmp75540E19F726A07129084227C0B376C3" />
+            <ComponentRef Id="cmpE31CC1C127530DA3442386327C9A78F1" />
+            <ComponentRef Id="cmp04FFEB8E32AEEB3EE95F361599DE84BE" />
+            <ComponentRef Id="cmp427CE54B566583C0C46692809499EF9A" />
+            <ComponentRef Id="cmp4D8922EF3297826CDBBAE5F9AA588317" />
+            <ComponentRef Id="cmp9A9189CD9933AFD3BC3AB86597BFC56C" />
+            <ComponentRef Id="cmpE32A6D6DD615129BA5D4A7B94C95B5D2" />
+            <ComponentRef Id="cmpFA53C23511A042B66DF657DBE49A8119" />
+            <ComponentRef Id="cmp43E6E9E86B17E11ACFF39F271C480B25" />
+            <ComponentRef Id="cmpE6F754C08886A091989365A9C8BEF14E" />
+            <ComponentRef Id="cmp933D1AF93E7C696BD7285B674366C3DD" />
+            <ComponentRef Id="cmp09DDAF0D03AACEF5CE006281A38828B8" />
+            <ComponentRef Id="cmp6F800882D90889068C864D94DE2A1063" />
+            <ComponentRef Id="cmp5EB1EA60B5F4156A09A91C741B2A884B" />
+            <ComponentRef Id="cmpEAD1A9AF82E9CC4FE4B1FD07F5737BA7" />
+            <ComponentRef Id="cmp1C3FC731868F1C39690467B06E24506C" />
+            <ComponentRef Id="cmpD7A1528F0C6F271928F5367976D47ABD" />
+            <ComponentRef Id="cmp4F16A8776E7EFD0017512502FB77C1C9" />
+            <ComponentRef Id="cmpE0116778655B400F3BEB4CAB2502CF3A" />
+            <ComponentRef Id="cmpE33B9914872777D855FA5A5660885CD2" />
+            <ComponentRef Id="cmp002FF6EBDC0046A13AFC9C0396439E1C" />
+            <ComponentRef Id="cmp9BEFD57988BD5C279062B6B43C10BFFF" />
+            <ComponentRef Id="cmp1852E6DF80D384FAC1D4C0DC9105DC67" />
+            <ComponentRef Id="cmpF5A96602EB3F81964DBE703F48871787" />
+            <ComponentRef Id="cmpBCAE0EADC4F43E6EA8A9430D33247962" />
+            <ComponentRef Id="cmp7063BBF2A7B6815AB4D2701ED497DE6A" />
+            <ComponentRef Id="cmpA381B5797EC468C8189898319BFC6678" />
+            <ComponentRef Id="cmp71FF3A45D65C600F641E70E68020ACA9" />
+            <ComponentRef Id="cmp877CB9AC1BBD3A3ABCD13166D14D1B97" />
+            <ComponentRef Id="cmpF9FE7816E0892E6F87EEA0CE5A435DE0" />
+            <ComponentRef Id="cmp2624C04688E64F879A1D20DD610ADA69" />
+            <ComponentRef Id="cmpBF3C2BB1FE90CB0FE5A8463009AE68A8" />
+            <ComponentRef Id="cmpCF53006500AAE3D65462FD61C10C4CBF" />
+            <ComponentRef Id="cmp166E1D359550BD0E96BFB881FFB79E92" />
+            <ComponentRef Id="cmp312109816F56665D94F1038445AEAF4C" />
+            <ComponentRef Id="cmp747A21B2F0C06BC2DDC44AFDB49ACBDB" />
+            <ComponentRef Id="cmp44BB8BD78271B6916E01F0981873D618" />
+            <ComponentRef Id="cmpE71BB683DA3ECF69AC911E3987F9DFF8" />
+            <ComponentRef Id="cmp1D4A5F9E44051FE71B7390EB17F89CA9" />
+            <ComponentRef Id="cmp53D524C5A204F6AF67F6E440FE38B6A2" />
+            <ComponentRef Id="cmpDD255598E9F95586518D99C4E15CFCA6" />
+            <ComponentRef Id="cmpD752F4288F8AE9E3D403A9153B7033A3" />
+            <ComponentRef Id="cmpE6D03521130E2A9739CE3CA4CF807016" />
+            <ComponentRef Id="cmp074781DA53601AB11CDBB4991DE85815" />
+            <ComponentRef Id="cmp6AEF728F05C7328B30E3E9A81FE4332B" />
+            <ComponentRef Id="cmp0F135B6AD3F3D0E88B39F4C786738362" />
+            <ComponentRef Id="cmp36FA3BCCED2D977EEFBE484B7538D2A8" />
+            <ComponentRef Id="cmpB0D435CFBD4390FBECBC19A6788D9936" />
+            <ComponentRef Id="cmp2E8EE2526BF116B08C08C29C340425BB" />
+            <ComponentRef Id="cmpBB95BA87EB89249E0DBDD9016D25E570" />
+            <ComponentRef Id="cmp837D3ABCECC5EB6026EE5CC755F28DC9" />
+            <ComponentRef Id="cmp9276B1363E63F72213C7955D0575CDD2" />
+            <ComponentRef Id="cmp1E339C6CEA4A92D1A0EB60DF3BB1A708" />
+            <ComponentRef Id="cmpB495B162D2C6EA41C47BFBB9252E15A4" />
+            <ComponentRef Id="cmp0161F1E56CA1A82169BE8943692C130C" />
+            <ComponentRef Id="cmp3222BA47D6F3886BCEFE4F37ED91C11D" />
+            <ComponentRef Id="cmpA8EE659429207E81BD33DBD24A4522A2" />
+            <ComponentRef Id="cmpBE2CFDBEFCBB337C2C4EA0FCF943FF92" />
+            <ComponentRef Id="cmpDEDE71D5D24803C16048598A56119ED2" />
+            <ComponentRef Id="cmp1D3ADF3F2BE248FC85D93B519F828585" />
+            <ComponentRef Id="cmpFF4F3C713E9F960EE9B36FF7543070C1" />
+            <ComponentRef Id="cmpA2ADB9A6CFC1233AACB3315F18D02779" />
+            <ComponentRef Id="cmp70B0074DB3D1097C087C1AF37F67A6C1" />
+            <ComponentRef Id="cmpE53A9D13C70381E10ED4EAD6D5FD7967" />
+            <ComponentRef Id="cmpBFAF062233DC2993670D722FAFFC7A6E" />
+            <ComponentRef Id="cmpEDA7516F3D65AC0914A3D608C9CACBEB" />
+            <ComponentRef Id="cmp75B69DE0894B0153AD1721BF199C9836" />
+            <ComponentRef Id="cmpC0EA7F8A45C5DC0B225A57A53FE15AA0" />
+            <ComponentRef Id="cmpCCD27D8FC5CF8EDB2F8AED03738DCE4D" />
+            <ComponentRef Id="cmpD22B92789E26DD67C36B6BC7124D2B84" />
+            <ComponentRef Id="cmpEB43050DFF9DCA5BD2F469EC891555E1" />
+            <ComponentRef Id="cmp79EAE2F4171B48740E2E26A678CFABA4" />
+            <ComponentRef Id="cmp140B1F9851306B54AFD1A1A245CE0B34" />
+            <ComponentRef Id="cmp5CDDFEC085782C2AF989F308B91A5A06" />
+            <ComponentRef Id="cmp271E01B7A11963556D12D7DD8C128E0B" />
+            <ComponentRef Id="cmpC43DD6DA22C164AC47CB5CB42464FBAC" />
+            <ComponentRef Id="cmp8C17593872FF8F2F5A5E63FAE825A6FD" />
+            <ComponentRef Id="cmpA75740672BBC7A20CDBD106D4D9610C5" />
+            <ComponentRef Id="cmpCFEB0F439A61604F7D62FC9274A30FEE" />
+            <ComponentRef Id="cmpF72706C57965FDE30C79C7E209DCE665" />
+            <ComponentRef Id="cmp4EEA5FB0D0FCCD702694C58A36148676" />
+            <ComponentRef Id="cmp5788CAFE94A5D7F4F68C585B44ACFD79" />
+            <ComponentRef Id="cmpE4BECA1F93974DA0C04D0BC450F7F699" />
+            <ComponentRef Id="cmp506A3CB620410CAAFEDD5C16099256BE" />
+            <ComponentRef Id="cmp7801DECF68D4AF9DAD3902277467559D" />
+            <ComponentRef Id="cmp506A8FFE7A566863148921DBFC3B208F" />
+            <ComponentRef Id="cmpE61ABFE32A419F551FC5D47A2228A924" />
+            <ComponentRef Id="cmp07285865DB050587D5A533201D2BA834" />
+            <ComponentRef Id="cmpB39385FDB1FFA551240ADE062163F9C5" />
+            <ComponentRef Id="cmp97082188BB3D6F68800C23DC38002D23" />
+            <ComponentRef Id="cmpC00B5AFBA0CFA6EB235D4A58EE90D586" />
+            <ComponentRef Id="cmp2DFFB4AEC675ED994765EAF2A5D38CAB" />
+            <ComponentRef Id="cmp79D0CA859F5F58A84634259762274196" />
+            <ComponentRef Id="cmpBB73365E7FEC37E23EB234DABF12C9FC" />
+            <ComponentRef Id="cmp76D77DB686030E6E1816B871DE311824" />
+            <ComponentRef Id="cmpFFD737B1ABD55595B539607FA214AEAB" />
+            <ComponentRef Id="cmpFB011FBC82C618EA99106298EC72144B" />
+            <ComponentRef Id="cmpB58F31D171F9995D4BE595448A3125D7" />
+            <ComponentRef Id="cmpEEA0DB6C1098C9210C2EC95FBE039E41" />
+            <ComponentRef Id="cmpC591495217C43A498E7503EF518BCBF3" />
+            <ComponentRef Id="cmpA74F1AD558188BDF72C45C0B2DB51F88" />
+            <ComponentRef Id="cmpFC75354E4552A00573783BFF40533380" />
+            <ComponentRef Id="cmpDCC3B53C6F251B79A67F2E11F0943488" />
+            <ComponentRef Id="cmp65FD2B92074C51A02FAB6A3F65D391F4" />
+            <ComponentRef Id="cmp2114C05EAC995C6E24316D33E36C9F56" />
+            <ComponentRef Id="cmp5B26FFA2B0FCD40E042154937F740372" />
+            <ComponentRef Id="cmp5E456DAF4F95D7F89AE007EFFA8BA59E" />
+            <ComponentRef Id="cmp67794528DE9E0682A17399824CDEFCE7" />
+            <ComponentRef Id="cmpEDCF5915813C619E4E482F9D451979D9" />
+            <ComponentRef Id="cmp066FA602C4E38D1FAF231E90455DF9EC" />
+            <ComponentRef Id="cmp75D59E8D173AD2EE5E5735B4D774AAFA" />
+            <ComponentRef Id="cmpFD2732017A6BDE3C715F3F3AB97F2DCA" />
+            <ComponentRef Id="cmp9DC5F1030EFAEF480E721DD7036D31D9" />
+            <ComponentRef Id="cmpA48B8E5A81B9F1AB6C334606E56F8C86" />
+            <ComponentRef Id="cmp8CB13C80741D4F050DBC0186ABC486A9" />
+            <ComponentRef Id="cmp1A4727A048EE75F78848AA6B52C10C45" />
+            <ComponentRef Id="cmpE9179A4A8AC7B9C5D832DB1200508764" />
+            <ComponentRef Id="cmp3F488BFDD2B49ED9DED7F64779206E98" />
+            <ComponentRef Id="cmp437371A94795845CEEBB4B5618C9DA08" />
+            <ComponentRef Id="cmpDC29D8A229D2D2BC42E5C03C2A24FA0D" />
+            <ComponentRef Id="cmp9464469B9027A55654B99519244F4F77" />
+            <ComponentRef Id="cmpAEE6C0EBD8EBB57395772E8B2347A664" />
+            <ComponentRef Id="cmp0A429BB1C4BA84BF679C82A0B598EE31" />
+            <ComponentRef Id="cmpD1643051B38212368ABE601660696666" />
+            <ComponentRef Id="cmpC91F3D3DC8161AA16B7482D59CC4AC5D" />
+            <ComponentRef Id="cmp30CC0158C0AAE54A93E613E2CA974F32" />
+            <ComponentRef Id="cmpBC13BC345783E53678F06B998D827573" />
+            <ComponentRef Id="cmp2A38601C48DF613FBDCD25F28C31BC04" />
+            <ComponentRef Id="cmp9204CBF11B754AE93070E23B9C91BA20" />
+            <ComponentRef Id="cmpC52A80C7CC0994D6EB5AD2661FE87DEB" />
+            <ComponentRef Id="cmp6F664EE1D0E7484D57DCEA473BF342B7" />
+            <ComponentRef Id="cmp6C24D9839E512746AD783D4C2CC540CB" />
+            <ComponentRef Id="cmp0B4FC532B407628D2D4965122C443A00" />
+            <ComponentRef Id="cmpEF7F304B662908D652BED72725E1F2D4" />
+            <ComponentRef Id="cmp59CA64013E569937254E288A9ED05E9C" />
+            <ComponentRef Id="cmp0EE76D491F52D3CFE1FA63665A907B77" />
+            <ComponentRef Id="cmpEBA64AABB4C91DC44E527D2B8A4F692B" />
+            <ComponentRef Id="cmpB78951B4E703035DD450C2966820CB56" />
+            <ComponentRef Id="cmpB23FAE4BE0509F4A550A0B8086A6E687" />
+            <ComponentRef Id="cmpF2170DF08000FA23B0ECEFF76A7D2C6A" />
+            <ComponentRef Id="cmp98D334A916535A7A64675B870FFA6808" />
+            <ComponentRef Id="cmp0CF1F86496122AABBF7BE8BFD3307571" />
+            <ComponentRef Id="cmpAEFD8E3409237732896E5690F67F4B28" />
+            <ComponentRef Id="cmp603EEF7B2D93E09A77A7D80368166983" />
+            <ComponentRef Id="cmpD2E0D96B69D209C739CE4D6BE5B77066" />
+            <ComponentRef Id="cmp7F8C974502F6C84D3380372129A0B37E" />
+            <ComponentRef Id="cmp3B73F4C3B5DDBE25514EFE2521E5E8DE" />
+            <ComponentRef Id="cmpC3DF991719B2A52601E7ACBA185D1305" />
+            <ComponentRef Id="cmp756EE033F9E4F8A609130A557C8BA7F7" />
+            <ComponentRef Id="cmp3CAB4DA4BAB0A062A43A304E6B09AF88" />
+            <ComponentRef Id="cmpC341029FEA6A41A78CAF69B18DF09E9B" />
+            <ComponentRef Id="cmp9320935424F21B2EFB01BD2990E84ADB" />
+            <ComponentRef Id="cmpAC0ABF1D2187EF8310DBCDE8A33C3348" />
+            <ComponentRef Id="cmp46DF82C8E43B31B0617A4F7A6C947898" />
+            <ComponentRef Id="cmp501782A23CD95553390333D6886A5E35" />
+            <ComponentRef Id="cmp02316576E71D9DB60A6FD2EDE6F6E240" />
+            <ComponentRef Id="cmp52CADE5EE2E967087A1F6FCBC9488555" />
+            <ComponentRef Id="cmpD2ECC78D6B044BCFC82087F0DAAC683D" />
+            <ComponentRef Id="cmpE5D4D003363D998BDF19F42755FAAE83" />
+            <ComponentRef Id="cmp2718D9DB86879A4160160D0BCA326986" />
+            <ComponentRef Id="cmp0573964B4722ED6B2124A9AD653A87A3" />
+            <ComponentRef Id="cmp207EA332BB3D44AADAB06A614369BB8F" />
+            <ComponentRef Id="cmpB9ECA65B90155E1183BE803F4A7F6866" />
+            <ComponentRef Id="cmpA11343C5B6391C8B6A82E6E702FD981D" />
+            <ComponentRef Id="cmp241EF2D1E3B0E80CF8BB1E6DFF98E1A2" />
+            <ComponentRef Id="cmp2A3EE9CF80B8EFE64D498AF88BBFD658" />
+            <ComponentRef Id="cmp43809F0C69074624ABCBBEDD61144A93" />
+            <ComponentRef Id="cmpF7E50BBAC3623D4DA56BB225C17D1C66" />
+            <ComponentRef Id="cmpCF6BDFD22B51253D1EA5953167E8D63C" />
+            <ComponentRef Id="cmp7BE646503858BC30B02EF154512536C6" />
+            <ComponentRef Id="cmp1A79C74FE87E8445115E6D3E56F24AA3" />
+            <ComponentRef Id="cmp5A7F9A383756228191CD39301D366C41" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>
