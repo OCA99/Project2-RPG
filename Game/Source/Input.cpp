@@ -200,7 +200,7 @@ void Input::HandleDeviceConnection(int index)
 				{
 					LOG("Found a gamepad with id %i named %s", i, SDL_GameControllerName(pad.controller));
 					pad.enabled = true;
-					pad.l_dz = pad.r_dz = 0.1f;
+					pad.l_dz = pad.r_dz = 0.9f;
 					pad.haptic = SDL_HapticOpen(index);
 					if (pad.haptic != nullptr)
 						LOG("... gamepad has force feedback capabilities");
