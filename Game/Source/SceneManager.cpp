@@ -72,6 +72,12 @@ bool SceneManager::Start()
 
 	startPressed = true;
 
+	POINT m;
+	GetCursorPos(&m);
+
+	mousePosition.x = m.x;
+	mousePosition.y = m.y;
+
 	return true;
 }
 
@@ -208,30 +214,28 @@ bool SceneManager::PostUpdate(float dt)
 	}
 	if (menu || currentScene->type == Scene::TYPE::MENU || optionsMenu || app->quests->questInvOpened || app->items->invOpened) {
 		
-		POINT mousePos;
-		GetCursorPos(&mousePos);
 
 		float dtSpeed = padSpeed * dt;
 
-		if (pad.l_x > 0.0f || pad.right)
+		if (pad.l_x > 0.9f || pad.right)
 		{
-			SetCursorPos(mousePos.x + dtSpeed, mousePos.y);
-			mousePos.x += dtSpeed;
+			mousePosition.x += dtSpeed;
+			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
-		if (pad.l_x < 0.0f || pad.left)
+		if (pad.l_x < -0.9f || pad.left)
 		{
-			SetCursorPos(mousePos.x - dtSpeed, mousePos.y);
-			mousePos.x -= dtSpeed;
+			mousePosition.x -= dtSpeed;
+			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
-		if (pad.l_y < 0.0f || pad.up)
+		if (pad.l_y < -0.9f || pad.up)
 		{
-			SetCursorPos(mousePos.x, mousePos.y - dtSpeed);
-			mousePos.y -= dtSpeed;
+			mousePosition.y -= dtSpeed;
+			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
-		if (pad.l_y > 0.0f || pad.down)
+		if (pad.l_y > 0.9f || pad.down)
 		{
-			SetCursorPos(mousePos.x, mousePos.y + dtSpeed);
-			mousePos.y += dtSpeed;
+			mousePosition.y += dtSpeed;
+			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
 	}
 
@@ -244,13 +248,13 @@ bool SceneManager::PostUpdate(float dt)
 			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
 			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
 			buttons = true;
-			padSpeed = 2;
+			padSpeed = 200;
 		}
 	}
 	
 	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
 
-		padSpeed = 6;
+		padSpeed = 600;
 
 		if (app->quests->questInvOpened) app->render->DrawTexture(questMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 		if (app->items->invOpened) app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
