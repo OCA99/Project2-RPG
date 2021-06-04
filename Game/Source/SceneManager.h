@@ -56,6 +56,7 @@ public:
 	SDL_Texture** optionsTex;
 	SDL_Texture** graphicsMenuTex;
 	SDL_Texture** audioMenuTex;
+	SDL_Texture** controlsMenuTex;
 	SDL_Texture** questMenuTex;//Quest Menu Texture
 	SDL_Texture** invMenu;
 
@@ -74,7 +75,8 @@ public:
 
 	bool changingScene = false;
 
-	bool startPressed;
+	bool startPressed = true;
+	bool bPressed = true;
 
 	bool r1Pressed = true;
 	bool l1Pressed = true;
