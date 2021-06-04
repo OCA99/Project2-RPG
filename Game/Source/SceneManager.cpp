@@ -58,6 +58,7 @@ bool SceneManager::Start()
 	LogoScene* s = new LogoScene();
 	menuTex = app->tex->Load("Textures/UI/MainPauseMenu/pause_menu.png");
 	optionsTex = app->tex->Load("Textures/UI/OptionsMenu/options_menu.png");
+	controlsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/controls_menu.png");
 	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
 	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
 
@@ -181,7 +182,18 @@ bool SceneManager::PostUpdate(float dt)
 		startPressed = false;
 	}
 
+	if (pad.b == true && bPressed)
+	{
+		if (menu && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened)
+		{
+			app->audio->PlayFx(8, 0);
+			menu = false;
+			bPressed = false;
+		}
+	}
+
 	if (pad.start == false) startPressed = true;
+	if (pad.b == false) bPressed = true;
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
@@ -201,22 +213,22 @@ bool SceneManager::PostUpdate(float dt)
 
 		float dtSpeed = padSpeed * dt;
 
-		if (pad.l_x > 0.0f || app->input->pads[0].right)
+		if (pad.l_x > 0.0f || pad.right)
 		{
 			SetCursorPos(mousePos.x + dtSpeed, mousePos.y);
 			mousePos.x += dtSpeed;
 		}
-		if (pad.l_x < 0.0f || app->input->pads[0].left)
+		if (pad.l_x < 0.0f || pad.left)
 		{
 			SetCursorPos(mousePos.x - dtSpeed, mousePos.y);
 			mousePos.x -= dtSpeed;
 		}
-		if (pad.l_y < 0.0f || app->input->pads[0].up)
+		if (pad.l_y < 0.0f || pad.up)
 		{
 			SetCursorPos(mousePos.x, mousePos.y - dtSpeed);
 			mousePos.y -= dtSpeed;
 		}
-		if (pad.l_y > 0.0f || app->input->pads[0].down)
+		if (pad.l_y > 0.0f || pad.down)
 		{
 			SetCursorPos(mousePos.x, mousePos.y + dtSpeed);
 			mousePos.y += dtSpeed;
@@ -303,10 +315,10 @@ bool SceneManager::PostUpdate(float dt)
 
 	if(optionsMenu)
 	{
-		if (!app->input->pads[0].r1) r1Pressed = true;
-		if (!app->input->pads[0].l1) l1Pressed = true;
+		if (!pad.r1) r1Pressed = true;
+		if (!pad.l1) l1Pressed = true;
 
-		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || (pad.b && bPressed))
 		{
 			app->audio->PlayFx(6, 0);
 			optionsMenu = false;
@@ -314,6 +326,7 @@ bool SceneManager::PostUpdate(float dt)
 			controlsSelected = false;
 			graphicsSelected = false;
 			app->ui->DestroyAllGuiControls();
+			bPressed = false;
 			buttons = false;
 		}
 		app->render->DrawTexture(optionsTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
@@ -335,7 +348,7 @@ bool SceneManager::PostUpdate(float dt)
 
 				buttons = true;
 			}
-			if (app->input->pads[0].r1 && r1Pressed)
+			if (pad.r1 && r1Pressed)
 			{
 				app->ui->DestroyAllGuiControls();
 				audioSelected = true;
@@ -343,6 +356,15 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = false;
 				buttons = false;
 				r1Pressed = false;
+			}
+			if (pad.l1 && l1Pressed)
+			{
+				app->ui->DestroyAllGuiControls();
+				audioSelected = false;
+				graphicsSelected = false;
+				controlsSelected = true;
+				buttons = false;
+				l1Pressed = false;
 			}
 		}
 
@@ -362,7 +384,7 @@ bool SceneManager::PostUpdate(float dt)
 
 				buttons = true;
 			}
-			if (app->input->pads[0].r1 == true && r1Pressed)
+			if (pad.r1 == true && r1Pressed)
 			{
 				app->ui->DestroyAllGuiControls();
 				audioSelected = false;
@@ -371,7 +393,7 @@ bool SceneManager::PostUpdate(float dt)
 				buttons = false;
 				r1Pressed = false;
 			}
-			if (app->input->pads[0].l1 && l1Pressed)
+			if (pad.l1 && l1Pressed)
 			{
 				app->ui->DestroyAllGuiControls();
 				audioSelected = false;
@@ -384,6 +406,7 @@ bool SceneManager::PostUpdate(float dt)
 
 		if (controlsSelected)
 		{
+			app->render->DrawTexture(controlsMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
 			if (buttons == false)
 			{
@@ -394,7 +417,7 @@ bool SceneManager::PostUpdate(float dt)
 
 				buttons = true;
 			}
-			if (app->input->pads[0].l1 == true && l1Pressed)
+			if (pad.l1 == true && l1Pressed)
 			{
 				app->ui->DestroyAllGuiControls();
 				audioSelected = true;
@@ -402,6 +425,15 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = false;
 				buttons = false;
 				l1Pressed = false;
+			}
+			if (pad.r1 && r1Pressed)
+			{
+				app->ui->DestroyAllGuiControls();
+				audioSelected = false;
+				graphicsSelected = true;
+				controlsSelected = false;
+				buttons = false;
+				r1Pressed = false;
 			}
 		}
 

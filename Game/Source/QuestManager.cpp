@@ -82,7 +82,7 @@ bool QuestManager::Update(float dt)
 
 	if (!app->input->pads[0].back) selectPressed = true;
 
-	if ((app->scene->currentScene->type == Scene::TYPE::MAP && app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN || (app->input->pads[0].back == true && selectPressed)) && !app->scene->menu && !app->items->invOpened && app->dialog->currentDialog == nullptr)
+	if ((app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN || (app->input->pads[0].back == true && selectPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->items->invOpened && app->dialog->currentDialog == nullptr)
 	{
 		selectPressed = false;
 		if (questInvOpened) app->ui->DestroyAllGuiControls();
