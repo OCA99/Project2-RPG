@@ -217,25 +217,27 @@ bool SceneManager::PostUpdate(float dt)
 
 		float dtSpeed = padSpeed * dt;
 
-		if (pad.l_x > 0.9f || pad.right)
+		LOG("padx: %f pady: %f", pad.l_x, pad.l_y);
+
+		if (pad.l_x > 0.6f || pad.right)
 		{
+			SetCursorPos(mousePosition.x, mousePosition.y);
 			mousePosition.x += dtSpeed;
-			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
-		if (pad.l_x < -0.9f || pad.left)
+		if (pad.l_x < -0.6f || pad.left)
 		{
+			SetCursorPos(mousePosition.x, mousePosition.y);
 			mousePosition.x -= dtSpeed;
-			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
-		if (pad.l_y < -0.9f || pad.up)
+		if (pad.l_y < -0.6f || pad.up)
 		{
+			SetCursorPos(mousePosition.x, mousePosition.y);
 			mousePosition.y -= dtSpeed;
-			SetCursorPos(mousePosition.x, mousePosition.y);
 		}
-		if (pad.l_y > 0.9f || pad.down)
+		if (pad.l_y > 0.6f || pad.down)
 		{
-			mousePosition.y += dtSpeed;
 			SetCursorPos(mousePosition.x, mousePosition.y);
+			mousePosition.y += dtSpeed;
 		}
 	}
 
@@ -248,7 +250,7 @@ bool SceneManager::PostUpdate(float dt)
 			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
 			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
 			buttons = true;
-			padSpeed = 200;
+			padSpeed = 400;
 		}
 	}
 	
