@@ -297,7 +297,7 @@ bool QuestManager::CheckQuestsLogic()
 			activeQuestsList->data->status = 2;
 			questsFinished.Add(activeQuestsList->data);
 			questsActive.Del(activeQuestsList);
-			//REWARDS();
+			//REWARDS
 			app->items->GiveItemToPlayer(activeQuestsList->data->reward);
 		}
 
