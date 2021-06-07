@@ -90,6 +90,7 @@ bool ItemManager::Update(float dt)
 			CreateButtons();
 			createButtons = false;
 		}
+
 	}
 
 	if (!invOpened) createButtons = true;
@@ -203,8 +204,8 @@ void ItemManager::CreateActionButtons(int y)
 {
 	if (actionButtons.Count() <= 0)
 	{
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //USE ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //DISCARD ITEM BUTTON
 
 	}
 	CheckActionButtons();
@@ -251,6 +252,8 @@ void ItemManager::DeleteActionButtons()
 		if (item->data->id == 19 || item->data->id == 20)
 			app->ui->DestroyGuiControl(item->data);
 
+		CreateButtons();
+
 		item = item->next;
 	}
 	actionButtons.Clear();
@@ -279,7 +282,6 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 	{
 		app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
 	}
-
 
 
 
