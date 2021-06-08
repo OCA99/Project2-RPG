@@ -58,7 +58,8 @@ public:
 	SDL_Texture** audioMenuTex;
 	SDL_Texture** controlsMenuTex;
 	SDL_Texture** questMenuTex;//Quest Menu Texture
-	SDL_Texture** invMenu;
+	SDL_Texture** invMenuThyma;
+	SDL_Texture** invMenuToisto;
 
 	bool graphicsSelected = false;
 	bool audioSelected = false;
