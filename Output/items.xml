@@ -14,6 +14,33 @@
 	 <!--  WEAPON --> 
 
 	<!-- ARMOR --> 
+		<item
+		type = "2"
+		title = "Leather ChestPlate"
+		description = "It will warm you on cold nights "
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "0"
+		buyCost = "0"
+		questItem = "false"
+		texturePath = "chestplate.png"
+		armorType = "chestplate"
+	/>
+	
+		<item
+		type = "2"
+		title = "Iron Helmet"
+		description = "It will warm you on cold nights "
+		objective = "None"
+		quantity = "1"
+		rewardingNPC = "None"
+		sellCost = "0"
+		buyCost = "0"
+		questItem = "false"
+		texturePath = "helmet.png"
+		armorType = "helmet"
+	/>
 
 	<!-- EXTRAS --> 
 	<item
