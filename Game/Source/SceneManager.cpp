@@ -218,7 +218,7 @@ bool SceneManager::PostUpdate(float dt)
 
 		float dtSpeed = padSpeed * dt;
 
-		LOG("padx: %f pady: %f", pad.l_x, pad.l_y);
+		//LOG("padx: %f pady: %f", pad.l_x, pad.l_y);
 
 		if (pad.l_x > 0.6f || pad.right)
 		{
