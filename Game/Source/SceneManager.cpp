@@ -60,7 +60,8 @@ bool SceneManager::Start()
 	optionsTex = app->tex->Load("Textures/UI/OptionsMenu/options_menu.png");
 	controlsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/controls_menu.png");
 	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
-	invMenu = app->tex->Load("Textures/UI/HUD/charactermenu.png");
+	invMenuThyma = app->tex->Load("Textures/UI/HUD/charactermenu.png");
+	invMenuToisto = app->tex->Load("Textures/UI/HUD/hud.png");
 
 	audioMenuTex = app->tex->Load("Textures/UI/OptionsMenu/audio_menu.png");
 	graphicsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/graphics_menu.png");
@@ -259,8 +260,15 @@ bool SceneManager::PostUpdate(float dt)
 		padSpeed = 600;
 
 		if (app->quests->questInvOpened) app->render->DrawTexture(questMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-		if (app->items->invOpened) app->render->DrawTexture(invMenu, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+		if (app->items->invOpened)
+		{
+			if (app->items->partyMember)
+				app->render->DrawTexture(invMenuToisto, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+			if(!app->items->partyMember)
+				app->render->DrawTexture(invMenuThyma, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+			
 
+		}
 		if (menu)
 		{
 
