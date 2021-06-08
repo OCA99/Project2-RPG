@@ -77,6 +77,8 @@ public:
 
 	void UseItem(Item* itemToUse, int y);
 
+	void RemoveItem(Item* itemToRemove, int y);
+
 	void CheckActionButtons();
 
 	void DrawPlayerStats();
