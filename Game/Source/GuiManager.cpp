@@ -143,11 +143,11 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		buttonTex = questButtonTex;
 		textTex = pixelTex;
 		break;
-	case 19:
+	case 19: //Use Item
 		buttonTex = itemTex;
 		textTex = useItemText;
 		break;
-	case 20:
+	case 20://Discard Item
 		buttonTex = itemTex;
 		textTex = discardItemText;
 		break;
@@ -156,6 +156,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		textTex = pixelTex;
 		break;
 	case 22://Inv Party Button
+		buttonTex = itemTex;
+		textTex = discardItemText;
+		break;
+	case 23://Remove Item 
 		buttonTex = itemTex;
 		textTex = discardItemText;
 		break;

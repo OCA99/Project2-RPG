@@ -94,8 +94,11 @@ bool GuiButton::Update(Input* input, float dt)
 	}
 	else
 	{
+
 		if (discarItem) discarItem = false;
 	}
+
+
 	if (id == 21 && state == GuiControlState::SELECTED)
 	{
 		for (int i = 0; i < app->puzzleManager->codeButtons.Count(); ++i)
@@ -112,6 +115,17 @@ bool GuiButton::Update(Input* input, float dt)
 		app->items->partyMember = !app->items->partyMember;
 		state = GuiControlState::NORMAL;
 
+	}
+
+	if (id == 23 && state == GuiControlState::SELECTED)
+	{
+		if (!removeItem) removeItem = true;
+		state = GuiControlState::NORMAL;
+
+	}
+	else
+	{
+		if (removeItem) removeItem = false;
 	}
 
 	if (state != GuiControlState::DISABLED)

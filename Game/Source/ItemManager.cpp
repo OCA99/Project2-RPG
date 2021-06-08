@@ -73,9 +73,7 @@ bool ItemManager::Start()
 
 bool ItemManager::Update(float dt)
 {
-	if (partyMember) LOG("TRUE");
-	if (!partyMember) LOG("FALSE");
-
+	
 	if (!app->input->pads[0].y) yPressed = true;
 
 	if ((app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || (app->input->pads[0].y && yPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->quests->questInvOpened && app->dialog->currentDialog == nullptr)
@@ -208,6 +206,8 @@ void ItemManager::CreateActionButtons(int y)
 	{
 		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //USE ITEM BUTTON
 		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //DISCARD ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 95 + 32 * y , 100, 20 }), 23)); //DISCARD ITEM BUTTON
+
 
 	}
 	CheckActionButtons();
@@ -240,7 +240,6 @@ void ItemManager::DeleteButtons()
 	while (item)
 	{
 
-		//if (item->data->id == 17 || item->data->id == 14)
 		app->ui->DestroyGuiControl(item->data);
 
 		item = item->next;
@@ -253,11 +252,10 @@ void ItemManager::DeleteActionButtons()
 	ListItem<GuiControl*>* item = actionButtons.start;
 	while (item)
 	{
-		if (item->data->id == 19 || item->data->id == 20)
+		if (item->data->id == 19 || item->data->id == 20 || item->data->id == 23)
 			app->ui->DestroyGuiControl(item->data);
 
 		CreateButtons();
-
 		item = item->next;
 	}
 	actionButtons.Clear();
@@ -311,6 +309,24 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 
 }
 
+void ItemManager::RemoveItem(Item* itemToRemove, int y)
+{
+	int a = 0;
+	ListItem<Item*>* item = playerItemList.start;
+	while (item)
+	{
+		if (a == y)
+		{
+			ListItem<Item*>* c = playerItemList.At(a);
+			playerItemList.Del(c);
+		}
+
+		a++;
+		item = item->next;
+
+	}
+}
+
 void ItemManager::CheckActionButtons()
 {
 	y = 0;
@@ -338,6 +354,15 @@ void ItemManager::CheckActionButtons()
 		{
 			item->data->itemSingleCheck = false;
 
+			DeleteActionButtons();
+
+		}
+
+		if (actionButtons.Count() > 0 && actionButtons[2]->removeItem && item->data->itemSingleCheck)
+		{
+			item->data->itemSingleCheck = false;
+			RemoveItem(playerItemList[y], y);
+			DeleteButtons();
 			DeleteActionButtons();
 
 		}
