@@ -151,9 +151,13 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		buttonTex = itemTex;
 		textTex = discardItemText;
 		break;
-	case 21:
+	case 21://Puzzle Button
 		buttonTex = puzzlePassTex;
 		textTex = pixelTex;
+		break;
+	case 22://Inv Party Button
+		buttonTex = itemTex;
+		textTex = discardItemText;
 		break;
 	default:
 		break;

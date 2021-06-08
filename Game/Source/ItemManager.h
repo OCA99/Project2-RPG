@@ -94,10 +94,14 @@ public:
 
 	bool invOpened = false;//True = Opened, False = closed.
 	bool createButtons = true;
+	bool partyMember = false; //false == toisto ;; true == thyma
 
 	bool useItem = false;
 	bool removeItem = false;
 	bool yPressed = true;
+
+	
+
 };
 
 

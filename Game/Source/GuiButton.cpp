@@ -107,7 +107,12 @@ bool GuiButton::Update(Input* input, float dt)
 
 	}
 
+	if (id == 22 && state == GuiControlState::SELECTED)
+	{
+		app->items->partyMember = !app->items->partyMember;
+		state = GuiControlState::NORMAL;
 
+	}
 
 	if (state != GuiControlState::DISABLED)
 	{

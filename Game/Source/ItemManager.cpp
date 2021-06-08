@@ -73,6 +73,8 @@ bool ItemManager::Start()
 
 bool ItemManager::Update(float dt)
 {
+	if (partyMember) LOG("TRUE");
+	if (!partyMember) LOG("FALSE");
 
 	if (!app->input->pads[0].y) yPressed = true;
 
@@ -81,7 +83,7 @@ bool ItemManager::Update(float dt)
 		yPressed = false;
 		invOpened = !invOpened;//Open or close Inv
 	}
-	
+
 
 	if (invOpened)
 	{
@@ -100,7 +102,7 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
-	
+
 	if (invOpened)//If the inventory is opened bool
 	{
 		DrawPlayerItems();//Draw Items Image and Title
@@ -152,7 +154,7 @@ void ItemManager::GiveItemToPlayer(SString& itemTitle)
 		}
 		//else if (playerItemList.Add(SearchForItem(itemTitle)) == nullptr)
 		//	LOG("There is no Reward for this Quest");
-		else{ playerItemList.Add(SearchForItem(itemTitle)); }
+		else { playerItemList.Add(SearchForItem(itemTitle)); }
 
 	}
 }
@@ -176,13 +178,13 @@ void ItemManager::ShowDescription()
 	int b = 0;
 	while (item)
 	{
-		if (b > playerItemList.Count()) 
+		if (b > playerItemList.Count())
 			b = 0;
 		if (item->data->itemSingleCheck)
 			CreateActionButtons(b);
 		if (item->data->itemCheck)
 		{
-			
+
 			if (b < playerItemList.Count())
 			{
 				//Draw Texture
@@ -225,6 +227,8 @@ void ItemManager::CreateButtons()
 			item = item->next;
 		}
 		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14));//CREATE EXIT BUTTON
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 200 , 15, 30, 30 }), 22));//CREATE PARTY BUTTON
+
 	}
 
 }
@@ -264,23 +268,28 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 	//EFECTO DE CADA ITEM
 	if (itemtoUse->title == SString("HP Potion"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.Addhealth(15.f);
+		if(partyMember) app->party->allyParty->FindByName("Toisto")->data.Addhealth(15.f);
+		if(!partyMember) app->party->allyParty->FindByName("Thyma")->data.Addhealth(15.f);
 	}
 	if (itemtoUse->title == SString("EXP Potion"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddExp(17.f);
+		if(partyMember) app->party->allyParty->FindByName("Toisto")->data.AddExp(17.f);
+		if(!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddExp(17.f);
 	}
 	if (itemtoUse->title == SString("Coin"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddMoney(1);
+		if(partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(1);
+		if(!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(1);
 	}
 	if (itemtoUse->title == SString("Coin Stack"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddMoney(50.f);
+		if(partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(50.f);
+		if(!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(50.f);
 	}
 	if (itemtoUse->title == SString("Treasure Chest"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
+		if(partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(150.f);
+		if(!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
 	}
 
 
@@ -297,7 +306,7 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 
 		a++;
 		item = item->next;
-		
+
 	}
 
 }
@@ -314,8 +323,8 @@ void ItemManager::CheckActionButtons()
 			actionButtons[1]->Draw(app->render);
 
 		}
-		
-		if (actionButtons.Count() > 0  && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
+
+		if (actionButtons.Count() > 0 && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
 		{
 			item->data->itemSingleCheck = false;
 
@@ -343,11 +352,28 @@ void ItemManager::DrawPlayerStats()
 {
 	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
 	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
-	float hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
-	float exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+	float hp = 0;
+	float exp = 0;
+	float health = 0;
+	float experience = 0;
+	if (partyMember)
+	{
+		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
+		exp = app->party->allyParty->FindByName("Toisto")->data.GetExp();
 
-	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
-	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
+		health = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
+		experience = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
+	}
+
+	if (!partyMember)
+	{
+		hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+		exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+
+		health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
+		experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
+
+	}
 
 	int barPosX = 714;
 	int barPosY = 595;
@@ -355,9 +381,9 @@ void ItemManager::DrawPlayerStats()
 	app->render->DrawRectangle({ 713,595,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 	app->render->DrawRectangle({ 713, 645,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 
-	if(hp > 85)
+	if (hp > 85)
 		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 85, 95, 255, false, false);//BLUE
-	
+
 	if (hp <= 85)
 		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
