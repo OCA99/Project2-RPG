@@ -6,6 +6,7 @@
 #include "Quest.h"
 #include "Scene.h"
 #include "PartyManager.h"
+#include "ParticleSystem.h"
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
@@ -258,18 +259,47 @@ void BattleManager::DoAction()
 	if (currentAction == 0) app->audio->PlayFx(9, 0);
 	if (currentAction == 1) app->audio->PlayFx(10, 0);
 
+	fPoint pos;
+	if (currentParty == 0) {
+		if (a->type == Action::Type::ATTACK)
+		{
+			pos = fPoint(512.0f, 52 + currentTarget * 80.5f) * 5;
+		}
+		else {
+			pos = fPoint(72.0f, 82 + currentTarget * 80.5f) * 5;
+		}
+	}
+	else {
+		if (a->type == Action::Type::ATTACK)
+		{
+			pos = fPoint(72.0f, 82 + currentTarget * 80.5f) * 5;
+		}
+		else {
+			pos = fPoint(512.0f, 52 + currentTarget * 80.5f) * 5;
+		}
+	}
+
 	Member* t = nullptr;
-	if (!targets.empty())
+	if (!targets.empty()) {
 		t = targets.at(currentTarget);
+		if (a->type == Action::Type::ATTACK) {
+			app->scene->currentScene->slashes.Add(app->particleSystem->AddEmitter(pos, EmitterData::EmitterType::SLASH));
+		}
+		else {
+			app->scene->currentScene->heals.Add(app->particleSystem->AddEmitter(pos, EmitterData::EmitterType::HEAL));
+		}
+	}
 	else
 	{
 		if (a->type == Action::Type::ATTACK)
 		{
 			t = app->party->allyParty->list.at(currentTarget);
+			app->scene->currentScene->slashes.Add(app->particleSystem->AddEmitter(pos, EmitterData::EmitterType::SLASH));
 		}
 		else if (a->type == Action::Type::DEFENSE)
 		{
 			t = app->party->enemyParty->list.at(currentTarget);
+			app->scene->currentScene->heals.Add(app->particleSystem->AddEmitter(pos, EmitterData::EmitterType::HEAL));
 		}
 	}
 
