@@ -104,6 +104,7 @@
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\DialogSytem.cpp" />
     <ClCompile Include="Source\Easing.cpp" />
+    <ClCompile Include="Source\Emitter.cpp" />
     <ClCompile Include="Source\EventHandler.cpp" />
     <ClCompile Include="Source\Fonts.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
@@ -121,6 +122,8 @@
     <ClCompile Include="Source\InputSystem.cpp" />
     <ClCompile Include="Source\MenuFadeSystem.cpp" />
     <ClCompile Include="Source\NPCMovementSystem.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\PartyManager.cpp" />
     <ClCompile Include="Source\PositionSystem.cpp" />
     <ClCompile Include="Source\PuzzleManager.cpp" />
@@ -148,6 +151,7 @@
     <ClInclude Include="Source\DialogSytem.h" />
     <ClInclude Include="Source\Easing.h" />
     <ClInclude Include="Source\ECS.h" />
+    <ClInclude Include="Source\Emitter.h" />
     <ClInclude Include="Source\EventHandler.h" />
     <ClInclude Include="Source\External\simplify.h" />
     <ClInclude Include="Source\Fonts.h" />
@@ -163,6 +167,8 @@
     <ClInclude Include="Source\MenuFadeSystem.h" />
     <ClInclude Include="Source\NPCFactory.h" />
     <ClInclude Include="Source\NPCMovementSystem.h" />
+    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\PartyManager.h" />
     <ClInclude Include="Source\PlayerFactory.h" />
     <ClInclude Include="Source\InputSystem.h" />

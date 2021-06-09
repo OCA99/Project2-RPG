@@ -80,6 +80,9 @@
     <ClCompile Include="Source\Easing.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Emitter.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -214,6 +217,9 @@
     <ClInclude Include="Source\Easing.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Emitter.h" />
+    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

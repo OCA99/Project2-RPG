@@ -472,10 +472,10 @@ bool SceneManager::PostUpdate(float dt)
 // Called before quitting
 bool SceneManager::CleanUp()
 {
-	if (currentScene != nullptr && currentScene->type == Scene::TYPE::MAP)
-		delete (MapScene*)currentScene;
-	else
-		delete currentScene;
+	if (currentScene == nullptr) return true;
+	currentScene->CleanUp();
+
+	delete currentScene;
 
 	return true;
 }

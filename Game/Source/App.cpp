@@ -17,6 +17,7 @@
 #include "ItemManager.h"
 #include "AssetsManager.h"
 #include "PuzzleManager.h"
+#include "ParticleSystem.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -49,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	battle = new BattleManager();
 	items = new ItemManager();
 	puzzleManager = new PuzzleManager();
+	particleSystem = new ParticleSystem();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -69,6 +71,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(debug);
 	AddModule(battle);
 	AddModule(puzzleManager);
+	AddModule(particleSystem);
 
 	// Render last to swap buffer
 	AddModule(render);
