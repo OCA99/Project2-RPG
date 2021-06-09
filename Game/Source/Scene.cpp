@@ -159,11 +159,6 @@ void MenuScene::Load()
 	e->assign<MenuFade>(70);
 	e->assign<Sprite>(gameTitle, 0.5f, 1);
 
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0); //start
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1); //continue
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
-	app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
-
 	app->render->camera.x = app->render->camera.y = 0;
 }
 

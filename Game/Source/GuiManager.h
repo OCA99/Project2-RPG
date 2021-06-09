@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255, Uint8 a = 255, int sliderValue = 0);
+	GuiControl* CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, bool anim = false, int fPos = 0, int time = 0, SplineType esType = SplineType::NONE, Uint8 r = 255, Uint8 g = 255, Uint8 b = 255, Uint8 a = 255, int sliderValue = 0);
 	void DestroyGuiControl(GuiControl* entity);
 
 	void DestroyAllGuiControls();

@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "Easing.h"
 #include "SceneManager.h"
 #include "QuestManager.h"
 #include "DialogSytem.h"
@@ -36,6 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	assetsManager = new AssetsManager();
 	tex = new Textures();
 	audio = new Audio();
+	easing = new Easing();
 	quests = new QuestManager();
 	dialog = new DialogSystem();
 	map = new Map();
@@ -55,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(assetsManager);
 	AddModule(audio);
+	AddModule(easing);
 	AddModule(map);
 	AddModule(scene);
 	AddModule(dialog);

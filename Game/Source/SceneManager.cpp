@@ -245,10 +245,10 @@ bool SceneManager::PostUpdate(float dt)
 	{
 		if (!buttons)
 		{
-			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 148, 120, 32 }), 0); //start
-			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 201, 120, 32 }), 1); //continue
-			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 256, 120, 32 }), 2); //options
-			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 262, 311, 120, 32 }), 3); //exit
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 100, 148, 120, 32 }), 0, true, 1000, 6000, SplineType::EASE); //start
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 100, 201, 120, 32 }), 1, true, 1000, 10, SplineType::EASE); //continue
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 100, 256, 120, 32 }), 2, true, 1000, 10, SplineType::EASE); //options
+			app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 100, 311, 120, 32 }), 3, true, 1000, 10, SplineType::EASE); //exit
 			buttons = true;
 			padSpeed = 400;
 		}
