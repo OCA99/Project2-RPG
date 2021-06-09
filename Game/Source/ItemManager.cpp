@@ -72,16 +72,23 @@ bool ItemManager::Start()
 		itemNode = itemNode.next_sibling("item");
 	}
 
-	//GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("HP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
+	GiveItemToPlayer(SString("EXP Potion"));
 	//GiveItemToPlayer(SString("HP Potion"));
-	GiveItemToPlayer(SString("Leather Helmet"));
-	GiveItemToPlayer(SString("Leather Chestplate"));
-	GiveItemToPlayer(SString("Leather Leggings"));
-	GiveItemToPlayer(SString("Leather Boots"));
-	GiveItemToPlayer(SString("Iron Helmet"));
-	GiveItemToPlayer(SString("Iron Chestplate"));
-	GiveItemToPlayer(SString("Magic Pendant"));
-	GiveItemToPlayer(SString("Iron Sword"));
+	//GiveItemToPlayer(SString("Leather Helmet"));
+	//GiveItemToPlayer(SString("Leather Chestplate"));
+	//GiveItemToPlayer(SString("Leather Leggings"));
+	//GiveItemToPlayer(SString("Leather Boots"));
+	//GiveItemToPlayer(SString("Iron Helmet"));
+	//GiveItemToPlayer(SString("Iron Chestplate"));
+	//GiveItemToPlayer(SString("Magic Pendant"));
+	//GiveItemToPlayer(SString("Iron Sword"));
 
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
@@ -98,6 +105,10 @@ bool ItemManager::Update(float dt)
 		yPressed = false;
 		invOpened = !invOpened;//Open or close Inv
 	}
+	if ((app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (app->input->pads[0].y && yPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP)
+	{
+		app->party->allyParty->FindByName("Thyma")->data.Addhealth(1.0f);
+	}
 
 
 	if (invOpened)
@@ -111,7 +122,6 @@ bool ItemManager::Update(float dt)
 	}
 
 	if (!invOpened) createButtons = true;
-
 	return true;
 }
 
@@ -460,36 +470,61 @@ void ItemManager::DrawPlayerStats()
 	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
 	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
 	float hp = 0;
+	float maxHp = 0;
+	float pixelHp = 0;
+	float resultHp = 0;
+
 	float exp = 0;
-	float health = 0;
-	float experience = 0;
+	float resultExp = 0;
+	int maxExp = 0;
+	float pixelExp = 0;
+
+
 	float attackPower = 0;
 	int money = 0;
 	float armor = 0;
+	int level = 0;
+
 	if (partyMember)
 	{
 		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
 		exp = app->party->allyParty->FindByName("Toisto")->data.GetExp();
 
-		health = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
-		experience = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
+		pixelHp = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
+		pixelExp = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
 		attackPower = (app->party->allyParty->FindByName("Toisto")->data.GetPower());
 		money = app->party->allyParty->FindByName("Toisto")->data.GetMoney();
 		armor = app->party->allyParty->FindByName("Toisto")->data.GetArmor();
+		level = app->party->allyParty->FindByName("Toisto")->data.GetLevel();
+		
 		
 	}
 
 	if (!partyMember)
 	{
-		hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
-		exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
 
-		health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
-		experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
+		maxExp = app->party->allyParty->FindByName("Thyma")->data.GetMaxExp();
+		exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+		resultExp = (100 * exp) / maxExp;
+		pixelExp = resultExp * 288/ 100;
+
+
+
+		maxHp = app->party->allyParty->FindByName("Thyma")->data.GetMaxHealth();
+		maxHp = 100;
+		hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+		hp = 92;
+		resultHp = (100 * hp) / maxHp;
+		pixelHp = resultHp * 288 / 100;
+
+
+
 		attackPower = (app->party->allyParty->FindByName("Thyma")->data.GetPower());
 
 		money = app->party->allyParty->FindByName("Thyma")->data.GetMoney();
 		armor = app->party->allyParty->FindByName("Thyma")->data.GetArmor();
+		level = app->party->allyParty->FindByName("Thyma")->data.GetLevel();
+
 	}
 
 	int barPosX = 714;
@@ -498,66 +533,66 @@ void ItemManager::DrawPlayerStats()
 	app->render->DrawRectangle({ 713,595,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 	app->render->DrawRectangle({ 713, 645,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 
-	if (hp > 85)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 85, 95, 255, false, false);//BLUE
+	if (resultHp > 85)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 50, 85, 95, 255, true, false);//BLUE
 
-	if (hp <= 85)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
+	if (resultHp <= 85)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
-	if (hp <= 75)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
+	if (resultHp <= 75)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
 
-	if (hp <= 67)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 71, 89, 50, 255, true, false);//GREEN
+	if (resultHp <= 67)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 71, 89, 50, 255, true, false);//GREEN
 
-	if (hp <= 60)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
+	if (resultHp <= 60)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
 
-	if (hp <= 50)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 123, 100, 51, 255, true, false);//YELLOW
+	if (resultHp <= 50)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 123, 100, 51, 255, true, false);//YELLOW
 
-	if (hp <= 40)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
+	if (resultHp <= 40)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
 
-	if (hp <= 30)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 123, 77, 52, 255, true, false);//ORANGE
+	if (resultHp <= 30)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 123, 77, 52, 255, true, false);//ORANGE
 
-	if (hp <= 20)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
+	if (resultHp <= 20)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
 
-	if (hp <= 10)
-		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 102, 49, 49, 255, true, false);//DARK RED
+	if (resultHp <= 10)
+		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 102, 49, 49, 255, true, false);//DARK RED
 
 
-	if (exp > 85)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 50, 85, 95, 255, true, false);//BLUE
+	if (resultExp > 85)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 50, 85, 95, 255, true, false);//BLUE
 
-	if (exp <= 85)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
+	if (resultExp <= 85)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
-	if (exp <= 75)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
+	if (resultExp <= 75)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
 
-	if (exp <= 67)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 71, 89, 50, 255, true, false);//GREEN
+	if (resultExp <= 67)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 71, 89, 50, 255, true, false);//GREEN
 
-	if (exp <= 60)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
+	if (resultExp <= 60)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
 
-	if (exp <= 50)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 123, 100, 51, 255, true, false);//YELLOW
+	if (resultExp <= 50)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 123, 100, 51, 255, true, false);//YELLOW
 
-	if (exp <= 40)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
+	if (resultExp <= 40)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
 
-	if (exp <= 30)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 123, 77, 52, 255, true, false);//ORANGE
+	if (resultExp <= 30)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 123, 77, 52, 255, true, false);//ORANGE
 
-	if (exp <= 20)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
+	if (resultExp <= 20)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
 
-	if (exp <= 10)
-		app->render->DrawRectangle({ 713, 645,(int)experience, 18 }, 102, 49, 49, 255, true, false);//DARK RED
+	if (resultExp <= 10)
+		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 102, 49, 49, 255, true, false);//DARK RED
 
 
 	//Draw HP NUMBER
@@ -575,6 +610,9 @@ void ItemManager::DrawPlayerStats()
 	//Draw Armor
 	text = ToUpperCase(to_string((int)armor));
 	app->fonts->BlitText(560, 325, 0, text.c_str());
+	//Draw Level
+	text = ToUpperCase(to_string((int)level));
+	app->fonts->BlitText(250, 310, 0, text.c_str());
 }
 
 void ItemManager::DrawArmor()
