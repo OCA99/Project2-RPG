@@ -78,12 +78,11 @@ bool GuiManager::CleanUp()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int sliderValue)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, bool anim, int fPos, int time, SplineType esType, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int sliderValue)
 {
 	GuiControl* control = nullptr;
 	SDL_Texture** textTex = nullptr;
 	SDL_Texture** buttonTex = nullptr;
-	SplineType* eType = nullptr;
 
 	switch (id)
 	{
@@ -164,12 +163,33 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		control = new GuiButton(id, bounds, buttonTex, textTex,eType);
-		control->SetObserver(app->scene);
-		control->color.r = r;
-		control->color.g = g;
-		control->color.b = b;
-		control->color.a = a;
+		if (anim == true)
+		{
+			control = new GuiButton(id,  buttonTex, bounds, textTex,fPos,time,esType);
+			control->SetObserver(app->scene);
+			control->color.r = r;
+			control->color.g = g;
+			control->color.b = b;
+			control->color.a = a;
+			if (id == 1)
+			{
+				type = type;
+			}
+
+		} else if (anim == false) 
+		{
+			control = new GuiButton(id, bounds, buttonTex, textTex);
+			control->SetObserver(app->scene);
+			control->color.r = r;
+			control->color.g = g;
+			control->color.b = b;
+			control->color.a = a;
+			if (id == 1)
+			{
+				type = type;
+			}
+		}
+		
 		break;
 	case GuiControlType::CHECKBOX:
 		control = new GuiCheckBox(id, bounds, checkBoxTex, onOffTex);

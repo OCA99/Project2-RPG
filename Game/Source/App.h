@@ -13,6 +13,7 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+class Easing;
 class SceneManager;
 class DialogSystem;
 class Map;
@@ -88,6 +89,7 @@ public:
 	Render* render;
 	Textures* tex;
 	Audio* audio;
+	Easing* easing;
 	SceneManager* scene;
 	DialogSystem* dialog;
 	Map* map;
