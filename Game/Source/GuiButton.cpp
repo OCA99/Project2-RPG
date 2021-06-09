@@ -28,7 +28,8 @@ GuiButton::GuiButton(uint32 id,  SDL_Texture** tex, SDL_Rect bounds, SDL_Texture
 	this->text = text;
 	this->texture = tex;
 	this->texture2 = textTex;
-	app->easing->CreateSpline(&bounds.x, fPos, time, esType);
+	int* origin = &this->bounds.x;
+	app->easing->CreateSpline(origin, fPos, time, esType);
 
 }
 
