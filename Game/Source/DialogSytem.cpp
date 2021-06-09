@@ -207,14 +207,15 @@ bool DialogSystem::LoadDialog(const char* filename)
 		std::string id = dialogRoot.attribute("id").as_string();
 		if (dialogues.find(id) == dialogues.end())
 		{
-			optionRoot = dialogRoot.child("options");
-			nameNPC = optionRoot.attribute("speaker").as_string();
 			// Parse the dialog XML into the tree structure.
 			DialogNode* dialog = ParseDialogXML(dialogRoot);
 			// Insert the dialog into the dictionary.
 			dialogues.insert(std::make_pair(id, dialog));
 		}
 
+
+		optionRoot = dialogRoot.child("options");
+		nameNPC = optionRoot.attribute("speaker").as_string();
 		/* End TODO 1 */
 	}
 
