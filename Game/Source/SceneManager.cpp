@@ -79,6 +79,10 @@ bool SceneManager::Start()
 	mousePosition.x = m.x;
 	mousePosition.y = m.y;
 
+	sCreated = false;
+	place = -500;
+
+
 	return true;
 }
 
@@ -186,6 +190,14 @@ bool SceneManager::PostUpdate(float dt)
 	{
 		app->audio->PlayFx(8, 0);
 		if(startPressed)menu = !menu;
+		if (menu == true)
+		{
+			sCreated = false;
+			place = -500;
+			pos = &place;
+
+		}
+
 		startPressed = false;
 	}
 
@@ -274,15 +286,16 @@ bool SceneManager::PostUpdate(float dt)
 
 			if (!optionsMenu)
 			{
-				app->render->DrawTexture(menuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+				CheckSpline();
+				app->render->DrawTexture(menuTex, *pos, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
 				if (buttons == false)
 				{
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 82, 120, 32 }), 4);//continue
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 271 / 2, 120, 32 }), 5);//save
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 381 / 2, 120, 32 }), 6);//load
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 491 / 2, 120, 32 }), 2);//options
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 601 / 2, 120, 32 }), 7);//back to menu
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 82, 120, 32 }), 4, true, 260, 300, SplineType::BACK);//continue
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 271 / 2, 120, 32 }), 5, true, 260, 400, SplineType::BACK);//save
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 381 / 2, 120, 32 }), 6, true, 260, 500, SplineType::BACK);//load
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 491 / 2, 120, 32 }), 2, true, 260, 600, SplineType::BACK);//options
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 601 / 2, 120, 32 }), 7, true, 260, 700, SplineType::BACK);//back to menu
 					buttons = true;
 				}
 
@@ -300,6 +313,7 @@ bool SceneManager::PostUpdate(float dt)
 
 				Mix_VolumeMusic(app->volume);
 			}
+			
 		
 		}
 
@@ -570,21 +584,29 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 	case 4: //continue (exit menu) button
 		app->ui->DestroyAllGuiControls();
 		menu = 0;
+		sCreated = false;
+		place = -500;
+
 
 		break;
 	case 5: //save
 		app->RequestSave();
+
 		break;
 	case 6: //load
 		app->ui->DestroyAllGuiControls();
 		app->RequestLoad();
 		app->scene->menu = 0;
+
 		break;
 	case 7: //back to menu
 		app->ui->DestroyAllGuiControls();
 		s = (Scene*)(new MenuScene());
 		sceneToBeLoaded = s;
 		menu = false;
+		sCreated = false;
+		place = -500;
+
 		break;
 	case 8:
 		slider = (GuiSlider*)control;
@@ -631,6 +653,8 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		buttons = false;
 		app->items->invOpened = false;
 		app->quests->questInvOpened = false;
+		sCreated = false;
+		place = -500;
 		break;
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
@@ -650,4 +674,15 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 	//8,9,10 are audio sliders
 
 	return true;
+}
+
+void SceneManager::CheckSpline()
+{
+	if (sCreated == false)
+	{
+		app->easing->CreateSpline(pos, 0, 200, SplineType::BACK);
+		sCreated = true;
+	}
+
+
 }
