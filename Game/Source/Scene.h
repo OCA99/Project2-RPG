@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "App.h"
 #include "Map.h"
+#include "Emitter.h"
 
 class Scene
 {
@@ -32,6 +33,14 @@ public:
 public:
 	ECS::World* world = nullptr;
 	TYPE type;
+
+	List<Emitter*> fires;
+	List<Emitter*> smokes;
+	List<Emitter*> novas;
+	List<Emitter*> slashes;
+	List<Emitter*> bubbles;
+	List<Emitter*> heals;
+	List<Emitter*> blesses;
 };
 
 class MapScene : Scene
