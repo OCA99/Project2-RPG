@@ -17,8 +17,6 @@ GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex, int sliderVa
 
 	unit = bounds.w / 100.0f;
 
-	// el musicVolume iii fxVolume empieza en 100 en guiManager, no se cambia en ningún lao, tmbién se tiene q hacer q cuando lo pruebes
-	//suene al volumen q toca pq cuando estamos en menu la musica se capea a 25.
 	if (id == 8)
 	{
 		value = app->volume;
@@ -34,6 +32,37 @@ GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex, int sliderVa
 
 	value = round(value);
 	sliderPosx = ((value * unit) + bounds.x) - 5 - 10;
+}
+
+GuiSlider::GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex, int sliderValue, bool horizontal, int fPos, float time, SplineType esType) : GuiControl(GuiControlType::SLIDER, id)
+{
+	this->bounds = bounds;
+	this->text = text;
+	this->texture = tex;
+	slider = { bounds.x, bounds.y, 30, 30 };
+
+	unit = bounds.w / 100.0f;
+
+	if (id == 8)
+	{
+		value = app->volume;
+	}
+	else if (id == 9)
+	{
+		value = app->volumeMusic;
+	}
+	else if (id == 10)
+	{
+		value = app->volumeFx;
+	}
+
+	value = round(value);
+	sliderPosx = ((value * unit) + bounds.x) - 5 - 10;
+
+	int* origin = &this->bounds.x;
+	if (!horizontal) origin = &this->bounds.y;
+
+	app->easing->CreateSpline(origin, fPos, time, esType);
 }
 
 GuiSlider::~GuiSlider()

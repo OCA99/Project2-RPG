@@ -4,6 +4,7 @@
 #include "GuiControl.h"
 #include "Log.h"
 
+#include "Easing.h"
 #include "Point.h"
 #include "SString.h"
 
@@ -12,6 +13,7 @@ class GuiCheckBox : public GuiControl
 public:
 
 	GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex);
+	GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex, bool horizontal, int fPos, float time, SplineType esType);
 	virtual ~GuiCheckBox();
 
 	bool Update(Input* input, float dt);

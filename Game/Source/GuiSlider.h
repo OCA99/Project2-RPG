@@ -6,12 +6,15 @@
 #include "Point.h"
 #include "SString.h"
 #include "Audio.h"
+#include "Easing.h"
 
 class GuiSlider : public GuiControl
 {
 public:
 
 	GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex, int sliderValue);
+	GuiSlider(uint32 id, SDL_Rect bounds, SDL_Texture** tex, int sliderValue, bool horizontal, int fPos, float time, SplineType esType);
+
 	virtual ~GuiSlider();
 
 	bool Start();
