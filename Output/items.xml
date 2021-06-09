@@ -12,95 +12,109 @@
 		texturePath = "(const char*) This is the texture path"
 	/>
 	 <!--  WEAPON --> 
+	 	<item
+		title = "Iron Sword"
+		displayTitle = "Iron Sword"
+		description = "It will kill|all the Skeletons"
+		quantity = "1"
+		texturePath = "iron_sword.png"
+		armorType = "weapon"
+	/>
 
 	<!-- ARMOR --> 
 		<item
-		type = "2"
-		title = "Leather ChestPlate"
-		description = "It will warm you on cold nights "
-		objective = "None"
+		title = "Leather Chestplate"
+		displayTitle = "Leather|ChestPlate"
+		description = "It will warm you|on cold nights"
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "0"
-		buyCost = "0"
-		questItem = "false"
-		texturePath = "chestplate.png"
+		texturePath = "leather_chestplate.png"
 		armorType = "chestplate"
 	/>
 	
 		<item
-		type = "2"
-		title = "Iron Helmet"
-		description = "It will warm you on cold nights "
-		objective = "None"
+		title = "Leather Helmet"
+		displayTitle = "Leather|Helmet"
+		description = "It will warm you|on cold nights "
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "0"
-		buyCost = "0"
-		questItem = "false"
-		texturePath = "helmet.png"
+		texturePath = "leather_helmet.png"
 		armorType = "helmet"
+	/>
+		<item
+		title = "Leather Leggings"
+		displayTitle = "Leather|Leggings"
+		description = "It will warm you|on cold nights"
+		quantity = "1"
+		texturePath = "leather_leggings.png"
+		armorType = "leggings"
+	/>
+		<item
+		title = "Leather Boots"
+		displayTitle = "Leather|Boots"
+		description = "It will warm you|on cold nights"
+		quantity = "1"
+		texturePath = "leather_boots.png"
+		armorType = "boots"
+	/>
+		<item
+		title = "Iron Chestplate"
+		displayTitle = "Iron|ChestPlate"
+		description = "It will warm you|on cold nights"
+		quantity = "1"
+		texturePath = "iron_chestplate.png"
+		armorType = "chestplate"
+	/>
+	
+		<item
+		title = "Iron Helmet"
+		displayTitle = "Iron|Helmet"
+		description = "It will warm you|on cold nights "
+		quantity = "1"
+		texturePath = "iron_helmet.png"
+		armorType = "helmet"
+	/>
+		<item
+		title = "Magic Pendant"
+		displayTitle = "Magic Pendant"
+		description = "It has some arcane|magical powers"
+		quantity = "1"
+		texturePath = "staff.png"
+		armorType = "accesory"
 	/>
 
 	<!-- EXTRAS --> 
 	<item
-		type = "2"
 		title = "Coin"
+		displayTitle = "Coin"
 		description = "just a simple coin"
-		objective = "None"
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "0"
-		buyCost = "0"
-		questItem = "true"
 		texturePath = "coin.png"
 	/>
 	<item
-		type = "2"
 		title = "Coin Stack"
+		displayTitle = "Coin Stack"
 		description = "a bag of shiny coins"
-		objective = "None"
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "0"
-		buyCost = "0"
-		questItem = "true"
 		texturePath = "coin_stack.png"
 	/>
 	<item
-		type = "2"
 		title = "HP Potion"
+		displayTitle = "HP Potion"
 		description = "a potion with|healing properties|that heals|15hp"
-		objective = "None"
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "50"
-		buyCost = "100"
-		questItem = "true"
 		texturePath = "hp_potion.png"
 	/>
 	<item
-		type = "2"
 		title = "EXP Potion"
+		displayTitle = "EXP Potion"
 		description = "a potion with raw|properties|that increases|17exp"
-		objective = "None"
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "50"
-		buyCost = "100"
-		questItem = "true"
 		texturePath = "exp_potion.png"
 	/>
 	<item
-		type = "2"
 		title = "Treasure Chest"
+		displayTitle = "Treasure Chest"
 		description = "A valuable chest|with a large amount|of coins inside"
-		objective = "None"
 		quantity = "1"
-		rewardingNPC = "None"
-		sellCost = "0"
-		buyCost = "0"
-		questItem = "true"
 		texturePath = "chest.png"
 	/>
 </items>
