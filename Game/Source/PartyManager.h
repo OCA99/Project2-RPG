@@ -24,7 +24,8 @@ struct Data {
 	float health = 0;
 	float exp = 10;
 	float maxHealth;
-	float power;
+	float armor = 0;
+	float power = 0;
 	bool dead = false;
 	int money = 0;
 	std::vector<Action*> actions;
@@ -32,6 +33,8 @@ struct Data {
 	int GetMoney() { return money; }
 	float GetHealth() { return health; }
 	float GetExp() { return exp; }
+	float GetArmor() { return armor; }
+	float GetPower() { return power; }
 	
 	void Addhealth(float hp) 
 	{
@@ -40,6 +43,8 @@ struct Data {
 	}
 	void AddMoney(int m) { money = money + m; }
 	void AddExp(float ex) { exp = exp + ex; }
+	void AddArmor(int ar) { armor = armor + ar; }
+	void AddPower(float pw) { power = power + pw; }
 
 	void CleanUp() {
 		for (int i = 0; i < actions.size(); i++) {
