@@ -252,7 +252,7 @@ void PartyManager::InitializeParties()
 	allyParty = new Party("ALLY PARTY");
 	Member* toisto = new Member("Toisto", PLAYER1, 100.0f, 20.0f, false);
  	allyParty->AddMember(toisto);
-	Member* thyma = new Member("Thyma", PLAYER2, 50.f, 25.f, false);
+	Member* thyma = new Member("Thyma", PLAYER2, 100.f, 25.f, false);
 	allyParty->AddMember(thyma);
 
 	Action* a = new Action("Punch", toisto, Action::Filter::ENEMY, 1, 0, Action::Type::ATTACK);

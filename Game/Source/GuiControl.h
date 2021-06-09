@@ -105,6 +105,7 @@ public:
 	bool itemSingleCheck = false;
 	bool itemUsed = false; // Check if Item has been Selected
 	bool discarItem = false;
+	bool removeItem = false;
 	bool questCheck = false; // Check if Quest has been Selected
 	bool checkPuzzle = false;
 
