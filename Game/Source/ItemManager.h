@@ -17,7 +17,13 @@
 using namespace std;
 
 class Font;
-
+enum class ArmorType {
+	NONE,
+	HELMET,
+	CHESTPLATE,
+	LEGGINGS,
+	BOOTS
+};
 class Item
 {
 public:
@@ -36,6 +42,7 @@ public:
 	SString rewardingNPC; // Name of rewarding NPC
 	SString texturePath; //Texture Path
 	SDL_Texture** itemTex = nullptr;
+	ArmorType armorType = ArmorType::NONE;
 };
 
 class ItemManager : public Module
@@ -77,9 +84,15 @@ public:
 
 	void UseItem(Item* itemToUse, int y);
 
+	void RemoveItem(Item* itemToRemove, int y);
+
+	void EquipArmor(Item* armourItem);
+
 	void CheckActionButtons();
 
 	void DrawPlayerStats();
+
+	void DrawArmor();
 
 
 public:
@@ -87,6 +100,8 @@ public:
 
 	List<Item*> itemList;//ALL Items
 	List<Item*> playerItemList;//Player Items
+	List<Item*> thymaArmor;//Armor list
+	List<Item*> toistoArmor;//Armor list
 	List<GuiControl*> buttons;//Buttons List
 	List<GuiControl*> actionButtons;//Buttons List
 
@@ -94,10 +109,15 @@ public:
 
 	bool invOpened = false;//True = Opened, False = closed.
 	bool createButtons = true;
+	bool partyMember = false; //false == toisto ;; true == thyma
 
 	bool useItem = false;
 	bool removeItem = false;
 	bool yPressed = true;
+
+	ArmorType currentAmor = ArmorType::NONE;
+
+
 };
 
 

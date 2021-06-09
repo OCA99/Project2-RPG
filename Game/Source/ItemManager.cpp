@@ -58,6 +58,15 @@ bool ItemManager::Start()
 		item->questItem = itemNode.attribute("questItem").as_bool();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
 		item->itemTex = app->tex->Load(SString("Textures/Items/%s", item->texturePath.GetString()).GetString());
+		SString tmp = itemNode.attribute("armorType").as_string();
+		if (tmp == SString("chestplate"))
+			item->armorType = ArmorType::CHESTPLATE;
+		if (tmp == SString("helmet"))
+			item->armorType = ArmorType::HELMET;
+		if (tmp == SString("leggings"))
+			item->armorType = ArmorType::LEGGINGS;
+		if (tmp == SString("boots"))
+			item->armorType = ArmorType::BOOTS;
 
 		itemList.Add(item);
 		itemNode = itemNode.next_sibling("item");
@@ -65,6 +74,10 @@ bool ItemManager::Start()
 
 	GiveItemToPlayer(SString("EXP Potion"));
 	GiveItemToPlayer(SString("HP Potion"));
+	GiveItemToPlayer(SString("Leather ChestPlate"));
+	GiveItemToPlayer(SString("Leather ChestPlate"));
+	GiveItemToPlayer(SString("Iron Helmet"));
+	GiveItemToPlayer(SString("Iron Helmet"));
 
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
@@ -81,7 +94,7 @@ bool ItemManager::Update(float dt)
 		yPressed = false;
 		invOpened = !invOpened;//Open or close Inv
 	}
-	
+
 
 	if (invOpened)
 	{
@@ -100,12 +113,13 @@ bool ItemManager::Update(float dt)
 
 bool ItemManager::PostUpdate(float dt)
 {
-	
+
 	if (invOpened)//If the inventory is opened bool
 	{
 		DrawPlayerItems();//Draw Items Image and Title
 		ShowDescription();//Show
 		DrawPlayerStats();
+		DrawArmor();
 	}
 
 	if (!invOpened)//If it close, we delete the buttons
@@ -152,7 +166,7 @@ void ItemManager::GiveItemToPlayer(SString& itemTitle)
 		}
 		//else if (playerItemList.Add(SearchForItem(itemTitle)) == nullptr)
 		//	LOG("There is no Reward for this Quest");
-		else{ playerItemList.Add(SearchForItem(itemTitle)); }
+		else { playerItemList.Add(SearchForItem(itemTitle)); }
 
 	}
 }
@@ -176,13 +190,13 @@ void ItemManager::ShowDescription()
 	int b = 0;
 	while (item)
 	{
-		if (b > playerItemList.Count()) 
+		if (b > playerItemList.Count())
 			b = 0;
 		if (item->data->itemSingleCheck)
 			CreateActionButtons(b);
 		if (item->data->itemCheck)
 		{
-			
+
 			if (b < playerItemList.Count())
 			{
 				//Draw Texture
@@ -206,6 +220,8 @@ void ItemManager::CreateActionButtons(int y)
 	{
 		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //USE ITEM BUTTON
 		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //DISCARD ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 95 + 32 * y , 100, 20 }), 23)); //REMOVE ITEM BUTTON
+
 
 	}
 	CheckActionButtons();
@@ -225,6 +241,8 @@ void ItemManager::CreateButtons()
 			item = item->next;
 		}
 		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14));//CREATE EXIT BUTTON
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 200 , 15, 30, 30 }), 22));//CREATE PARTY BUTTON
+
 	}
 
 }
@@ -236,7 +254,6 @@ void ItemManager::DeleteButtons()
 	while (item)
 	{
 
-		//if (item->data->id == 17 || item->data->id == 14)
 		app->ui->DestroyGuiControl(item->data);
 
 		item = item->next;
@@ -249,11 +266,10 @@ void ItemManager::DeleteActionButtons()
 	ListItem<GuiControl*>* item = actionButtons.start;
 	while (item)
 	{
-		if (item->data->id == 19 || item->data->id == 20)
+		if (item->data->id == 19 || item->data->id == 20 || item->data->id == 23)
 			app->ui->DestroyGuiControl(item->data);
 
 		CreateButtons();
-
 		item = item->next;
 	}
 	actionButtons.Clear();
@@ -264,23 +280,38 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 	//EFECTO DE CADA ITEM
 	if (itemtoUse->title == SString("HP Potion"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.Addhealth(15.f);
+		if (partyMember) app->party->allyParty->FindByName("Toisto")->data.Addhealth(15.f);
+		if (!partyMember) app->party->allyParty->FindByName("Thyma")->data.Addhealth(15.f);
 	}
 	if (itemtoUse->title == SString("EXP Potion"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddExp(17.f);
+		if (partyMember) app->party->allyParty->FindByName("Toisto")->data.AddExp(17.f);
+		if (!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddExp(17.f);
 	}
 	if (itemtoUse->title == SString("Coin"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddMoney(1);
+		if (partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(1);
+		if (!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(1);
 	}
 	if (itemtoUse->title == SString("Coin Stack"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddMoney(50.f);
+		if (partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(50.f);
+		if (!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(50.f);
 	}
 	if (itemtoUse->title == SString("Treasure Chest"))
 	{
-		app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
+		if (partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(150.f);
+		if (!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
+	}
+	if (itemtoUse->title == SString("Leather ChestPlate"))
+	{
+		if (partyMember) EquipArmor(itemtoUse);
+		if (!partyMember) EquipArmor(itemtoUse);
+	}
+	if (itemtoUse->title == SString("Iron Helmet"))
+	{
+		if (partyMember) EquipArmor(itemtoUse);
+		if (!partyMember) EquipArmor(itemtoUse);
 	}
 
 
@@ -297,9 +328,69 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 
 		a++;
 		item = item->next;
-		
+
 	}
 
+}
+
+void ItemManager::RemoveItem(Item* itemToRemove, int y)
+{
+	int a = 0;
+	ListItem<Item*>* item = playerItemList.start;
+	while (item)
+	{
+		if (a == y)
+		{
+			ListItem<Item*>* c = playerItemList.At(a);
+			playerItemList.Del(c);
+		}
+
+		a++;
+		item = item->next;
+
+	}
+}
+
+void ItemManager::EquipArmor(Item* armourItem)
+{
+
+	ListItem<Item*>* item = nullptr;
+	if (!partyMember) item = thymaArmor.start;
+	if (partyMember) item = toistoArmor.start;
+	while (item)
+	{
+		if (item->data == armourItem)
+		{
+			GiveItemToPlayer(item->data->title);
+		}
+
+		item = item->next;
+
+	}
+
+	switch (armourItem->armorType)
+	{
+	case ArmorType::NONE:
+		break;
+	case ArmorType::HELMET:
+		if (!partyMember) thymaArmor.Add(armourItem);
+		if (partyMember) toistoArmor.Add(armourItem);
+		break;
+	case ArmorType::CHESTPLATE:
+		if (!partyMember) thymaArmor.Add(armourItem);
+		if (partyMember) toistoArmor.Add(armourItem);
+		break;
+	case ArmorType::LEGGINGS:
+		if (!partyMember) thymaArmor.Add(armourItem);
+		if (partyMember) toistoArmor.Add(armourItem);
+		break;
+	case ArmorType::BOOTS:
+		if (!partyMember) thymaArmor.Add(armourItem);
+		if (partyMember) toistoArmor.Add(armourItem);
+		break;
+	default:
+		break;
+	}
 }
 
 void ItemManager::CheckActionButtons()
@@ -314,8 +405,8 @@ void ItemManager::CheckActionButtons()
 			actionButtons[1]->Draw(app->render);
 
 		}
-		
-		if (actionButtons.Count() > 0  && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
+
+		if (actionButtons.Count() > 0 && actionButtons[0]->itemUsed && item->data->itemSingleCheck)
 		{
 			item->data->itemSingleCheck = false;
 
@@ -333,6 +424,15 @@ void ItemManager::CheckActionButtons()
 
 		}
 
+		if (actionButtons.Count() > 0 && actionButtons[2]->removeItem && item->data->itemSingleCheck)
+		{
+			item->data->itemSingleCheck = false;
+			RemoveItem(playerItemList[y], y);
+			DeleteButtons();
+			DeleteActionButtons();
+
+		}
+
 		++y;
 		item = item->next;
 	}
@@ -343,11 +443,28 @@ void ItemManager::DrawPlayerStats()
 {
 	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
 	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
-	float hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
-	float exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+	float hp = 0;
+	float exp = 0;
+	float health = 0;
+	float experience = 0;
+	if (partyMember)
+	{
+		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
+		exp = app->party->allyParty->FindByName("Toisto")->data.GetExp();
 
-	float health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
-	float experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
+		health = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
+		experience = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
+	}
+
+	if (!partyMember)
+	{
+		hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+		exp = app->party->allyParty->FindByName("Thyma")->data.GetExp();
+
+		health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
+		experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
+
+	}
 
 	int barPosX = 714;
 	int barPosY = 595;
@@ -355,9 +472,9 @@ void ItemManager::DrawPlayerStats()
 	app->render->DrawRectangle({ 713,595,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 	app->render->DrawRectangle({ 713, 645,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 
-	if(hp > 85)
+	if (hp > 85)
 		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 85, 95, 255, false, false);//BLUE
-	
+
 	if (hp <= 85)
 		app->render->DrawRectangle({ 713,595,(int)health, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
@@ -426,6 +543,44 @@ void ItemManager::DrawPlayerStats()
 	//Draw Money
 	text = ToUpperCase(to_string(app->party->allyParty->FindByName("Thyma")->data.GetMoney()));
 	app->fonts->BlitText(582, 233, 0, text.c_str());
+
+}
+
+void ItemManager::DrawArmor()
+{
+
+	ListItem<Item*>* item = nullptr;
+	if (!partyMember) item = thymaArmor.start;
+	if (partyMember) item = toistoArmor.start;
+	while (item)
+	{
+		switch (item->data->armorType)
+		{
+		case ArmorType::NONE:
+			break;
+		case ArmorType::HELMET:
+			app->render->DrawTexture(item->data->itemTex, 285, 30 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+
+			break;
+		case ArmorType::CHESTPLATE:
+			app->render->DrawTexture(item->data->itemTex, 285, 75 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+
+			break;
+		case ArmorType::LEGGINGS:
+			app->render->DrawTexture(item->data->itemTex, 285, 75 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+
+			break;
+		case ArmorType::BOOTS:
+			app->render->DrawTexture(item->data->itemTex, 285, 75 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+
+			break;
+		default:
+			break;
+		}
+
+		item = item->next;
+
+	}
 
 }
 
