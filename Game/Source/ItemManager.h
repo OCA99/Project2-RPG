@@ -34,6 +34,7 @@ public:
 public:
 
 	int quantity; // Amount of items in possession
+	float armor;
 	SString title; // Item title
 	SString displayTitle; // Displayed Title
 	SString description; // Item description
