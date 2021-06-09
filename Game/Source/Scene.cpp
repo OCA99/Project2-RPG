@@ -19,6 +19,7 @@
 #include "BattleMemberSystem.h"
 #include "MenuFadeSystem.h"
 #include "SceneTransitionSystem.h"
+#include "ParticleSystem.h"
 
 #include "BattleMemberFactory.h"
 
@@ -33,8 +34,16 @@ void Scene::Load()
 
 void Scene::CleanUp()
 {
+	app->map->CleanUp();
+
 	if (world != nullptr)
 		world->destroyWorld();
+
+	world = nullptr;
+
+	app->particleSystem->RemoveAllEmitters();
+
+	return;
 }
 
 void MapScene::Load(fPoint playerPosition)
@@ -63,6 +72,8 @@ void MapScene::Load(fPoint playerPosition)
 	}
 	else if (s == "Tavern.tmx")
 	{
+
+		fires.Add(app->particleSystem->AddEmitter(fPoint(2610, 1320), EmitterData::EmitterType::FIRE));
 		app->audio->songToBeLoaded = "Audio/Music/Originals/town_tavern.wav";
 		app->audio->PlayMusic(app->audio->songToBeLoaded, 0.f);
 	}
