@@ -4,9 +4,11 @@
 #include "ECS.h"
 #include "Module.h"
 #include "List.h"
+#include "Log.h"
 
 #include <string>
 #include <iostream>
+#include <math.h>
 
 struct Action;
 
@@ -22,29 +24,49 @@ struct Data {
 	//Numero en la Party
 	int id;
 	float health = 0;
-	float exp = 10;
-	float maxHealth;
+	int maxHealth = 100;
+	float exp = 0;
+	float maxExp = 15;
 	float armor = 0;
 	float power = 0;
 	bool dead = false;
 	int money = 0;
+	int level = 1;
 	std::vector<Action*> actions;
 
 	int GetMoney() { return money; }
+	int GetLevel() { return level; }
 	float GetHealth() { return health; }
+	float GetMaxHealth() { return maxHealth; }
+	
 	float GetExp() { return exp; }
+	int GetMaxExp() { return maxExp; }
 	float GetArmor() { return armor; }
 	float GetPower() { return power; }
 	
 	void Addhealth(float hp) 
 	{
-		health = health + hp;
+		health += hp;
 		if (health > 100) health = 100;
 	}
 	void AddMoney(int m) { money = money + m; }
-	void AddExp(float ex) { exp = exp + ex; }
+	void AddExp(float ex) 
+	{
+		exp = exp + ex; 
+		while (exp >= maxExp)
+		{
+			level++;
+			exp = exp - maxExp;
+			if (exp < 0) exp = 0;
+			maxExp = ((50 / 3) * (level * level) - (6 * (level * level) + 17 * level - 12));
+			
+		}
+			
+		
+	}
 	void AddArmor(int ar) { armor = armor + ar; }
 	void AddPower(float pw) { power = power + pw; }
+	void AddLevel(int lvl) { level = level + lvl; }
 
 	void CleanUp() {
 		for (int i = 0; i < actions.size(); i++) {
