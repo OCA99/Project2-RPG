@@ -60,8 +60,8 @@ bool SceneManager::Start()
 	optionsTex = app->tex->Load("Textures/UI/OptionsMenu/options_menu.png");
 	controlsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/controls_menu.png");
 	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
-	invMenuThyma = app->tex->Load("Textures/UI/HUD/charactermenu.png");
-	invMenuToisto = app->tex->Load("Textures/UI/HUD/hud.png");
+	invMenuThyma = app->tex->Load("Textures/UI/HUD/charactermenu_thyma.png");
+	invMenuToisto = app->tex->Load("Textures/UI/HUD/charactermenu_toisto.png");
 
 	audioMenuTex = app->tex->Load("Textures/UI/OptionsMenu/audio_menu.png");
 	graphicsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/graphics_menu.png");

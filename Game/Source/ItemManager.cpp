@@ -47,26 +47,25 @@ bool ItemManager::Start()
 	{
 		Item* item = new Item();
 
-		item->type = itemNode.attribute("type").as_int();
 		item->title = itemNode.attribute("title").as_string();
+		item->displayTitle = itemNode.attribute("displayTitle").as_string();
 		item->description = itemNode.attribute("description").as_string();
-		item->objective = itemNode.attribute("objective").as_string();
 		item->quantity = itemNode.attribute("quantity").as_int();
-		item->rewardingNPC = itemNode.attribute("rewardingNPC").as_string();
-		item->sellCost = itemNode.attribute("sellCost").as_int();
-		item->buyCost = itemNode.attribute("buyCost").as_int();
-		item->questItem = itemNode.attribute("questItem").as_bool();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
 		item->itemTex = app->tex->Load(SString("Textures/Items/%s", item->texturePath.GetString()).GetString());
 		SString tmp = itemNode.attribute("armorType").as_string();
 		if (tmp == SString("chestplate"))
-			item->armorType = ArmorType::CHESTPLATE;
+			item->itemType = ItemType::CHESTPLATE;
 		if (tmp == SString("helmet"))
-			item->armorType = ArmorType::HELMET;
+			item->itemType = ItemType::HELMET;
 		if (tmp == SString("leggings"))
-			item->armorType = ArmorType::LEGGINGS;
+			item->itemType = ItemType::LEGGINGS;
 		if (tmp == SString("boots"))
-			item->armorType = ArmorType::BOOTS;
+			item->itemType = ItemType::BOOTS;
+		if (tmp == SString("accesory"))
+			item->itemType = ItemType::ACCESORY;
+		if (tmp == SString("weapon"))
+			item->itemType = ItemType::WEAPON;
 
 		itemList.Add(item);
 		itemNode = itemNode.next_sibling("item");
@@ -74,10 +73,12 @@ bool ItemManager::Start()
 
 	GiveItemToPlayer(SString("EXP Potion"));
 	GiveItemToPlayer(SString("HP Potion"));
-	GiveItemToPlayer(SString("Leather ChestPlate"));
-	GiveItemToPlayer(SString("Leather ChestPlate"));
-	GiveItemToPlayer(SString("Iron Helmet"));
-	GiveItemToPlayer(SString("Iron Helmet"));
+	GiveItemToPlayer(SString("Leather Helmet"));
+	GiveItemToPlayer(SString("Leather Chestplate"));
+	GiveItemToPlayer(SString("Leather Leggings"));
+	GiveItemToPlayer(SString("Leather Boots"));
+	GiveItemToPlayer(SString("Iron Sword"));
+	GiveItemToPlayer(SString("Magic Pendant"));
 
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
@@ -116,7 +117,7 @@ bool ItemManager::PostUpdate(float dt)
 
 	if (invOpened)//If the inventory is opened bool
 	{
-		DrawPlayerItems();//Draw Items Image and Title
+		DrawItems();//Draw Items Image and Title
 		ShowDescription();//Show
 		DrawPlayerStats();
 		DrawArmor();
@@ -138,18 +139,22 @@ bool ItemManager::CleanUp()
 	return true;
 }
 
-void ItemManager::DrawPlayerItems()
+void ItemManager::DrawItems()
 {
 	ListItem<Item*>* item = playerItemList.start;
 	y = 0;
 	while (item)
 	{
-		//Draw Texture
-		app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0, 0, 0, 0), 1.0f, 1, 0, 0, 0, false);
+		if (item->data->itemTex != nullptr)
+		{
+			//Draw Texture
+			app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0, 0, 0, 0), 1.0f, 1, 0, 0, 0, false);
 
-		//DRAW TEXT
-		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(75, 80 + (32 * y), 1, text.c_str());
+			//DRAW TEXT
+			std::string text = ToUpperCase(item->data->displayTitle.GetString());
+			app->fonts->BlitText(75, 75 + (32 * y), 1, text.c_str());
+
+		}
 
 		++y;
 		item = item->next;
@@ -219,8 +224,8 @@ void ItemManager::CreateActionButtons(int y)
 	if (actionButtons.Count() <= 0)
 	{
 		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //USE ITEM BUTTON
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 20)); //DISCARD ITEM BUTTON
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 95 + 32 * y , 100, 20 }), 23)); //REMOVE ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 95 + 32 * y , 100, 20 }), 20)); //DISCARD ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 23)); //REMOVE ITEM BUTTON
 
 
 	}
@@ -241,7 +246,7 @@ void ItemManager::CreateButtons()
 			item = item->next;
 		}
 		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14));//CREATE EXIT BUTTON
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 200 , 15, 30, 30 }), 22));//CREATE PARTY BUTTON
+		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, 18, 30, 30 }), 22));//CREATE PARTY BUTTON
 
 	}
 
@@ -303,16 +308,13 @@ void ItemManager::UseItem(Item* itemtoUse, int y)
 		if (partyMember) app->party->allyParty->FindByName("Toisto")->data.AddMoney(150.f);
 		if (!partyMember) app->party->allyParty->FindByName("Thyma")->data.AddMoney(150.f);
 	}
-	if (itemtoUse->title == SString("Leather ChestPlate"))
+	if (itemtoUse->itemType == ItemType::HELMET || itemtoUse->itemType == ItemType::CHESTPLATE || itemtoUse->itemType == ItemType::LEGGINGS || 
+		itemtoUse->itemType == ItemType::BOOTS || itemtoUse->itemType == ItemType::ACCESORY || itemtoUse->itemType == ItemType::WEAPON)
 	{
 		if (partyMember) EquipArmor(itemtoUse);
 		if (!partyMember) EquipArmor(itemtoUse);
 	}
-	if (itemtoUse->title == SString("Iron Helmet"))
-	{
-		if (partyMember) EquipArmor(itemtoUse);
-		if (!partyMember) EquipArmor(itemtoUse);
-	}
+
 
 
 
@@ -359,7 +361,7 @@ void ItemManager::EquipArmor(Item* armourItem)
 	if (partyMember) item = toistoArmor.start;
 	while (item)
 	{
-		if (item->data == armourItem)
+		if (item->data->itemType == armourItem->itemType)
 		{
 			GiveItemToPlayer(item->data->title);
 		}
@@ -368,29 +370,8 @@ void ItemManager::EquipArmor(Item* armourItem)
 
 	}
 
-	switch (armourItem->armorType)
-	{
-	case ArmorType::NONE:
-		break;
-	case ArmorType::HELMET:
-		if (!partyMember) thymaArmor.Add(armourItem);
-		if (partyMember) toistoArmor.Add(armourItem);
-		break;
-	case ArmorType::CHESTPLATE:
-		if (!partyMember) thymaArmor.Add(armourItem);
-		if (partyMember) toistoArmor.Add(armourItem);
-		break;
-	case ArmorType::LEGGINGS:
-		if (!partyMember) thymaArmor.Add(armourItem);
-		if (partyMember) toistoArmor.Add(armourItem);
-		break;
-	case ArmorType::BOOTS:
-		if (!partyMember) thymaArmor.Add(armourItem);
-		if (partyMember) toistoArmor.Add(armourItem);
-		break;
-	default:
-		break;
-	}
+	if (!partyMember) thymaArmor.Add(armourItem);
+	if (partyMember) toistoArmor.Add(armourItem);
 }
 
 void ItemManager::CheckActionButtons()
@@ -554,24 +535,32 @@ void ItemManager::DrawArmor()
 	if (partyMember) item = toistoArmor.start;
 	while (item)
 	{
-		switch (item->data->armorType)
+		switch (item->data->itemType)
 		{
-		case ArmorType::NONE:
+		case ItemType::NONE:
 			break;
-		case ArmorType::HELMET:
-			app->render->DrawTexture(item->data->itemTex, 285, 30 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+		case ItemType::HELMET:
+			app->render->DrawTexture(item->data->itemTex, 290, 60, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
-		case ArmorType::CHESTPLATE:
-			app->render->DrawTexture(item->data->itemTex, 285, 75 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+		case ItemType::CHESTPLATE:
+			app->render->DrawTexture(item->data->itemTex, 290, 110, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
-		case ArmorType::LEGGINGS:
-			app->render->DrawTexture(item->data->itemTex, 285, 75 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+		case ItemType::LEGGINGS:
+			app->render->DrawTexture(item->data->itemTex, 290, 157, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
-		case ArmorType::BOOTS:
-			app->render->DrawTexture(item->data->itemTex, 285, 75 + 32, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+		case ItemType::BOOTS:
+			app->render->DrawTexture(item->data->itemTex, 290, 207, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+
+			break;
+		case ItemType::ACCESORY:
+			app->render->DrawTexture(item->data->itemTex, 505, 180, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+
+			break;
+		case ItemType::WEAPON:
+			app->render->DrawTexture(item->data->itemTex, 505, 85, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		default:

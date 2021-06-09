@@ -17,12 +17,14 @@
 using namespace std;
 
 class Font;
-enum class ArmorType {
+enum class ItemType {
 	NONE,
 	HELMET,
 	CHESTPLATE,
 	LEGGINGS,
-	BOOTS
+	BOOTS,
+	ACCESORY,
+	WEAPON,
 };
 class Item
 {
@@ -31,18 +33,13 @@ public:
 	~Item() {};
 public:
 
-	int type; // Item type: 0 --> weapon --> 1 --> armor --> 2 --> potion
 	int quantity; // Amount of items in possession
-	int buyCost; // Quantity of Gold item costs on buy
-	int sellCost; // Quantity of Gold item costs on sell
-	bool questItem; // True if it is for a quest
 	SString title; // Item title
+	SString displayTitle; // Displayed Title
 	SString description; // Item description
-	SString objective; // target to the enemy who drops
-	SString rewardingNPC; // Name of rewarding NPC
 	SString texturePath; //Texture Path
 	SDL_Texture** itemTex = nullptr;
-	ArmorType armorType = ArmorType::NONE;
+	ItemType itemType = ItemType::NONE;
 };
 
 class ItemManager : public Module
@@ -61,7 +58,7 @@ public:
 	bool CleanUp();
 
 	//Draw Items Icon & Title
-	void DrawPlayerItems();
+	void DrawItems();
 
 	//Give item to a player, USE TITLE AS PARAMETER
 	void GiveItemToPlayer(SString& itemTitle);
@@ -115,7 +112,7 @@ public:
 	bool removeItem = false;
 	bool yPressed = true;
 
-	ArmorType currentAmor = ArmorType::NONE;
+	ItemType currentAmor = ItemType::NONE;
 
 
 };

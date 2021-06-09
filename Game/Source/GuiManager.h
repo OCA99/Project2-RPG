@@ -72,6 +72,7 @@ public:
 	SDL_Texture** itemTex;
 	SDL_Texture** useItemText;
 	SDL_Texture** discardItemText;
+	SDL_Texture** cancelItemText;
 	SDL_Texture** puzzlePassTex;
 	
 
