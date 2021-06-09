@@ -61,6 +61,7 @@ struct Member {
 		IDLE,
 		ATTACKING,
 		HURT,
+		HEAL,
 		DEAD
 	};
 
