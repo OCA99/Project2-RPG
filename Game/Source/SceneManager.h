@@ -40,6 +40,7 @@ public:
 	void LoadScene(Scene* scene);
 
 	void LoadScene(MapScene* scene, fPoint playerPosition);
+	void CheckSpline();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&);
@@ -81,6 +82,11 @@ public:
 
 	bool r1Pressed = true;
 	bool l1Pressed = true;
+
+	int place = -500;
+	int* pos = &place;
+	bool sCreated = false;
+
 
 	float padSpeed = 10;
 	fPoint mousePosition;
