@@ -12,7 +12,7 @@ class GuiButton : public GuiControl
 public:
 
 	GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex);
-	GuiButton(uint32 id,  SDL_Texture** tex, SDL_Rect bounds, SDL_Texture** textTex, int fPos, float time, SplineType esType);
+	GuiButton(uint32 id,  SDL_Texture** tex, SDL_Rect bounds, SDL_Texture** textTex, bool horizontal, int fPos, float time, SplineType esType);
 
 	virtual ~GuiButton();
 

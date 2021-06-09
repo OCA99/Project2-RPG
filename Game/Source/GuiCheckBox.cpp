@@ -12,6 +12,20 @@ GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Text
 	this->texture2 = textTex;
 }
 
+GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture** textTex, bool horizontal, int fPos, float time, SplineType esType) : GuiControl(GuiControlType::CHECKBOX, id)
+{
+	this->bounds = bounds;
+	this->checkedBounds = { bounds.x + 15, bounds.y + 15, 50, 50 };
+	this->text = text;
+	this->texture = tex;
+	this->texture2 = textTex;
+
+	int* origin = &this->bounds.x;
+	if (!horizontal) origin = &this->bounds.y;
+
+	app->easing->CreateSpline(origin, fPos, time, esType);
+}
+
 GuiCheckBox::~GuiCheckBox()
 {
 }

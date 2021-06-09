@@ -80,9 +80,7 @@ bool SceneManager::Start()
 	mousePosition.y = m.y;
 
 	sCreated = false;
-	place = -500;
-
-
+	ResetInitialPositions();
 	return true;
 }
 
@@ -192,10 +190,8 @@ bool SceneManager::PostUpdate(float dt)
 		if(startPressed)menu = !menu;
 		if (menu == true)
 		{
+			ResetInitialPositions();
 			sCreated = false;
-			place = -500;
-			pos = &place;
-
 		}
 
 		startPressed = false;
@@ -286,16 +282,23 @@ bool SceneManager::PostUpdate(float dt)
 
 			if (!optionsMenu)
 			{
-				CheckSpline();
-				app->render->DrawTexture(menuTex, *pos, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+				if (sCreated == false)
+				{
+					pos = &pauseMenuInitPos;
+					app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
+					sCreated = true;
+				}
+
+				app->render->DrawTexture(menuTex, 0, *pos, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
 				if (buttons == false)
 				{
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 82, 120, 32 }), 4, true, 260, 300, SplineType::BACK);//continue
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 271 / 2, 120, 32 }), 5, true, 260, 400, SplineType::BACK);//save
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 381 / 2, 120, 32 }), 6, true, 260, 500, SplineType::BACK);//load
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 491 / 2, 120, 32 }), 2, true, 260, 600, SplineType::BACK);//options
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -300, 601 / 2, 120, 32 }), 7, true, 260, 700, SplineType::BACK);//back to menu
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 4, true, 82, 600, SplineType::BACK, false);//continue
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 5, true, 271 / 2, 700, SplineType::BACK, false);//save
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 6, true, 381 / 2, 800, SplineType::BACK, false);//load
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 2, true, 491 / 2, 900, SplineType::BACK, false);//options
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 7, true, 601 / 2, 1000, SplineType::BACK, false);//back to menu
 					buttons = true;
 				}
 
@@ -312,9 +315,7 @@ bool SceneManager::PostUpdate(float dt)
 				}
 
 				Mix_VolumeMusic(app->volume);
-			}
-			
-		
+			}	
 		}
 
 		if (menu == false && !app->quests->questInvOpened)
@@ -357,22 +358,30 @@ bool SceneManager::PostUpdate(float dt)
 			bPressed = false;
 			buttons = false;
 		}
-		app->render->DrawTexture(optionsTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+
+		if (sCreated == false)
+		{
+			pos = &pauseMenuInitPos;
+			app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
+			sCreated = true;
+		}
+
 
 		if (graphicsSelected)
 		{
-			app->render->DrawTexture(graphicsMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(optionsTex, -*pos, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(graphicsMenuTex, -*pos, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
 			if (buttons == false)
 			{
 
-				app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 323 / 2, 183 / 2, 50 / 2 }), 15); //fullscreen checkbox
-				GuiControl* c = app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ 728 / 2, 462 / 2, 183 / 2, 50 / 2 }), 16); //vsync checkbox
+				app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ -1000, 323 / 2, 183 / 2, 50 / 2 }), 15, true, 728 / 2, 600, SplineType::BACK); //fullscreen checkbox
+				GuiControl* c = app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ -1000, 462 / 2, 183 / 2, 50 / 2 }), 16, true, 728 / 2, 600, SplineType::BACK); //vsync checkbox
 				((GuiCheckBox*)c)->checked = true;
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 11, true, 140 / 2, 600, SplineType::BACK); //graphics button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 12, true, 468 / 2, 600, SplineType::BACK); //audio button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 13, true, 798 / 2, 600, SplineType::BACK); //controls button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 34 / 2, 60 / 2, 60 / 2 }), 14, true, 58 / 2, 600, SplineType::BACK); //back button
 
 				buttons = true;
 			}
@@ -398,17 +407,18 @@ bool SceneManager::PostUpdate(float dt)
 
 		if (audioSelected)
 		{
-			app->render->DrawTexture(audioMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(optionsTex, 0, *pos - 1, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(audioMenuTex, 0, *pos, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 330 / 2, 300 / 2, 30 / 2 }), 8); //general volume slider
-				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 412 / 2, 300 / 2, 30 / 2 }), 9); //music volume slider
-				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 494 / 2, 300 / 2, 30 / 2 }), 10); //fx volume slider
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 8, true, 330 / 2, 600, SplineType::BACK, false); //general volume slider
+				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 9, true, 412 / 2, 600, SplineType::BACK, false); //music volume slider
+				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 10, true, 494 / 2, 600, SplineType::BACK, false); //fx volume slider
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 1000, 340 / 2, 65 / 2 }), 11, true, 152 / 2, 600, SplineType::BACK, false); //graphics button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 1000, 340 / 2, 65 / 2 }), 12, true, 152 / 2, 600, SplineType::BACK, false); //audio button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 1000, 340 / 2, 65 / 2 }), 13, true, 152 / 2, 600, SplineType::BACK, false); //controls button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 1000, 60 / 2, 60 / 2 }), 14, true, 34 / 2, 600, SplineType::BACK, false); //back button
 
 				buttons = true;
 			}
@@ -434,14 +444,15 @@ bool SceneManager::PostUpdate(float dt)
 
 		if (controlsSelected)
 		{
-			app->render->DrawTexture(controlsMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(optionsTex, *pos, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			app->render->DrawTexture(controlsMenuTex, *pos, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 152 / 2, 340 / 2, 65 / 2 }), 11); //graphics button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 152 / 2, 340 / 2, 65 / 2 }), 12); //audio button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 152 / 2, 340 / 2, 65 / 2 }), 13); //controls button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 34 / 2, 60 / 2, 60 / 2 }), 14); //back button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 11, true, 140 / 2, 600, SplineType::BACK); //graphics button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 12, true, 468 / 2, 600, SplineType::BACK); //audio button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 13, true, 798 / 2, 600, SplineType::BACK); //controls button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 34 / 2, 60 / 2, 60 / 2 }), 14, true, 58 / 2, 600, SplineType::BACK); //back button
 
 				buttons = true;
 			}
@@ -577,17 +588,16 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		buttons = false;
 		optionsMenu = true;
 		audioSelected = true;
-		break;
+		ResetInitialPositions();
+		sCreated = false; break;
 	case 3: //exit
 		return false;
 		break;
 	case 4: //continue (exit menu) button
 		app->ui->DestroyAllGuiControls();
 		menu = 0;
+		ResetInitialPositions();
 		sCreated = false;
-		place = -500;
-
-
 		break;
 	case 5: //save
 		app->RequestSave();
@@ -604,9 +614,8 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		s = (Scene*)(new MenuScene());
 		sceneToBeLoaded = s;
 		menu = false;
+		ResetInitialPositions();
 		sCreated = false;
-		place = -500;
-
 		break;
 	case 8:
 		slider = (GuiSlider*)control;
@@ -628,21 +637,27 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		graphicsSelected = true;
 		audioSelected = false;
 		controlsSelected = false;
+		ResetInitialPositions();
 		buttons = false;
+		sCreated = false;
 		break;
 	case 12: //audio window button
 		app->ui->DestroyAllGuiControls();
 		audioSelected = true;
 		graphicsSelected = false;
 		controlsSelected = false;
+		ResetInitialPositions();
 		buttons = false;
+		sCreated = false;
 		break;
 	case 13: //controls window button
 		app->ui->DestroyAllGuiControls();
 		controlsSelected = true;
 		audioSelected = false;
 		graphicsSelected = false;
+		ResetInitialPositions();
 		buttons = false;
+		sCreated = false;
 		break;
 	case 14: //back button
 		app->ui->DestroyAllGuiControls();
@@ -653,8 +668,8 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 		buttons = false;
 		app->items->invOpened = false;
 		app->quests->questInvOpened = false;
+		ResetInitialPositions();
 		sCreated = false;
-		place = -500;
 		break;
 	case 15: //fullscreen checkbox
 		app->win->ToggleFullscreen();
@@ -676,13 +691,20 @@ bool SceneManager::OnGuiMouseClickEvent(GuiControl* control)
 	return true;
 }
 
-void SceneManager::CheckSpline()
+void SceneManager::CheckSpline(int position, int finaPos, float time)
 {
 	if (sCreated == false)
 	{
-		app->easing->CreateSpline(pos, 0, 200, SplineType::BACK);
+		pos = &position;
+		app->easing->CreateSpline(pos, finaPos, time, SplineType::BACK);
 		sCreated = true;
 	}
+}
 
-
+void SceneManager::ResetInitialPositions()
+{
+	pauseMenuInitPos = 800;
+	optionsMenuInitPos = 1000;
+	questMenuInitPos = 1000;
+	invMenuInitPos = 1000;
 }

@@ -22,13 +22,16 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, SDL_Texture** tex, SDL_Texture*
 
 }
 
-GuiButton::GuiButton(uint32 id,  SDL_Texture** tex, SDL_Rect bounds, SDL_Texture** textTex, int fPos, float time, SplineType esType) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id,  SDL_Texture** tex, SDL_Rect bounds, SDL_Texture** textTex, bool horizontal, int fPos, float time, SplineType esType) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
 	this->texture = tex;
 	this->texture2 = textTex;
+	
 	int* origin = &this->bounds.x;
+	if(!horizontal) origin = &this->bounds.y;
+
 	app->easing->CreateSpline(origin, fPos, time, esType);
 
 }

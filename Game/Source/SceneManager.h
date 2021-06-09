@@ -40,7 +40,8 @@ public:
 	void LoadScene(Scene* scene);
 
 	void LoadScene(MapScene* scene, fPoint playerPosition);
-	void CheckSpline();
+	void CheckSpline(int position, int finaPos, float time);
+	void ResetInitialPositions();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&);
@@ -83,10 +84,14 @@ public:
 	bool r1Pressed = true;
 	bool l1Pressed = true;
 
-	int place = -500;
-	int* pos = &place;
+
+	int* pos = &pauseMenuInitPos;
 	bool sCreated = false;
 
+	int pauseMenuInitPos = 800;
+	int optionsMenuInitPos = 1000;
+	int questMenuInitPos = 1000;
+	int invMenuInitPos = 1000;
 
 	float padSpeed = 10;
 	fPoint mousePosition;

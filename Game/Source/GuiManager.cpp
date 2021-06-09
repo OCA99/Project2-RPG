@@ -80,7 +80,7 @@ bool GuiManager::CleanUp()
 	return true;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, bool anim, int fPos, int time, SplineType esType, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int sliderValue)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, int id, bool anim, int fPos, int time, SplineType esType, bool horizontal, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int sliderValue)
 {
 	GuiControl* control = nullptr;
 	SDL_Texture** textTex = nullptr;
@@ -175,7 +175,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 	case GuiControlType::BUTTON:
 		if (anim == true)
 		{
-			control = new GuiButton(id,  buttonTex, bounds, textTex,fPos,time,esType);
+			control = new GuiButton(id,  buttonTex, bounds, textTex, horizontal,fPos,time,esType);
 			control->SetObserver(app->scene);
 			control->color.r = r;
 			control->color.g = g;
@@ -202,21 +202,47 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		
 		break;
 	case GuiControlType::CHECKBOX:
-		control = new GuiCheckBox(id, bounds, checkBoxTex, onOffTex);
-		control->SetObserver(app->scene);
-		control->color.r = r;
-		control->color.g = g;
-		control->color.b = b;
-		control->color.a = a;
-		break;
+		if (anim == true)
+		{
+			control = new GuiCheckBox(id, bounds, checkBoxTex, onOffTex, horizontal, fPos, time, esType);
+			control->SetObserver(app->scene);
+			control->color.r = r;
+			control->color.g = g;
+			control->color.b = b;
+			control->color.a = a;
+			break;
+		}
+		else if (anim == false)
+		{
+			control = new GuiCheckBox(id, bounds, checkBoxTex, onOffTex);
+			control->SetObserver(app->scene);
+			control->color.r = r;
+			control->color.g = g;
+			control->color.b = b;
+			control->color.a = a;
+			break;
+		}
 	case GuiControlType::SLIDER:
-		control = new GuiSlider(id, bounds, sliderTex, sliderValue);
-		control->SetObserver(app->scene);//preguntar EDU que onda
-		control->color.r = r;
-		control->color.g = g;
-		control->color.b = b;
-		control->color.a = a;
-		break;
+		if (anim == true)
+		{
+			control = new GuiSlider(id, bounds, sliderTex, sliderValue, horizontal, fPos, time, esType);
+			control->SetObserver(app->scene);//preguntar EDU que onda
+			control->color.r = r;
+			control->color.g = g;
+			control->color.b = b;
+			control->color.a = a;
+			break;
+		}
+		else if (anim == false)
+		{
+			control = new GuiSlider(id, bounds, sliderTex, sliderValue);
+			control->SetObserver(app->scene);//preguntar EDU que onda
+			control->color.r = r;
+			control->color.g = g;
+			control->color.b = b;
+			control->color.a = a;
+			break;
+		}
 
 	default: break;
 	}
