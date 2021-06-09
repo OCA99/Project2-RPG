@@ -186,6 +186,9 @@ bool GuiButton::Draw(Render* render)
 	int scale = app->win->GetScale();
 
 	SDL_Rect drawBounds = SDL_Rect({ bounds.x * scale, bounds.y * scale, bounds.w * scale, bounds.h * scale });
+	
+	int texOffsetx = 0;
+
 	// Draw the right button depending on state
 	if (app->debug->bounds)
 	{
@@ -210,13 +213,19 @@ bool GuiButton::Draw(Render* render)
 	}
 	else
 	{
+
+		if (id == 22 && app->items->partyMember)
+			texOffsetx = 0;
+		else if (id == 22 && !app->items->partyMember)
+			texOffsetx = 60;
+
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
 			break;
 		case GuiControlState::FOCUSED:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ drawBounds.w + 1,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ texOffsetx,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			if (app->ui->lastId != id) playFxOnce = true;
 
 			if (playFxOnce)
@@ -228,17 +237,17 @@ bool GuiButton::Draw(Render* render)
 			break;
 		case GuiControlState::NORMAL:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ texOffsetx,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			break;
 		case GuiControlState::PRESSED:
 			render->DrawTexture(texture, bounds.x, bounds.y, &SDL_Rect({ (drawBounds.w + 1) * 2,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
-			if (id == 14 || id == 19 || id == 20)
-				render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			if (id == 14 || id == 19 || id == 20 || id == 22)
+				render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ texOffsetx,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			else
-				render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+				render->DrawTexture(texture2, bounds.x - 2, bounds.y + 1, &SDL_Rect({ texOffsetx,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			break;
 		case GuiControlState::SELECTED:
-			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ 0,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+			render->DrawTexture(texture2, bounds.x, bounds.y, &SDL_Rect({ texOffsetx,0,drawBounds.w + 1,drawBounds.h + 1 }), .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
 			break;
 		}
 

@@ -50,6 +50,7 @@ bool ItemManager::Start()
 		item->title = itemNode.attribute("title").as_string();
 		item->displayTitle = itemNode.attribute("displayTitle").as_string();
 		item->description = itemNode.attribute("description").as_string();
+		item->armor = itemNode.attribute("armor").as_float();
 		item->quantity = itemNode.attribute("quantity").as_int();
 		item->texturePath = itemNode.attribute("texturePath").as_string();
 		item->itemTex = app->tex->Load(SString("Textures/Items/%s", item->texturePath.GetString()).GetString());
@@ -71,14 +72,16 @@ bool ItemManager::Start()
 		itemNode = itemNode.next_sibling("item");
 	}
 
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("HP Potion"));
+	//GiveItemToPlayer(SString("EXP Potion"));
+	//GiveItemToPlayer(SString("HP Potion"));
 	GiveItemToPlayer(SString("Leather Helmet"));
 	GiveItemToPlayer(SString("Leather Chestplate"));
 	GiveItemToPlayer(SString("Leather Leggings"));
 	GiveItemToPlayer(SString("Leather Boots"));
-	GiveItemToPlayer(SString("Iron Sword"));
+	GiveItemToPlayer(SString("Iron Helmet"));
+	GiveItemToPlayer(SString("Iron Chestplate"));
 	GiveItemToPlayer(SString("Magic Pendant"));
+	GiveItemToPlayer(SString("Iron Sword"));
 
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
@@ -118,9 +121,9 @@ bool ItemManager::PostUpdate(float dt)
 	if (invOpened)//If the inventory is opened bool
 	{
 		DrawItems();//Draw Items Image and Title
+		DrawArmor();//Draw the Armor of the player
 		ShowDescription();//Show
-		DrawPlayerStats();
-		DrawArmor();
+		DrawPlayerStats();//Draw player Stats
 	}
 
 	if (!invOpened)//If it close, we delete the buttons
@@ -359,19 +362,51 @@ void ItemManager::EquipArmor(Item* armourItem)
 	ListItem<Item*>* item = nullptr;
 	if (!partyMember) item = thymaArmor.start;
 	if (partyMember) item = toistoArmor.start;
+	int a = 0;
 	while (item)
 	{
 		if (item->data->itemType == armourItem->itemType)
 		{
 			GiveItemToPlayer(item->data->title);
-		}
+			if (!partyMember)
+			{
+				ListItem<Item*>* c = thymaArmor.At(a);
+				thymaArmor.Del(c);
+				app->party->allyParty->FindByName("Thyma")->data.AddArmor(-item->data->armor);
+				
+			}
+			if (partyMember)
+			{
+				ListItem<Item*>* c = toistoArmor.At(a);
+				toistoArmor.Del(item);
+				app->party->allyParty->FindByName("Toisto")->data.AddArmor(-item->data->armor);
 
+			}
+		}
+		a++;
 		item = item->next;
 
 	}
+	
+	float armor = armourItem->armor;
+	if (!partyMember)
+	{
+		thymaArmor.Add(armourItem);
+		if(armourItem->itemType != ItemType::WEAPON)
+			app->party->allyParty->FindByName("Thyma")->data.AddArmor(armor);
+		else
+			app->party->allyParty->FindByName("Thyma")->data.AddPower(armor);//Power with Armour name
 
-	if (!partyMember) thymaArmor.Add(armourItem);
-	if (partyMember) toistoArmor.Add(armourItem);
+	}
+	if (partyMember) 
+	{
+		toistoArmor.Add(armourItem);
+		if (armourItem->itemType != ItemType::WEAPON)
+			app->party->allyParty->FindByName("Toisto")->data.AddArmor(armor);
+		else
+			app->party->allyParty->FindByName("Toisto")->data.AddPower(armor);
+
+	}
 }
 
 void ItemManager::CheckActionButtons()
@@ -428,6 +463,9 @@ void ItemManager::DrawPlayerStats()
 	float exp = 0;
 	float health = 0;
 	float experience = 0;
+	float attackPower = 0;
+	int money = 0;
+	float armor = 0;
 	if (partyMember)
 	{
 		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
@@ -435,6 +473,10 @@ void ItemManager::DrawPlayerStats()
 
 		health = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
 		experience = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
+		attackPower = (app->party->allyParty->FindByName("Toisto")->data.GetPower());
+		money = app->party->allyParty->FindByName("Toisto")->data.GetMoney();
+		armor = app->party->allyParty->FindByName("Toisto")->data.GetArmor();
+		
 	}
 
 	if (!partyMember)
@@ -444,7 +486,10 @@ void ItemManager::DrawPlayerStats()
 
 		health = (app->party->allyParty->FindByName("Thyma")->data.GetHealth() * 288) / 100;
 		experience = (app->party->allyParty->FindByName("Thyma")->data.GetExp() * 288) / 100;
+		attackPower = (app->party->allyParty->FindByName("Thyma")->data.GetPower());
 
+		money = app->party->allyParty->FindByName("Thyma")->data.GetMoney();
+		armor = app->party->allyParty->FindByName("Thyma")->data.GetArmor();
 	}
 
 	int barPosX = 714;
@@ -522,9 +567,14 @@ void ItemManager::DrawPlayerStats()
 	text = ToUpperCase(to_string((int)exp));
 	app->fonts->BlitText(297, 322, 0, text.c_str());
 	//Draw Money
-	text = ToUpperCase(to_string(app->party->allyParty->FindByName("Thyma")->data.GetMoney()));
+	text = ToUpperCase(to_string(money));
 	app->fonts->BlitText(582, 233, 0, text.c_str());
-
+	//Draw Attack Power
+	text = ToUpperCase(to_string((int)attackPower));
+	app->fonts->BlitText(560, 310, 0, text.c_str());
+	//Draw Armor
+	text = ToUpperCase(to_string((int)armor));
+	app->fonts->BlitText(560, 325, 0, text.c_str());
 }
 
 void ItemManager::DrawArmor()

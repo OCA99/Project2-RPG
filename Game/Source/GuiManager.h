@@ -55,6 +55,7 @@ public:
 	SDL_Texture** sliderTex;
 	SDL_Texture** checkBoxTex;
 	SDL_Texture** backButtonTex;
+	SDL_Texture** miniatureTex;
 
 	SDL_Texture** startTex;
 	SDL_Texture** continueTex;

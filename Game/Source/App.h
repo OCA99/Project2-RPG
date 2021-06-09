@@ -27,6 +27,7 @@ class QuestManager;
 class ItemManager;
 class AssetsManager;
 class PuzzleManager;
+class ParticleSystem;
 
 class App
 {
@@ -102,6 +103,7 @@ public:
 	QuestManager* quests;
 	AssetsManager* assetsManager;
 	PuzzleManager* puzzleManager;
+	ParticleSystem* particleSystem;
 
 private:
 
