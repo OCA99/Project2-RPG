@@ -30,8 +30,9 @@ bool GuiManager::Start()
 	invButtonTex = app->tex->Load("Textures/UI/HUD/inventory_button.png");
 	
 	sliderTex = app->tex->Load("Textures/UI/OptionsMenu/volume_slider.png");
-	backButtonTex = app->tex->Load("Textures/UI/OptionsMenu/back_button.png");
 	checkBoxTex = app->tex->Load("Textures/UI/OptionsMenu/checkbox.png");
+	backButtonTex = app->tex->Load("Textures/UI/OptionsMenu/back_button.png");
+	miniatureTex = app->tex->Load("Textures/UI/HUD/characters_miniature.png");
 
 	startTex = app->tex->Load("Textures/UI/MainPauseMenu/start.png");
 	continueTex = app->tex->Load("Textures/UI/MainPauseMenu/continue.png");
@@ -156,8 +157,8 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, SDL_Rect bounds, i
 		textTex = pixelTex;
 		break;
 	case 22://Inv Party Button
-		buttonTex = pixelTex;
-		textTex = pixelTex;
+		buttonTex = backButtonTex;
+		textTex = miniatureTex;
 		break;
 	case 23://Remove Item 
 		buttonTex = itemTex;
