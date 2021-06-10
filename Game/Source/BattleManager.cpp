@@ -232,6 +232,9 @@ void BattleManager::EndBattle()
 	app->scene->playerPositionToBeLoaded.x = 944;
 	app->scene->playerPositionToBeLoaded.y = 240;
 
+	app->party->allyParty->FindByName("Thyma")->data.AddExp(5 * app->party->allyParty->FindByName("Thyma")->data.level);
+	app->party->allyParty->FindByName("Toisto")->data.AddExp(5 * app->party->allyParty->FindByName("Toisto")->data.level);
+
 	app->party->RemoveParties();
 
 	end = false;

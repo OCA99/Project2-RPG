@@ -5,6 +5,8 @@
 #include "Module.h"
 #include "List.h"
 #include "Log.h"
+#include "App.h"
+#include "Audio.h"
 
 #include <string>
 #include <iostream>
@@ -64,6 +66,7 @@ struct Data {
 		while (exp >= maxExp)
 		{
 			//PLAY LEVEL SOUND
+			app->audio->PlayFx(13, 0);
 			level++;
 			maxHealth = maxHealth + (maxHealth * 10) / 100;
 			power = power + 3;

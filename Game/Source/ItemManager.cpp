@@ -607,19 +607,10 @@ void ItemManager::DrawPlayerStats()
 
 	//Draw HP NUMBER
 	std::string text = ToUpperCase(to_string((int)hp));
-	app->fonts->BlitText(297, 297, 0, text.c_str());
-	//Draw MAX HP
-	text = ToUpperCase(to_string((int)maxHp));
-	app->fonts->BlitText(400, 297, 0, text.c_str());
+	app->fonts->BlitText(290, 297, 0, text.c_str());
 	//Draw EXP
 	text = ToUpperCase(to_string((int)exp));
-	app->fonts->BlitText(395, 324, 0, text.c_str());
-	//DRAW SEPARATOR -";
-	text = ToUpperCase(std::string("-"));
-	app->fonts->BlitText(415, 324, 0, text.c_str());
-	//Draw MAX EXP
-	text = ToUpperCase(to_string((int)maxExp));
-	app->fonts->BlitText(435, 324, 0, text.c_str());
+	app->fonts->BlitText(290, 322, 0, text.c_str());
 	//Draw Money
 	text = ToUpperCase(to_string(money));
 	app->fonts->BlitText(582, 233, 0, text.c_str());
