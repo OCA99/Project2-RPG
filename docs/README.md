@@ -2,7 +2,7 @@
 
 We present *UnderEvil* by FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can fight in epic battles with a party, immerse on an individual adventure with quests and puzzles, fight monsters in the undercity dungeons & many more things!
 
-[![title](https://cdn.discordapp.com/attachments/677906102758670338/852564724519927846/game_title.png)](https://www.youtube.com/watch?v=Jcrc76qN4ps)
+[![title](![thumbnail](https://user-images.githubusercontent.com/59050152/121552264-9f8c6d80-ca10-11eb-8cda-cd81a2acc342.png)](https://www.youtube.com/watch?v=Jcrc76qN4ps)
 
 # About the team
 ![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
