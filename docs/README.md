@@ -1,69 +1,12 @@
-![title](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/game_title.png)
-
-# Description
-
-We present *UnderEvil* from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
+![game_title](https://user-images.githubusercontent.com/59050152/121552654-eb3f1700-ca10-11eb-89c4-36f7d6ad0e0a.png)
 
 
-# Key Features
-- **Town Map**: town, tavern, forest.
-- **Team Party of 2**
-- **3 NPC Characters**: tavern keeper, reaper and blacksmith.
-- **Dialogue System**: 4 different dialogues implemented.
-- **Turn-based Combat System**
-- **Screens and Battle Transitions**
-- **3 types of enemies**
-- **Main Menu**
-- **Pause Menu**
-- **Battle Menu**
-- **Settings Menu**
-- **Character Menu**: including equipment, stats and inventory.
-- **Quests Menu**
-- **HUD**
-- **Keyboard and Gamepad Inputs**
-- **Save & Load**
-- **Animated Logo and Title**
-- **3 Puzzles**
-- **3 Quests**
-- **6 Types of Items**
+We present *UnderEvil* by FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can fight in epic battles with a party, immerse on an individual adventure with quests and puzzles, fight monsters in the undercity dungeons & many more things!
 
-# Controls
-## Keyboard
-- **Up Arrow**: Move player upwards.
-- **Down Arrow**: Move player downwards.
-- **Left Arrow**: Move player to the left.
-- **Right Arrow**: Move player to the right.
-- **Space Bar**: Interact.
-- **ESC**: Pause and resume game.
-- **E**: Open character menu.
-- **N**: Open quests menu.
+[![Thumbnail](https://user-images.githubusercontent.com/59050152/121553643-bd0e0700-ca11-11eb-8085-8c85761c235e.png)](https://www.youtube.com/watch?v=Jcrc76qN4ps)
 
-## Gamepad
-- **Joystick Up / Up Arrow**: Move player upwards.
-- **Joystick Down / Down Arrow**: Move player downwards.
-- **Joystick Left / Left Arrow**: Move player to the left.
-- **Joystick Right / Right Arrow**: Move player to the right.
-- **A**: Interact.
-- **Start**: Pause and resume game.
-- **Select**: Quest menu.
-- **Y**: Character menu.
-
-## Debug Keys
-- **F9**: View colliders and bounds.
-- **F10**: Activate god mode.
-- **F11**: Toggle fullscreen.
-
-
-# External Libraries and Softwares
-- [Simple DirectMedia Layer](https://www.libsdl.org/)
-- [ECS](https://github.com/redxdev/ECS)
-- [pugixml](https://pugixml.org/)
-- [Tiled Map Editor](https://www.mapeditor.org/)
-- [RPG Maker](https://www.rpgmakerweb.com/)
-
-# Developer Team
-
-![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
+# About the team
+![fmstudios_logo](https://user-images.githubusercontent.com/59050152/121552810-0ad63f80-ca11-11eb-8b7f-e0560ebc5a3a.png)
 
 FM Studios is composed by a group of 7 hardworking and ambitious students:
 
@@ -75,29 +18,42 @@ FM Studios is composed by a group of 7 hardworking and ambitious students:
 * [Andres Sanchez](https://github.com/andreusama) - QA, Programmer
 * [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
 
-# License
+# About the game
+*UnderEvil* is a game about a girl named Toisto who wakes up in the middle of the woods near a small town without any memory. As she is walking, she stumbles across a familiar face, a boy named Thyma. All together they decide to start working as monster hunters to help the town people and stop the rising population of monsters from the cementary. But, where do they come from? Why are they there? 
+Help them discover the dark secret that the town holds and the reason why they can't remember who they are. Will you be able to uncover the mystery?
 
-## MIT License 
+## Controls
+The game can either be played with the keyboard and mouse or with a gamepad.
+### Keyboard
+- **Up Arrow**: Move player upwards.
+- **Down Arrow**: Move player downwards.
+- **Left Arrow**: Move player to the left.
+- **Right Arrow**: Move player to the right.
+- **Space Bar**: Interact.
+- **ESC**: Pause and resume game.
+- **E**: Open character menu.
+- **N**: Open quests menu.
 
-MIT License
+### Gamepad
+- **Joystick Up / Up Arrow**: Move player upwards.
+- **Joystick Down / Down Arrow**: Move player downwards.
+- **Joystick Left / Left Arrow**: Move player to the left.
+- **Joystick Right / Right Arrow**: Move player to the right.
+- **A**: Interact.
+- **Start**: Pause and resume game.
+- **Select**: Quest menu.
+- **Y**: Character menu.
 
-Copyright (c) 2020 FM Studios
+# Key Features
+- **Explore the different maps**
+- **Make friends with your party members**
+- **Talk with the townies with an extensive dialogue system**: tavern keeper, reaper and blacksmith.
+- **Fight different types of enemies in an epic turn-based combat system**
+- **Navigate through all the menus** Main Menu, Pause Menu, Battle Menu, Settings Menu, Character Menu; including equipment, stats and inventory, Quests Menu
+- **No time to finish the game? No problem! Save and Load whenever you want**
+- **Solve the several mindbreaking puzzles**
+- **Finish all the quests and gain your own money**
+- **Collect all the different items**
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+## Download link
+Click here to play.

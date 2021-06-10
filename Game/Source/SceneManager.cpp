@@ -791,4 +791,5 @@ void SceneManager::ResetInitialPositions()
 	optionsMenuInitPos = 1000;
 	questMenuInitPos = 1000;
 	invMenuInitPos = 1000;
+	battleMenuInitPos = 1000;
 }
