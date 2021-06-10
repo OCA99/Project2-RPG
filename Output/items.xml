@@ -16,7 +16,7 @@
 		title = "Iron Sword"
 		displayTitle = "Iron Sword"
 		description = "It will kill|all the Skeletons"
-		armor = "50"
+		armor = "10"
 		quantity = "1"
 		texturePath = "iron_sword.png"
 		armorType = "weapon"

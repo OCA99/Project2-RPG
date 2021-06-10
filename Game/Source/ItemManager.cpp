@@ -74,21 +74,11 @@ bool ItemManager::Start()
 
 	GiveItemToPlayer(SString("HP Potion"));
 	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	GiveItemToPlayer(SString("EXP Potion"));
-	//GiveItemToPlayer(SString("HP Potion"));
-	//GiveItemToPlayer(SString("Leather Helmet"));
-	//GiveItemToPlayer(SString("Leather Chestplate"));
-	//GiveItemToPlayer(SString("Leather Leggings"));
-	//GiveItemToPlayer(SString("Leather Boots"));
-	//GiveItemToPlayer(SString("Iron Helmet"));
-	//GiveItemToPlayer(SString("Iron Chestplate"));
-	//GiveItemToPlayer(SString("Magic Pendant"));
-	//GiveItemToPlayer(SString("Iron Sword"));
+	GiveItemToPlayer(SString("Magic Pendant"));
+	GiveItemToPlayer(SString("Leather Helmet"));
+	GiveItemToPlayer(SString("Leather Chestplate"));
+	GiveItemToPlayer(SString("Leather Leggings"));
+	GiveItemToPlayer(SString("Leather Boots"));
 
 	itemDescTex = app->tex->Load("Textures/UI/OptionsMenu/item_description.png");
 
@@ -627,10 +617,10 @@ void ItemManager::DrawPlayerStats()
 	app->fonts->BlitText(582, 233 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Attack Power
 	text = ToUpperCase(to_string((int)attackPower));
-	app->fonts->BlitText(560, 310 + (-*app->scene->pos), 0, text.c_str());
+	app->fonts->BlitText(560, 309 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Armor
 	text = ToUpperCase(to_string((int)armor));
-	app->fonts->BlitText(560, 325 + (-*app->scene->pos), 0, text.c_str());
+	app->fonts->BlitText(560, 327 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Level
 	text = ToUpperCase(to_string((int)level));
 	app->fonts->BlitText(250, 310 + (-*app->scene->pos), 0, text.c_str());
