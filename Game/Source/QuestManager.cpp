@@ -85,14 +85,23 @@ bool QuestManager::Update(float dt)
 	if ((app->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN || (app->input->pads[0].back == true && selectPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP && !app->scene->menu && !app->items->invOpened && app->dialog->currentDialog == nullptr)
 	{
 		selectPressed = false;
-		if (questInvOpened) app->ui->DestroyAllGuiControls();
-		if (!questInvOpened)
+		if (questInvOpened)
 		{
+			app->ui->DestroyAllGuiControls();
 			app->scene->ResetInitialPositions();
 			app->scene->sCreated = false;
 			buttons = true;
 		}
 		questInvOpened = !questInvOpened;//Open or close Inv
+	}
+
+	if (app->input->pads[0].b == true && questInvOpened)
+	{
+		app->ui->DestroyAllGuiControls();
+		app->scene->ResetInitialPositions();
+		app->scene->sCreated = false;
+		buttons = true;
+		questInvOpened = false;
 	}
 
 	if (questInvOpened)
@@ -214,7 +223,7 @@ void QuestManager::DrawQuestUi()
 	while (item)
 	{
 		std::string text = ToUpperCase(item->data->title.GetString());
-		app->fonts->BlitText(40, 80 + (32 * i), 1, text.c_str());
+		app->fonts->BlitText(40, 80 + (32 * i) + (-*app->scene->pos), 1, text.c_str());
 		item = item->next;
 		++i;
 	}
