@@ -44,16 +44,52 @@ The game can either be played with the keyboard and mouse or with a gamepad.
 - **Select**: Quest menu.
 - **Y**: Character menu.
 
-# Key Features
+## Key Features
 - **Explore the different maps**
-- **Make friends with your party members**
-- **Talk with the townies with an extensive dialogue system**: tavern keeper, reaper and blacksmith.
+Town
+![image](https://user-images.githubusercontent.com/59050152/121560083-7a4f2d80-ca17-11eb-9bce-6a8e093a81d0.png)
+
+Graveyard
+![image](https://user-images.githubusercontent.com/59050152/121560124-83d89580-ca17-11eb-9cbb-7e80ff2a81ea.png)
+
+Sewers
+![image](https://user-images.githubusercontent.com/59050152/121560166-8c30d080-ca17-11eb-8de9-a7a51fb5021a.png)
+
+- **Make friends with your party members and talk with the townies with an extensive dialogue system**
+![image](https://user-images.githubusercontent.com/59050152/121560337-b5516100-ca17-11eb-933f-77cbe89c4d97.png)
+
 - **Fight different types of enemies in an epic turn-based combat system**
-- **Navigate through all the menus** Main Menu, Pause Menu, Battle Menu, Settings Menu, Character Menu; including equipment, stats and inventory, Quests Menu
-- **No time to finish the game? No problem! Save and Load whenever you want**
-- **Solve the several mindbreaking puzzles**
-- **Finish all the quests and gain your own money**
+![image](https://user-images.githubusercontent.com/59050152/121560392-c0a48c80-ca17-11eb-937f-e4f4203102ac.png)
+
+- **Navigate through all the menus** 
+Main Menu
+![image](https://user-images.githubusercontent.com/59050152/121561078-6eb03680-ca18-11eb-9462-3ea8b4e59a47.png)
+
+Pause Menu
+![image](https://user-images.githubusercontent.com/59050152/121561026-648e3800-ca18-11eb-9f15-26488f6b3881.png)
+
+Settings Menu: including graphics, audio and controls
+![image](https://user-images.githubusercontent.com/59050152/121560921-4cb6b400-ca18-11eb-992d-414981047a18.png)
+![image](https://user-images.githubusercontent.com/59050152/121560948-53ddc200-ca18-11eb-9d23-8cabef2ee2e5.png)
+![image](https://user-images.githubusercontent.com/59050152/121560978-59d3a300-ca18-11eb-9ac2-eac20d87ad5b.png)
+
+Character Menu: including equipment, stats and inventory
+![image](https://user-images.githubusercontent.com/59050152/121560861-3872b700-ca18-11eb-9efe-562344412e8b.png)
+![image](https://user-images.githubusercontent.com/59050152/121560882-3f012e80-ca18-11eb-9677-d59a3fd658c7.png)
+
+Quests Menu
+![image](https://user-images.githubusercontent.com/59050152/121560825-2ee94f00-ca18-11eb-9277-cc4f47b66581.png)
+
+- **Solve the several mindbreaking puzzles and finish quests to gain your own money**
+![image](https://user-images.githubusercontent.com/59050152/121561139-7ec81600-ca18-11eb-8d36-0496feb7c1b3.png)
+
 - **Collect all the different items**
+![leather_helmet](https://user-images.githubusercontent.com/59050152/121561241-9acbb780-ca18-11eb-9692-504be582ed61.png)
+![exp_potion](https://user-images.githubusercontent.com/59050152/121561346-b20aa500-ca18-11eb-8ff8-cc0b39082b4e.png)
+![iron_chestplate](https://user-images.githubusercontent.com/59050152/121561422-c189ee00-ca18-11eb-930d-4867c0030b6f.png)
+![ring](https://user-images.githubusercontent.com/59050152/121561475-cc448300-ca18-11eb-91f8-d49856e7073e.png)
+
+- **No time to finish the game? No problem! Save and Load whenever you want**
 
 ## Download link
 Click here to play.
