@@ -6,7 +6,7 @@ We present *UnderEvil* by FM Studios, a group of students working on a universit
 [![thumbnail](https://user-images.githubusercontent.com/59050152/121552264-9f8c6d80-ca10-11eb-8cda-cd81a2acc342.png)](https://www.youtube.com/watch?v=Jcrc76qN4ps)
 
 # About the team
-![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
+![fmstudios_logo](https://user-images.githubusercontent.com/59050152/121552810-0ad63f80-ca11-11eb-8b7f-e0560ebc5a3a.png)
 
 FM Studios is composed by a group of 7 hardworking and ambitious students:
 
