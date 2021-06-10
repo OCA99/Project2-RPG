@@ -95,6 +95,16 @@ Quests Menu
 ![exp_potion](https://user-images.githubusercontent.com/59050152/121561346-b20aa500-ca18-11eb-8ff8-cc0b39082b4e.png)
 ![iron_chestplate](https://user-images.githubusercontent.com/59050152/121561422-c189ee00-ca18-11eb-930d-4867c0030b6f.png)
 ![ring](https://user-images.githubusercontent.com/59050152/121561475-cc448300-ca18-11eb-91f8-d49856e7073e.png)
+![coin](https://user-images.githubusercontent.com/59050152/121594708-ba290b80-ca3d-11eb-8f0e-006799fb9adf.png)
+![coin_stack](https://user-images.githubusercontent.com/59050152/121594744-c3b27380-ca3d-11eb-96fe-dce83387fb85.png)
+![coin](https://user-images.githubusercontent.com/59050152/121594745-c44b0a00-ca3d-11eb-8714-3f734a869c33.png)
+![hp_potion](https://user-images.githubusercontent.com/59050152/121594757-c8772780-ca3d-11eb-8e0d-49b0ee42503e.png)
+![iron_helmet](https://user-images.githubusercontent.com/59050152/121594772-cdd47200-ca3d-11eb-9069-afa0a526f5ec.png)
+![iron_sword](https://user-images.githubusercontent.com/59050152/121594777-d0cf6280-ca3d-11eb-870d-67e04b19449d.png)
+![leather_boots](https://user-images.githubusercontent.com/59050152/121594795-d7f67080-ca3d-11eb-9851-510ae91a3398.png)
+![leather_chestplate](https://user-images.githubusercontent.com/59050152/121594830-e3499c00-ca3d-11eb-815a-2541ea95fe6c.png)
+![leather_leggings](https://user-images.githubusercontent.com/59050152/121594854-eb094080-ca3d-11eb-8c7e-1fdaae05a122.png)
+![staff](https://user-images.githubusercontent.com/59050152/121594889-f2304e80-ca3d-11eb-8262-d61e583f69cc.png)
 
 - **No time to finish the game? No problem! Save and Load whenever you want**
 
