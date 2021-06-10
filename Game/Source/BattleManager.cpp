@@ -248,6 +248,11 @@ void BattleManager::StartBattle()
 
 	end = false;
 	endWait = 4.0f;
+
+	app->scene->ResetInitialPositions();
+	app->scene->pos = &app->scene->battleMenuInitPos;
+	app->easing->CreateSpline(app->scene->pos, 0, 300, SplineType::BACK);
+
 }
 
 void BattleManager::EndBattle()
@@ -474,19 +479,19 @@ void BattleManager::Draw()
 		uint w, h;
 		app->win->GetWindowSize(w, h);
 		int y = h / 2 - 45 - 38 * i;
-		app->render->DrawTexture(characterBar, x, y, NULL, 0.5f);
+		app->render->DrawTexture(characterBar, (-*app->scene->pos) + x, y, NULL, 0.5f);
 		std::string name = party->list.at(i)->name;
 		std::transform(name.begin(), name.end(), name.begin(), ::toupper);
-		app->fonts->BlitText(x + 30, y + 20, 1, name.c_str());
+		app->fonts->BlitText((-*app->scene->pos) + x + 30, y + 20, 1, name.c_str());
 		int p = 10 - std::floor(party->list.at(i)->data.health / party->list.at(i)->data.maxHealth * 11.0f);
 		if (p < 0) p = 0;
 		if (p > 10) p = 10;
 		SDL_Rect section = SDL_Rect({ 0, 30 * p, 300, 30 });
-		app->render->DrawTexture(healthBars, x + 250, y + 15, &section, 0.5f);
+		app->render->DrawTexture(healthBars, (-*app->scene->pos) + x + 250, y + 15, &section, 0.5f);
 
 		if (i == currentMember && currentParty == 0)
 		{
-			app->render->DrawTexture(selectionArrows, 70, 30 + i * 80.5f, &SDL_Rect({ 104, 0, 52, 57 }), .5f);
+			app->render->DrawTexture(selectionArrows, (-*app->scene->pos) + 70, 30 + i * 80.5f, &SDL_Rect({ 104, 0, 52, 57 }), .5f);
 
 			std::vector<Action*>* actions = &party->list.at(i)->data.actions;
 			for (int j = 0; j < actions->size(); j++) {
@@ -494,12 +499,12 @@ void BattleManager::Draw()
 
 				x = 90;
 				y = h / 2 - 45 - 38 * (party->list.size() - 1) - 32 - j * 25;
-				app->render->DrawTexture(actionBox, x, y, NULL, .5f);
+				app->render->DrawTexture(actionBox, (-*app->scene->pos) + x, y, NULL, .5f);
 				std::transform(a->name.begin(), a->name.end(), a->name.begin(), ::toupper);
-				app->fonts->BlitText(x + 25, y + 13, 1, a->name.c_str());
+				app->fonts->BlitText((-*app->scene->pos) + x + 25, y + 13, 1, a->name.c_str());
 
 				if (j == currentAction) {
-					if(selecting != Selecting::TARGET) app->render->DrawTexture(selectionArrowHorizontal, x + 80, y + 12, NULL, 0.3f);
+					if(selecting != Selecting::TARGET) app->render->DrawTexture(selectionArrowHorizontal, (-*app->scene->pos) + x + 80, y + 12, NULL, 0.3f);
 				}
 			}
 		}
@@ -531,6 +536,6 @@ void BattleManager::Draw()
 		if (p > 10) p = 10;
 		SDL_Rect section = SDL_Rect({ 0, 30 * p, 300, 30 });
 
-		app->render->DrawTexture(healthBars, 480.0f, 20 + i * 80.5f, &section, 0.25f);
+		app->render->DrawTexture(healthBars, (*app->scene->pos) + 480.0f, 20 + i * 80.5f, &section, 0.25f);
 	}
 }
