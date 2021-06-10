@@ -19,6 +19,7 @@
 #include "GuiCheckBox.h"
 #include "GuiSlider.h"
 #include "ItemManager.h"
+#include "PartyManager.h"
 
 #include <Windows.h>
 #include <iostream>
@@ -62,6 +63,15 @@ bool SceneManager::Start()
 	questMenuTex = app->tex->Load("Textures/UI/HUD/quest_menu.png");
 	invMenuThyma = app->tex->Load("Textures/UI/HUD/charactermenu_thyma.png");
 	invMenuToisto = app->tex->Load("Textures/UI/HUD/charactermenu_toisto.png");
+	hudIngame = app->tex->Load("Textures/UI/HUD/ingame_hud.png");
+	hudIngame1 = app->tex->Load("Textures/UI/HUD/ingame_hud1.png");
+	hudIngame2 = app->tex->Load("Textures/UI/HUD/ingame_hud2.png");
+	hudIngame3 = app->tex->Load("Textures/UI/HUD/ingame_hud3.png");
+	hudIngame4 = app->tex->Load("Textures/UI/HUD/ingame_hud4.png");
+	hudIngame5 = app->tex->Load("Textures/UI/HUD/ingame_hud5.png");
+	hudIngame6 = app->tex->Load("Textures/UI/HUD/ingame_hud6.png");
+	hudIngame7 = app->tex->Load("Textures/UI/HUD/ingame_hud7.png");
+	hudIngame8 = app->tex->Load("Textures/UI/HUD/ingame_hud8.png");
 
 	audioMenuTex = app->tex->Load("Textures/UI/OptionsMenu/audio_menu.png");
 	graphicsMenuTex = app->tex->Load("Textures/UI/OptionsMenu/graphics_menu.png");
@@ -95,7 +105,7 @@ bool SceneManager::Update(float dt)
 {
 	if (sceneToBeLoaded != nullptr)
 	{
-		
+
 		if (currentScene != nullptr && currentScene->type == Scene::TYPE::MAP)
 		{
 			if (isFinished == false)
@@ -116,7 +126,7 @@ bool SceneManager::Update(float dt)
 
 				}
 				//LOG("%f", app->volume);
-				if (app->volume == 0.0f) 
+				if (app->volume == 0.0f)
 				{
 					app->volume = 0.0f;
 					app->volumeDown = false;
@@ -157,6 +167,46 @@ bool SceneManager::Update(float dt)
 bool SceneManager::PostUpdate(float dt)
 {
 	bool ret = true;
+	if (app->scene->currentScene->type == Scene::TYPE::MAP)
+	{
+
+		int maximumHP = app->party->allyParty->FindByName("Thyma")->data.GetMaxHealth();
+		int health = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
+		int resultHP = (100 * health) / maximumHP;
+
+		if (resultHP > 85)
+			app->render->DrawTexture(hudIngame8, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//BLUE
+
+		if (resultHP <= 85)
+			app->render->DrawTexture(hudIngame8, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);// LIGHT BLUE
+
+		if (resultHP <= 75)
+			app->render->DrawTexture(hudIngame7, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//DARK GREEN
+
+		if (resultHP <= 67)
+			app->render->DrawTexture(hudIngame6, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//GREEN
+
+		if (resultHP <= 60)
+			app->render->DrawTexture(hudIngame5, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//LIGHT GREEN
+
+		if (resultHP <= 50)
+			app->render->DrawTexture(hudIngame4, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//YELLOW
+
+		if (resultHP <= 40)
+			app->render->DrawTexture(hudIngame3, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//LIGHT GREEN
+
+		if (resultHP <= 30)
+			app->render->DrawTexture(hudIngame2, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//ORANGE
+
+		if (resultHP <= 20)
+			app->render->DrawTexture(hudIngame1, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//DARK ORANGE
+
+		if (resultHP <= 10)
+			app->render->DrawTexture(hudIngame, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);//DARK RED
+
+	}
+
+
 	GamePad& pad = app->input->pads[0];
 
 	currentScene->world->tick(dt);
@@ -186,13 +236,13 @@ bool SceneManager::PostUpdate(float dt)
 
 	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened && startPressed && currentScene->type == Scene::TYPE::MAP)
 	{
-		if (menu	)
+		if (menu)
 		{
 			ResetInitialPositions();
 			sCreated = false;
 		}
 		app->audio->PlayFx(8, 0);
-		if(startPressed)menu = !menu;
+		if (startPressed)menu = !menu;
 
 		startPressed = false;
 	}
@@ -227,7 +277,7 @@ bool SceneManager::PostUpdate(float dt)
 		LOG("loading");
 	}
 	if (menu || currentScene->type == Scene::TYPE::MENU || optionsMenu || app->quests->questInvOpened || app->items->invOpened) {
-		
+
 
 		float dtSpeed = padSpeed * dt;
 
@@ -267,7 +317,7 @@ bool SceneManager::PostUpdate(float dt)
 			padSpeed = 400;
 		}
 	}
-	
+
 	if (currentScene->type != Scene::TYPE::MENU && currentScene->type != Scene::TYPE::LOGO && currentScene->type != Scene::TYPE::BATTLE) {
 
 		padSpeed = 600;
@@ -292,9 +342,9 @@ bool SceneManager::PostUpdate(float dt)
 			}
 			if (app->items->partyMember)
 				app->render->DrawTexture(invMenuToisto, 0, -*pos, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-			if(!app->items->partyMember)
+			if (!app->items->partyMember)
 				app->render->DrawTexture(invMenuThyma, 0, -*pos, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
-			
+
 
 		}
 		if (menu)
@@ -335,7 +385,7 @@ bool SceneManager::PostUpdate(float dt)
 				}
 
 				Mix_VolumeMusic(app->volume);
-			}	
+			}
 		}
 
 		if (menu == false && !app->quests->questInvOpened)
@@ -357,12 +407,12 @@ bool SceneManager::PostUpdate(float dt)
 
 
 			Mix_VolumeMusic(app->volume);
-			if(buttons)app->ui->DestroyAllGuiControls();
+			if (buttons)app->ui->DestroyAllGuiControls();
 			buttons = false;
 		}
 	}
 
-	if(optionsMenu)
+	if (optionsMenu)
 	{
 		if (!pad.r1) r1Pressed = true;
 		if (!pad.l1) l1Pressed = true;
@@ -542,10 +592,10 @@ void SceneManager::LoadScene(MapScene* scene, fPoint playerPosition)
 bool SceneManager::Load(pugi::xml_node& savedGame)
 {
 	//passar la escena a LoadScene
-	
+
 	pugi::xml_node sceneNode = savedGame.child("currentScene");
 	const char* string = sceneNode.attribute("name").as_string();
-	
+
 	pugi::xml_node entityNode = savedGame.child("entity");
 	pugi::xml_node positionNode = entityNode.child("position");
 
@@ -553,17 +603,17 @@ bool SceneManager::Load(pugi::xml_node& savedGame)
 
 	sceneToBeLoaded = (Scene*)newS;
 	playerPositionToBeLoaded = fPoint(positionNode.attribute("x").as_int(), positionNode.attribute("y").as_int());
-	
+
 	currentScene->world->all([&](ECS::Entity* ent)
-	{
-		ECS::ComponentHandle<Position> position = ent->get<Position>();
-		if (position.isValid())
 		{
-			position->position.x = positionNode.attribute("x").as_int();
-			position->position.y = positionNode.attribute("y").as_int();
-		}
+			ECS::ComponentHandle<Position> position = ent->get<Position>();
+			if (position.isValid())
+			{
+				position->position.x = positionNode.attribute("x").as_int();
+				position->position.y = positionNode.attribute("y").as_int();
+			}
 			// do something with ent
-	});
+		});
 
 	return true;
 }
@@ -584,17 +634,17 @@ bool SceneManager::Save(pugi::xml_node& savedGame)
 	pugi::xml_node positionNode = entityNode.append_child("position");
 
 	currentScene->world->all([&](ECS::Entity* ent)
-	{
-		ECS::ComponentHandle<Position> position = ent->get<Position>();
-		if (position.isValid())
 		{
-			pugi::xml_attribute positionEntityx = positionNode.append_attribute("x");
-			positionEntityx.set_value(position->position.x);
-			pugi::xml_attribute positionEntityy = positionNode.append_attribute("y");
-			positionEntityy.set_value(position->position.y);
-		}
-		// do something with ent
-	});
+			ECS::ComponentHandle<Position> position = ent->get<Position>();
+			if (position.isValid())
+			{
+				pugi::xml_attribute positionEntityx = positionNode.append_attribute("x");
+				positionEntityx.set_value(position->position.x);
+				pugi::xml_attribute positionEntityy = positionNode.append_attribute("y");
+				positionEntityy.set_value(position->position.y);
+			}
+			// do something with ent
+		});
 	//guardar entitats etc
 	return true;
 }

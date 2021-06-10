@@ -62,6 +62,16 @@ public:
 	SDL_Texture** questMenuTex;//Quest Menu Texture
 	SDL_Texture** invMenuThyma;
 	SDL_Texture** invMenuToisto;
+	
+	SDL_Texture** hudIngame;
+	SDL_Texture** hudIngame1;
+	SDL_Texture** hudIngame2;
+	SDL_Texture** hudIngame3;
+	SDL_Texture** hudIngame4;
+	SDL_Texture** hudIngame5;
+	SDL_Texture** hudIngame6;
+	SDL_Texture** hudIngame7;
+	SDL_Texture** hudIngame8;
 
 	bool graphicsSelected = false;
 	bool audioSelected = false;
