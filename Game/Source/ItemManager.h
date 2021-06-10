@@ -113,6 +113,8 @@ public:
 	bool removeItem = false;
 	bool yPressed = true;
 
+	bool hemosAbiertoElInvenLoko = true;
+
 	ItemType currentAmor = ItemType::NONE;
 
 
