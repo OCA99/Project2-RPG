@@ -7,7 +7,7 @@ We present *UnderEvil* by FM Studios, a group of students working on a universit
 
 https://www.youtube.com/watch?v=Jcrc76qN4ps
 
-https://youtube.com/embed/<Jcrc76qN4ps>
+https://youtube.com/embed/Jcrc76qN4ps
   
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
