@@ -102,6 +102,7 @@ public:
 	int optionsMenuInitPos = 1000;
 	int questMenuInitPos = 1000;
 	int invMenuInitPos = 1000;
+	int battleMenuInitPos = 1000;
 
 	float padSpeed = 10;
 	fPoint mousePosition;
