@@ -618,10 +618,10 @@ void ItemManager::DrawPlayerStats()
 
 	//Draw HP NUMBER
 	std::string text = ToUpperCase(to_string((int)hp));
-	app->fonts->BlitText(297, 297 + (-*app->scene->pos), 0, text.c_str());
+	app->fonts->BlitText(293, 297 + (-*app->scene->pos), 0, text.c_str());
 	//Draw EXP
 	text = ToUpperCase(to_string((int)exp));
-	app->fonts->BlitText(297, 322 + (-*app->scene->pos), 0, text.c_str());
+	app->fonts->BlitText(293, 322 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Money
 	text = ToUpperCase(to_string(money));
 	app->fonts->BlitText(582, 233 + (-*app->scene->pos), 0, text.c_str());
