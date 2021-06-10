@@ -86,6 +86,12 @@ bool QuestManager::Update(float dt)
 	{
 		selectPressed = false;
 		if (questInvOpened) app->ui->DestroyAllGuiControls();
+		if (!questInvOpened)
+		{
+			app->scene->ResetInitialPositions();
+			app->scene->sCreated = false;
+			buttons = true;
+		}
 		questInvOpened = !questInvOpened;//Open or close Inv
 	}
 
@@ -98,7 +104,6 @@ bool QuestManager::Update(float dt)
 		}
 	}
 
-	if (!questInvOpened) buttons = true;
 
 	return true;
 }
@@ -271,12 +276,12 @@ void QuestManager::CreateQuestButtons()
 {
 	if (questButtons.Count() <= 0)
 	{
-		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59 / 2 , 36 / 2, 30, 30 }), 14);//Back Button 14
+		app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 59 / 2 , -1000, 30, 30 }), 14, true, 36 / 2, 600, SplineType::BACK, false);//Back Button 14
 		ListItem<Quest*>* item = questsActive.start;
 		y = 0;
 		while (item)
 		{
-			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 18)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			questButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , -1000, 340 / 2, 70 / 2 }), 18, true, 65 + 32 * y, 600 + 200 * y, SplineType::BACK, false)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			y++;
 			item = item->next;
 		}
