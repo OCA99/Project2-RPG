@@ -306,7 +306,7 @@ bool SceneManager::PostUpdate(float dt)
 				if (sCreated == false)
 				{
 					pos = &pauseMenuInitPos;
-					app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
+					app->easing->CreateSpline(pos, 0, 300, SplineType::BACK);
 					sCreated = true;
 				}
 
@@ -314,11 +314,11 @@ bool SceneManager::PostUpdate(float dt)
 
 				if (buttons == false)
 				{
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 4, true, 82, 600, SplineType::BACK, false);//continue
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 5, true, 271 / 2, 700, SplineType::BACK, false);//save
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 6, true, 381 / 2, 800, SplineType::BACK, false);//load
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 2, true, 491 / 2, 900, SplineType::BACK, false);//options
-					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 7, true, 601 / 2, 1000, SplineType::BACK, false);//back to menu
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 4, true, 82, 450, SplineType::BACK, false);//continue
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 5, true, 271 / 2, 550, SplineType::BACK, false);//save
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 6, true, 381 / 2, 650, SplineType::BACK, false);//load
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 2, true, 491 / 2, 750, SplineType::BACK, false);//options
+					app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 260, 1000, 120, 32 }), 7, true, 601 / 2, 850, SplineType::BACK, false);//back to menu
 					buttons = true;
 				}
 
@@ -384,7 +384,7 @@ bool SceneManager::PostUpdate(float dt)
 		if (sCreated == false)
 		{
 			pos = &pauseMenuInitPos;
-			app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
+			app->easing->CreateSpline(pos, 0, 300, SplineType::BACK);
 			sCreated = true;
 		}
 
@@ -397,13 +397,13 @@ bool SceneManager::PostUpdate(float dt)
 			if (buttons == false)
 			{
 
-				app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ -1000, 323 / 2, 183 / 2, 50 / 2 }), 15, true, 728 / 2, 600, SplineType::BACK); //fullscreen checkbox
-				GuiControl* c = app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ -1000, 462 / 2, 183 / 2, 50 / 2 }), 16, true, 728 / 2, 600, SplineType::BACK); //vsync checkbox
+				app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ -1000, 323 / 2, 183 / 2, 50 / 2 }), 15, true, 728 / 2, 300, SplineType::BACK); //fullscreen checkbox
+				GuiControl* c = app->ui->CreateGuiControl(GuiControlType::CHECKBOX, SDL_Rect({ -1000, 462 / 2, 183 / 2, 50 / 2 }), 16, true, 728 / 2, 300, SplineType::BACK); //vsync checkbox
 				((GuiCheckBox*)c)->checked = true;
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 11, true, 140 / 2, 600, SplineType::BACK); //graphics button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 12, true, 468 / 2, 600, SplineType::BACK); //audio button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 13, true, 798 / 2, 600, SplineType::BACK); //controls button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 34 / 2, 60 / 2, 60 / 2 }), 14, true, 58 / 2, 600, SplineType::BACK); //back button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 11, true, 140 / 2, 300, SplineType::BACK); //graphics button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 12, true, 468 / 2, 300, SplineType::BACK); //audio button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 152 / 2, 340 / 2, 65 / 2 }), 13, true, 798 / 2, 300, SplineType::BACK); //controls button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ -1000, 34 / 2, 60 / 2, 60 / 2 }), 14, true, 58 / 2, 300, SplineType::BACK); //back button
 
 				buttons = true;
 			}
@@ -438,13 +438,13 @@ bool SceneManager::PostUpdate(float dt)
 
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 8, true, 330 / 2, 600, SplineType::BACK, false); //general volume slider
-				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 9, true, 412 / 2, 600, SplineType::BACK, false); //music volume slider
-				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 10, true, 494 / 2, 600, SplineType::BACK, false); //fx volume slider
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 1000, 340 / 2, 65 / 2 }), 11, true, 152 / 2, 600, SplineType::BACK, false); //graphics button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 1000, 340 / 2, 65 / 2 }), 12, true, 152 / 2, 600, SplineType::BACK, false); //audio button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 1000, 340 / 2, 65 / 2 }), 13, true, 152 / 2, 600, SplineType::BACK, false); //controls button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 1000, 60 / 2, 60 / 2 }), 14, true, 34 / 2, 600, SplineType::BACK, false); //back button
+				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 8, true, 330 / 2, 300, SplineType::BACK, false); //general volume slider
+				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 9, true, 412 / 2, 300, SplineType::BACK, false); //music volume slider
+				app->ui->CreateGuiControl(GuiControlType::SLIDER, SDL_Rect({ 715 / 2, 1000, 300 / 2, 30 / 2 }), 10, true, 494 / 2, 300, SplineType::BACK, false); //fx volume slider
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 140 / 2, 1000, 340 / 2, 65 / 2 }), 11, true, 152 / 2, 300, SplineType::BACK, false); //graphics button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 468 / 2, 1000, 340 / 2, 65 / 2 }), 12, true, 152 / 2, 300, SplineType::BACK, false); //audio button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 798 / 2, 1000, 340 / 2, 65 / 2 }), 13, true, 152 / 2, 300, SplineType::BACK, false); //controls button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 58 / 2, 1000, 60 / 2, 60 / 2 }), 14, true, 34 / 2, 300, SplineType::BACK, false); //back button
 
 				buttons = true;
 			}
@@ -479,10 +479,10 @@ bool SceneManager::PostUpdate(float dt)
 
 			if (buttons == false)
 			{
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 11, true, 140 / 2, 600, SplineType::BACK); //graphics button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 12, true, 468 / 2, 600, SplineType::BACK); //audio button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 13, true, 798 / 2, 600, SplineType::BACK); //controls button
-				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 34 / 2, 60 / 2, 60 / 2 }), 14, true, 58 / 2, 600, SplineType::BACK); //back button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 11, true, 140 / 2, 300, SplineType::BACK); //graphics button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 12, true, 468 / 2, 300, SplineType::BACK); //audio button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 152 / 2, 340 / 2, 65 / 2 }), 13, true, 798 / 2, 300, SplineType::BACK); //controls button
+				app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 1000, 34 / 2, 60 / 2, 60 / 2 }), 14, true, 58 / 2, 300, SplineType::BACK); //back button
 
 				buttons = true;
 			}
