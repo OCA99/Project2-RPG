@@ -184,15 +184,15 @@ bool SceneManager::PostUpdate(float dt)
 		}
 	}
 
-	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened && startPressed)
+	if ((app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || pad.start == true) && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened && startPressed && currentScene->type == Scene::TYPE::MAP)
 	{
-		app->audio->PlayFx(8, 0);
-		if(startPressed)menu = !menu;
-		if (menu == true)
+		if (menu	)
 		{
 			ResetInitialPositions();
 			sCreated = false;
 		}
+		app->audio->PlayFx(8, 0);
+		if(startPressed)menu = !menu;
 
 		startPressed = false;
 	}
@@ -201,6 +201,11 @@ bool SceneManager::PostUpdate(float dt)
 	{
 		if (menu && !optionsMenu && app->dialog->currentDialog == nullptr && !app->battle->isBattling && !app->quests->questInvOpened && !app->items->invOpened)
 		{
+			if (menu == true)
+			{
+				ResetInitialPositions();
+				sCreated = false;
+			}
 			app->audio->PlayFx(8, 0);
 			menu = false;
 			bPressed = false;
@@ -271,7 +276,7 @@ bool SceneManager::PostUpdate(float dt)
 		{
 			if (sCreated == false)
 			{
-				pos = &pauseMenuInitPos;
+				pos = &questMenuInitPos;
 				app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
 				sCreated = true;
 			}
@@ -279,10 +284,16 @@ bool SceneManager::PostUpdate(float dt)
 		}
 		if (app->items->invOpened)
 		{
+			if (sCreated == false)
+			{
+				pos = &invMenuInitPos;
+				app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
+				sCreated = true;
+			}
 			if (app->items->partyMember)
-				app->render->DrawTexture(invMenuToisto, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				app->render->DrawTexture(invMenuToisto, 0, -*pos, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 			if(!app->items->partyMember)
-				app->render->DrawTexture(invMenuThyma, 0, 0, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
+				app->render->DrawTexture(invMenuThyma, 0, -*pos, &SDL_Rect({ 0,0,1280,720 }), 0.5f, 1, 0, 0, 0, false);
 			
 
 		}
@@ -366,6 +377,8 @@ bool SceneManager::PostUpdate(float dt)
 			app->ui->DestroyAllGuiControls();
 			bPressed = false;
 			buttons = false;
+			ResetInitialPositions();
+			sCreated = false;
 		}
 
 		if (sCreated == false)
@@ -402,6 +415,8 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = false;
 				buttons = false;
 				r1Pressed = false;
+				ResetInitialPositions();
+				sCreated = false;
 			}
 			if (pad.l1 && l1Pressed)
 			{
@@ -411,6 +426,8 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = true;
 				buttons = false;
 				l1Pressed = false;
+				ResetInitialPositions();
+				sCreated = false;
 			}
 		}
 
@@ -439,6 +456,8 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = true;
 				buttons = false;
 				r1Pressed = false;
+				ResetInitialPositions();
+				sCreated = false;
 			}
 			if (pad.l1 && l1Pressed)
 			{
@@ -448,6 +467,8 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = false;
 				buttons = false;
 				l1Pressed = false;
+				ResetInitialPositions();
+				sCreated = false;
 			}
 		}
 
@@ -473,6 +494,8 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = false;
 				buttons = false;
 				l1Pressed = false;
+				ResetInitialPositions();
+				sCreated = false;
 			}
 			if (pad.r1 && r1Pressed)
 			{
@@ -482,6 +505,8 @@ bool SceneManager::PostUpdate(float dt)
 				controlsSelected = false;
 				buttons = false;
 				r1Pressed = false;
+				ResetInitialPositions();
+				sCreated = false;
 			}
 		}
 
