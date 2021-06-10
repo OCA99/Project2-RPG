@@ -82,25 +82,51 @@ bool BattleManager::Update(float dt)
 		o = app->party->allyParty;
 	}
 
-	if (p->list.at(currentMember)->data.dead)
+	if (currentParty != 0)
 	{
-		while (activeQuestsList != nullptr)
+		if (p->list.at(currentMember)->data.dead)
 		{
- 			if (p->list.at(currentMember)->name == activeQuestsList->data->objective.GetString())
+			while (activeQuestsList != nullptr)
 			{
-				if (activeQuestsList->data->progress < activeQuestsList->data->quantity)
+				if (p->list.at(currentMember)->name == activeQuestsList->data->objective.GetString())
 				{
-					activeQuestsList->data->progress += 3;
-					if (activeQuestsList->data->progress >= activeQuestsList->data->quantity)
+					if (activeQuestsList->data->progress < activeQuestsList->data->quantity)
 					{
-						activeQuestsList->data->progress = activeQuestsList->data->quantity;
+						activeQuestsList->data->progress += 3;
+						if (activeQuestsList->data->progress >= activeQuestsList->data->quantity)
+						{
+							activeQuestsList->data->progress = activeQuestsList->data->quantity;
+						}
 					}
 				}
+				activeQuestsList = activeQuestsList->next;
+
 			}
-			activeQuestsList = activeQuestsList->next;
-			
 		}
 	}
+	else
+	{
+		if (o->list.at(currentMember)->data.dead)
+		{
+			while (activeQuestsList != nullptr)
+			{
+				if (o->list.at(currentMember)->name == activeQuestsList->data->objective.GetString())
+				{
+					if (activeQuestsList->data->progress < activeQuestsList->data->quantity)
+					{
+						activeQuestsList->data->progress += 3;
+						if (activeQuestsList->data->progress >= activeQuestsList->data->quantity)
+						{
+							activeQuestsList->data->progress = activeQuestsList->data->quantity;
+						}
+					}
+				}
+				activeQuestsList = activeQuestsList->next;
+
+			}
+		}
+	}
+	
 
 	while (currentMember < p->list.size() && p->list.at(currentMember)->data.dead)
 		currentMember += 1;
