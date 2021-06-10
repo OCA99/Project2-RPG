@@ -18,29 +18,8 @@ FM Studios is composed by a group of 7 hardworking and ambitious students:
 * [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
 
 # About the game
-*UnderEvil* is a game about a girl named Toisto who wakes up in the middle of the woods near a small town without any memory. As she is walking, she stumbles across a familiar face, a boy names Thyma. All together they decide to start working as monster hunters to help the town people and stop the rising population of monsters from the cementary. But, where do they come from? Why are they there? 
+*UnderEvil* is a game about a girl named Toisto who wakes up in the middle of the woods near a small town without any memory. As she is walking, she stumbles across a familiar face, a boy named Thyma. All together they decide to start working as monster hunters to help the town people and stop the rising population of monsters from the cementary. But, where do they come from? Why are they there? 
 Help them discover the dark secret that the town holds and the reason why they can't remember who they are. Will you be able to uncover the mystery?
-
-# Key Features
-- **Town Map**: town, tavern, forest.
-- **Team Party of 2**
-- **3 NPC Characters**: tavern keeper, reaper and blacksmith.
-- **Dialogue System**: 4 different dialogues implemented.
-- **Turn-based Combat System**
-- **Screens and Battle Transitions**
-- **3 types of enemies**
-- **Main Menu**
-- **Pause Menu**
-- **Battle Menu**
-- **Settings Menu**
-- **Character Menu**: including equipment, stats and inventory.
-- **Quests Menu**
-- **Keyboard and Gamepad Inputs**
-- **Save & Load**
-- **Animated Logo and Title**
-- **3 Puzzles**
-- **3 Quests**
-- **6 Types of Items**
 
 # Controls
 The game can either be played with the keyboard and mouse or with a gamepad.
@@ -63,3 +42,6 @@ The game can either be played with the keyboard and mouse or with a gamepad.
 - **Start**: Pause and resume game.
 - **Select**: Quest menu.
 - **Y**: Character menu.
+
+# Download link
+Click here to play.
