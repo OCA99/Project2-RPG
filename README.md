@@ -26,6 +26,16 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **3 Puzzles**
 - **3 Quests**
 - **6 Types of Items**
+- **Animated ease in/out Buttons in all menus of the game.**
+- **Level ups for the players and level system.**
+- **Final touches to health bars and experience bars ( now they change with the level-ups!)**
+- **Armor can be equipped now and will give the player extra stats.**
+- **Particle system.**
+- **New interactive HUD implemented.**
+- **Added a lot more visual and audio feedback.**
+- **Installer for the game.**
+
+
 
 # Controls
 ## Keyboard
