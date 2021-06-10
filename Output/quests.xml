@@ -27,7 +27,7 @@
 		quantity = "1"
 		demandingNPC = "thyma"
 		rewardingNPC = "tlady"
-		reward = "Treasure Chest"
+		reward = "HP Potion"
 		rewardXP = "100"
 		rewardGold = "100"
 		requiredId = "0"

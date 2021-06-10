@@ -487,11 +487,19 @@ void ItemManager::DrawPlayerStats()
 
 	if (partyMember)
 	{
-		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
+		maxExp = app->party->allyParty->FindByName("Toisto")->data.GetMaxExp();
 		exp = app->party->allyParty->FindByName("Toisto")->data.GetExp();
+		resultExp = (100 * exp) / maxExp;
+		pixelExp = resultExp * 288 / 100;
 
-		pixelHp = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
-		pixelExp = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
+
+
+		maxHp = app->party->allyParty->FindByName("Toisto")->data.GetMaxHealth();
+		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
+		resultHp = (100 * hp) / maxHp;
+		pixelHp = resultHp * 288 / 100;
+
+
 		attackPower = (app->party->allyParty->FindByName("Toisto")->data.GetPower());
 		money = app->party->allyParty->FindByName("Toisto")->data.GetMoney();
 		armor = app->party->allyParty->FindByName("Toisto")->data.GetArmor();
@@ -511,9 +519,7 @@ void ItemManager::DrawPlayerStats()
 
 
 		maxHp = app->party->allyParty->FindByName("Thyma")->data.GetMaxHealth();
-		maxHp = 100;
 		hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
-		hp = 92;
 		resultHp = (100 * hp) / maxHp;
 		pixelHp = resultHp * 288 / 100;
 
@@ -598,9 +604,18 @@ void ItemManager::DrawPlayerStats()
 	//Draw HP NUMBER
 	std::string text = ToUpperCase(to_string((int)hp));
 	app->fonts->BlitText(297, 297, 0, text.c_str());
+	//Draw MAX HP
+	text = ToUpperCase(to_string((int)maxHp));
+	app->fonts->BlitText(400, 297, 0, text.c_str());
 	//Draw EXP
 	text = ToUpperCase(to_string((int)exp));
-	app->fonts->BlitText(297, 322, 0, text.c_str());
+	app->fonts->BlitText(395, 324, 0, text.c_str());
+	//DRAW SEPARATOR -";
+	text = ToUpperCase(std::string("-"));
+	app->fonts->BlitText(415, 324, 0, text.c_str());
+	//Draw MAX EXP
+	text = ToUpperCase(to_string((int)maxExp));
+	app->fonts->BlitText(435, 324, 0, text.c_str());
 	//Draw Money
 	text = ToUpperCase(to_string(money));
 	app->fonts->BlitText(582, 233, 0, text.c_str());
@@ -612,7 +627,7 @@ void ItemManager::DrawPlayerStats()
 	app->fonts->BlitText(560, 325, 0, text.c_str());
 	//Draw Level
 	text = ToUpperCase(to_string((int)level));
-	app->fonts->BlitText(250, 310, 0, text.c_str());
+	app->fonts->BlitText(255, 310, 0, text.c_str());
 }
 
 void ItemManager::DrawArmor()

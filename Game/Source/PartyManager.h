@@ -47,26 +47,35 @@ struct Data {
 	void Addhealth(float hp) 
 	{
 		health += hp;
-		if (health > 100) health = 100;
+		if (health > maxHealth) health = maxHealth;
 	}
-	void AddMoney(int m) { money = money + m; }
 	void AddExp(float ex) 
 	{
 		exp = exp + ex; 
-		while (exp >= maxExp)
-		{
-			level++;
-			exp = exp - maxExp;
-			if (exp < 0) exp = 0;
-			maxExp = ((50 / 3) * (level * level) - (6 * (level * level) + 17 * level - 12));
-			
-		}
-			
-		
+		LevelUp();
 	}
+	void AddMoney(int m) { money = money + m; }
 	void AddArmor(int ar) { armor = armor + ar; }
 	void AddPower(float pw) { power = power + pw; }
 	void AddLevel(int lvl) { level = level + lvl; }
+
+	void LevelUp()
+	{
+		while (exp >= maxExp)
+		{
+			//PLAY LEVEL SOUND
+			level++;
+			maxHealth = maxHealth + (maxHealth * 10) / 100;
+			power = power + 3;
+			armor = armor + 2;
+			exp = exp - maxExp;
+
+
+			if (exp < 0) exp = 0;
+			maxExp = ((50 / 3) * (level * level) - (6 * (level * level) + 17 * level - 12));
+
+		}
+	}
 
 	void CleanUp() {
 		for (int i = 0; i < actions.size(); i++) {
