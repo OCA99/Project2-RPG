@@ -21,9 +21,9 @@ FM Studios is composed by a group of 7 hardworking and ambitious students:
 *UnderEvil* is a game about a girl named Toisto who wakes up in the middle of the woods near a small town without any memory. As she is walking, she stumbles across a familiar face, a boy named Thyma. All together they decide to start working as monster hunters to help the town people and stop the rising population of monsters from the cementary. But, where do they come from? Why are they there? 
 Help them discover the dark secret that the town holds and the reason why they can't remember who they are. Will you be able to uncover the mystery?
 
-# Controls
+## Controls
 The game can either be played with the keyboard and mouse or with a gamepad.
-## Keyboard
+### Keyboard
 - **Up Arrow**: Move player upwards.
 - **Down Arrow**: Move player downwards.
 - **Left Arrow**: Move player to the left.
@@ -33,7 +33,7 @@ The game can either be played with the keyboard and mouse or with a gamepad.
 - **E**: Open character menu.
 - **N**: Open quests menu.
 
-## Gamepad
+### Gamepad
 - **Joystick Up / Up Arrow**: Move player upwards.
 - **Joystick Down / Down Arrow**: Move player downwards.
 - **Joystick Left / Left Arrow**: Move player to the left.
@@ -43,5 +43,5 @@ The game can either be played with the keyboard and mouse or with a gamepad.
 - **Select**: Quest menu.
 - **Y**: Character menu.
 
-# Download link
+## Download link
 Click here to play.
