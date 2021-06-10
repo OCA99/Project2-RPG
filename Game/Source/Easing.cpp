@@ -26,9 +26,7 @@ bool Easing::Update(float dt)
 				(*item) = nullptr;
 
 			}
-
 		}
-
 	}
 
 	splines.remove(nullptr);
@@ -46,9 +44,7 @@ bool Easing::CleanUp()
 
 			delete(*item);
 			(*item) = nullptr;
-
 		}
-
 	}
 
 	splines.clear();

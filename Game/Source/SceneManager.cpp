@@ -267,7 +267,16 @@ bool SceneManager::PostUpdate(float dt)
 
 		padSpeed = 600;
 
-		if (app->quests->questInvOpened) app->render->DrawTexture(questMenuTex, 0, 0, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		if (app->quests->questInvOpened)
+		{
+			if (sCreated == false)
+			{
+				pos = &pauseMenuInitPos;
+				app->easing->CreateSpline(pos, 0, 600, SplineType::BACK);
+				sCreated = true;
+			}
+			app->render->DrawTexture(questMenuTex, 0, -*pos, nullptr, .5f, 0.0f, 0.0f, INT_MAX, INT_MAX, false);
+		}
 		if (app->items->invOpened)
 		{
 			if (app->items->partyMember)

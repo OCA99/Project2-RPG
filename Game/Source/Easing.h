@@ -84,6 +84,7 @@ public:
 
 	void CreateSpline(int* position, const int& finalPos, const float& time, const SplineType& type);
 
+	bool easingFinished = true;
 
 private:
 
