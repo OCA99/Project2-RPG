@@ -175,8 +175,9 @@ void ItemManager::DrawItems()
 
 }
 
-void ItemManager::GiveItemToPlayer(SString& itemTitle)
+void ItemManager::GiveItemToPlayer(SString& itemTitle, int quantity)
 {
+	for(int i = 0; i < quantity; ++i)
 	{
 		if (playerItemList.Count() >= MAX_ITEMS)
 		{
@@ -184,7 +185,10 @@ void ItemManager::GiveItemToPlayer(SString& itemTitle)
 		}
 		//else if (playerItemList.Add(SearchForItem(itemTitle)) == nullptr)
 		//	LOG("There is no Reward for this Quest");
-		else { playerItemList.Add(SearchForItem(itemTitle)); }
+		else 
+		{ 
+			playerItemList.Add(SearchForItem(itemTitle)); 
+		}
 
 	}
 }
