@@ -104,12 +104,23 @@ bool ItemManager::Update(float dt)
 	{
 		yPressed = false;
 		invOpened = !invOpened;//Open or close Inv
+		if (!invOpened)
+		{
+			app->scene->ResetInitialPositions();
+			app->scene->sCreated = false;
+		}
 	}
 	if ((app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (app->input->pads[0].y && yPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP)
 	{
-		app->party->allyParty->FindByName("Thyma")->data.Addhealth(1.0f);
+		app->party->allyParty->FindByName("Thyma")->data.Addhealth(-1.0f);
 	}
 
+	if (app->input->pads[0].b == true && invOpened)
+	{
+		invOpened = false;
+		app->scene->ResetInitialPositions();
+		app->scene->sCreated = false;
+	}
 
 	if (invOpened)
 	{
@@ -138,6 +149,7 @@ bool ItemManager::PostUpdate(float dt)
 
 	if (!invOpened)//If it close, we delete the buttons
 	{
+		hemosAbiertoElInvenLoko = true;
 		CleanUp();
 	}
 
@@ -161,11 +173,11 @@ void ItemManager::DrawItems()
 		if (item->data->itemTex != nullptr)
 		{
 			//Draw Texture
-			app->render->DrawTexture(item->data->itemTex, 45, 75 + 32 * y, (SDL_Rect*)(0, 0, 0, 0), 1.0f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 45, (-*app->scene->pos) + 75 + 32 * y, (SDL_Rect*)(0, 0, 0, 0), 1.0f, 1, 0, 0, 0, false);
 
 			//DRAW TEXT
 			std::string text = ToUpperCase(item->data->displayTitle.GetString());
-			app->fonts->BlitText(75, 75 + (32 * y), 1, text.c_str());
+			app->fonts->BlitText(75, 75 + (32 * y) + (-*app->scene->pos), 1, text.c_str());
 
 		}
 
@@ -222,11 +234,11 @@ void ItemManager::ShowDescription()
 			if (b < playerItemList.Count())
 			{
 				//Draw Texture
-				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 32, item->data->bounds.y + 30, &SDL_Rect({ 0,0,384,96 }), 0.5f, 0, 0, 0, 0, false);
+				app->render->DrawTexture(itemDescTex, item->data->bounds.x + 32, (-*app->scene->pos) + item->data->bounds.y + 30, &SDL_Rect({ 0,0,384,96 }), 0.5f, 0, 0, 0, 0, false);
 
 				//Draw Text
 				std::string text = ToUpperCase(playerItemList[b]->description.GetString());
-				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35, 1, text.c_str());
+				app->fonts->BlitText(item->data->bounds.x + 37, item->data->bounds.y + 35 + (-*app->scene->pos), 1, text.c_str());
 			}
 
 		}
@@ -240,9 +252,9 @@ void ItemManager::CreateActionButtons(int y)
 {
 	if (actionButtons.Count() <= 0)
 	{
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19)); //USE ITEM BUTTON
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 95 + 32 * y , 100, 20 }), 20)); //DISCARD ITEM BUTTON
-		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 75 + 32 * y , 100, 20 }), 23)); //REMOVE ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100,20 }), 19, true, 55 + 32 * y, 600, SplineType::BACK, false)); //USE ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100, 20 }), 20, true, 95 + 32 * y, 600, SplineType::BACK, false)); //DISCARD ITEM BUTTON
+		actionButtons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 205 , 55 + 32 * y , 100, 20 }), 23, true, 75 + 32 * y, 600, SplineType::BACK, false)); //REMOVE ITEM BUTTON
 
 
 	}
@@ -252,21 +264,34 @@ void ItemManager::CreateActionButtons(int y)
 
 void ItemManager::CreateButtons()
 {
+
 	if (buttons.Count() <= 0)
 	{
 		ListItem<Item*>* item = playerItemList.start;
 		y = 0;
 		while (item)
 		{
+			if(hemosAbiertoElInvenLoko) 
+				buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , -1000, 340 / 2, 70 / 2 }), 17, true, 65 + 32 * y, 600, SplineType::BACK, false)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			else
 			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			y++;
 			item = item->next;
 		}
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 15, 30, 30 }), 14));//CREATE EXIT BUTTON
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, 18, 30, 30 }), 22));//CREATE PARTY BUTTON
+		if (hemosAbiertoElInvenLoko)
+		{
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , -1000, 30, 30 }), 14, true, 36 / 2, 600, SplineType::BACK, false));//CREATE EXIT BUTTON
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, -1000, 30, 30 }), 22, true, 18, 600, SplineType::BACK, false));//CREATE PARTY BUTTON
+		}
+		else
+		{
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 36 / 2, 30, 30 }), 14));//CREATE EXIT BUTTON
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, 18, 30, 30 }), 22));//CREATE PARTY BUTTON
+		}
 
 	}
 
+	hemosAbiertoElInvenLoko = false;
 }
 
 void ItemManager::DeleteButtons()
@@ -473,21 +498,7 @@ void ItemManager::DrawPlayerStats()
 {
 	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
 	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
-	float hp = 0;
-	float maxHp = 0;
-	float pixelHp = 0;
-	float resultHp = 0;
 
-	float exp = 0;
-	float resultExp = 0;
-	int maxExp = 0;
-	float pixelExp = 0;
-
-
-	float attackPower = 0;
-	int money = 0;
-	float armor = 0;
-	int level = 0;
 
 	if (partyMember)
 	{
@@ -540,89 +551,89 @@ void ItemManager::DrawPlayerStats()
 	int barPosX = 714;
 	int barPosY = 595;
 
-	app->render->DrawRectangle({ 713,595,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
-	app->render->DrawRectangle({ 713, 645,288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
+	app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
+	app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),288, 18 }, 147, 147, 147, 255, true, false);//BASE COLOR
 
 	if (resultHp > 85)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 50, 85, 95, 255, true, false);//BLUE
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 50, 85, 95, 255, true, false);//BLUE
 
 	if (resultHp <= 85)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
 	if (resultHp <= 75)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
 
 	if (resultHp <= 67)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 71, 89, 50, 255, true, false);//GREEN
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 71, 89, 50, 255, true, false);//GREEN
 
 	if (resultHp <= 60)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
 
 	if (resultHp <= 50)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 123, 100, 51, 255, true, false);//YELLOW
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 123, 100, 51, 255, true, false);//YELLOW
 
 	if (resultHp <= 40)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
 
 	if (resultHp <= 30)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 123, 77, 52, 255, true, false);//ORANGE
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 123, 77, 52, 255, true, false);//ORANGE
 
 	if (resultHp <= 20)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
 
 	if (resultHp <= 10)
-		app->render->DrawRectangle({ 713,595,(int)pixelHp, 18 }, 102, 49, 49, 255, true, false);//DARK RED
+		app->render->DrawRectangle({ 713,595 + (-*app->scene->pos),(int)pixelHp, 18 }, 102, 49, 49, 255, true, false);//DARK RED
 
 
 	if (resultExp > 85)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 50, 85, 95, 255, true, false);//BLUE
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 50, 85, 95, 255, true, false);//BLUE
 
 	if (resultExp <= 85)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 50, 89, 83, 255, true, false);// LIGHT BLUE
 
 	if (resultExp <= 75)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 51, 81, 48, 255, true, false);//DARK GREEN
 
 	if (resultExp <= 67)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 71, 89, 50, 255, true, false);//GREEN
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 71, 89, 50, 255, true, false);//GREEN
 
 	if (resultExp <= 60)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 100, 106, 51, 255, true, false);//LIGHT GREEN
 
 	if (resultExp <= 50)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 123, 100, 51, 255, true, false);//YELLOW
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 123, 100, 51, 255, true, false);//YELLOW
 
 	if (resultExp <= 40)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 123, 90, 52, 255, true, false);//LIGHT GREEN
 
 	if (resultExp <= 30)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 123, 77, 52, 255, true, false);//ORANGE
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 123, 77, 52, 255, true, false);//ORANGE
 
 	if (resultExp <= 20)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 102, 60, 49, 255, true, false);//DARK ORANGE
 
 	if (resultExp <= 10)
-		app->render->DrawRectangle({ 713, 645,(int)pixelExp, 18 }, 102, 49, 49, 255, true, false);//DARK RED
+		app->render->DrawRectangle({ 713, 645 + (-*app->scene->pos),(int)pixelExp, 18 }, 102, 49, 49, 255, true, false);//DARK RED
 
 
 	//Draw HP NUMBER
 	std::string text = ToUpperCase(to_string((int)hp));
-	app->fonts->BlitText(290, 297, 0, text.c_str());
+	app->fonts->BlitText(293, 297 + (-*app->scene->pos), 0, text.c_str());
 	//Draw EXP
 	text = ToUpperCase(to_string((int)exp));
-	app->fonts->BlitText(290, 322, 0, text.c_str());
+	app->fonts->BlitText(293, 322 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Money
 	text = ToUpperCase(to_string(money));
-	app->fonts->BlitText(582, 233, 0, text.c_str());
+	app->fonts->BlitText(582, 233 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Attack Power
 	text = ToUpperCase(to_string((int)attackPower));
-	app->fonts->BlitText(560, 310, 0, text.c_str());
+	app->fonts->BlitText(560, 310 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Armor
 	text = ToUpperCase(to_string((int)armor));
-	app->fonts->BlitText(560, 325, 0, text.c_str());
+	app->fonts->BlitText(560, 325 + (-*app->scene->pos), 0, text.c_str());
 	//Draw Level
 	text = ToUpperCase(to_string((int)level));
-	app->fonts->BlitText(255, 310, 0, text.c_str());
+	app->fonts->BlitText(250, 310 + (-*app->scene->pos), 0, text.c_str());
 }
 
 void ItemManager::DrawArmor()
@@ -638,27 +649,27 @@ void ItemManager::DrawArmor()
 		case ItemType::NONE:
 			break;
 		case ItemType::HELMET:
-			app->render->DrawTexture(item->data->itemTex, 290, 60, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 290, 60 + (-*app->scene->pos), (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		case ItemType::CHESTPLATE:
-			app->render->DrawTexture(item->data->itemTex, 290, 110, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 290, 110 + (-*app->scene->pos), (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		case ItemType::LEGGINGS:
-			app->render->DrawTexture(item->data->itemTex, 290, 157, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 290, 157 + (-*app->scene->pos), (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		case ItemType::BOOTS:
-			app->render->DrawTexture(item->data->itemTex, 290, 207, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 290, 207 + (-*app->scene->pos), (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		case ItemType::ACCESORY:
-			app->render->DrawTexture(item->data->itemTex, 505, 180, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 505, 180 + (-*app->scene->pos), (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		case ItemType::WEAPON:
-			app->render->DrawTexture(item->data->itemTex, 505, 85, (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
+			app->render->DrawTexture(item->data->itemTex, 505, 85 + (-*app->scene->pos), (SDL_Rect*)(0, 0, 0, 0), 1.5f, 1, 0, 0, 0, false);
 
 			break;
 		default:

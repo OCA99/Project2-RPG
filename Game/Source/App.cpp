@@ -64,6 +64,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(dialog);
 	AddModule(fonts);
+	AddModule(particleSystem);
 	AddModule(ui);
 	AddModule(party);
 	AddModule(quests);
@@ -71,7 +72,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(debug);
 	AddModule(battle);
 	AddModule(puzzleManager);
-	AddModule(particleSystem);
 
 	// Render last to swap buffer
 	AddModule(render);
