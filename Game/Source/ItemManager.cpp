@@ -112,7 +112,7 @@ bool ItemManager::Update(float dt)
 	}
 	if ((app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || (app->input->pads[0].y && yPressed)) && app->scene->currentScene->type == Scene::TYPE::MAP)
 	{
-		app->party->allyParty->FindByName("Thyma")->data.Addhealth(1.0f);
+		app->party->allyParty->FindByName("Thyma")->data.Addhealth(-1.0f);
 	}
 
 	if (app->input->pads[0].b == true && invOpened)
@@ -498,21 +498,7 @@ void ItemManager::DrawPlayerStats()
 {
 	//if(Member* m = app->party->allyParty->FindByName(std::string("Thyma")))
 	//int h = app->party->allyParty->FindByName("thyma")->data.GetHealth();
-	float hp = 0;
-	float maxHp = 0;
-	float pixelHp = 0;
-	float resultHp = 0;
 
-	float exp = 0;
-	float resultExp = 0;
-	int maxExp = 0;
-	float pixelExp = 0;
-
-
-	float attackPower = 0;
-	int money = 0;
-	float armor = 0;
-	int level = 0;
 
 	if (partyMember)
 	{

@@ -117,7 +117,21 @@ public:
 
 	ItemType currentAmor = ItemType::NONE;
 
+	float hp = 0;
+	float maxHp = 0;
+	float pixelHp = 0;
+	float resultHp = 0;
 
+	float exp = 0;
+	float resultExp = 0;
+	int maxExp = 0;
+	float pixelExp = 0;
+
+
+	float attackPower = 0;
+	int money = 0;
+	float armor = 0;
+	int level = 0;
 };
 
 
