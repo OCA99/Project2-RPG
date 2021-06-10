@@ -108,4 +108,4 @@ Quests Menu
 - **No time to finish the game? No problem! Save and Load whenever you want**
 
 ## Download link
-Click [!here](https://github.com/AitorAlvarez17/Project2-RPG/releases/tag/v1.0) to play.
+Click [here](https://github.com/AitorAlvarez17/Project2-RPG/releases/tag/v1.0) to play.
