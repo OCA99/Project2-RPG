@@ -97,7 +97,6 @@ Quests Menu
 ![ring](https://user-images.githubusercontent.com/59050152/121561475-cc448300-ca18-11eb-91f8-d49856e7073e.png)
 ![coin](https://user-images.githubusercontent.com/59050152/121594708-ba290b80-ca3d-11eb-8f0e-006799fb9adf.png)
 ![coin_stack](https://user-images.githubusercontent.com/59050152/121594744-c3b27380-ca3d-11eb-96fe-dce83387fb85.png)
-![coin](https://user-images.githubusercontent.com/59050152/121594745-c44b0a00-ca3d-11eb-8714-3f734a869c33.png)
 ![hp_potion](https://user-images.githubusercontent.com/59050152/121594757-c8772780-ca3d-11eb-8e0d-49b0ee42503e.png)
 ![iron_helmet](https://user-images.githubusercontent.com/59050152/121594772-cdd47200-ca3d-11eb-9069-afa0a526f5ec.png)
 ![iron_sword](https://user-images.githubusercontent.com/59050152/121594777-d0cf6280-ca3d-11eb-870d-67e04b19449d.png)
