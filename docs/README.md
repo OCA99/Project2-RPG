@@ -1,9 +1,25 @@
 ![title](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/game_title.png)
 
-# Description
+We present *UnderEvil* by FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can fight in epic turn-based battles with a party, immerse on an individual adventure with quests and puzzles, fight monsters in the undercity dungeons & many more things!
 
-We present *UnderEvil* from FM Studios, a group of students working on a university subject at Bachelor's degrees in Video Game Design and Development (CITM) in Barcelona. We aim to develop a turn-based RPG game where the player can choose a class with unique abilities, fight in epic battles with a party, immerse on an individual adventure with missions, fight monsters in the undercity dungeons & much more things!
+# Aqui posar trailer
 
+# About the team
+![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
+
+FM Studios is composed by a group of 7 hardworking and ambitious students:
+
+* [Aitor Álvarez](https://github.com/AitorAlvarez17) - Project Lead, Programmer
+* [Oscar Cuatrecasas](https://github.com/OCA99) - Lead Programmer
+* [Irene Hernandez](https://github.com/ihedud) - Lead Designer, UI Designer
+* [Paula Hitz](https://github.com/paulahitz8) - Lead Artist, UI Designer
+* [Eduard Minguell](https://github.com/Eduardiko)- Level Designer, Programmer
+* [Andres Sanchez](https://github.com/andreusama) - QA, Programmer
+* [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
+
+# About the game
+*UnderEvil* is a game about a girl named Toisto who wakes up in the middle of the woods near a small town without any memory. As she is walking, she stumbles across a familiar face, a boy names Thyma. All together they decide to start working as monster hunters to help the town people and stop the rising population of monsters from the cementary. But, where do they come from? Why are they there? 
+Help them discover the dark secret that the town holds and the reason why they can't remember who they are. Will you be able to uncover the mystery?
 
 # Key Features
 - **Town Map**: town, tavern, forest.
@@ -19,7 +35,6 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **Settings Menu**
 - **Character Menu**: including equipment, stats and inventory.
 - **Quests Menu**
-- **HUD**
 - **Keyboard and Gamepad Inputs**
 - **Save & Load**
 - **Animated Logo and Title**
@@ -28,6 +43,7 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **6 Types of Items**
 
 # Controls
+The game can either be played with the keyboard and mouse or with a gamepad.
 ## Keyboard
 - **Up Arrow**: Move player upwards.
 - **Down Arrow**: Move player downwards.
@@ -47,57 +63,3 @@ We present *UnderEvil* from FM Studios, a group of students working on a univers
 - **Start**: Pause and resume game.
 - **Select**: Quest menu.
 - **Y**: Character menu.
-
-## Debug Keys
-- **F9**: View colliders and bounds.
-- **F10**: Activate god mode.
-- **F11**: Toggle fullscreen.
-
-
-# External Libraries and Softwares
-- [Simple DirectMedia Layer](https://www.libsdl.org/)
-- [ECS](https://github.com/redxdev/ECS)
-- [pugixml](https://pugixml.org/)
-- [Tiled Map Editor](https://www.mapeditor.org/)
-- [RPG Maker](https://www.rpgmakerweb.com/)
-
-# Developer Team
-
-![logo](https://github.com/AitorAlvarez17/Project2-RPG/blob/master/Screenshots/fmstudios_logo.png)
-
-FM Studios is composed by a group of 7 hardworking and ambitious students:
-
-* [Aitor Álvarez](https://github.com/AitorAlvarez17) - Project Lead, Programmer
-* [Oscar Cuatrecasas](https://github.com/OCA99) - Lead Programmer
-* [Irene Hernandez](https://github.com/ihedud) - Lead Designer, UI Designer
-* [Paula Hitz](https://github.com/paulahitz8) - Lead Artist, UI Designer
-* [Eduard Minguell](https://github.com/Eduardiko)- Level Designer, Programmer
-* [Andres Sanchez](https://github.com/andreusama) - QA, Programmer
-* [Telmo Beroiz](https://github.com/Telmiyo) - Management, Programmer
-
-# License
-
-## MIT License 
-
-MIT License
-
-Copyright (c) 2020 FM Studios
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
