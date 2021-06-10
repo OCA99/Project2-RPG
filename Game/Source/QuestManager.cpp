@@ -90,7 +90,6 @@ bool QuestManager::Update(float dt)
 			app->ui->DestroyAllGuiControls();
 			app->scene->ResetInitialPositions();
 			app->scene->sCreated = false;
-			buttons = true;
 		}
 		questInvOpened = !questInvOpened;//Open or close Inv
 	}
@@ -113,6 +112,7 @@ bool QuestManager::Update(float dt)
 		}
 	}
 
+	if (!questInvOpened) buttons = true;
 
 	return true;
 }

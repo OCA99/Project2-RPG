@@ -149,6 +149,7 @@ bool ItemManager::PostUpdate(float dt)
 
 	if (!invOpened)//If it close, we delete the buttons
 	{
+		hemosAbiertoElInvenLoko = true;
 		CleanUp();
 	}
 
@@ -263,21 +264,34 @@ void ItemManager::CreateActionButtons(int y)
 
 void ItemManager::CreateButtons()
 {
+
 	if (buttons.Count() <= 0)
 	{
 		ListItem<Item*>* item = playerItemList.start;
 		y = 0;
 		while (item)
 		{
-			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , -1000, 340 / 2, 70 / 2 }), 17, true, 65 + 32 * y, 600, SplineType::BACK, false)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			if(hemosAbiertoElInvenLoko) 
+				buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , -1000, 340 / 2, 70 / 2 }), 17, true, 65 + 32 * y, 600, SplineType::BACK, false)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
+			else
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 35 , 65 + 32 * y, 340 / 2, 70 / 2 }), 17)); //BUTTON TO SHOW ITEM DESCRIPTION WITH THE MOUSE
 			y++;
 			item = item->next;
 		}
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , -1000, 30, 30 }), 14, true, 36 / 2, 600, SplineType::BACK, false));//CREATE EXIT BUTTON
-		buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, -1000, 30, 30 }), 22, true, 18, 600, SplineType::BACK, false));//CREATE PARTY BUTTON
+		if (hemosAbiertoElInvenLoko)
+		{
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , -1000, 30, 30 }), 14, true, 36 / 2, 600, SplineType::BACK, false));//CREATE EXIT BUTTON
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, -1000, 30, 30 }), 22, true, 18, 600, SplineType::BACK, false));//CREATE PARTY BUTTON
+		}
+		else
+		{
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 30 , 36 / 2, 30, 30 }), 14));//CREATE EXIT BUTTON
+			buttons.Add(app->ui->CreateGuiControl(GuiControlType::BUTTON, SDL_Rect({ 578, 18, 30, 30 }), 22));//CREATE PARTY BUTTON
+		}
 
 	}
 
+	hemosAbiertoElInvenLoko = false;
 }
 
 void ItemManager::DeleteButtons()
