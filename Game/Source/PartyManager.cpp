@@ -328,7 +328,6 @@ Member::Member(std::string name, Type type) : name(name), type(type)
 Member::Member(std::string name, Type type, float health, float power, bool isDead) : name(name), type(type)
 {
 	data.health = health;
-	data.maxHealth = health;
 	data.power = power;
 	data.dead = isDead;
 

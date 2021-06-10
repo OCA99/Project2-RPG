@@ -133,6 +133,7 @@ void LogoScene::Load()
 	app->audio->LoadFx("Audio/Fx/action_equip_item.ogg");//11
 	app->audio->LoadFx("Audio/Fx/action_buy.ogg");//12
 	app->audio->LoadFx("Audio/Fx/misc_puzzle.ogg");//13
+	app->audio->LoadFx("Audio/Fx/level_up.ogg");//14
 
 	logoTexture = app->tex->Load("Textures/UI/MainPauseMenu/LogoAnim/logo_anim_tileset.png");
 

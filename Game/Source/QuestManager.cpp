@@ -312,7 +312,7 @@ bool QuestManager::CheckQuestsLogic()
 			questsFinished.Add(activeQuestsList->data);
 			questsActive.Del(activeQuestsList);
 			//REWARDS
-			app->items->GiveItemToPlayer(activeQuestsList->data->reward);
+			app->items->GiveItemToPlayer(activeQuestsList->data->reward,std::stoi(activeQuestsList->data->rewardQuantity.GetString()));
 		}
 
 		activeQuestsList = activeQuestsList->next;

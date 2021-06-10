@@ -62,7 +62,7 @@ public:
 	void DrawItems();
 
 	//Give item to a player, USE TITLE AS PARAMETER
-	void GiveItemToPlayer(SString& itemTitle);
+	void GiveItemToPlayer(SString& itemTitle, int quantity = 1);
 
 	//Search for an item BY ITS TITLE(NAME)
 	Item* SearchForItem(SString& itemTitle); 

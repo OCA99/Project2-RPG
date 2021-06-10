@@ -186,8 +186,9 @@ void ItemManager::DrawItems()
 
 }
 
-void ItemManager::GiveItemToPlayer(SString& itemTitle)
+void ItemManager::GiveItemToPlayer(SString& itemTitle, int quantity)
 {
+	for(int i = 0; i < quantity; ++i)
 	{
 		if (playerItemList.Count() >= MAX_ITEMS)
 		{
@@ -195,7 +196,10 @@ void ItemManager::GiveItemToPlayer(SString& itemTitle)
 		}
 		//else if (playerItemList.Add(SearchForItem(itemTitle)) == nullptr)
 		//	LOG("There is no Reward for this Quest");
-		else { playerItemList.Add(SearchForItem(itemTitle)); }
+		else 
+		{ 
+			playerItemList.Add(SearchForItem(itemTitle)); 
+		}
 
 	}
 }
@@ -498,11 +502,19 @@ void ItemManager::DrawPlayerStats()
 
 	if (partyMember)
 	{
-		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
+		maxExp = app->party->allyParty->FindByName("Toisto")->data.GetMaxExp();
 		exp = app->party->allyParty->FindByName("Toisto")->data.GetExp();
+		resultExp = (100 * exp) / maxExp;
+		pixelExp = resultExp * 288 / 100;
 
-		pixelHp = (app->party->allyParty->FindByName("Toisto")->data.GetHealth() * 288) / 100;
-		pixelExp = (app->party->allyParty->FindByName("Toisto")->data.GetExp() * 288) / 100;
+
+
+		maxHp = app->party->allyParty->FindByName("Toisto")->data.GetMaxHealth();
+		hp = app->party->allyParty->FindByName("Toisto")->data.GetHealth();
+		resultHp = (100 * hp) / maxHp;
+		pixelHp = resultHp * 288 / 100;
+
+
 		attackPower = (app->party->allyParty->FindByName("Toisto")->data.GetPower());
 		money = app->party->allyParty->FindByName("Toisto")->data.GetMoney();
 		armor = app->party->allyParty->FindByName("Toisto")->data.GetArmor();
@@ -522,9 +534,7 @@ void ItemManager::DrawPlayerStats()
 
 
 		maxHp = app->party->allyParty->FindByName("Thyma")->data.GetMaxHealth();
-		maxHp = 100;
 		hp = app->party->allyParty->FindByName("Thyma")->data.GetHealth();
-		hp = 92;
 		resultHp = (100 * hp) / maxHp;
 		pixelHp = resultHp * 288 / 100;
 
