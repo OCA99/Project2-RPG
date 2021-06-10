@@ -43,5 +43,16 @@ The game can either be played with the keyboard and mouse or with a gamepad.
 - **Select**: Quest menu.
 - **Y**: Character menu.
 
+# Key Features
+- **Explore the different maps**
+- **Make friends with your party members**
+- **Talk with the townies with an extensive dialogue system**: tavern keeper, reaper and blacksmith.
+- **Fight different types of enemies in an epic turn-based combat system**
+- **Navigate through all the menus** Main Menu, Pause Menu, Battle Menu, Settings Menu, Character Menu; including equipment, stats and inventory, Quests Menu
+- **No time to finish the game? No problem! Save and Load whenever you want**
+- **Solve the several mindbreaking puzzles**
+- **Finish all the quests and gain your own money**
+- **Collect all the different items**
+
 ## Download link
 Click here to play.
